@@ -121,7 +121,7 @@ export default function HistoryPage() {
               Question History
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-500">
-              Review all questions you've attempted
+              Review all questions you&apos;ve attempted
             </p>
           </div>
           <div className="flex items-center gap-3">
