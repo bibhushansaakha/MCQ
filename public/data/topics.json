@@ -1,0 +1,71 @@
+{
+  "topics": [
+    {
+      "id": "chapter-01",
+      "name": "Chapter 1: Electrical & Electronics",
+      "file": "/data/Chapter_01_Electrical_Electronics.json",
+      "description": "Basic Electrical and Electronics Engineering concepts"
+    },
+    {
+      "id": "chapter-02",
+      "name": "Chapter 2: Digital Logic & Microprocessor",
+      "file": "/data/Chapter_02_Digital_Logic_Microprocessor.json",
+      "description": "Digital logic circuits and microprocessor fundamentals"
+    },
+    {
+      "id": "chapter-03",
+      "name": "Chapter 3: Programming Languages",
+      "file": "/data/Chapter_03_Programming_Languages.json",
+      "description": "Programming languages and concepts"
+    },
+    {
+      "id": "chapter-04",
+      "name": "Chapter 4: Computer Organization",
+      "file": "/data/Chapter_04_Computer_Organization.json",
+      "description": "Computer organization and architecture"
+    },
+    {
+      "id": "chapter-05",
+      "name": "Chapter 5: Network & Security",
+      "file": "/data/Chapter_05_Network_Security.json",
+      "description": "Computer networks and security"
+    },
+    {
+      "id": "chapter-06",
+      "name": "Chapter 6: Theory, Computation & Graphics",
+      "file": "/data/Chapter_06_Theory_Computation_Graphics.json",
+      "description": "Theory of computation and computer graphics"
+    },
+    {
+      "id": "chapter-07",
+      "name": "Chapter 7: Data Structures & OS",
+      "file": "/data/Chapter_07_Data_Structures_OS.json",
+      "description": "Data structures and operating systems"
+    },
+    {
+      "id": "chapter-08",
+      "name": "Chapter 8: Software Engineering",
+      "file": "/data/Chapter_08_Software_Engineering.json",
+      "description": "Software engineering principles and practices"
+    },
+    {
+      "id": "chapter-09",
+      "name": "Chapter 9: AI & Neural Networks",
+      "file": "/data/Chapter_09_AI_Neural_Networks.json",
+      "description": "Artificial intelligence and neural networks"
+    },
+    {
+      "id": "chapter-10",
+      "name": "Chapter 10: Engineering Projects",
+      "file": "/data/Chapter_10_Engineering_Projects.json",
+      "description": "Engineering project management and practices"
+    },
+    {
+      "id": "general-test",
+      "name": "General Test",
+      "file": "",
+      "description": "Mixed questions from SETI and SETII sections",
+      "isGeneral": true
+    }
+  ]
+}

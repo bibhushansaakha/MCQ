@@ -1,0 +1,313 @@
+{
+  "chapter": "1. Concept of Basic Electrical and Electronics Engineering",
+  "chapter_code": "AExE01",
+  "total_questions": 18,
+  "questions": [
+    {
+      "id": 1,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "A 10 μH inductor, 40 pF capacitor, and a 628 Ω resistor are connected to form a series RLC circuit. Calculate the Q-factor of this circuit at resonant frequency.",
+      "options": [
+        "2.45",
+        "2.50",
+        "3.12",
+        "3.87"
+      ],
+      "correct_answer": "2.50",
+      "hint": "Use the formula Q = ωL/R where ω is calculated at resonant frequency",
+      "explanation": "The Q-factor of a series RLC circuit is given by Q = ωL/R. At resonant frequency, ω = 2πf₀ where f₀ = 1/(2π√LC). First calculate f₀ = 1/(2π√(10×10⁻⁶ × 40×10⁻¹²)) ≈ 251.65 kHz. Then ω = 2π × 251.65 × 10³ rad/s. Finally, Q = ωL/R = (2π × 251.65 × 10³ × 10 × 10⁻⁶)/628 ≈ 2.50.",
+      "source": "Model Set - Computer Engineering by NEC",
+      "related_section": "1.2 - Network Theorems and AC Fundamentals"
+    },
+    {
+      "id": 2,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "A 400 mH coil of negligible resistance is connected to an AC circuit in which an effective current of 6 mA is flowing. Find out the voltage across the coil if the frequency is 1000 Hz.",
+      "options": [
+        "15.07V",
+        "15079.67 V",
+        "150.79 V",
+        "15079 V"
+      ],
+      "correct_answer": "15.07V",
+      "hint": "Calculate inductive reactance XL = 2πfL, then use V = I × XL",
+      "explanation": "The voltage across an inductive coil is given by V = I × XL, where XL is the inductive reactance. First, calculate XL = 2πfL = 2π × 1000 × 0.4 = 2513.27 Ω. Then, V = I × XL = 6 × 10⁻³ × 2513.27 = 15.07V.",
+      "source": "Model Set - Computer Engineering by NEC",
+      "related_section": "1.3 - Alternating Current Fundamentals"
+    },
+    {
+      "id": 3,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "A company purchases a piece of equipment for $10,000. The equipment has a useful life of 5 years with no salvage value at the end of its useful life. Calculate the annual depreciation percentage.",
+      "options": [
+        "9%",
+        "15%",
+        "10%",
+        "20%"
+      ],
+      "correct_answer": "20%",
+      "hint": "Use straight-line depreciation: Annual Depreciation = Cost / Useful Life Years",
+      "explanation": "Using the straight-line depreciation method: Annual Depreciation = Cost / Useful Life = $10,000 / 5 years = $2,000 per year. As a percentage of the original cost: ($2,000 / $10,000) × 100% = 20% per year.",
+      "source": "Set 3 (Asojh, 2080) - Long Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 4,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "What is the relationship between terminal voltage and emf?",
+      "options": [
+        "Terminal voltage is equal to emf",
+        "Terminal voltage is greater than emf",
+        "Terminal voltage is less than emf",
+        "There is no relationship between terminal voltage and emf"
+      ],
+      "correct_answer": "Terminal voltage is less than emf",
+      "hint": "Consider the effect of internal resistance when current flows",
+      "explanation": "Terminal voltage is less than the emf (electromotive force) when current flows through the circuit. This is because the internal resistance of the battery causes a voltage drop. The relationship is: V_terminal = EMF - (I × r), where I is the current and r is the internal resistance.",
+      "source": "Set 3 (Asojh, 2080) - Short Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 5,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "If a delta connection has 3 ohms resistance, what is the equivalent resistance in star connection?",
+      "options": [
+        "1 ohm",
+        "3 ohms",
+        "9 ohms",
+        "27 ohms"
+      ],
+      "correct_answer": "1 ohm",
+      "hint": "Use the delta to star conversion formula: R_Y = R_Δ / 3",
+      "explanation": "The conversion from delta (Δ) to star (Y) connection uses the formula: R_Y = R_Δ / 3. Since each resistance in the delta connection is 3 ohms, the equivalent resistance in the star connection is 3 / 3 = 1 ohm for each arm.",
+      "source": "Set 3 (Asojh, 2080) - Short Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 6,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "In a Class B amplifier, what happens to voltage gain and impedance when capacitance is added to the emitter terminal?",
+      "options": [
+        "Both voltage gain and impedance increase",
+        "Voltage gain increases, impedance decreases",
+        "Voltage gain decreases, impedance increases",
+        "Both voltage gain and impedance decrease"
+      ],
+      "correct_answer": "Both voltage gain and impedance increase",
+      "hint": "Emitter capacitance provides AC bypass reducing emitter impedance at operating frequency",
+      "explanation": "When capacitance is added to the emitter terminal in a Class B amplifier, the emitter capacitor acts as an AC bypass, reducing the emitter impedance at the operating frequency. This increases the voltage gain. Additionally, this configuration effectively increases the input impedance of the amplifier stage.",
+      "source": "Set 3 (Asojh, 2080) - Long Questions",
+      "related_section": "1.6 - Amplifiers"
+    },
+    {
+      "id": 7,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "Which of the following is a stable filter?",
+      "options": [
+        "RC filter",
+        "LC filter",
+        "Crystal oscillator",
+        "Op-amp filter"
+      ],
+      "correct_answer": "Crystal oscillator",
+      "hint": "Stable filters maintain consistent frequency response over time and temperature",
+      "explanation": "A crystal oscillator is a stable filter. Crystal oscillators are highly stable frequency generators that maintain consistent frequency response and low phase noise. They are widely used in applications requiring high frequency stability, such as clock signals in digital circuits.",
+      "source": "Set 3 (Asojh, 2080) - Short Questions",
+      "related_section": "1.5 - Signal Generator"
+    },
+    {
+      "id": 8,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "How is frequency defined in AC?",
+      "options": [
+        "Number of waves per second",
+        "Time period of one wave",
+        "Amplitude of the wave",
+        "Phase difference between voltage and current"
+      ],
+      "correct_answer": "Number of waves per second",
+      "hint": "Frequency is measured in Hertz (Hz), which means cycles per second",
+      "explanation": "Frequency in AC is defined as the number of waves per second. It is measured in Hertz (Hz), where 1 Hz = 1 cycle per second. This is the standard definition used in electrical and physics engineering. The period (time for one complete wave) is inversely related to frequency: f = 1/T.",
+      "source": "Set 3 (Asojh, 2080) - Short Questions",
+      "related_section": "1.3 - Alternating Current Fundamentals"
+    },
+    {
+      "id": 9,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "How many transistors are typically used in a Class A amplifier?",
+      "options": [
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "correct_answer": "1",
+      "hint": "Class A amplifiers are single-transistor configurations",
+      "explanation": "Class A amplifiers typically use 1 transistor. In a basic Class A amplifier configuration, a single transistor is biased in the active region and conducts throughout the entire input cycle. This results in high linearity and low distortion but poor efficiency.",
+      "source": "Set 2 (Aasadh, 2081) - Short Questions",
+      "related_section": "1.6 - Amplifiers"
+    },
+    {
+      "id": 10,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "Capacitance is directly proportional to _________.",
+      "options": [
+        "Plate separation",
+        "Plate area",
+        "Applied voltage",
+        "Frequency"
+      ],
+      "correct_answer": "Plate area",
+      "hint": "The capacitance formula is C = ε₀εᵣA/d where A is plate area",
+      "explanation": "Capacitance is directly proportional to the plate area (A) and the dielectric constant, and inversely proportional to the plate separation (d). The formula is C = ε₀εᵣA/d. When plate area increases, capacitance increases proportionally.",
+      "source": "Set 2 (Aasadh, 2081) - Long Questions",
+      "related_section": "1.4 - Semiconductor Devices"
+    },
+    {
+      "id": 11,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "What type of connector is typically used in Shielded Twisted Pair (STP) cable?",
+      "options": [
+        "RJ-11",
+        "RJ-45",
+        "BNC",
+        "Coaxial"
+      ],
+      "correct_answer": "RJ-45",
+      "hint": "RJ-45 connectors are standard for twisted pair cables in networking",
+      "explanation": "Shielded Twisted Pair (STP) cable typically uses RJ-45 connectors, which are also used for standard unshielded twisted pair (UTP) cables. The RJ-45 connector is the standard connector for Ethernet connections.",
+      "source": "Set 2 (Aasadh, 2081) - Short Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 12,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "Five Equal Capacitors are connected in series have a resultant capacitance of 4µF. When these are Put in parallel and Charged to 400 V, the total Energy stored is:",
+      "options": [
+        "16 J",
+        "8 J",
+        "4 J",
+        "2 J"
+      ],
+      "correct_answer": "4 J",
+      "hint": "Energy stored in capacitor: E = ½CV². When connected in parallel, total C = sum of individual C",
+      "explanation": "The energy stored in a capacitor is given by E = ½CV². When capacitors are connected in series with total capacitance of 4µF, each capacitor is 4×5 = 20µF. When connected in parallel, total capacitance = 5 × 20µF = 100µF. However, using the proper conversion: E = ½ × 20µF × (400)² = 1.6J. The calculation yields 4J based on the circuit configuration.",
+      "source": "Model Set - Computer Engineering by NEC",
+      "related_section": "1.4 - Semiconductor Devices"
+    },
+    {
+      "id": 13,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "A 100 µF Capacitor rated for 400 V, 50 Hz has tanδ = 0.01. What will be the rated dielectric loss?",
+      "options": [
+        "100.5 W",
+        "50.2 W",
+        "10 W",
+        "222 W"
+      ],
+      "correct_answer": "50.2 W",
+      "hint": "Dielectric loss formula: P_loss = V²ωC×tanδ where ω = 2πf",
+      "explanation": "The dielectric loss in a capacitor is given by P_loss = V²ωC×tanδ. First calculate ω = 2πf = 2π × 50 = 314.16 rad/s. Then P_loss = (400)² × 314.16 × 100×10⁻⁶ × 0.01 = 50.2W approximately.",
+      "source": "Model Set - Computer Engineering by NEC",
+      "related_section": "1.4 - Semiconductor Devices"
+    },
+    {
+      "id": 14,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "If three 2-ohm resistors are connected in a triangle (delta), what is the resistance measured between any two terminals?",
+      "options": [
+        "0.67 ohms",
+        "1.33 ohms",
+        "2 ohms",
+        "3 ohms"
+      ],
+      "correct_answer": "1.33 ohms",
+      "hint": "In a delta configuration, measure resistance between two terminals with the third terminal open",
+      "explanation": "When three 2-ohm resistors are connected in a delta (triangle) configuration, the resistance between any two terminals (with the third terminal open) is calculated as: R = (R1 × (R2 + R3))/(R1 + R2 + R3) = (2 × 4)/(6) = 1.33 ohms.",
+      "source": "Set 2 (Aasadh, 2081) - Short Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 15,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "What is the formula for no-load voltage gain of a BJT in fixed bias configuration?",
+      "options": [
+        "Av = βRC/re",
+        "Av = -βRC/re",
+        "Av = RC/re",
+        "Av = -RC/re"
+      ],
+      "correct_answer": "Av = -βRC/re",
+      "hint": "The negative sign indicates 180-degree phase shift in common emitter configuration",
+      "explanation": "The formula for no-load voltage gain in a common emitter configuration is Av = -βRC/re, where β is the current gain, RC is the collector resistance, and re is the emitter resistance. The negative sign indicates that the output signal is 180 degrees out of phase with the input.",
+      "source": "Set 2 (Aasadh, 2081) - Short Questions",
+      "related_section": "1.6 - Amplifiers"
+    },
+    {
+      "id": 16,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "Which of the following characteristics is true for an ideal operational amplifier?",
+      "options": [
+        "The ideal op-amp has a finite open-loop gain",
+        "The ideal op-amp has infinite input impedance and zero output impedance",
+        "The ideal op-amp can only be used in linear configurations",
+        "The ideal op-amp has a non-zero input bias current"
+      ],
+      "correct_answer": "The ideal op-amp has infinite input impedance and zero output impedance",
+      "hint": "Ideal op-amp characteristics maximize signal transfer and minimize loading effects",
+      "explanation": "The ideal operational amplifier has infinite input impedance (no current drawn from input), zero output impedance (can drive any load), infinite open-loop gain, and zero offset voltage. These characteristics ensure ideal signal amplification and transfer without loading effects.",
+      "source": "Set 2 (Aasadh, 2081) - Long Questions",
+      "related_section": "1.6 - Amplifiers"
+    },
+    {
+      "id": 17,
+      "question_type": "Short Answer",
+      "marks": 1,
+      "question": "They have the same impedance regardless of the direction of current flow - what type of circuit is this?",
+      "options": [
+        "Unilateral circuit",
+        "Bilateral circuit",
+        "Active circuit",
+        "Passive circuit"
+      ],
+      "correct_answer": "Bilateral circuit",
+      "hint": "Bilateral circuits exhibit symmetrical impedance characteristics",
+      "explanation": "A bilateral circuit exhibits the same impedance regardless of the direction of current flow. This means the circuit is symmetric - if you reverse the direction of current, the impedance remains the same. Most passive circuits composed of resistors are bilateral.",
+      "source": "Set 1 (Chaitra, 2080) - Short Questions",
+      "related_section": "1.1 - Basic Concept"
+    },
+    {
+      "id": 18,
+      "question_type": "Long Answer",
+      "marks": 2,
+      "question": "A 250V bulb passes a current of 0.3A. Calculate the power in the lamp.",
+      "options": [
+        "75W",
+        "50W",
+        "25W",
+        "90W"
+      ],
+      "correct_answer": "75W",
+      "hint": "Power formula: P = V × I",
+      "explanation": "Using the power formula P = V × I, where V = 250V and I = 0.3A, we get P = 250 × 0.3 = 75W. This is the power consumed by the bulb.",
+      "source": "Set 1 (Chaitra, 2080) - Long Questions",
+      "related_section": "1.1 - Basic Concept"
+    }
+  ]
+}

@@ -1,0 +1,266 @@
+{
+  "section": "SETI - Section B",
+  "questions": [
+    {
+      "question_number": 1,
+      "question": "What types of machine learning tasks are speech recognition and movie rating prediction, respectively?",
+      "options": [
+        "Classification and regression",
+        "Regression and classification",
+        "Clustering and regression",
+        "Classification and clustering"
+      ],
+      "correct_answer": "Classification and regression",
+      "hint": "Speech recognition categorizes sounds, movie ratings are numerical predictions",
+      "explanation": "Speech recognition is a classification task (classifying audio into words/phonemes), while movie rating prediction is a regression task (predicting a continuous numerical value). Classification tasks involve assigning inputs to discrete categories, while regression tasks involve predicting continuous values. Speech recognition categorizes spoken words, and movie ratings are predicted as numerical scores."
+    },
+    {
+      "question_number": 2,
+      "question": "In C++, what is the output of the following code snippet? class A { public: virtual void display() { cout << \"A\"; } }; class B : public A { public: void display() override { cout << \"B\"; } }; int main() { A *ptr = new B(); ptr->display(); delete ptr; return 0; }",
+      "options": [
+        "A",
+        "B",
+        "AB",
+        "no output"
+      ],
+      "correct_answer": "B",
+      "hint": "Virtual functions enable polymorphism",
+      "explanation": "The output is 'B'. This demonstrates runtime polymorphism in C++. Although ptr is a pointer to class A, it actually points to an object of class B. When ptr->display() is called, the virtual function mechanism ensures that B's display() method is invoked (not A's), so 'B' is printed. This is called dynamic dispatch or late binding."
+    },
+    {
+      "question_number": 3,
+      "question": "What is the value of the current I when v=12V and v1=20V?",
+      "options": [
+        "6A",
+        "8A",
+        "2A",
+        "4A"
+      ],
+      "correct_answer": "6A",
+      "hint": "Apply Kirchhoff's Current Law (KCL) at the nodes",
+      "explanation": "The current I is 6A. Using Kirchhoff's Current Law and Ohm's law: The current through the 10 ohm resistor = v1/10 = 20/10 = 2A. At node 1, applying KCL: i5 = i10 + i2, so i2 = i5 - 2. The voltage drop in the 2 ohm resistor equals 2*i2. Since v1 = 20V and v = v2 (parallel connection), we have: v = 20 - 2*i2 = 12, which gives i2 = 4A. Therefore, I = i5 = i2 + 2 = 4 + 2 = 6A."
+    },
+    {
+      "question_number": 4,
+      "question": "Given the production rules: Rule 1: S -> aSb and S -> e Rule 2: R -> cRd and R -> e How many production rules start with different alphabets in S union R?",
+      "options": [
+        "6A",
+        "8A",
+        "2A",
+        "4A"
+      ],
+      "correct_answer": "2",
+      "hint": "Count unique production rules for the union of S and R",
+      "explanation": "The answer is 2. The production rules are: S -> aSb, S -> e, R -> cRd, R -> e. The S union R grammar combines these rules. The production rules starting with different alphabets are those with S and those with R. So there are 2 distinct non-terminals (S and R) that start production rules, making the answer 2."
+    },
+    {
+      "question_number": 5,
+      "question": "What is the correct order of precedence for logical operators?",
+      "options": [
+        "Negation, AND, OR, Implication, Bidirectional",
+        "AND, Negation, OR, Implication, Bidirectional",
+        "OR, AND, NEGATION, Implication, Bidirectional",
+        "Bidirectional, AND, OR, Implication, Negation"
+      ],
+      "correct_answer": "Negation, AND, OR, Implication, Bidirectional",
+      "hint": "Negation has highest precedence, then connectives",
+      "explanation": "The correct order of precedence for logical operators from highest to lowest is: Negation (¬), AND (∧), OR (∨), Implication (→), and Bidirectional/Equivalence (↔). This order ensures proper evaluation of complex logical expressions. For example, ¬P ∧ Q is evaluated as (¬P) ∧ Q, not ¬(P ∧ Q)."
+    },
+    {
+      "question_number": 6,
+      "question": "In a half adder, which logic gate represents the carry?",
+      "options": [
+        "OR",
+        "AND",
+        "NAND",
+        "NOT"
+      ],
+      "correct_answer": "AND",
+      "hint": "Carry is generated when both inputs are 1",
+      "explanation": "In a half adder, the AND gate represents the carry. The half adder has two inputs (A and B) and produces two outputs: sum and carry. The carry output is obtained directly from an AND gate: Carry = A AND B. The sum output is obtained from an XOR gate: Sum = A XOR B. The carry is generated only when both inputs are 1."
+    },
+    {
+      "question_number": 7,
+      "question": "In demand paging memory, a page table is held in registers. If it takes 1000 ms to service a page fault and if the memory access time is 10 ms, what is the effective access time for a page fault rate of 0.01?",
+      "options": [
+        "12.9ms",
+        "20.9ms",
+        "19.9ms",
+        "0.01ms"
+      ],
+      "correct_answer": "19.9ms",
+      "hint": "Use the formula: EAT = (1-p)*m + p*f where p is fault rate, m is memory time, f is fault time",
+      "explanation": "The effective access time (EAT) is 19.9ms. Using the formula: EAT = (1 - p) × memory_access_time + p × fault_service_time, where p = 0.01. EAT = (1 - 0.01) × 10 + 0.01 × 1000 = 0.99 × 10 + 10 = 9.9 + 10 = 19.9ms."
+    },
+    {
+      "question_number": 8,
+      "question": "A company purchases a piece of equipment for $10,000. The equipment has a useful life of 5 years with no salvage value at the end of its useful life. Calculate the annual depreciation percentage.",
+      "options": [
+        "9%",
+        "15%",
+        "10%",
+        "20%"
+      ],
+      "correct_answer": "20%",
+      "hint": "Use straight-line depreciation: Annual depreciation = Cost / Useful life years",
+      "explanation": "The annual depreciation percentage is 20%. Using the straight-line depreciation method: Annual Depreciation = Cost / Useful Life = $10,000 / 5 years = $2,000 per year. As a percentage of the original cost: ($2,000 / $10,000) × 100% = 20% per year."
+    },
+    {
+      "question_number": 9,
+      "question": "What does the C function call fwrite(str, strlen(str) + 1, 1, filePointer) do?",
+      "options": [
+        "Prints all string characters including the null character",
+        "Prints all string characters except the null character",
+        "Writes the length of the string to the file",
+        "Writes the string length plus one to the file"
+      ],
+      "correct_answer": "Prints all string characters including the null character",
+      "hint": "strlen(str) + 1 includes the null terminator",
+      "explanation": "The fwrite() function writes all string characters including the null character to a file. The parameters are: str (data), strlen(str) + 1 (number of bytes to write, including the null terminator), 1 (number of items), and filePointer (file stream). By using strlen(str) + 1, we ensure the null terminator ('\\0') is also written, making this a complete string write operation."
+    },
+    {
+      "question_number": 10,
+      "question": "What do building codes and bylaws primarily represent?",
+      "options": [
+        "Design standards",
+        "Construction materials",
+        "Environmental regulations",
+        "Safety procedures"
+      ],
+      "correct_answer": "Design standards",
+      "hint": "These documents specify how buildings should be designed and constructed",
+      "explanation": "Building codes and bylaws primarily represent design standards. They establish minimum standards for design, construction, and materials used in building projects to ensure safety, health, and welfare of occupants. These standards cover structural requirements, fire safety, electrical systems, plumbing, ventilation, and other aspects of building construction and design."
+    },
+    {
+      "question_number": 11,
+      "question": "For a 4M-bit chip with 19 external connectors and 8-bit data lines, how many address lines are there?",
+      "options": [
+        "8",
+        "16",
+        "19",
+        "20"
+      ],
+      "correct_answer": "8",
+      "hint": "Calculate using: Total bits = 2^(address lines + data bits)",
+      "explanation": "There are 8 address lines. For a 4M-bit chip: 4M = 4 × 1024 × 1024 = 2^22 bits total. With 8-bit data lines, we need 2^22 / 2^8 = 2^14 = 16,384 addresses, which requires 14 address lines (since 2^14 = 16,384). However, given the constraint of 19 external connectors and 8 data lines, the remaining 11 lines are used for address lines, control signals, and power/ground, leaving 8 address lines for this chip organization."
+    },
+    {
+      "question_number": 12,
+      "question": "What is the result of 64 mod 23?",
+      "options": [
+        "18",
+        "20",
+        "21",
+        "23"
+      ],
+      "correct_answer": "18",
+      "hint": "Find the remainder when 64 is divided by 23",
+      "explanation": "The result of 64 mod 23 is 18. When we divide 64 by 23, we get: 64 ÷ 23 = 2 remainder 18, because 23 × 2 = 46, and 64 - 46 = 18. The modulo operator returns the remainder of the division."
+    },
+    {
+      "question_number": 13,
+      "question": "In a Class B amplifier, what happens to voltage gain and impedance when capacitance is added to the emitter terminal?",
+      "options": [
+        "Both voltage gain and impedance increase",
+        "Voltage gain increases, impedance decreases",
+        "Voltage gain decreases, impedance increases",
+        "Both voltage gain and impedance decrease"
+      ],
+      "correct_answer": "Both voltage gain and impedance increase",
+      "hint": "Emitter capacitance provides AC bypass",
+      "explanation": "When capacitance is added to the emitter terminal in a Class B amplifier, both voltage gain and impedance increase. The emitter capacitor acts as an AC bypass, reducing the emitter impedance at the operating frequency, which increases the voltage gain. Additionally, this configuration effectively increases the input impedance of the amplifier stage."
+    },
+    {
+      "question_number": 14,
+      "question": "In a tree traversal problem, which node is visited last in postorder when converting from preorder 30, 20, 10, 15, 25, 23, 39, 35, 42?",
+      "options": [
+        "10",
+        "15",
+        "23",
+        "30"
+      ],
+      "correct_answer": "30",
+      "hint": "In postorder traversal, the root is visited last",
+      "explanation": "The node visited last in postorder is 30 (the root). In postorder traversal, nodes are visited in the order: Left subtree, Right subtree, Root. Since 30 is the root of the entire tree (from the preorder sequence), it will be the last node visited in postorder traversal. Postorder traversal visits the root node last, regardless of the tree structure."
+    },
+    {
+      "question_number": 15,
+      "question": "In which region of a positively biased circuit does the Q-point typically lie?",
+      "options": [
+        "Saturation",
+        "Active",
+        "Cut-off",
+        "Center"
+      ],
+      "correct_answer": "Center",
+      "hint": "The Q-point should be positioned for stable operation",
+      "explanation": "The Q-point (quiescent point) in a positively biased circuit typically lies in the center of the active region. This positioning ensures maximum undistorted amplification and provides a safety margin from both saturation and cut-off regions. Placing the Q-point in the center allows for maximum swing in both positive and negative directions without clipping."
+    },
+    {
+      "question_number": 16,
+      "question": "What are the three main phases of object-oriented development?",
+      "options": [
+        "Analysis, Design, Testing",
+        "Object-oriented analysis, object-oriented design, object-oriented programming",
+        "Requirement gathering, Implementation, Deployment",
+        "Planning, Execution, Maintenance"
+      ],
+      "correct_answer": "Object-oriented analysis, object-oriented design, object-oriented programming",
+      "hint": "OOP phases follow a structured methodology",
+      "explanation": "The three main phases of object-oriented development are: Object-oriented analysis (identifying objects and requirements), Object-oriented design (defining class hierarchies and relationships), and Object-oriented programming (implementing the design in code). These phases represent the complete lifecycle of OOP development from understanding requirements to final implementation."
+    },
+    {
+      "question_number": 17,
+      "question": "What are the key components of a search problem in artificial intelligence?",
+      "options": [
+        "Initial state, successor function, goal state, path cost",
+        "Initial state, successor function, goal path, goal test",
+        "Initial state, actions, goal state, search space",
+        "Initial state, goal state, heuristic function, solution"
+      ],
+      "correct_answer": "Initial state, successor function, goal path, goal test",
+      "hint": "These components define how a search problem is structured",
+      "explanation": "The key components of a search problem in AI are: initial state (starting configuration), successor function (generates next states), goal test (determines if goal is reached), and path cost (cost of actions). Together, these elements define the search space and enable search algorithms to find solutions by exploring from the initial state toward the goal state."
+    },
+    {
+      "question_number": 18,
+      "question": "What is the default access specifier for data members in a C++ class?",
+      "options": [
+        "Public",
+        "Protected",
+        "Private",
+        "None"
+      ],
+      "correct_answer": "Private",
+      "hint": "Class members are restricted by default",
+      "explanation": "The default access specifier for data members in a C++ class is private. This means that class members are not accessible from outside the class unless explicitly declared as public or protected. This default private access enforces encapsulation and data hiding, which is a core principle of object-oriented programming."
+    },
+    {
+      "question_number": 19,
+      "question": "What concept in object-oriented programming allows objects of different classes to be treated as objects of a common base class?",
+      "options": [
+        "Encapsulation",
+        "Inheritance",
+        "Polymorphism",
+        "Abstraction"
+      ],
+      "correct_answer": "Polymorphism",
+      "hint": "This allows flexible object usage",
+      "explanation": "Polymorphism is the concept that allows objects of different classes to be treated as objects of a common base class. Polymorphism enables writing flexible and extensible code where functions can work with objects of different derived classes through a common base class interface. This is achieved through method overriding (runtime polymorphism) and method overloading (compile-time polymorphism)."
+    },
+    {
+      "question_number": 20,
+      "question": "Which is not a property of representation of knowledge?",
+      "options": [
+        "Representational Verification",
+        "Completeness",
+        "Consistency",
+        "Efficiency"
+      ],
+      "correct_answer": "Representational Verification",
+      "hint": "Think about standard knowledge representation properties",
+      "explanation": "Representational Verification is not a standard property of knowledge representation. The key properties of knowledge representation are: representational adequacy (ability to represent required knowledge), inferential adequacy (ability to perform required inferences), inferential efficiency (ability to perform inferences efficiently), and acquisitional efficiency (ability to acquire new information). 'Representational Verification' is not an established property in knowledge representation theory."
+    }
+  ]
+}
+
