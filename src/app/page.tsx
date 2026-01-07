@@ -1,8 +1,8 @@
-import ModeSelector from '@/components/ModeSelector';
-import { loadTopicsServer } from '@/lib/questionUtils.server';
-import { Topic } from '@/lib/types';
+import ModeSelector from "@/components/ModeSelector";
+import { loadTopicsServer } from "@/lib/questionUtils.server";
+import { Topic } from "@/lib/types";
 
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 export default async function Home() {
@@ -10,7 +10,7 @@ export default async function Home() {
   try {
     topics = await loadTopicsServer();
   } catch (error) {
-    console.error('Error loading topics:', error);
+    console.error("Error loading topics:", error);
     // Fallback to empty array if database is not available
   }
 

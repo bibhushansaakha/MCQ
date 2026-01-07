@@ -87,12 +87,29 @@ npm run dev
    - Apply to all environments (Production, Preview, Development)
 4. Deploy!
 
+5. **Initialize the database** (IMPORTANT):
+   After deployment, visit your Vercel URL and go to:
+   ```
+   https://your-app.vercel.app/api/init-db
+   ```
+   Or make a POST request to initialize:
+   ```bash
+   curl -X POST https://your-app.vercel.app/api/init-db
+   ```
+   
+   This will:
+   - Create all topics from `topics.json`
+   - Import all questions from JSON files in `public/data/`
+   - Set up the database for use
+
 The build process will:
 - Generate Prisma client during build
-- Create the database on first run
-- Import questions from JSON files (you may need to run `npm run migrate-data` manually or set up a build hook)
+- Run database migrations
+- Create the database file on first run
 
-**Note**: For production deployments, consider using a hosted database (PostgreSQL) instead of SQLite for better performance and reliability.
+**Note**: The database initialization only needs to be done once. After that, the database will persist across deployments.
+
+**Alternative**: For production deployments, consider using a hosted database (PostgreSQL) instead of SQLite for better performance and reliability.
 
 ## Project Structure
 

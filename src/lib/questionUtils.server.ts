@@ -5,6 +5,42 @@ import { prisma } from './prisma';
 
 export async function loadTopicsServer(): Promise<Topic[]> {
   try {
+    // Check if database is empty and initialize if needed
+    const topicCount = await prisma.topic.count();
+    if (topicCount === 0) {
+      // Try to initialize database automatically
+      try {
+        const { readFile, readdir } = await import('fs/promises');
+        const { join } = await import('path');
+        
+        const topicsPath = join(process.cwd(), 'public', 'data', 'topics.json');
+        const topicsData = JSON.parse(await readFile(topicsPath, 'utf-8'));
+
+        for (const topic of topicsData.topics || topicsData) {
+          await prisma.topic.upsert({
+            where: { topicId: topic.id },
+            update: {
+              name: topic.name,
+              description: topic.description,
+              isGeneral: topic.isGeneral || false,
+            },
+            create: {
+              topicId: topic.id,
+              name: topic.name,
+              description: topic.description,
+              isGeneral: topic.isGeneral || false,
+            },
+          });
+        }
+        
+        // Note: Questions will be loaded on-demand or via API route
+        console.log('Database auto-initialized with topics');
+      } catch (initError) {
+        console.error('Auto-initialization failed:', initError);
+        // Continue with empty array
+      }
+    }
+
     const topics = await prisma.topic.findMany({
       orderBy: { topicId: 'asc' },
     });
