@@ -2,30 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { Question } from '@/lib/types';
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(
   request: NextRequest,
   { params }: { params: { topicId: string } }
 ) {
   try {
     const { topicId } = params;
-    const searchParams = request.nextUrl.searchParams;
-    const chapters = searchParams.get('chapters')?.split(',').filter(Boolean) || [];
 
-    // Build where clause
-    const where: any = { topicId };
-    
-    // If topicId is a chapter topic and chapters filter is provided, filter by chapter field
-    // This ensures chapter practice mode only shows questions from that specific chapter
-    if (topicId.startsWith('chapter-') && chapters.length > 0) {
-      // Use the chapter filter (should match the topicId)
-      where.chapter = { in: chapters };
-    } else if (topicId.startsWith('chapter-')) {
-      // If no explicit filter but it's a chapter topic, filter by chapter matching topicId
-      where.chapter = topicId;
-    }
-
+    // Query by topicId only - questions are already linked to topics via topicId
+    // The chapter field stores full names like "Chapter 1: Electrical & Electronics"
+    // while topicId is "chapter-01", so we don't filter by chapter field
     const questions = await prisma.question.findMany({
-      where,
+      where: { topicId },
       orderBy: { questionNumber: 'asc' },
     });
 

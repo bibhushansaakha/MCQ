@@ -7,25 +7,14 @@ export async function loadQuestions(topicId: string, filters?: {
   sources?: string[];
 }): Promise<Question[]> {
   try {
-    // For chapter topics, automatically filter by chapter matching the topicId
-    const isChapterTopic = topicId.startsWith('chapter-');
-    const effectiveFilters = { ...filters };
-    
-    if (isChapterTopic) {
-      // If no explicit chapter filter, use the topicId as the chapter filter
-      if (!effectiveFilters.chapters || effectiveFilters.chapters.length === 0) {
-        effectiveFilters.chapters = [topicId];
-      }
-    }
-    
     // If filters are provided, use filter endpoint
-    if (effectiveFilters && (effectiveFilters.chapters?.length || effectiveFilters.difficulties?.length || effectiveFilters.sources?.length)) {
+    if (filters && (filters.chapters?.length || filters.difficulties?.length || filters.sources?.length)) {
       const response = await fetch('/api/questions/filter', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           topicId,
-          ...effectiveFilters,
+          ...filters,
         }),
       });
       if (!response.ok) {
@@ -34,11 +23,8 @@ export async function loadQuestions(topicId: string, filters?: {
       return response.json();
     }
     
-    // Otherwise use regular endpoint (with chapter filter in URL if chapter topic)
-    const url = isChapterTopic 
-      ? `/api/questions/${topicId}?chapters=${encodeURIComponent(topicId)}`
-      : `/api/questions/${topicId}`;
-    const response = await fetch(url);
+    // Otherwise use regular endpoint - just query by topicId
+    const response = await fetch(`/api/questions/${topicId}`);
     if (!response.ok) {
       throw new Error(`Failed to load questions for ${topicId}`);
     }
