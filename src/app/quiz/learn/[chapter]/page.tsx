@@ -122,7 +122,7 @@ export default function LearnQuizPage() {
     return () => {
       isMounted = false;
     };
-  }, [chapter]); // Only depend on chapter, not startTimer
+  }, [chapter, startTimer]); // startTimer is stable (useCallback)
 
   // Cleanup on unmount
   useEffect(() => {
@@ -182,7 +182,8 @@ export default function LearnQuizPage() {
         new Map(prev).set(currentQuestionIndex, Date.now())
       );
     }
-  }, [currentQuestionIndex]); // Only depend on currentQuestionIndex
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestionIndex]); // questionStartTimes intentionally excluded to avoid unnecessary re-runs
 
   const handleOptionSelect = useCallback(
     async (option: string) => {

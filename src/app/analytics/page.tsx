@@ -622,7 +622,7 @@ export default function AnalyticsPage() {
                             Exam Ready!
                           </h3>
                           <p className="text-gray-700 dark:text-gray-300">
-                            You're scoring {fullTestStats.accuracy.toFixed(1)}% in full tests. You're well-prepared for the actual exam!
+                            You&apos;re scoring {fullTestStats.accuracy.toFixed(1)}% in full tests. You&apos;re well-prepared for the actual exam!
                           </p>
                         </div>
                       ) : (
