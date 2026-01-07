@@ -284,6 +284,19 @@ async function initializeDatabase() {
       });
     }
 
+    // Step 3: Clean up existing questions to ensure clean re-import
+    // This is necessary because old questions may have incorrect topicId values
+    // and upsert won't update them due to the unique constraint (topicId, questionNumber)
+    console.log('Step 3: Cleaning up existing questions...');
+    try {
+      const deletedCount = await prisma.question.deleteMany({});
+      console.log(`Deleted ${deletedCount.count} existing questions`);
+    } catch (deleteError: any) {
+      // If delete fails, log but continue (might be first run or foreign key constraint)
+      console.log('No existing questions to delete or delete failed:', deleteError.message);
+      // Continue anyway - questions will be imported/updated via upsert
+    }
+
     // Auto-discover and process database files
     const dataDir = join(process.cwd(), 'public', 'data');
     const files = await readdir(dataDir);
