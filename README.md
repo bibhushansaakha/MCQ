@@ -1,24 +1,25 @@
-# NEC Exam Preparation - MCQ Practice Website
+# Kati Sajilo - NEC Exam Preparation
 
-A fast, minimal MCQ practice website for Nepal Engineering Council exam preparation. Built with Next.js 14, TypeScript, and Tailwind CSS.
+A fast, minimal MCQ practice website for Nepal Engineering Council exam preparation. Built with Next.js 14, TypeScript, Tailwind CSS, and SQLite.
 
 ## Features
 
-- 📚 **Multiple Topics**: Practice questions from different chapters and sections
-- 🎯 **Random Questions**: Get random MCQs from selected topics
+- 📚 **Chapter Practice**: Practice questions from 10 different chapters with hints and explanations
+- 🎯 **Quick Test**: 25 questions in 30 minutes from all chapters
+- 🏆 **Full Test**: 100 questions in 2 hours - complete exam simulation
 - ✅ **Instant Feedback**: Immediate feedback on correct/incorrect answers
 - 💡 **Hints & Explanations**: Access hints and detailed explanations for each question
-- 📊 **Analytics Dashboard**: Track your performance with comprehensive analytics
+- 📊 **Performance Dashboard**: Track your performance with comprehensive analytics
   - Overall statistics (accuracy, time spent, hints used)
   - Per-chapter statistics
   - Performance trends over time
   - Time distribution analysis
   - Hints usage trends
   - Chapter comparison charts
-  - Daily activity tracking
-- 📖 **History**: Review all attempted questions with full details
+- 📖 **Attempts History**: Review all attempted questions with full details
 - 🌓 **Dark Mode**: Toggle between light and dark themes
 - ⚡ **Fast & Minimal**: Optimized for speed with minimal animations
+- ⌨️ **Keyboard Shortcuts**: Navigate and answer questions using keyboard
 
 ## Getting Started
 
@@ -31,7 +32,7 @@ A fast, minimal MCQ practice website for Nepal Engineering Council exam preparat
 
 1. Clone the repository:
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/bibhushansaakha/MCQ.git
 cd MCQ
 ```
 
@@ -40,12 +41,39 @@ cd MCQ
 npm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+```bash
+cp .env.example .env
+```
+
+The `.env` file should contain:
+```env
+DATABASE_URL="file:./prisma/dev.db"
+```
+
+4. Generate Prisma client:
+```bash
+npx prisma generate
+```
+
+5. Run database migrations:
+```bash
+npx prisma migrate deploy
+```
+
+6. Import questions from JSON files:
+```bash
+npm run migrate-data
+```
+
+This will create the database and import all questions from the JSON files in `public/data/`.
+
+7. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
+8. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Project Structure
 
@@ -53,28 +81,83 @@ npm run dev
 MCQ/
 ├── public/
 │   └── data/          # JSON files containing questions
+├── prisma/
+│   ├── schema.prisma  # Database schema
+│   ├── migrate-data.ts # Script to import questions from JSON
+│   └── migrations/    # Database migrations
 ├── src/
 │   ├── app/           # Next.js app router pages
 │   ├── components/    # React components
-│   ├── contexts/      # React contexts (Theme)
+│   ├── contexts/      # React contexts (Theme, QuizStats)
 │   ├── hooks/         # Custom React hooks
 │   └── lib/           # Utility functions
 └── package.json
 ```
+
+## Database Setup
+
+The application uses SQLite with Prisma ORM. The database is created automatically when you run `npm run migrate-data`.
+
+### Adding New Questions
+
+You can add questions in two ways:
+
+1. **Upload via UI**: Go to `/admin/upload` and upload a JSON file
+2. **Add JSON files**: Place JSON files in `public/data/` following the format:
+```json
+[
+  {
+    "chapter": "Chapter 1: Electrical & Electronics",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Your question here",
+        "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+        "correct_answer": "Option 1",
+        "hint": "Optional hint",
+        "explanation": "Optional explanation",
+        "chapter": "chapter-01",
+        "difficulty": "easy"
+      }
+    ]
+  }
+]
+```
+
+Then run `npm run migrate-data` to import them.
 
 ## Technologies Used
 
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS** - Utility-first CSS framework
+- **Prisma** - ORM for database management
+- **SQLite** - File-based database
 - **Recharts** - Charting library for analytics
-- **localStorage** - Client-side data persistence
+
+## Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run migrate-data` - Import questions from JSON files into database
+- `npm run update-topics` - Update topic names from topics.json
+- `npm run fix` - Clean cache and rebuild
 
 ## License
 
-This project is open source and available for personal use.
+This project is open source and available under the MIT License. Feel free to use, modify, and distribute.
 
 ## Author
 
 **Bibhushan Saakha**
+- GitHub: [@bibhushansaakha](https://github.com/bibhushansaakha)
 - LinkedIn: [@bibhushansaakha](https://www.linkedin.com/in/bibhushansaakha)
+
+## Contributing
+
+Contributions, suggestions, and feedback are welcome! This is a casual side project, so feel free to fork, modify, or contribute as you see fit.
+
+## Acknowledgments
+
+Built as a personal project to help prepare for the Nepal Engineering Council exam. Open source and free to use.

@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 interface PieChartData {
@@ -21,6 +22,31 @@ interface AnalyticsChartProps {
 const COLORS = ['#10b981', '#ef4444']; // Green for correct, red for wrong
 
 export default function AnalyticsChart({ type, data, title }: AnalyticsChartProps) {
+  const [isDark, setIsDark] = useState(false);
+
+  useEffect(() => {
+    // Check if dark mode is active
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    
+    checkDarkMode();
+    
+    // Watch for theme changes
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    
+    return () => observer.disconnect();
+  }, []);
+
+  // Bar chart colors - deep saturated orange brand color
+  const barColor = '#ea580c'; // Deep saturated orange (same in both modes)
+  const gridColor = isDark ? '#374151' : '#e5e7eb';
+  const axisColor = isDark ? '#9ca3af' : '#6b7280';
+
   if (type === 'pie') {
     return (
       <div className="rounded p-6">
@@ -54,12 +80,12 @@ export default function AnalyticsChart({ type, data, title }: AnalyticsChartProp
       <h3 className="text-base font-semibold text-foreground mb-6">{title}</h3>
       <ResponsiveContainer width="100%" height={250}>
         <BarChart data={data as BarChartData[]}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="name" stroke="#6b7280" />
-          <YAxis stroke="#6b7280" />
+          <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+          <XAxis dataKey="name" stroke={axisColor} />
+          <YAxis stroke={axisColor} />
           <Tooltip />
           <Legend />
-          <Bar dataKey="value" fill="#37352f" />
+          <Bar dataKey="value" fill={barColor} />
         </BarChart>
       </ResponsiveContainer>
     </div>

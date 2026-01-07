@@ -20,11 +20,11 @@ export default function ChapterStats({ topic, stats }: ChapterStatsProps) {
         </div>
         <div>
           <div className="text-xs text-gray-500 dark:text-gray-500 mb-1">Correct</div>
-          <div className="text-xl font-semibold text-green-600 dark:text-green-500">{stats.correct}</div>
+          <div className="text-xl font-semibold text-green-600 dark:text-green-400">{stats.correct}</div>
         </div>
         <div>
           <div className="text-xs text-gray-500 dark:text-gray-500 mb-1">Wrong</div>
-          <div className="text-xl font-semibold text-red-600 dark:text-red-500">{stats.wrong}</div>
+          <div className="text-xl font-semibold text-red-600 dark:text-red-400">{stats.wrong}</div>
         </div>
         <div>
           <div className="text-xs text-gray-500 dark:text-gray-500 mb-1">Accuracy</div>

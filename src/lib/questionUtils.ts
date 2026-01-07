@@ -1,64 +1,74 @@
-import { Question, QuestionData, Topic, TopicsData, ChapterQuestionData } from './types';
+import { Question, Topic, QuestionWithChapter } from './types';
 
-// Client-side fetch
-async function fetchJsonFile<T>(filePath: string): Promise<T> {
-  const response = await fetch(filePath);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${filePath}`);
-  }
-  return response.json();
-}
-
-function normalizeQuestions(data: QuestionData | ChapterQuestionData): Question[] {
-  if ('questions' in data && Array.isArray(data.questions)) {
-    return data.questions.map((q: any) => ({
-      question_number: q.question_number || q.id || 0,
-      question: q.question,
-      options: q.options,
-      correct_answer: q.correct_answer,
-      hint: q.hint,
-      explanation: q.explanation,
-    }));
-  }
-  return [];
-}
-
-export async function loadQuestions(topicId: string): Promise<Question[]> {
+// Client-side API calls
+export async function loadQuestions(topicId: string, filters?: {
+  chapters?: string[];
+  difficulties?: ('easy' | 'difficult')[];
+  sources?: string[];
+}): Promise<Question[]> {
   try {
-    const topicsData: TopicsData = await fetchJsonFile<TopicsData>('/data/topics.json');
+    // For chapter topics, automatically filter by chapter matching the topicId
+    const isChapterTopic = topicId.startsWith('chapter-');
+    const effectiveFilters = { ...filters };
     
-    const topic = topicsData.topics.find(t => t.id === topicId);
-    if (!topic) {
-      throw new Error(`Topic ${topicId} not found`);
+    if (isChapterTopic) {
+      // If no explicit chapter filter, use the topicId as the chapter filter
+      if (!effectiveFilters.chapters || effectiveFilters.chapters.length === 0) {
+        effectiveFilters.chapters = [topicId];
+      }
     }
-
-    // Handle general test - combine SETI and SETII sections
-    if (topic.isGeneral) {
-      const setiA: QuestionData = await fetchJsonFile<QuestionData>('/data/seti-section-a.json');
-      const setiB: QuestionData = await fetchJsonFile<QuestionData>('/data/seti-section-b.json');
-      const setiiA: QuestionData = await fetchJsonFile<QuestionData>('/data/setii-section-a.json');
-      
-      const allQuestions = [
-        ...normalizeQuestions(setiA),
-        ...normalizeQuestions(setiB),
-        ...normalizeQuestions(setiiA),
-      ];
-      
-      return allQuestions;
+    
+    // If filters are provided, use filter endpoint
+    if (effectiveFilters && (effectiveFilters.chapters?.length || effectiveFilters.difficulties?.length || effectiveFilters.sources?.length)) {
+      const response = await fetch('/api/questions/filter', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          topicId,
+          ...effectiveFilters,
+        }),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to load filtered questions');
+      }
+      return response.json();
     }
-
-    const data = await fetchJsonFile<QuestionData | ChapterQuestionData>(topic.file);
-    return normalizeQuestions(data);
+    
+    // Otherwise use regular endpoint (with chapter filter in URL if chapter topic)
+    const url = isChapterTopic 
+      ? `/api/questions/${topicId}?chapters=${encodeURIComponent(topicId)}`
+      : `/api/questions/${topicId}`;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Failed to load questions for ${topicId}`);
+    }
+    return response.json();
   } catch (error) {
     console.error('Error loading questions:', error);
     throw error;
   }
 }
 
+export async function loadQuestionsFromAllChapters(count: number): Promise<QuestionWithChapter[]> {
+  try {
+    const response = await fetch(`/api/questions/all-chapters?count=${count}`);
+    if (!response.ok) {
+      throw new Error('Failed to load questions from all chapters');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error loading questions from all chapters:', error);
+    throw error;
+  }
+}
+
 export async function loadTopics(): Promise<Topic[]> {
   try {
-    const data: TopicsData = await fetchJsonFile<TopicsData>('/data/topics.json');
-    return data.topics;
+    const response = await fetch('/api/topics');
+    if (!response.ok) {
+      throw new Error('Failed to load topics');
+    }
+    return response.json();
   } catch (error) {
     console.error('Error loading topics:', error);
     throw error;

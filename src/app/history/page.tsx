@@ -17,18 +17,21 @@ interface HistoryItem {
 
 export default function HistoryPage() {
   const [historyItems, setHistoryItems] = useState<HistoryItem[]>([]);
+  const [sessions, setSessions] = useState<SessionData[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedTopic, setSelectedTopic] = useState<string>('all');
   const [expandedItems, setExpandedItems] = useState<Set<string>>(new Set());
+  const [clearing, setClearing] = useState(false);
 
   useEffect(() => {
     async function loadHistory() {
       try {
-        const sessions = getAllSessions();
+        const allSessions = await getAllSessions();
+        setSessions(allSessions);
         const items: HistoryItem[] = [];
 
         // Collect all attempts with their session info
-        for (const session of sessions) {
+        for (const session of allSessions) {
           const sessionDate = new Date(session.startTime).toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'short',
@@ -95,6 +98,134 @@ export default function HistoryPage() {
     setExpandedItems(newExpanded);
   };
 
+  const handleClearHistory = async () => {
+    if (!confirm('Are you sure you want to delete all test results and history? This action cannot be undone.')) {
+      return;
+    }
+
+    setClearing(true);
+    try {
+      // Clear database
+      const response = await fetch('/api/clear-history', {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to clear history');
+      }
+
+      // Clear localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('mcq_sessions');
+      }
+
+      // Reload history
+      setHistoryItems([]);
+      setSessions([]);
+      
+      // Reload the page to refresh everything
+      window.location.reload();
+    } catch (error) {
+      console.error('Error clearing history:', error);
+      alert('Failed to clear history. Please try again.');
+    } finally {
+      setClearing(false);
+    }
+  };
+
+  const handleDeleteSession = async (sessionId: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!confirm('Are you sure you want to delete this test result? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      const response = await fetch(`/api/sessions/${sessionId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to delete session');
+      }
+
+      // Remove from state
+      setSessions(prev => prev.filter(s => s.sessionId !== sessionId));
+      setHistoryItems(prev => prev.filter(item => {
+        // Find the session to get its attempts
+        const session = sessions.find(s => s.sessionId === sessionId);
+        if (!session) return true;
+        const attemptIds = new Set(session.attempts.map(a => `${a.questionId}-${a.timestamp}`));
+        return !attemptIds.has(`${item.attempt.questionId}-${item.attempt.timestamp}`);
+      }));
+
+      // Clear localStorage
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem('mcq_sessions');
+      }
+    } catch (error) {
+      console.error('Error deleting session:', error);
+      alert('Failed to delete session. Please try again.');
+    }
+  };
+
+  const handleDeleteAttempt = async (attempt: QuestionAttempt, sessionTopic: string, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (!confirm('Are you sure you want to delete this question attempt? This action cannot be undone.')) {
+      return;
+    }
+
+    try {
+      // Find the session this attempt belongs to
+      const session = sessions.find(s => 
+        s.topic === sessionTopic && 
+        s.attempts.some(a => 
+          a.questionId === attempt.questionId && 
+          a.timestamp === attempt.timestamp
+        )
+      );
+
+      if (session) {
+        // Delete attempt via API
+        const response = await fetch(`/api/attempts/delete`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            sessionId: session.sessionId,
+            questionId: attempt.questionId,
+            timestamp: attempt.timestamp,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to delete attempt');
+        }
+
+        // Remove from UI
+        setHistoryItems(prev => prev.filter(item => 
+          !(item.attempt.questionId === attempt.questionId && 
+            item.attempt.timestamp === attempt.timestamp &&
+            item.sessionTopic === sessionTopic)
+        ));
+
+        // Update sessions state
+        setSessions(prev => prev.map(s => {
+          if (s.sessionId === session.sessionId) {
+            return {
+              ...s,
+              attempts: s.attempts.filter(a => 
+                !(a.questionId === attempt.questionId && a.timestamp === attempt.timestamp)
+              ),
+            };
+          }
+          return s;
+        }));
+      }
+    } catch (error) {
+      console.error('Error deleting attempt:', error);
+      alert('Failed to delete attempt. Please try again.');
+    }
+  };
+
   const filteredItems = selectedTopic === 'all'
     ? historyItems
     : historyItems.filter(item => item.sessionTopic === selectedTopic);
@@ -118,28 +249,103 @@ export default function HistoryPage() {
         <div className="mb-10 flex justify-between items-center pb-6">
           <div>
             <h1 className="text-3xl font-semibold text-foreground mb-1">
-              Question History
+              Attempts
             </h1>
             <p className="text-sm text-gray-500 dark:text-gray-500">
               Review all questions you&apos;ve attempted
             </p>
           </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/analytics"
-              className="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-foreground"
-            >
-              Analytics
-            </Link>
-            <Link
-              href="/"
-              className="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-foreground"
-            >
-              Back to Topics
-            </Link>
-            <ThemeToggleWrapper />
-          </div>
+          <button
+            onClick={handleClearHistory}
+            disabled={clearing || (sessions.length === 0 && historyItems.length === 0)}
+            className="px-3 py-1.5 text-sm text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {clearing ? 'Clearing...' : 'Clear History'}
+          </button>
         </div>
+
+        {/* Exam Sessions */}
+        {sessions.filter(s => s.examMode === 'quick-test' || s.examMode === 'full-test').length > 0 && (
+          <div className="mb-8">
+            <h2 className="text-xl font-semibold text-foreground mb-4">Exam Sessions</h2>
+            <div className="space-y-3">
+              {sessions
+                .filter(s => s.examMode === 'quick-test' || s.examMode === 'full-test')
+                .sort((a, b) => b.startTime - a.startTime)
+                .map(session => {
+                  const sessionDate = new Date(session.startTime).toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  });
+                  const attempts = session.attempts || [];
+                  const totalQuestions = attempts.length;
+                  const correctAnswers = attempts.filter((a: QuestionAttempt) => a.correct).length;
+                  const wrongAnswers = attempts.filter((a: QuestionAttempt) => !a.correct).length;
+                  const accuracy = totalQuestions > 0 
+                    ? ((correctAnswers / totalQuestions) * 100).toFixed(1)
+                    : '0.0';
+                  
+                  return (
+                    <div
+                      key={session.sessionId}
+                      className="p-4 rounded-lg border border-gray-200/40 dark:border-gray-700/30"
+                    >
+                      <div className="flex justify-between items-start">
+                        <div className="flex-1">
+                          <div className="flex items-center gap-3 mb-2">
+                            <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-transparent">
+                              {session.examMode === 'quick-test' ? 'Quick Test' : 'Full Test'}
+                            </span>
+                            <span className="text-sm text-gray-500 dark:text-gray-500">
+                              {sessionDate}
+                            </span>
+                          </div>
+                          <div className="grid grid-cols-4 gap-4 text-sm">
+                            <div>
+                              <span className="text-gray-500 dark:text-gray-500">Questions: </span>
+                              <span className="font-semibold text-foreground">{totalQuestions}</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-500 dark:text-gray-500">Correct: </span>
+                              <span className="font-semibold text-green-600 dark:text-green-400">{correctAnswers}</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-500 dark:text-gray-500">Incorrect: </span>
+                              <span className="font-semibold text-red-600 dark:text-red-400">{wrongAnswers}</span>
+                            </div>
+                            <div>
+                              <span className="text-gray-500 dark:text-gray-500">Accuracy: </span>
+                              <span className="font-semibold text-foreground">{accuracy}%</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="flex items-center gap-2 ml-4">
+                          <Link
+                            href={`/review/${session.sessionId}`}
+                            className="px-4 py-2 text-sm font-medium text-background bg-foreground rounded hover:bg-foreground/90"
+                          >
+                            Review
+                          </Link>
+                          <button
+                            onClick={(e) => handleDeleteSession(session.sessionId, e)}
+                            className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-foreground rounded transition-colors"
+                            title="Delete this test result"
+                          >
+                            <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
+            </div>
+          </div>
+        )}
 
         {/* Filter */}
         {topics.length > 0 && (
@@ -149,7 +355,7 @@ export default function HistoryPage() {
               className={`px-3 py-1.5 text-sm rounded border ${
                 selectedTopic === 'all'
                   ? 'bg-foreground text-background border-foreground'
-                  : 'bg-transparent text-foreground border-gray-200 dark:border-gray-800 hover:bg-gray-50/15 dark:hover:bg-gray-800/10'
+                  : 'bg-transparent text-foreground border-gray-200/40 dark:border-gray-700/30 hover:bg-gray-50/15 dark:hover:bg-gray-800/10'
               }`}
             >
               All Topics
@@ -161,7 +367,7 @@ export default function HistoryPage() {
                 className={`px-3 py-1.5 text-sm rounded border ${
                   selectedTopic === topic
                     ? 'bg-foreground text-background border-foreground'
-                    : 'bg-transparent text-foreground border-gray-200 dark:border-gray-800 hover:bg-gray-50/15 dark:hover:bg-gray-800/10'
+                    : 'bg-transparent text-foreground border-gray-200/40 dark:border-gray-700/30 hover:bg-gray-50/15 dark:hover:bg-gray-800/10'
                 }`}
               >
                 {topic}
@@ -178,7 +384,7 @@ export default function HistoryPage() {
             </p>
             <Link
               href="/"
-              className="inline-block px-4 py-2 text-sm text-foreground bg-transparent border border-gray-200 dark:border-gray-800 rounded hover:bg-gray-50/15 dark:hover:bg-gray-800/10"
+              className="inline-block px-4 py-2 text-sm text-foreground bg-transparent border border-gray-200/40 dark:border-gray-700/30 rounded hover:bg-gray-50/15 dark:hover:bg-gray-800/10"
             >
               Start Practicing
             </Link>
@@ -192,7 +398,7 @@ export default function HistoryPage() {
               return (
                 <div
                   key={`${attempt.timestamp}-${index}`}
-                  className="rounded border border-gray-100 dark:border-gray-800 overflow-hidden"
+                  className="rounded border border-gray-200/40 dark:border-gray-700/30 overflow-hidden"
                 >
                   <div
                     className="p-4 cursor-pointer hover:bg-gray-50/15 dark:hover:bg-gray-800/10"
@@ -202,19 +408,27 @@ export default function HistoryPage() {
                       <div className="flex-1">
                         <div className="flex items-center gap-3 mb-2">
                           <span
-                            className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold ${
+                            className={`w-5 h-5 rounded-full flex items-center justify-center text-xs font-semibold border ${
                               attempt.correct
-                                ? 'bg-green-600 text-white'
-                                : 'bg-red-600 text-white'
+                                ? 'border-green-600 dark:border-green-400 text-green-600 dark:text-green-400 bg-transparent'
+                                : 'border-red-600 dark:border-red-400 text-red-600 dark:text-red-400 bg-transparent'
                             }`}
                           >
-                            {attempt.correct ? '✓' : '✗'}
+                            {attempt.correct ? (
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                              </svg>
+                            ) : (
+                              <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                              </svg>
+                            )}
                           </span>
                           <span className="text-xs text-gray-500 dark:text-gray-500">
                             {sessionTopic} • {sessionDate}
                           </span>
                           {attempt.hintUsed && (
-                            <span className="text-xs px-2 py-0.5 rounded bg-yellow-100 dark:bg-yellow-950/30 text-yellow-700 dark:text-yellow-500">
+                            <span className="text-xs px-1.5 py-0.5 rounded border border-gray-300 dark:border-gray-600 text-gray-600 dark:text-gray-400 bg-transparent">
                               Hint Used
                             </span>
                           )}
@@ -235,9 +449,26 @@ export default function HistoryPage() {
                           )}
                         </div>
                       </div>
-                      <button className="ml-4 text-gray-400 dark:text-gray-600">
-                        {isExpanded ? '▼' : '▶'}
-                      </button>
+                      <div className="flex items-center gap-2 ml-4">
+                        <button
+                          onClick={(e) => handleDeleteAttempt(attempt, sessionTopic, e)}
+                          className="p-1.5 text-gray-500 dark:text-gray-400 hover:text-foreground rounded transition-colors"
+                          title="Delete this question attempt"
+                        >
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                          </svg>
+                        </button>
+                        <button className="text-gray-400 dark:text-gray-600">
+                          <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            {isExpanded ? (
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 9l-7 7-7-7" />
+                            ) : (
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 5l7 7-7 7" />
+                            )}
+                          </svg>
+                        </button>
+                      </div>
                     </div>
                   </div>
 
@@ -255,37 +486,54 @@ export default function HistoryPage() {
                             return (
                               <div
                                 key={optIdx}
-                                className={`p-2 rounded text-sm ${
+                                className={`p-2 rounded text-sm border border-gray-200/40 dark:border-gray-700/30 ${
                                   isCorrect
-                                    ? 'bg-green-100 dark:bg-green-950/30 text-green-700 dark:text-green-500 border border-green-300 dark:border-green-800'
-                                    : attempt.correct === false && !isCorrect
-                                    ? 'bg-transparent text-foreground border border-gray-200 dark:border-gray-800'
-                                    : 'bg-transparent text-foreground border border-gray-200 dark:border-gray-800'
+                                    ? 'text-green-600 dark:text-green-400 border-green-500 dark:border-green-400'
+                                    : 'text-foreground'
                                 }`}
                               >
                                 {option}
                                 {isCorrect && (
-                                  <span className="ml-2 text-xs font-semibold">✓ Correct Answer</span>
+                                  <span className="ml-2 text-xs font-semibold text-green-600 dark:text-green-400 flex items-center gap-1">
+                                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                                    </svg>
+                                    Correct
+                                  </span>
                                 )}
                               </div>
                             );
                           })}
                         </div>
                         
-                        <div className={`mb-4 p-2 rounded text-sm ${
+                        <div className={`mb-4 p-2 rounded-lg text-sm border ${
                           attempt.correct
-                            ? 'bg-green-50 dark:bg-green-950/20 text-green-700 dark:text-green-500'
-                            : 'bg-red-50 dark:bg-red-950/20 text-red-700 dark:text-red-500'
+                            ? 'border-green-500 dark:border-green-400 text-green-600 dark:text-green-400 bg-transparent'
+                            : 'border-red-500 dark:border-red-400 text-red-600 dark:text-red-400 bg-transparent'
                         }`}>
-                          <span className="font-semibold">
-                            {attempt.correct ? '✓ Correct' : '✗ Incorrect'}
+                          <span className="font-semibold flex items-center gap-1.5">
+                            {attempt.correct ? (
+                              <>
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M5 13l4 4L19 7" />
+                                </svg>
+                                Correct
+                              </>
+                            ) : (
+                              <>
+                                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                                Incorrect
+                              </>
+                            )}
                           </span>
                         </div>
 
                         {question.hint && (
                           <div className="mb-4">
                             <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-500 mb-2">Hint:</h4>
-                            <p className="text-sm text-foreground p-3 rounded border-l-2 border-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/10">
+                            <p className="text-sm text-foreground p-3 rounded border border-gray-200/40 dark:border-gray-700/30 bg-transparent">
                               {question.hint}
                             </p>
                           </div>
@@ -294,7 +542,7 @@ export default function HistoryPage() {
                         {question.explanation && (
                           <div>
                             <h4 className="text-xs font-semibold text-gray-500 dark:text-gray-500 mb-2">Explanation:</h4>
-                            <p className="text-sm text-foreground p-3 rounded border-l-2 border-blue-400 bg-blue-50/30 dark:bg-blue-950/10">
+                            <p className="text-sm text-foreground p-3 rounded border border-gray-200/40 dark:border-gray-700/30 bg-transparent">
                               {question.explanation}
                             </p>
                           </div>

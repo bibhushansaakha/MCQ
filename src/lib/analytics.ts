@@ -1,65 +1,150 @@
-import { SessionData, QuestionAttempt, OverallStats, ChapterStats, AnalyticsData } from './types';
+import { SessionData, QuestionAttempt, OverallStats, ChapterStats, AnalyticsData, ExamMode } from './types';
 
 const STORAGE_KEY = 'mcq_sessions';
 
-export function startSession(topic: string): string {
+export async function startSession(topic: string, examMode?: ExamMode): Promise<string> {
   const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
-  const session: SessionData = {
-    sessionId,
-    topic,
-    startTime: Date.now(),
-    attempts: [],
-    totalQuestions: 0,
-    correctAnswers: 0,
-    wrongAnswers: 0,
-    hintsUsed: 0,
-    totalTime: 0,
-  };
+  const startTime = Date.now();
   
-  const sessions = getAllSessions();
-  sessions.push(session);
-  saveSessions(sessions);
+  // Save to database via API
+  try {
+    await fetch('/api/sessions', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        topicId: topic,
+        examMode: examMode || null,
+        startTime,
+      }),
+    });
+  } catch (error) {
+    console.error('Error saving session to database:', error);
+    // Fallback to localStorage
+    const session: SessionData = {
+      sessionId,
+      topic,
+      startTime,
+      attempts: [],
+      totalQuestions: 0,
+      correctAnswers: 0,
+      wrongAnswers: 0,
+      hintsUsed: 0,
+      totalTime: 0,
+      examMode: examMode,
+    };
+    const sessions = getAllSessionsSync();
+    sessions.push(session);
+    saveSessions(sessions);
+  }
   
   return sessionId;
 }
 
-export function recordAttempt(sessionId: string, attempt: QuestionAttempt): void {
-  const sessions = getAllSessions();
-  const session = sessions.find(s => s.sessionId === sessionId);
-  
-  if (!session) {
-    console.error('Session not found:', sessionId);
-    return;
-  }
-  
-  session.attempts.push(attempt);
-  session.totalQuestions++;
-  session.totalTime += attempt.timeSpent;
-  
-  if (attempt.correct) {
-    session.correctAnswers++;
-  } else {
-    session.wrongAnswers++;
-  }
-  
-  if (attempt.hintUsed) {
-    session.hintsUsed++;
-  }
-  
-  saveSessions(sessions);
-}
-
-export function endSession(sessionId: string): void {
-  const sessions = getAllSessions();
-  const session = sessions.find(s => s.sessionId === sessionId);
-  
-  if (session) {
-    session.endTime = Date.now();
+export async function recordAttempt(sessionId: string, attempt: QuestionAttempt): Promise<void> {
+  // Save to database via API
+  try {
+    const response = await fetch('/api/attempts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        sessionId,
+        questionId: attempt.questionId,
+        questionNumber: attempt.questionId,
+        correct: attempt.correct,
+        timeSpent: attempt.timeSpent,
+        hintUsed: attempt.hintUsed,
+        explanationViewed: attempt.explanationViewed,
+        timestamp: attempt.timestamp,
+      }),
+    });
+    
+    if (!response.ok) {
+      const errorData = await response.json().catch(() => ({}));
+      throw new Error(`Failed to save attempt: ${errorData.error || response.statusText}`);
+    }
+  } catch (error) {
+    console.error('Error saving attempt to database:', error);
+    // Fallback to localStorage
+    const sessions = getAllSessionsSync();
+    const session = sessions.find(s => s.sessionId === sessionId);
+    
+    if (!session) {
+      console.error('Session not found:', sessionId);
+      return;
+    }
+    
+    session.attempts.push(attempt);
+    session.totalQuestions++;
+    session.totalTime += attempt.timeSpent;
+    
+    if (attempt.correct) {
+      session.correctAnswers++;
+    } else {
+      session.wrongAnswers++;
+    }
+    
+    if (attempt.hintUsed) {
+      session.hintsUsed++;
+    }
+    
     saveSessions(sessions);
   }
 }
 
-export function getAllSessions(): SessionData[] {
+export async function endSession(sessionId: string): Promise<void> {
+  // Update database via API
+  try {
+    await fetch(`/api/sessions/${sessionId}`, {
+      method: 'PATCH',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        endTime: Date.now(),
+      }),
+    });
+  } catch (error) {
+    console.error('Error updating session in database:', error);
+    // Fallback to localStorage
+    const sessions = getAllSessionsSync();
+    const session = sessions.find(s => s.sessionId === sessionId);
+    
+    if (session) {
+      session.endTime = Date.now();
+      saveSessions(sessions);
+    }
+  }
+}
+
+export async function getAllSessions(): Promise<SessionData[]> {
+  if (typeof window === 'undefined') {
+    return [];
+  }
+  
+  // Try to fetch from database API first
+  try {
+    const response = await fetch('/api/sessions');
+    if (response.ok) {
+      const sessions = await response.json();
+      // Also sync to localStorage for offline access
+      saveSessions(sessions);
+      return sessions;
+    }
+  } catch (error) {
+    console.error('Error fetching sessions from database:', error);
+  }
+  
+  // Fallback to localStorage
+  try {
+    const data = localStorage.getItem(STORAGE_KEY);
+    return data ? JSON.parse(data) : [];
+  } catch (error) {
+    console.error('Error reading sessions from localStorage:', error);
+    return [];
+  }
+}
+
+// Synchronous version for backward compatibility (returns empty array, will be populated async)
+export function getAllSessionsSync(): SessionData[] {
   if (typeof window === 'undefined') {
     return [];
   }
@@ -165,8 +250,8 @@ export function formatTime(milliseconds: number): string {
   return `${minutes}:${seconds.toString().padStart(2, '0')}`;
 }
 
-export function getAnalyticsData(): AnalyticsData {
-  const sessions = getAllSessions();
+export async function getAnalyticsData(): Promise<AnalyticsData> {
+  const sessions = await getAllSessions();
   return {
     sessions,
     overallStats: calculateOverallStats(sessions),

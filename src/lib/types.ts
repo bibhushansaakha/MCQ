@@ -6,6 +6,9 @@ export interface Question {
   correct_answer: string;
   hint: string;
   explanation: string;
+  chapter?: string;
+  difficulty?: 'easy' | 'difficult';
+  source?: string;
 }
 
 export interface QuestionData {
@@ -30,6 +33,8 @@ export interface ChapterQuestionData {
     explanation: string;
     source?: string;
     related_section?: string;
+    chapter?: string;
+    difficulty?: 'easy' | 'difficult';
   }>;
 }
 
@@ -55,6 +60,8 @@ export interface QuestionAttempt {
   timestamp: number;
 }
 
+export type ExamMode = 'chapterwise' | 'quick-test' | 'full-test';
+
 export interface SessionData {
   sessionId: string;
   topic: string;
@@ -66,6 +73,7 @@ export interface SessionData {
   wrongAnswers: number;
   hintsUsed: number;
   totalTime: number;
+  examMode?: ExamMode;
 }
 
 export interface OverallStats {
@@ -94,4 +102,19 @@ export interface AnalyticsData {
     [topic: string]: ChapterStats;
   };
 }
+
+export interface QuestionWithChapter extends Question {
+  chapterId?: string;
+}
+
+export const EXAM_CONFIG = {
+  'quick-test': {
+    questionCount: 25,
+    timeLimit: 30 * 60 * 1000, // 30 minutes in milliseconds
+  },
+  'full-test': {
+    questionCount: 100,
+    timeLimit: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+  },
+} as const;
 

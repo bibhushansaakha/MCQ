@@ -16,17 +16,47 @@ import {
 import { AnalyticsData } from '@/lib/types';
 import AnalyticsChart from '@/components/AnalyticsChart';
 import ChapterStats from '@/components/ChapterStats';
-import ThemeToggleWrapper from '@/components/ThemeToggleWrapper';
 import Link from 'next/link';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, BarChart, Bar } from 'recharts';
 
-export default function AnalyticsPage() {
-  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+function useDarkMode() {
+  const [isDark, setIsDark] = useState(false);
 
   useEffect(() => {
-    const data = getAnalyticsData();
-    setAnalytics(data);
+    const checkDarkMode = () => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    };
+    
+    checkDarkMode();
+    
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    
+    return () => observer.disconnect();
   }, []);
+
+  return isDark;
+}
+
+export default function AnalyticsPage() {
+  const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
+  const isDark = useDarkMode();
+
+  useEffect(() => {
+    async function loadAnalytics() {
+      const data = await getAnalyticsData();
+      setAnalytics(data);
+    }
+    loadAnalytics();
+  }, []);
+
+  // Chart colors - deep saturated orange brand color
+  const barColor = '#ea580c'; // Deep saturated orange (same in both modes)
+  const gridColor = isDark ? '#374151' : '#e5e7eb';
+  const axisColor = isDark ? '#9ca3af' : '#6b7280';
 
   if (!analytics) {
     return (
@@ -64,30 +94,13 @@ export default function AnalyticsPage() {
   return (
     <main className="min-h-screen bg-background py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-5xl mx-auto">
-        <div className="mb-10 flex justify-between items-center pb-6">
-          <div>
-            <h1 className="text-3xl font-semibold text-foreground mb-1">
-              Analytics Dashboard
-            </h1>
-            <p className="text-sm text-gray-500 dark:text-gray-500">
-              Track your performance across all topics
-            </p>
-          </div>
-          <div className="flex items-center gap-3">
-            <Link
-              href="/history"
-              className="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-foreground"
-            >
-              History
-            </Link>
-            <Link
-              href="/"
-              className="px-3 py-1.5 text-sm text-gray-500 dark:text-gray-500 hover:text-foreground"
-            >
-              Back to Topics
-            </Link>
-            <ThemeToggleWrapper />
-          </div>
+        <div className="mb-10 pb-6">
+          <h1 className="text-3xl font-semibold text-foreground mb-1">
+            Performance
+          </h1>
+          <p className="text-sm text-gray-500 dark:text-gray-500">
+            Track your performance across all topics
+          </p>
         </div>
 
         {/* Overall Statistics */}
@@ -174,9 +187,9 @@ export default function AnalyticsPage() {
                   <div className="rounded p-6">
                     <ResponsiveContainer width="100%" height={280}>
                       <LineChart data={performanceTrends}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="date" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" domain={[0, 100]} />
+                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                        <XAxis dataKey="date" stroke={axisColor} />
+                        <YAxis stroke={axisColor} domain={[0, 100]} />
                         <Tooltip />
                         <Legend />
                         <Line type="monotone" dataKey="accuracy" stroke="#10b981" strokeWidth={3} name="Accuracy %" dot={{ fill: '#10b981', r: 4 }} />
@@ -193,11 +206,11 @@ export default function AnalyticsPage() {
                   <div className="rounded p-6">
                     <ResponsiveContainer width="100%" height={280}>
                       <BarChart data={timeDistribution}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="range" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" />
+                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                        <XAxis dataKey="range" stroke={axisColor} />
+                        <YAxis stroke={axisColor} />
                         <Tooltip />
-                        <Bar dataKey="count" fill="#37352f" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="count" fill={barColor} radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
@@ -211,9 +224,9 @@ export default function AnalyticsPage() {
                   <div className="rounded p-6">
                     <ResponsiveContainer width="100%" height={280}>
                       <LineChart data={hintsTrends}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="date" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" />
+                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                        <XAxis dataKey="date" stroke={axisColor} />
+                        <YAxis stroke={axisColor} />
                         <Tooltip />
                         <Legend />
                         <Line type="monotone" dataKey="hintRate" stroke="#f59e0b" strokeWidth={3} name="Hint Usage %" dot={{ fill: '#f59e0b', r: 4 }} />
@@ -231,8 +244,8 @@ export default function AnalyticsPage() {
                     <ResponsiveContainer width="100%" height={300}>
                       <BarChart data={chapterComparison} layout="vertical">
                         <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis type="number" domain={[0, 100]} stroke="#6b7280" />
-                        <YAxis dataKey="name" type="category" width={120} stroke="#6b7280" />
+                        <XAxis type="number" domain={[0, 100]} stroke={axisColor} />
+                        <YAxis dataKey="name" type="category" width={120} stroke={axisColor} />
                         <Tooltip />
                         <Bar dataKey="accuracy" fill="#10b981" radius={[0, 4, 4, 0]} />
                       </BarChart>
@@ -248,13 +261,13 @@ export default function AnalyticsPage() {
                   <div className="rounded p-6">
                     <ResponsiveContainer width="100%" height={280}>
                       <BarChart data={dailyActivity}>
-                        <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                        <XAxis dataKey="date" stroke="#6b7280" />
-                        <YAxis stroke="#6b7280" />
+                        <CartesianGrid strokeDasharray="3 3" stroke={gridColor} />
+                        <XAxis dataKey="date" stroke={axisColor} />
+                        <YAxis stroke={axisColor} />
                         <Tooltip />
                         <Legend />
-                        <Bar dataKey="questions" fill="#37352f" name="Questions" radius={[4, 4, 0, 0]} />
-                        <Bar dataKey="sessions" fill="#6b7280" name="Sessions" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="questions" fill={barColor} name="Questions" radius={[4, 4, 0, 0]} />
+                        <Bar dataKey="sessions" fill="#c2410c" name="Sessions" radius={[4, 4, 0, 0]} />
                       </BarChart>
                     </ResponsiveContainer>
                   </div>
