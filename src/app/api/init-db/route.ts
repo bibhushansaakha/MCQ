@@ -284,17 +284,27 @@ async function initializeDatabase() {
       });
     }
 
-    // Step 3: Clean up existing questions to ensure clean re-import
-    // This is necessary because old questions may have incorrect topicId values
-    // and upsert won't update them due to the unique constraint (topicId, questionNumber)
-    console.log('Step 3: Cleaning up existing questions...');
+    // Step 3: Clean up existing data in correct order to avoid foreign key violations
+    // Delete order: Attempts → Sessions → Questions (due to foreign key constraints)
+    console.log('Step 3: Cleaning up existing data...');
     try {
-      const deletedCount = await prisma.question.deleteMany({});
-      console.log(`Deleted ${deletedCount.count} existing questions`);
+      // Delete attempts first (they reference questions)
+      const deletedAttempts = await prisma.attempt.deleteMany({});
+      console.log(`Deleted ${deletedAttempts.count} attempts`);
+      
+      // Delete sessions (they reference attempts)
+      const deletedSessions = await prisma.session.deleteMany({});
+      console.log(`Deleted ${deletedSessions.count} sessions`);
+      
+      // Now delete questions (no foreign key constraints blocking)
+      const deletedQuestions = await prisma.question.deleteMany({});
+      console.log(`Deleted ${deletedQuestions.count} questions`);
+      
+      console.log(`Cleanup complete: ${deletedAttempts.count} attempts, ${deletedSessions.count} sessions, ${deletedQuestions.count} questions`);
     } catch (deleteError: any) {
-      // If delete fails, log but continue (might be first run or foreign key constraint)
-      console.log('No existing questions to delete or delete failed:', deleteError.message);
-      // Continue anyway - questions will be imported/updated via upsert
+      // If delete fails, log error and throw (we need clean state)
+      console.error('Error during cleanup:', deleteError.message);
+      throw new Error(`Cleanup failed: ${deleteError.message}. Cannot proceed with initialization.`);
     }
 
     // Auto-discover and process database files
@@ -322,121 +332,197 @@ async function initializeDatabase() {
         for (const q of questions) {
           // Extract topicId from chapter name or chapterData
           let topicId: string | null = null;
+          let extractionMethod = '';
           
-          // Try to extract chapter number from q.chapter (e.g., "Chapter 1: Electrical & Electronics")
+          // Primary: Try to extract chapter number from q.chapter (e.g., "Chapter 1: Electrical & Electronics")
           if (q.chapter) {
             const chapterMatch = String(q.chapter).match(/chapter-?(\d+)/i);
             if (chapterMatch) {
               topicId = `chapter-${chapterMatch[1].padStart(2, '0')}`;
+              extractionMethod = 'q.chapter (regex match)';
             } else {
               // Fallback: try to extract any number from the chapter string
               const numMatch = String(q.chapter).match(/(\d+)/);
               if (numMatch) {
                 topicId = `chapter-${numMatch[1].padStart(2, '0')}`;
+                extractionMethod = 'q.chapter (number extraction)';
               }
             }
           }
           
-          // If still no topicId, try to extract from chapterName
+          // Secondary: If still no topicId, try to extract from chapterName
           if (!topicId && chapterName) {
             const chapterNameMatch = chapterName.match(/chapter-?(\d+)/i);
             if (chapterNameMatch) {
               topicId = `chapter-${chapterNameMatch[1].padStart(2, '0')}`;
+              extractionMethod = 'chapterName (regex match)';
             } else {
               // Fallback: try to extract any number from chapterName
               const numMatch = chapterName.match(/(\d+)/);
               if (numMatch) {
                 topicId = `chapter-${numMatch[1].padStart(2, '0')}`;
+                extractionMethod = 'chapterName (number extraction)';
               } else {
                 // Last resort: normalize chapterName
                 const normalized = chapterName.toLowerCase().replace(/\s+/g, '-');
                 const normalizedMatch = normalized.match(/chapter-?(\d+)/);
                 if (normalizedMatch) {
                   topicId = `chapter-${normalizedMatch[1].padStart(2, '0')}`;
+                  extractionMethod = 'chapterName (normalized)';
                 }
               }
             }
           }
           
+          // Validate topicId format matches topics.json pattern (chapter-01, chapter-02, etc.)
+          if (topicId && !/^chapter-\d{2}$/.test(topicId)) {
+            console.warn(`Invalid topicId format extracted: ${topicId} for chapter: ${chapterName || q.chapter}. Expected format: chapter-XX`);
+            // Try to fix it
+            const fixMatch = topicId.match(/(\d+)/);
+            if (fixMatch) {
+              topicId = `chapter-${fixMatch[1].padStart(2, '0')}`;
+              console.log(`Fixed topicId to: ${topicId}`);
+            } else {
+              topicId = null;
+            }
+          }
+          
           if (!topicId) {
-            console.warn(`Could not determine topicId for question in chapter: ${chapterName || q.chapter}`);
+            console.warn(`Could not determine topicId for question in chapter: ${chapterName || q.chapter || 'unknown'}. Question: ${q.question?.substring(0, 50)}...`);
             continue;
+          }
+          
+          // Log extraction for debugging (first few questions only)
+          if (totalQuestions < 5) {
+            console.log(`Extracted topicId: ${topicId} from ${extractionMethod || 'unknown'} (chapter: ${chapterName || q.chapter})`);
           }
 
           // Find or create topic - use topics.json as source of truth for names
           let topic = await prisma.topic.findUnique({ where: { topicId } });
           if (!topic) {
-            // Try to find topic name from topics.json
+            // Topic should already exist from topics.json, but create if missing
             const topicsPath = join(process.cwd(), 'public', 'data', 'topics.json');
             let topicName = chapterName;
+            let topicDescription = '';
             try {
               const topicsData = JSON.parse(await readFile(topicsPath, 'utf-8'));
               const topicsArray = Array.isArray(topicsData) ? topicsData : (topicsData.topics || []);
               const topicFromJson = topicsArray.find((t: any) => t.id === topicId);
               if (topicFromJson) {
                 topicName = topicFromJson.name;
+                topicDescription = topicFromJson.description || '';
+              } else {
+                console.warn(`Topic ${topicId} not found in topics.json, creating with chapterName: ${chapterName}`);
               }
             } catch (e) {
-              // If topics.json doesn't exist or can't be read, use chapterName
+              console.warn(`Could not read topics.json: ${e}. Using chapterName: ${chapterName}`);
             }
             
             topic = await prisma.topic.create({
               data: {
                 topicId,
                 name: topicName || chapterName || `Chapter ${topicId.replace('chapter-', '')}`,
-                description: '',
+                description: topicDescription,
                 isGeneral: false,
               },
             });
+            console.log(`Created topic: ${topicId} - ${topic.name}`);
           }
 
-          if (!topic) continue;
+          if (!topic) {
+            console.error(`Failed to find or create topic for topicId: ${topicId}`);
+            continue;
+          }
 
           const questionNumber = q.question_number || q.id || q.questionNumber || 0;
           const options = Array.isArray(q.options) ? JSON.stringify(q.options) : q.options;
 
-          await prisma.question.upsert({
-            where: {
-              topicId_questionNumber: {
+          try {
+            const result = await prisma.question.upsert({
+              where: {
+                topicId_questionNumber: {
+                  topicId: topic.topicId,
+                  questionNumber,
+                },
+              },
+              update: {
+                question: q.question,
+                options,
+                correctAnswer: q.correct_answer || q.correctAnswer,
+                hint: q.hint || null,
+                explanation: q.explanation || null,
+                chapter: q.chapter || topicId,
+                difficulty: q.difficulty === 'easy' || q.difficulty === 'difficult' ? q.difficulty : null,
+                source: q.source || file,
+                topicId: topic.topicId, // Ensure topicId is correct
+              },
+              create: {
                 topicId: topic.topicId,
                 questionNumber,
+                questionId: q.id || null,
+                question: q.question,
+                options,
+                correctAnswer: q.correct_answer || q.correctAnswer,
+                hint: q.hint || null,
+                explanation: q.explanation || null,
+                chapter: q.chapter || topicId,
+                difficulty: q.difficulty === 'easy' || q.difficulty === 'difficult' ? q.difficulty : null,
+                source: q.source || file,
               },
-            },
-            update: {
-              question: q.question,
-              options,
-              correctAnswer: q.correct_answer || q.correctAnswer,
-              hint: q.hint || null,
-              explanation: q.explanation || null,
-              chapter: q.chapter || topicId,
-              difficulty: q.difficulty === 'easy' || q.difficulty === 'difficult' ? q.difficulty : null,
-              source: q.source || file,
-            },
-            create: {
-              topicId: topic.topicId,
-              questionNumber,
-              questionId: q.id || null,
-              question: q.question,
-              options,
-              correctAnswer: q.correct_answer || q.correctAnswer,
-              hint: q.hint || null,
-              explanation: q.explanation || null,
-              chapter: q.chapter || topicId,
-              difficulty: q.difficulty === 'easy' || q.difficulty === 'difficult' ? q.difficulty : null,
-              source: q.source || file,
-            },
-          });
-
-          totalQuestions++;
+            });
+            
+            // Log first few upserts for debugging
+            if (totalQuestions < 5) {
+              console.log(`Upserted question ${questionNumber} for topicId ${topic.topicId}`);
+            }
+            
+            totalQuestions++;
+          } catch (upsertError: any) {
+            console.error(`Error upserting question ${questionNumber} for topicId ${topic.topicId}:`, upsertError.message);
+            // Continue with next question
+          }
         }
       }
+    }
+
+    // Step 4: Post-import verification
+    console.log('Step 4: Verifying imported data...');
+    const verificationResults: Record<string, number> = {};
+    const allTopics = await prisma.topic.findMany({
+      select: { topicId: true, name: true },
+    });
+    
+    let totalVerifiedQuestions = 0;
+    for (const topic of allTopics) {
+      const questionCount = await prisma.question.count({
+        where: { topicId: topic.topicId }
+      });
+      verificationResults[topic.topicId] = questionCount;
+      totalVerifiedQuestions += questionCount;
+      console.log(`Topic ${topic.topicId} (${topic.name}): ${questionCount} questions`);
+    }
+    
+    // Check for any questions with invalid topicIds
+    const allQuestions = await prisma.question.findMany({
+      select: { topicId: true },
+    });
+    const validTopicIds = new Set(allTopics.map(t => t.topicId));
+    const orphanedQuestions = allQuestions.filter(q => !validTopicIds.has(q.topicId));
+    
+    if (orphanedQuestions.length > 0) {
+      console.warn(`Warning: Found ${orphanedQuestions.length} questions with invalid topicIds`);
     }
 
     return {
       initialized: true,
       message: 'Database initialized successfully',
-      topicsCreated: await prisma.topic.count(),
+      topicsCreated: allTopics.length,
       questionsCreated: totalQuestions,
+      questionsVerified: totalVerifiedQuestions,
+      verification: verificationResults,
+      warnings: orphanedQuestions.length > 0 
+        ? [`Found ${orphanedQuestions.length} orphaned questions with invalid topicIds`]
+        : [],
     };
   } catch (error: any) {
     console.error('Error initializing database:', error);
