@@ -307,17 +307,70 @@ async function initializeDatabase() {
         const chapterName = chapterData.chapter || chapterData.chapterName || '';
 
         for (const q of questions) {
-          const topicId = q.chapter 
-            ? `chapter-${String(q.chapter).padStart(2, '0')}`
-            : chapterName.toLowerCase().replace(/\s+/g, '-').replace(/chapter-?(\d+)/i, 'chapter-$1');
+          // Extract topicId from chapter name or chapterData
+          let topicId: string | null = null;
+          
+          // Try to extract chapter number from q.chapter (e.g., "Chapter 1: Electrical & Electronics")
+          if (q.chapter) {
+            const chapterMatch = String(q.chapter).match(/chapter-?(\d+)/i);
+            if (chapterMatch) {
+              topicId = `chapter-${chapterMatch[1].padStart(2, '0')}`;
+            } else {
+              // Fallback: try to extract any number from the chapter string
+              const numMatch = String(q.chapter).match(/(\d+)/);
+              if (numMatch) {
+                topicId = `chapter-${numMatch[1].padStart(2, '0')}`;
+              }
+            }
+          }
+          
+          // If still no topicId, try to extract from chapterName
+          if (!topicId && chapterName) {
+            const chapterNameMatch = chapterName.match(/chapter-?(\d+)/i);
+            if (chapterNameMatch) {
+              topicId = `chapter-${chapterNameMatch[1].padStart(2, '0')}`;
+            } else {
+              // Fallback: try to extract any number from chapterName
+              const numMatch = chapterName.match(/(\d+)/);
+              if (numMatch) {
+                topicId = `chapter-${numMatch[1].padStart(2, '0')}`;
+              } else {
+                // Last resort: normalize chapterName
+                const normalized = chapterName.toLowerCase().replace(/\s+/g, '-');
+                const normalizedMatch = normalized.match(/chapter-?(\d+)/);
+                if (normalizedMatch) {
+                  topicId = `chapter-${normalizedMatch[1].padStart(2, '0')}`;
+                }
+              }
+            }
+          }
+          
+          if (!topicId) {
+            console.warn(`Could not determine topicId for question in chapter: ${chapterName || q.chapter}`);
+            continue;
+          }
 
-          // Find or create topic
+          // Find or create topic - use topics.json as source of truth for names
           let topic = await prisma.topic.findUnique({ where: { topicId } });
-          if (!topic && chapterName) {
+          if (!topic) {
+            // Try to find topic name from topics.json
+            const topicsPath = join(process.cwd(), 'public', 'data', 'topics.json');
+            let topicName = chapterName;
+            try {
+              const topicsData = JSON.parse(await readFile(topicsPath, 'utf-8'));
+              const topicsArray = Array.isArray(topicsData) ? topicsData : (topicsData.topics || []);
+              const topicFromJson = topicsArray.find((t: any) => t.id === topicId);
+              if (topicFromJson) {
+                topicName = topicFromJson.name;
+              }
+            } catch (e) {
+              // If topics.json doesn't exist or can't be read, use chapterName
+            }
+            
             topic = await prisma.topic.create({
               data: {
                 topicId,
-                name: chapterName,
+                name: topicName || chapterName || `Chapter ${topicId.replace('chapter-', '')}`,
                 description: '',
                 isGeneral: false,
               },
