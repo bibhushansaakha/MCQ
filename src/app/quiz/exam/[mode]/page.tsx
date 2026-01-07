@@ -215,7 +215,8 @@ export default function ExamQuizPage() {
     return () => {
       isMounted = false;
     };
-  }, [mode, config?.questionCount]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mode, config?.questionCount, startTimer]);
 
   // Update isAnswered when question changes and track start time
   useEffect(() => {
