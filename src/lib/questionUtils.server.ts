@@ -6,7 +6,18 @@ import { prisma } from './prisma';
 export async function loadTopicsServer(): Promise<Topic[]> {
   try {
     // Check if database is empty and initialize if needed
-    const topicCount = await prisma.topic.count();
+    let topicCount = 0;
+    try {
+      topicCount = await prisma.topic.count();
+    } catch (error: any) {
+      // If tables don't exist, return empty array (migrations need to run first)
+      if (error.message?.includes('does not exist')) {
+        console.error('Database tables do not exist. Please run migrations first.');
+        return [];
+      }
+      throw error;
+    }
+    
     if (topicCount === 0) {
       // Try to initialize database automatically
       try {
