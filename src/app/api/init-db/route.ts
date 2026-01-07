@@ -2,11 +2,39 @@ import { NextResponse } from 'next/server';
 import { prisma } from '@/lib/prisma';
 import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
+import { execSync } from 'child_process';
 
 export const dynamic = 'force-dynamic';
 
+async function ensureMigrations() {
+  try {
+    // Run migrations to ensure database schema is up to date
+    // This will create the database file if it doesn't exist
+    execSync('npx prisma migrate deploy', { 
+      stdio: 'pipe',
+      env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || 'file:./prisma/dev.db' }
+    });
+    console.log('✓ Migrations applied successfully');
+  } catch (error: any) {
+    // If migrations fail, try to push schema directly (for development)
+    try {
+      console.log('Migration deploy failed, trying schema push...');
+      execSync('npx prisma db push --accept-data-loss', {
+        stdio: 'pipe',
+        env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || 'file:./prisma/dev.db' }
+      });
+      console.log('✓ Schema pushed successfully');
+    } catch (pushError) {
+      console.warn('Schema push also failed, database will be created on first use:', pushError);
+    }
+  }
+}
+
 async function initializeDatabase() {
   try {
+    // Ensure migrations are applied first
+    await ensureMigrations();
+
     // Check if database already has topics
     const topicCount = await prisma.topic.count();
     if (topicCount > 0) {
