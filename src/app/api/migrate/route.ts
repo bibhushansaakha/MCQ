@@ -12,31 +12,51 @@ export async function POST() {
       );
     }
 
-    console.log('Running migrations...');
-    const output: string[] = [];
+    // Generate Prisma client first
+    try {
+      console.log('Generating Prisma client...');
+      execSync('npx prisma generate', {
+        encoding: 'utf-8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+        env: { ...process.env }
+      });
+    } catch (genError: any) {
+      console.warn('Prisma generate warning:', genError.message);
+    }
+
+    const errors: any[] = [];
     
-    // Try db push first (more reliable for Vercel)
+    // Try db push first
     try {
       console.log('Pushing schema to database...');
       const result = execSync('npx prisma db push --accept-data-loss --skip-generate', {
         encoding: 'utf-8',
+        stdio: ['ignore', 'pipe', 'pipe'],
         env: { ...process.env }
       });
-      output.push(result);
       return NextResponse.json({ 
         success: true, 
         message: 'Schema pushed successfully',
         output: result
       });
     } catch (pushError: any) {
-      // Fallback to migrations
-      console.log('Schema push failed, trying migrations...');
+      const pushStdout = pushError.stdout?.toString() || '';
+      const pushStderr = pushError.stderr?.toString() || '';
+      errors.push({
+        method: 'db push',
+        error: pushError.message,
+        stdout: pushStdout,
+        stderr: pushStderr,
+      });
+      
+      // Try migrations
       try {
+        console.log('Trying migrations...');
         const result = execSync('npx prisma migrate deploy', {
           encoding: 'utf-8',
+          stdio: ['ignore', 'pipe', 'pipe'],
           env: { ...process.env }
         });
-        output.push(result);
         return NextResponse.json({ 
           success: true, 
           message: 'Migrations applied successfully',
@@ -44,13 +64,21 @@ export async function POST() {
           warning: 'Used migrations instead of db push'
         });
       } catch (migrationError: any) {
+        const migrationStdout = migrationError.stdout?.toString() || '';
+        const migrationStderr = migrationError.stderr?.toString() || '';
+        errors.push({
+          method: 'migrate deploy',
+          error: migrationError.message,
+          stdout: migrationStdout,
+          stderr: migrationStderr,
+        });
+        
         return NextResponse.json(
           { 
             error: 'Both db push and migrations failed', 
-            details: migrationError.message,
-            pushError: pushError.message,
-            pushOutput: pushError.stdout || pushError.stderr || '',
-            migrationOutput: migrationError.stdout || migrationError.stderr || ''
+            errors: errors,
+            databaseUrlPrefix: process.env.DATABASE_URL?.substring(0, 30) + '...',
+            suggestion: 'Try using /api/create-tables endpoint to create tables directly'
           },
           { status: 500 }
         );
