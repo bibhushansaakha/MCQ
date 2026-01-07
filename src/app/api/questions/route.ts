@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { loadAllQuestionsFromJson } from '@/lib/jsonUtils';
 import { Question } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -11,44 +11,49 @@ export async function GET(request: NextRequest) {
     const difficulty = searchParams.get('difficulty');
     const topicId = searchParams.get('topicId');
 
-    // Build where clause dynamically based on provided filters
-    const where: any = {};
+    let questions = await loadAllQuestionsFromJson();
 
+    // Filter by topicId if provided
     if (topicId) {
-      where.topicId = topicId;
-    }
-
-    if (chapter) {
-      where.chapter = chapter;
-    }
-
-    if (difficulty) {
-      // Validate difficulty value
-      if (difficulty === 'easy' || difficulty === 'difficult') {
-        where.difficulty = difficulty;
+      const chapterMatch = topicId.match(/chapter-(\d+)/);
+      if (chapterMatch) {
+        const chapterNum = parseInt(chapterMatch[1], 10);
+        questions = questions.filter(q => {
+          if (!q.chapter) return false;
+          const qMatch = String(q.chapter).match(/(\d+)/);
+          if (!qMatch) return false;
+          return parseInt(qMatch[1], 10) === chapterNum;
+        });
       }
     }
 
-    const questions = await prisma.question.findMany({
-      where,
-      orderBy: { questionNumber: 'asc' },
-    });
+    // Filter by chapter if provided
+    if (chapter) {
+      const chapterMatch = chapter.match(/chapter-(\d+)/);
+      if (chapterMatch) {
+        const chapterNum = parseInt(chapterMatch[1], 10);
+        questions = questions.filter(q => {
+          if (!q.chapter) return false;
+          const qMatch = String(q.chapter).match(/(\d+)/);
+          if (!qMatch) return false;
+          return parseInt(qMatch[1], 10) === chapterNum;
+        });
+      }
+    }
 
-    const formattedQuestions: Question[] = questions.map(q => ({
-      question_number: q.questionNumber || q.questionId || 0,
-      id: q.questionId || q.questionNumber || undefined,
-      question: q.question,
-      options: JSON.parse(q.options),
-      correct_answer: q.correctAnswer,
-      hint: q.hint || '',
-      explanation: q.explanation || '',
-      chapter: q.chapter || undefined,
-      difficulty: (q.difficulty === 'easy' || q.difficulty === 'difficult') ? q.difficulty : undefined,
-    }));
+    // Filter by difficulty if provided
+    if (difficulty && (difficulty === 'easy' || difficulty === 'difficult')) {
+      questions = questions.filter(q => q.difficulty === difficulty);
+    }
 
-    return NextResponse.json(formattedQuestions);
+    // Sort by question number
+    const sorted = questions.sort((a, b) => 
+      (a.question_number || 0) - (b.question_number || 0)
+    );
+
+    return NextResponse.json(sorted);
   } catch (error) {
-    console.error('Error loading filtered questions:', error);
+    console.error('Error loading questions:', error);
     return NextResponse.json(
       { error: 'Failed to load questions' },
       { status: 500 }

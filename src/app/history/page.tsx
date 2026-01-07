@@ -105,15 +105,6 @@ export default function HistoryPage() {
 
     setClearing(true);
     try {
-      // Clear database
-      const response = await fetch('/api/clear-history', {
-        method: 'POST',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to clear history');
-      }
-
       // Clear localStorage
       if (typeof window !== 'undefined') {
         localStorage.removeItem('mcq_sessions');
@@ -122,9 +113,6 @@ export default function HistoryPage() {
       // Reload history
       setHistoryItems([]);
       setSessions([]);
-      
-      // Reload the page to refresh everything
-      window.location.reload();
     } catch (error) {
       console.error('Error clearing history:', error);
       alert('Failed to clear history. Please try again.');
@@ -140,16 +128,14 @@ export default function HistoryPage() {
     }
 
     try {
-      const response = await fetch(`/api/sessions/${sessionId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to delete session');
-      }
+      // Delete from localStorage
+      const { getAllSessionsSync, saveSessions } = await import('@/lib/analytics');
+      const sessions = getAllSessionsSync();
+      const filtered = sessions.filter(s => s.sessionId !== sessionId);
+      saveSessions(filtered);
 
       // Remove from state
-      setSessions(prev => prev.filter(s => s.sessionId !== sessionId));
+      setSessions(filtered);
       setHistoryItems(prev => prev.filter(item => {
         // Find the session to get its attempts
         const session = sessions.find(s => s.sessionId === sessionId);
@@ -157,11 +143,6 @@ export default function HistoryPage() {
         const attemptIds = new Set(session.attempts.map(a => `${a.questionId}-${a.timestamp}`));
         return !attemptIds.has(`${item.attempt.questionId}-${item.attempt.timestamp}`);
       }));
-
-      // Clear localStorage
-      if (typeof window !== 'undefined') {
-        localStorage.removeItem('mcq_sessions');
-      }
     } catch (error) {
       console.error('Error deleting session:', error);
       alert('Failed to delete session. Please try again.');
@@ -185,19 +166,26 @@ export default function HistoryPage() {
       );
 
       if (session) {
-        // Delete attempt via API
-        const response = await fetch(`/api/attempts/delete`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            sessionId: session.sessionId,
-            questionId: attempt.questionId,
-            timestamp: attempt.timestamp,
-          }),
-        });
-
-        if (!response.ok) {
-          throw new Error('Failed to delete attempt');
+        // Delete attempt from localStorage
+        const { getAllSessionsSync, saveSessions } = await import('@/lib/analytics');
+        const allSessions = getAllSessionsSync();
+        const sessionToUpdate = allSessions.find(s => s.sessionId === session.sessionId);
+        
+        if (sessionToUpdate) {
+          // Remove the attempt
+          sessionToUpdate.attempts = sessionToUpdate.attempts.filter(a => 
+            !(a.questionId === attempt.questionId && a.timestamp === attempt.timestamp)
+          );
+          
+          // Recalculate stats
+          sessionToUpdate.totalQuestions = sessionToUpdate.attempts.length;
+          sessionToUpdate.correctAnswers = sessionToUpdate.attempts.filter(a => a.correct).length;
+          sessionToUpdate.wrongAnswers = sessionToUpdate.attempts.filter(a => !a.correct).length;
+          sessionToUpdate.hintsUsed = sessionToUpdate.attempts.filter(a => a.hintUsed).length;
+          sessionToUpdate.totalTime = sessionToUpdate.attempts.reduce((sum, a) => sum + a.timeSpent, 0);
+          
+          saveSessions(allSessions);
+          setSessions(allSessions);
         }
 
         // Remove from UI

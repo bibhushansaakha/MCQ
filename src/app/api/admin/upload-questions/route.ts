@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
-import { readFile } from 'fs/promises';
+import { readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 
 export const dynamic = 'force-dynamic';
@@ -147,99 +146,61 @@ export async function POST(request: NextRequest) {
       const topicName = topicFromJson?.name || chapterInfo.metadata.chapter || `Chapter ${chapterTag}`;
       const topicDescription = topicFromJson?.description || `${topicName}${chapterInfo.metadata.set ? ` - ${chapterInfo.metadata.set}` : ''} (from ${chapterInfo.metadata.sourceFile})`;
 
-      // Create or update topic
-      const existingTopic = await prisma.topic.findUnique({
-        where: { topicId: chapterTag },
-      });
-
-      if (existingTopic) {
-        await prisma.topic.update({
-          where: { topicId: chapterTag },
-          data: {
-            name: topicName,
-            description: topicDescription,
-          },
+      // Update topics.json if needed
+      const topicsPath = join(process.cwd(), 'public', 'data', 'topics.json');
+      const topicsData = JSON.parse(await readFile(topicsPath, 'utf-8'));
+      const topicsArray = Array.isArray(topicsData) ? topicsData : (topicsData.topics || []);
+      
+      const topicExists = topicsArray.find((t: any) => t.id === chapterTag);
+      if (!topicExists) {
+        topicsArray.push({
+          id: chapterTag,
+          name: topicName,
+          file: '',
+          description: topicDescription,
         });
-        results.topicsUpdated++;
-      } else {
-        await prisma.topic.create({
-          data: {
-            topicId: chapterTag,
-            name: topicName,
-            description: topicDescription,
-            isGeneral: false,
-          },
-        });
+        await writeFile(topicsPath, JSON.stringify({ topics: topicsArray }, null, 2), 'utf-8');
         results.topicsCreated++;
-      }
-
-      // Import questions
-      for (const q of chapterInfo.questions) {
-        const questionNumber = q.id || q.question_number || 0;
-        const questionId = q.id || q.question_number;
-
-        // Normalize difficulty
-        let difficulty: string | null = null;
-        if (q.difficulty) {
-          const diffLower = q.difficulty.toLowerCase();
-          if (diffLower === 'easy') {
-            difficulty = 'easy';
-          } else if (diffLower === 'difficult' || diffLower === 'hard') {
-            difficulty = 'difficult';
-          }
-        }
-
-        try {
-          const existing = await prisma.question.findUnique({
-            where: {
-              topicId_questionNumber: {
-                topicId: chapterTag,
-                questionNumber,
-              },
-            },
-          });
-
-          if (existing) {
-            await prisma.question.update({
-              where: { id: existing.id },
-              data: {
-                question: q.question,
-                options: JSON.stringify(q.options),
-                correctAnswer: q.correct_answer,
-                hint: q.hint || null,
-                explanation: q.explanation || null,
-                questionType: q.question_type || null,
-                marks: q.marks || null,
-                source: q.source || chapterInfo.metadata.sourceFile || null,
-                chapter: chapterTag,
-                difficulty,
-              },
-            });
-            results.questionsUpdated++;
-          } else {
-            await prisma.question.create({
-              data: {
-                topicId: chapterTag,
-                questionNumber,
-                questionId: questionId || null,
-                question: q.question,
-                options: JSON.stringify(q.options),
-                correctAnswer: q.correct_answer,
-                hint: q.hint || null,
-                explanation: q.explanation || null,
-                questionType: q.question_type || null,
-                marks: q.marks || null,
-                source: q.source || chapterInfo.metadata.sourceFile || null,
-                chapter: chapterTag,
-                difficulty,
-              },
-            });
-            results.questionsImported++;
-          }
-        } catch (error: any) {
-          results.errors.push(`Error importing question ${questionNumber}: ${error.message}`);
+      } else {
+        // Update existing topic
+        const index = topicsArray.findIndex((t: any) => t.id === chapterTag);
+        if (index >= 0) {
+          topicsArray[index].name = topicName;
+          topicsArray[index].description = topicDescription;
+          await writeFile(topicsPath, JSON.stringify({ topics: topicsArray }, null, 2), 'utf-8');
+          results.topicsUpdated++;
         }
       }
+
+      // Write questions to a new JSON file or append to existing
+      // For simplicity, create a new file with timestamp
+      const timestamp = Date.now();
+      const outputFileName = `NEC_UPLOADED_${timestamp}.json`;
+      const outputPath = join(process.cwd(), 'public', 'data', outputFileName);
+      
+      // Format as array of chapters (matching existing format)
+      const outputData = [{
+        chapter: chapterInfo.metadata.chapter || topicName,
+        chapter_code: chapterInfo.metadata.chapter_code || chapterTag.toUpperCase(),
+        total_questions: chapterInfo.questions.length,
+        set: chapterInfo.metadata.set || sourceName,
+        question_type: chapterInfo.metadata.question_type || 'Mixed Questions',
+        questions: chapterInfo.questions.map(q => ({
+          id: q.id || q.question_number || 0,
+          question: q.question,
+          options: q.options,
+          correct_answer: q.correct_answer,
+          hint: q.hint || '',
+          explanation: q.explanation || '',
+          chapter: q.chapter || chapterInfo.metadata.chapter || topicName,
+          difficulty: q.difficulty || null,
+          marks: q.marks || null,
+          source: q.source || chapterInfo.metadata.sourceFile || sourceName,
+        })),
+      }];
+
+      await writeFile(outputPath, JSON.stringify(outputData, null, 2), 'utf-8');
+      results.questionsImported = chapterInfo.questions.length;
     }
 
     return NextResponse.json({

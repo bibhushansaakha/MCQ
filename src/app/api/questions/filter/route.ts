@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { prisma } from '@/lib/prisma';
+import { loadAllQuestionsFromJson } from '@/lib/jsonUtils';
 import { Question } from '@/lib/types';
 
 export const dynamic = 'force-dynamic';
@@ -9,49 +9,58 @@ export async function POST(request: NextRequest) {
     const body = await request.json();
     const { chapters, difficulties, sources, topicId } = body;
 
-    // Build where clause dynamically
-    const where: any = {};
+    // Load all questions
+    let questions = await loadAllQuestionsFromJson();
 
+    // Filter by topicId if provided
     if (topicId) {
-      where.topicId = topicId;
+      const chapterMatch = topicId.match(/chapter-(\d+)/);
+      if (chapterMatch) {
+        const chapterNum = parseInt(chapterMatch[1], 10);
+        questions = questions.filter(q => {
+          if (!q.chapter) return false;
+          const qMatch = String(q.chapter).match(/(\d+)/);
+          if (!qMatch) return false;
+          return parseInt(qMatch[1], 10) === chapterNum;
+        });
+      }
     }
 
+    // Filter by chapters if provided
     if (chapters && chapters.length > 0) {
-      where.chapter = { in: chapters };
+      const chapterNums = chapters.map((ch: string) => {
+        const match = ch.match(/chapter-(\d+)/);
+        return match ? parseInt(match[1], 10) : null;
+      }).filter(Boolean);
+      
+      questions = questions.filter(q => {
+        if (!q.chapter) return false;
+        const match = String(q.chapter).match(/(\d+)/);
+        if (!match) return false;
+        return chapterNums.includes(parseInt(match[1], 10));
+      });
     }
 
+    // Filter by difficulties if provided
     if (difficulties && difficulties.length > 0) {
-      where.difficulty = { in: difficulties };
+      questions = questions.filter(q => 
+        q.difficulty && difficulties.includes(q.difficulty)
+      );
     }
 
-    // Note: Source filtering would require adding source field to Question model
-    // For now, we'll filter by source in memory after fetching
-    const questions = await prisma.question.findMany({
-      where,
-      orderBy: { questionNumber: 'asc' },
-    });
-
-    let filteredQuestions = questions.map(q => ({
-      question_number: q.questionNumber || q.questionId || 0,
-      id: q.questionId || q.questionNumber || undefined,
-      question: q.question,
-      options: JSON.parse(q.options),
-      correct_answer: q.correctAnswer,
-      hint: q.hint || '',
-      explanation: q.explanation || '',
-      chapter: q.chapter || undefined,
-      difficulty: (q.difficulty === 'easy' || q.difficulty === 'difficult') ? q.difficulty : undefined,
-      source: q.source || undefined,
-    }));
-
-    // Filter by source if provided (in-memory filtering)
+    // Filter by sources if provided
     if (sources && sources.length > 0) {
-      filteredQuestions = filteredQuestions.filter(q => 
+      questions = questions.filter(q => 
         q.source && sources.includes(q.source)
       );
     }
 
-    return NextResponse.json(filteredQuestions);
+    // Sort by question number
+    const sorted = questions.sort((a, b) => 
+      (a.question_number || 0) - (b.question_number || 0)
+    );
+
+    return NextResponse.json(sorted);
   } catch (error) {
     console.error('Error loading filtered questions:', error);
     return NextResponse.json(

@@ -35,12 +35,15 @@ export default function ReviewPage() {
   useEffect(() => {
     async function loadReviewData() {
       try {
-        // Load session data
-        const sessionResponse = await fetch(`/api/sessions/${sessionId}`);
-        if (!sessionResponse.ok) {
-          throw new Error("Failed to load session");
+        // Load session data from localStorage
+        const { getAllSessions } = await import('@/lib/analytics');
+        const sessions = await getAllSessions();
+        const sessionData = sessions.find(s => s.sessionId === sessionId);
+        
+        if (!sessionData) {
+          throw new Error("Session not found");
         }
-        const sessionData: SessionData = await sessionResponse.json();
+        
         setSession(sessionData);
 
         // Load questions based on exam mode

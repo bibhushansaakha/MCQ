@@ -5,19 +5,14 @@
   "scripts": {
     "dev": "next dev",
     "dev:clean": "rm -rf .next node_modules/.cache && next dev",
-    "build": "prisma generate && next build",
+    "build": "next build",
     "build:clean": "rm -rf .next node_modules/.cache && next build",
     "start": "next start",
     "lint": "next lint",
-    "migrate-data": "tsx prisma/migrate-data.ts",
-    "update-topics": "tsx prisma/update-topic-names.ts",
-    "postinstall": "echo 'Install complete. Prisma client will be generated during build.'",
-    "db:setup": "prisma generate && prisma migrate deploy && npm run migrate-data",
     "clean": "rm -rf .next node_modules/.cache",
     "fix": "rm -rf .next node_modules/.cache && npm run build"
   },
   "dependencies": {
-    "@prisma/client": "^6.19.1",
     "next": "14.2.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -31,9 +26,7 @@
     "eslint": "^8.57.0",
     "eslint-config-next": "14.2.5",
     "postcss": "^8.4.40",
-    "prisma": "^6.19.1",
     "tailwindcss": "^3.4.7",
-    "tsx": "^4.21.0",
     "typescript": "^5.5.4"
   }
 }
