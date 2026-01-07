@@ -14,7 +14,7 @@ import {
   loadQuestionsFromAllChapters,
   loadQuestions,
 } from "@/lib/questionUtils";
-import { formatTime } from "@/lib/analytics";
+import { formatTime, startSession } from "@/lib/analytics";
 import ThemeToggleWrapper from "@/components/ThemeToggleWrapper";
 import Link from "next/link";
 import HintDisplay from "@/components/HintDisplay";
@@ -24,6 +24,7 @@ export default function ReviewPage() {
   const params = useParams();
   const router = useRouter();
   const sessionId = params.sessionId as string;
+  const [retaking, setRetaking] = useState(false);
 
   const [session, setSession] = useState<SessionData | null>(null);
   const [questions, setQuestions] = useState<
@@ -195,20 +196,50 @@ export default function ReviewPage() {
 
         {/* Summary Stats */}
         <div className="mb-8 p-6 rounded-lg bg-gray-50/30 dark:bg-gray-100/5">
-          <h1 className="text-2xl font-semibold text-foreground mb-4">
-            Exam Review
-            {examMode && (
-              <span className="ml-3 text-sm font-normal text-gray-500 dark:text-gray-500">
-                (
-                {examMode === "quick-test"
-                  ? "Quick Test"
-                  : examMode === "full-test"
-                  ? "Full Test"
-                  : "Chapterwise"}
-                )
-              </span>
+          <div className="flex justify-between items-start mb-4">
+            <h1 className="text-2xl font-semibold text-foreground">
+              Exam Review
+              {examMode && (
+                <span className="ml-3 text-sm font-normal text-gray-500 dark:text-gray-500">
+                  (
+                  {examMode === "quick-test"
+                    ? "Quick Test"
+                    : examMode === "full-test"
+                    ? "Full Test"
+                    : "Chapterwise"}
+                  )
+                </span>
+              )}
+            </h1>
+            {examMode && (examMode === "quick-test" || examMode === "full-test") && (
+              <button
+                onClick={async () => {
+                  if (!confirm('Are you sure you want to retake this exam? This will start a new session.')) {
+                    return;
+                  }
+                  setRetaking(true);
+                  try {
+                    // Start a completely new session with the same questions
+                    const newSessionId = await startSession("all-chapters", examMode, session.questions);
+                    // Store the sessionId temporarily so exam page can find it
+                    if (typeof window !== 'undefined') {
+                      sessionStorage.setItem('retakeSessionId', newSessionId);
+                    }
+                    // Navigate to exam page - it will use the stored sessionId
+                    router.push(`/quiz/exam/${examMode}`);
+                  } catch (error) {
+                    console.error('Error retaking exam:', error);
+                    alert('Failed to start retake. Please try again.');
+                    setRetaking(false);
+                  }
+                }}
+                disabled={retaking}
+                className="px-4 py-2 text-sm font-medium text-white bg-[#ea580c] hover:bg-[#c2410c] rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {retaking ? 'Starting...' : 'Retake Exam'}
+              </button>
             )}
-          </h1>
+          </div>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-500">

@@ -47,18 +47,52 @@ export async function recordAttempt(sessionId: string, attempt: QuestionAttempt)
     return;
   }
   
-  session.attempts.push(attempt);
-  session.totalQuestions++;
-  session.totalTime += attempt.timeSpent;
+  // Check if an attempt for this question already exists
+  const existingAttemptIndex = session.attempts.findIndex(
+    a => a.questionId === attempt.questionId
+  );
   
-  if (attempt.correct) {
-    session.correctAnswers++;
+  if (existingAttemptIndex >= 0) {
+    // Update existing attempt
+    const oldAttempt = session.attempts[existingAttemptIndex];
+    
+    // Update stats: remove old attempt's contribution
+    session.totalTime -= oldAttempt.timeSpent;
+    if (oldAttempt.correct) {
+      session.correctAnswers--;
+    } else {
+      session.wrongAnswers--;
+    }
+    
+    // Update with new attempt
+    session.attempts[existingAttemptIndex] = attempt;
+    
+    // Update stats: add new attempt's contribution
+    session.totalTime += attempt.timeSpent;
+    if (attempt.correct) {
+      session.correctAnswers++;
+    } else {
+      session.wrongAnswers++;
+    }
   } else {
-    session.wrongAnswers++;
+    // Add new attempt
+    session.attempts.push(attempt);
+    session.totalQuestions++;
+    session.totalTime += attempt.timeSpent;
+    
+    if (attempt.correct) {
+      session.correctAnswers++;
+    } else {
+      session.wrongAnswers++;
+    }
   }
   
   if (attempt.hintUsed) {
-    session.hintsUsed++;
+    // Only increment if this is a new attempt or if hint wasn't used before
+    const existingAttempt = session.attempts.find(a => a.questionId === attempt.questionId);
+    if (!existingAttempt || !existingAttempt.hintUsed) {
+      session.hintsUsed++;
+    }
   }
   
   saveSessions(sessions);

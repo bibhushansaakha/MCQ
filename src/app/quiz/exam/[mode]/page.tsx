@@ -182,17 +182,42 @@ export default function ExamQuizPage() {
 
     async function initializeExam() {
       try {
-        // Load questions from all chapters
-        const loadedQuestions = await loadQuestionsFromAllChapters(
-          examConfig.questionCount
-        );
+        let loadedQuestions: QuestionWithChapter[] = [];
+        let sessionToUse: string | null = null;
+
+        // Check if we're retaking (sessionId stored in sessionStorage)
+        if (typeof window !== 'undefined' && !sessionId) {
+          const retakeSessionId = sessionStorage.getItem('retakeSessionId');
+          if (retakeSessionId) {
+            // Get the session with stored questions
+            const { getAllSessions } = await import('@/lib/analytics');
+            const sessions = await getAllSessions();
+            const retakeSession = sessions.find(s => s.sessionId === retakeSessionId);
+            
+            if (retakeSession && retakeSession.questions && retakeSession.questions.length > 0) {
+              // Use stored questions from retake session
+              loadedQuestions = retakeSession.questions as QuestionWithChapter[];
+              sessionToUse = retakeSessionId;
+              // Clear the sessionStorage
+              sessionStorage.removeItem('retakeSessionId');
+            }
+          }
+        }
+
+        // If no retake session found, load new questions
+        if (loadedQuestions.length === 0) {
+          loadedQuestions = await loadQuestionsFromAllChapters(
+            examConfig.questionCount
+          );
+        }
+
         if (!isMounted) return;
 
         setQuestions(loadedQuestions);
 
         // Start session only if we don't already have one
         if (!sessionId) {
-          const newSessionId = await startSession("all-chapters", mode, loadedQuestions);
+          const newSessionId = sessionToUse || await startSession("all-chapters", mode, loadedQuestions);
           if (!isMounted) return;
 
           setSessionId(newSessionId);
