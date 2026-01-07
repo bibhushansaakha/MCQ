@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 
 export function useSessionTimer() {
   const [elapsedTime, setElapsedTime] = useState(0);
@@ -26,18 +26,18 @@ export function useSessionTimer() {
     };
   }, [isRunning]);
 
-  const start = () => {
+  const start = useCallback(() => {
     setIsRunning(true);
-  };
+  }, []);
 
-  const stop = () => {
+  const stop = useCallback(() => {
     setIsRunning(false);
-  };
+  }, []);
 
-  const reset = () => {
+  const reset = useCallback(() => {
     setElapsedTime(0);
     setIsRunning(false);
-  };
+  }, []);
 
   return {
     elapsedTime,

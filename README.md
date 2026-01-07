@@ -1,12 +1,47 @@
 # Kati Sajilo - NEC Exam Preparation
 
-A fast, minimal MCQ practice website for Nepal Engineering Council exam preparation. Built with Next.js 14, TypeScript, Tailwind CSS, and SQLite.
+A fast, minimal MCQ practice website for Nepal Engineering Council exam preparation. Built with Next.js 14, TypeScript, and Tailwind CSS. Features both Learn Mode for studying concepts and Practice Mode for exam preparation. All data is stored in JSON files and browser localStorage - no database required!
 
 ## Features
 
-- 📚 **Chapter Practice**: Practice questions from 10 different chapters with hints and explanations
-- 🎯 **Quick Test**: 25 questions in 30 minutes from all chapters
-- 🏆 **Full Test**: 100 questions in 2 hours - complete exam simulation
+### 🎓 Learn with MCQ
+
+A dedicated learning mode designed for studying and understanding concepts:
+
+- **Chapter-wise Learning**: Study questions from 9 chapters (Chapters 1-6, 8-10) in order
+- **Always Show Explanations**: Explanations are displayed after every answer, even if correct
+- **Sequential Learning**: Questions are shown in order (not randomized) for structured learning
+- **Chapter Navigation**: Easily switch between chapters without losing progress
+- **Question Navigation**: Jump to any question using the sidebar navigation
+- **Progress Tracking**: Track how many questions you've answered in each chapter
+
+### 📝 Practice Past Questions
+
+Test your knowledge with various practice modes:
+
+#### Chapter Practice
+
+- Practice questions from specific chapters
+- Access hints and detailed explanations
+- Questions are randomized for varied practice
+- Track your performance per chapter
+
+#### Quick Test
+
+- **25 questions** in **30 minutes**
+- Questions randomly selected from all chapters
+- Simulates a quick exam scenario
+- No hints or explanations during the test (available in review)
+
+#### Full Test
+
+- **100 questions** in **2 hours**
+- Complete exam simulation matching NEC exam format
+- Questions distributed evenly across all chapters
+- Timer counts down to simulate real exam pressure
+
+### 📊 Additional Features
+
 - ✅ **Instant Feedback**: Immediate feedback on correct/incorrect answers
 - 💡 **Hints & Explanations**: Access hints and detailed explanations for each question
 - 📊 **Performance Dashboard**: Track your performance with comprehensive analytics
@@ -17,67 +52,41 @@ A fast, minimal MCQ practice website for Nepal Engineering Council exam preparat
   - Hints usage trends
   - Chapter comparison charts
 - 📖 **Attempts History**: Review all attempted questions with full details
+- 🔍 **Session Review**: Review completed sessions with detailed analysis
 - 🌓 **Dark Mode**: Toggle between light and dark themes
 - ⚡ **Fast & Minimal**: Optimized for speed with minimal animations
 - ⌨️ **Keyboard Shortcuts**: Navigate and answer questions using keyboard
+- 📱 **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
 
 ## Getting Started
 
 ### Prerequisites
 
-- Node.js 18+ 
+- Node.js 18+
 - npm or yarn
 
 ### Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/bibhushansaakha/MCQ.git
 cd MCQ
 ```
 
 2. Install dependencies:
+
 ```bash
 npm install
 ```
 
-3. Set up environment variables:
-```bash
-cp .env.example .env
-```
+3. Run the development server:
 
-The `.env` file should contain:
-```env
-# For local development with PostgreSQL
-DATABASE_URL="postgresql://user:password@localhost:5432/mcq_db"
-
-# Or use your Vercel Prisma Postgres connection string for testing
-# DATABASE_URL="postgres://..."
-```
-
-4. Generate Prisma client:
-```bash
-npx prisma generate
-```
-
-5. Run database migrations:
-```bash
-npx prisma migrate deploy
-```
-
-6. Import questions from JSON files:
-```bash
-npm run migrate-data
-```
-
-This will create the database and import all questions from the JSON files in `public/data/`.
-
-7. Run the development server:
 ```bash
 npm run dev
 ```
 
-8. Open [http://localhost:3000](http://localhost:3000) in your browser.
+4. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
 ## Deployment
 
@@ -85,48 +94,34 @@ npm run dev
 
 1. Push your code to GitHub
 2. Import your repository in Vercel
-3. **Database is already configured!** 
-   - Vercel Prisma Postgres automatically sets `DATABASE_URL`
-   - No need to manually add environment variables
-   - The connection string is automatically available
-4. Deploy!
+3. Deploy!
 
-5. **Initialize the database** (IMPORTANT):
-   After deployment, visit your Vercel URL and go to:
-   ```
-   https://your-app.vercel.app/api/init-db
-   ```
-   Or make a POST request to initialize:
-   ```bash
-   curl -X POST https://your-app.vercel.app/api/init-db
-   ```
-   
-   This will:
-   - Create all topics from `topics.json`
-   - Import all questions from JSON files in `public/data/`
-   - Set up the database for use
+**No database setup required!** The application uses:
 
-The build process will:
-- Generate Prisma client during build
-- Run database migrations
-- Create the database file on first run
+- JSON files for questions (stored in `public/data/`)
+- Browser localStorage for analytics and sessions (client-side only)
 
-**Note**: The database initialization only needs to be done once. After that, the database will persist across deployments.
-
-**Alternative**: For production deployments, consider using a hosted database (PostgreSQL) instead of SQLite for better performance and reliability.
+Questions are loaded directly from JSON files at runtime, and analytics are stored locally in each user's browser.
 
 ## Project Structure
 
 ```
 MCQ/
 ├── public/
-│   └── data/          # JSON files containing questions
-├── prisma/
-│   ├── schema.prisma  # Database schema
-│   ├── migrate-data.ts # Script to import questions from JSON
-│   └── migrations/    # Database migrations
+│   └── data/
+│       ├── learn/     # JSON files for Learn mode (1.json, 2.json, etc.)
+│       └── *.json     # JSON files for practice mode questions
 ├── src/
-│   ├── app/           # Next.js app router pages
+│   ├── app/
+│   │   ├── learn/     # Learn with MCQ page
+│   │   ├── practice/  # Practice Past Questions page
+│   │   ├── quiz/
+│   │   │   ├── learn/[chapter]/  # Learn mode quiz page
+│   │   │   ├── [topic]/         # Chapter practice page
+│   │   │   └── exam/[mode]/     # Quick/Full test pages
+│   │   ├── analytics/ # Performance dashboard
+│   │   ├── history/   # Attempts history
+│   │   └── review/    # Session review
 │   ├── components/    # React components
 │   ├── contexts/      # React contexts (Theme, QuizStats)
 │   ├── hooks/         # Custom React hooks
@@ -134,16 +129,40 @@ MCQ/
 └── package.json
 ```
 
-## Database Setup
+## Usage Guide
 
-The application uses PostgreSQL (Vercel Prisma Postgres) with Prisma ORM. The database is persistent and works perfectly with Vercel's serverless architecture.
+### Learn Mode
+
+1. Click **"Learn with MCQ"** on the homepage
+2. Select a chapter (1-6, 8-10)
+3. Questions are displayed in order
+4. Answer questions and view explanations
+5. Use navigation controls to move between questions and chapters
+
+### Practice Mode
+
+1. Click **"Practice Past Questions"** on the homepage
+2. Choose your preferred mode:
+   - **Chapter Practice**: Select a chapter to practice
+   - **Quick Test**: Start a 25-question test
+   - **Full Test**: Start a 100-question exam simulation
+3. Answer questions and track your performance
+4. Review your session after completion
+
+## Data Storage
+
+The application uses a simple, database-free architecture:
+
+- **Questions**: Stored in JSON files in `public/data/` and `public/data/learn/`
+- **Analytics & Sessions**: Stored in browser localStorage (client-side only)
+- **No database required**: Everything works out of the box!
 
 ### Adding New Questions
 
-You can add questions in two ways:
+#### For Practice Mode
 
-1. **Upload via UI**: Go to `/admin/upload` and upload a JSON file
-2. **Add JSON files**: Place JSON files in `public/data/` following the format:
+Add JSON files to `public/data/` following the format:
+
 ```json
 [
   {
@@ -164,25 +183,109 @@ You can add questions in two ways:
 ]
 ```
 
-Then run `npm run migrate-data` to import them.
+#### For Learn Mode
+
+Add JSON files to `public/data/learn/` with two supported formats:
+
+**Format 1: Array of chapter objects** (for chapters with multiple sets)
+
+```json
+[
+  {
+    "chapter": "Chapter 9: AI and Neural Networks",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Your question here",
+        "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+        "correct_answer": "Option 1",
+        "hint": "Optional hint",
+        "explanation": "Detailed explanation",
+        "chapter": "Chapter 9: AI and Neural Networks",
+        "difficulty": "easy"
+      }
+    ]
+  }
+]
+```
+
+**Format 2: Direct array of questions** (simpler format)
+
+```json
+[
+  {
+    "id": 1,
+    "question": "Your question here",
+    "options": ["Option 1", "Option 2", "Option 3", "Option 4"],
+    "correct_answer": "Option 1",
+    "hint": "Optional hint",
+    "explanation": "Detailed explanation",
+    "chapter": "Chapter 2: Digital Logic",
+    "difficulty": "easy"
+  }
+]
+```
+
+**File Naming:**
+
+- Single chapter: `1.json`, `2.json`, etc.
+- Split chapters: `5_1.json`, `5_2.json` (for Chapter 5 split into two files)
+
+**No import needed!** Questions are loaded directly from JSON files at runtime. Just add your JSON files and they'll be available immediately.
 
 ## Technologies Used
 
 - **Next.js 14** - React framework with App Router
 - **TypeScript** - Type-safe JavaScript
 - **Tailwind CSS** - Utility-first CSS framework
-- **Prisma** - ORM for database management
-- **SQLite** - File-based database
 - **Recharts** - Charting library for analytics
+- **React Hooks** - Custom hooks for session timer, exam timer
+- **LocalStorage** - Client-side data storage for sessions and analytics
+- **JSON Files** - Question data stored in JSON files (no database needed)
 
 ## Scripts
 
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run start` - Start production server
-- `npm run migrate-data` - Import questions from JSON files into database
-- `npm run update-topics` - Update topic names from topics.json
 - `npm run fix` - Clean cache and rebuild
+
+## Production Checklist
+
+Before deploying to production, ensure:
+
+- ✅ All JSON files in `public/data/` and `public/data/learn/` are valid
+- ✅ Learn mode JSON files follow the correct format (see Adding New Questions section)
+- ✅ Test all modes: Learn Mode, Chapter Practice, Quick Test, Full Test
+- ✅ Verify analytics page loads correctly
+- ✅ Check that dark mode works properly
+- ✅ Test keyboard shortcuts in all modes
+- ✅ Verify responsive design on mobile devices
+- ✅ No debug logging statements in production code
+
+## Key Features Summary
+
+### Learn Mode
+
+- Sequential question display (not randomized)
+- Explanations always shown after answering
+- Chapter navigation with progress tracking
+- Question navigation sidebar
+- Perfect for first-time learning
+
+### Practice Mode
+
+- **Chapter Practice**: Randomized questions with hints
+- **Quick Test**: 25 questions in 30 minutes
+- **Full Test**: 100 questions in 2 hours (exam simulation)
+
+### Analytics
+
+- Separate analytics for Learn and Practice modes
+- Mode-specific insights and recommendations
+- Focus recommendations with target goals
+- Performance trends and chapter comparisons
+- Exam readiness analysis
 
 ## License
 
@@ -191,6 +294,7 @@ This project is open source and available under the MIT License. Feel free to us
 ## Author
 
 **Bibhushan Saakha**
+
 - GitHub: [@bibhushansaakha](https://github.com/bibhushansaakha)
 - LinkedIn: [@bibhushansaakha](https://www.linkedin.com/in/bibhushansaakha)
 

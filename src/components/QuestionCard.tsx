@@ -39,6 +39,8 @@ export default function QuestionCard({
   const isCorrect = selectedOption === question.correct_answer;
   const isExamMode = examMode === 'quick-test' || examMode === 'full-test';
   const showCorrectAnswer = examMode && isExamMode ? false : (isAnswered && correctAnswer !== null);
+  // In learn mode (chapterwise), always show explanation when answered
+  const shouldShowExplanation = !isExamMode && isAnswered && showExplanation;
 
   return (
     <div className="pb-8">
@@ -122,7 +124,7 @@ export default function QuestionCard({
       </div>
 
       <HintDisplay hint={question.hint} isVisible={showHint} />
-      <ExplanationDisplay explanation={question.explanation} isVisible={showExplanation} />
+      <ExplanationDisplay explanation={question.explanation} isVisible={shouldShowExplanation} />
         </>
       )}
 

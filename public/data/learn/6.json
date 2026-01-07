@@ -1,0 +1,280 @@
+{
+    "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+    "chapter_code": "ACtE06",
+    "total_questions": 15,
+    "set": "TOC & CG Revision Set 1",
+    "question_type": "MCQ with Detailed Explanations",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the key difference between a deterministic finite automaton (DFA) and a nondeterministic finite automaton (NFA)?",
+        "options": [
+          "A DFA has exactly one transition for each symbol from every state, while an NFA may have zero, one, or many transitions (including ε-moves) for the same symbol from a state.",
+          "A DFA can recognize only regular languages, while an NFA can recognize context-free languages.",
+          "An NFA always has more states than an equivalent DFA.",
+          "A DFA uses a stack, while an NFA does not."
+        ],
+        "correct_answer": "A DFA has exactly one transition for each symbol from every state, while an NFA may have zero, one, or many transitions (including ε-moves) for the same symbol from a state.",
+        "hint": "Think about the transition function δ: for which model is δ a total function from (state, symbol) to a single next state?",
+        "explanation": "Both DFA and NFA are models of computation for regular languages, but their transition behavior differs.\n\nIn a DFA, the transition function is:\n  δ : Q × Σ → Q\nFor each state q ∈ Q and each symbol a ∈ Σ, there is exactly one defined next state δ(q, a). This means the automaton's behavior is completely determined by the current state and current input symbol. There is no ambiguity: at any step, only one path is possible. This is why the machine is ‘deterministic’.\n\nIn an NFA, the transition function is:\n  δ : Q × Σ_ε → P(Q)\nwhere Σ_ε = Σ ∪ {ε} and P(Q) is the power set of Q. For a given state and input symbol, δ may return:\n  • zero states (no transition),\n  • one state, or\n  • multiple possible next states.\nAdditionally, NFAs may have ε-transitions that consume no input symbol but move the machine to new states. Because of this, an NFA can be in a *set* of possible current states at any point in a conceptual execution.\n\nDespite this difference, DFAs and NFAs are equivalent in expressive power: for every NFA there exists an equivalent DFA recognizing the same language. The usual construction is the subset construction, where each DFA state represents a subset of NFA states. However, the DFA can have up to 2^|Q_NFA| states in the worst case.\n\nSo the essential difference is not in the class of languages recognized, but in the form of the transition function and the degree of nondeterminism allowed during computation.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0601 - DFA vs NFA",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 2,
+        "question": "Why are DFA and NFA considered equivalent models of computation for regular languages?",
+        "options": [
+          "Because every regular expression can be converted only to a DFA.",
+          "Because for every NFA there exists a DFA that recognizes the same language, constructed by subset construction.",
+          "Because NFA can simulate PDA, and DFA can simulate PDA.",
+          "Because DFAs can use ε-transitions to mimic all NFAs."
+        ],
+        "correct_answer": "Because for every NFA there exists a DFA that recognizes the same language, constructed by subset construction.",
+        "hint": "Think of a DFA state representing a *set* of NFA states.",
+        "explanation": "DFA and NFA are equivalent in *language recognition power* for regular languages. This means any language recognized by some NFA can also be recognized by some DFA, and every DFA trivially is an NFA (with restricted transitions).\n\nThe central construction is the *subset construction* (also called powerset construction):\n  • Given an NFA N = (Q, Σ, δ, q₀, F), construct a DFA D = (Q', Σ, δ', q₀', F') such that L(D) = L(N).\n  • Each state in Q' is a subset of Q (so Q' ⊆ P(Q)). Intuitively, a DFA state encodes all possible NFA states that the NFA could be in after reading some prefix of the input.\n  • The start state q₀' of the DFA is the ε-closure of {q₀} (all states reachable from q₀ via ε-moves).\n  • For each DFA state S ⊆ Q and symbol a ∈ Σ, define:\n        δ'(S, a) = ε-closure(⋃_{q∈S} δ(q, a))\n  • A DFA subset S is accepting if S intersects F: S ∩ F ≠ ∅.\n\nThis construction systematically removes nondeterminism by letting the DFA compactly track all possible NFA states at once. While the resulting DFA can, in the worst case, have up to 2^|Q| states, it always exists and recognizes the same language.\n\nBecause of this theorem, NFAs are often used as a convenient design tool (they are easier to construct from regular expressions), and then converted into DFAs for implementation in lexical analyzers, pattern matchers, and hardware finite state machines.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0601 - Equivalence of DFA and NFA",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 3,
+        "question": "What is the main idea of DFA minimization and why is it important?",
+        "options": [
+          "To reduce the alphabet size of the DFA.",
+          "To merge equivalent states so that the DFA has the minimum number of states recognizing the same language.",
+          "To allow ε-transitions for easier design.",
+          "To change a DFA into an NFA."
+        ],
+        "correct_answer": "To merge equivalent states so that the DFA has the minimum number of states recognizing the same language.",
+        "hint": "Think about states that behave identically for all future inputs.",
+        "explanation": "DFA minimization is the process of transforming a given DFA into an equivalent DFA (recognizing the same language) that has the minimum possible number of states. Two states are *equivalent* if, for every possible input string w, either both states accept w (from that state onward) or both reject w. Intuitively, the future behavior of the automaton from those states is indistinguishable.\n\nMain idea:\n  • Partition the set of states into equivalence classes under the Myhill–Nerode equivalence relation.\n  • Each equivalence class is collapsed into a single state in the minimized DFA.\n  • Transitions between equivalence classes are defined naturally from transitions of representative states.\n\nCommon algorithmic view:\n  1. Initially partition states into accepting and non-accepting sets (they are obviously distinguishable if one is accepting and the other is not).\n  2. Iteratively refine partitions: for any block of states, split it if some states in the block transition into different blocks under some input symbol.\n  3. Continue until no more refinement occurs. Each resulting block represents one state of the minimal DFA.\n\nImportance:\n  • Reduced memory/storage: fewer states mean smaller transition tables or hardware.\n  • Faster execution: fewer states and transitions to process.\n  • Conceptual clarity: the minimal DFA reveals the intrinsic complexity of the language (number of distinct Myhill–Nerode equivalence classes).\n  • In compiler construction, minimal DFAs make lexical analyzers more efficient.\n\nUniqueness: Apart from renaming of states, the minimal DFA for a given regular language is unique. This property is useful when comparing regular languages or reasoning about their complexity.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0601 - Minimization of FSM",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 4,
+        "question": "Which of the following correctly relates regular expressions and finite automata?",
+        "options": [
+          "Every DFA can be converted to an equivalent regular expression, but not vice versa.",
+          "Regular expressions and finite automata (DFA/NFA) describe exactly the same class of languages: the regular languages.",
+          "Regular expressions can describe context-free languages while finite automata cannot.",
+          "Finite automata can describe non-recursively enumerable languages."
+        ],
+        "correct_answer": "Regular expressions and finite automata (DFA/NFA) describe exactly the same class of languages: the regular languages.",
+        "hint": "Think about Kleene's theorem.",
+        "explanation": "Kleene's Theorem is the central result connecting regular expressions and finite automata. It states that the following three formalisms are equivalent in expressive power:\n  1. Deterministic finite automata (DFA),\n  2. Nondeterministic finite automata (NFA), and\n  3. Regular expressions.\nAll three describe exactly the class of *regular languages*.\n\nDirection 1: RE → NFA/DFA.\n  • Given a regular expression, you can systematically construct an NFA using Thompson's construction. For basic symbols, concatenation, alternation (|), and Kleene star (*), there are standard NFA fragments that can be combined.\n  • Then, using subset construction, the NFA can be turned into an equivalent DFA.\n\nDirection 2: DFA/NFA → RE.\n  • Given a finite automaton, there are state-elimination algorithms that remove states one by one and accumulate edge labels as regular expressions. The final result is a regular expression denoting the same language.\n\nTherefore, regular expressions, DFA, and NFA are different syntactic or structural views of the same underlying thing: regular languages. Regular expressions are more compact and convenient to write and reason about patterns, while automata are more suitable for mechanical implementation (e.g., lexical analyzers or hardware circuits).",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0601 - Regular Expressions & FA",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 5,
+        "question": "What does the pumping lemma for regular languages guarantee?",
+        "options": [
+          "That every long enough string in a regular language can be decomposed into xyz where some middle part y can be repeated any number of times and the resulting strings all remain in the language.",
+          "That all regular languages are finite.",
+          "That any non-regular language becomes regular after pumping.",
+          "That any NFA can be pumped into a DFA."
+        ],
+        "correct_answer": "That every long enough string in a regular language can be decomposed into xyz where some middle part y can be repeated any number of times and the resulting strings all remain in the language.",
+        "hint": "Think of |y| > 0, |xy| ≤ p, and xy^i z ∈ L for all i ≥ 0.",
+        "explanation": "The pumping lemma for regular languages is a *necessary condition* for a language to be regular. It does not characterize regular languages completely, but it is an extremely useful tool for proving that certain languages are *not* regular.\n\nStatement (informal):\nIf L is a regular language, then there exists a constant p (the pumping length) such that any string w ∈ L with |w| ≥ p can be split into three parts w = xyz satisfying:\n  1. |y| > 0 (the pumped part is non-empty),\n  2. |xy| ≤ p (the initial segment xy lies within the first p symbols),\n  3. For all i ≥ 0, the string x y^i z ∈ L.\n\nIntuition:\n  • Because L is regular, there exists a DFA with a finite number of states, say p states.\n  • Any string of length at least p causes the DFA, as it reads the first p symbols, to visit at least one state twice (Pigeonhole Principle).\n  • The part of the input that causes this loop corresponds to y. Since the automaton can loop that segment any number of times and remain in an accepting path, the pumped strings x y^i z must all be in L.\n\nHow it is used:\n  • To show a language L is *not* regular, you assume it *is* regular and thus must satisfy the pumping lemma.\n  • You choose a string w in L of length ≥ p, then argue that for *every* way to split w into xyz obeying conditions 1 and 2, there exists some i (often i = 0 or 2) such that x y^i z ∉ L.\n  • This contradicts the pumping lemma, hence L cannot be regular.\n\nExample: L = { a^n b^n | n ≥ 0 }.\n  • Intuitively not regular; counting equal numbers of a's and b's requires memory beyond a finite automaton.\n  • Suppose L is regular. Let p be pumping length. Consider w = a^p b^p.\n  • By conditions, y consists only of a's within first p positions. Pumping y (e.g. i = 0) changes number of a's but not b's, giving a^{p - |y|} b^p, which is not in L.\n  • Contradiction ⇒ L is not regular.\n\nThus, the pumping lemma is a powerful *negative tool*: if a language fails the pumping lemma, it is definitely not regular. If it satisfies the lemma, it might still be non-regular (the lemma is not a sufficient condition).",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "ACtE0601 - Pumping Lemma (Regular)",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 6,
+        "question": "In a context-free grammar (CFG), what does a parse tree represent?",
+        "options": [
+          "The order in which terminals are read from left to right.",
+          "A hierarchical structural derivation of how a start symbol generates a string in the language using production rules.",
+          "A tree that always has the same shape for every string.",
+          "A binary decision tree for membership testing."
+        ],
+        "correct_answer": "A hierarchical structural derivation of how a start symbol generates a string in the language using production rules.",
+        "hint": "Think about non-terminals as interior nodes and terminals as leaves.",
+        "explanation": "A parse tree (also called derivation tree) in the context of a context-free grammar (CFG) visually represents how a string in the language is derived from the start symbol using the grammar's productions.\n\nGiven a CFG G = (V, Σ, R, S):\n  • V: set of non-terminals,\n  • Σ: set of terminals,\n  • R: set of production rules of the form A → α,\n  • S: start symbol.\n\nA parse tree has the following properties:\n  • The root of the tree is labeled with the start symbol S.\n  • Each interior node is labeled with a non-terminal A ∈ V.\n  • Each leaf node is labeled with a terminal symbol ∈ Σ or with ε.\n  • For each interior node labeled A, with children labeled α₁, α₂, …, α_k (in order), there is a production rule A → α₁α₂…α_k in R.\n\nThe *yield* of a parse tree is the string obtained by reading off the leaf nodes from left to right, ignoring ε leaves. This yield is a string in the language generated by the grammar.\n\nParse trees encode the *syntactic structure* of a string according to a grammar. The tree reveals hierarchy, such as which substrings group together as subexpressions, phrases, or statements. This is essential in compilers, where syntax trees are used as intermediate representations for semantic analysis and code generation.\n\nDifferent derivations (leftmost vs rightmost) of the same string can lead to the same parse tree, but an *ambiguous grammar* allows at least one string with *two distinct parse trees*. So parse trees are also central for discussing ambiguity in context-free grammars.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0602 - Parse Trees",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 7,
+        "question": "What is an ambiguous grammar?",
+        "options": [
+          "A grammar that generates no strings.",
+          "A grammar for which at least one string in the language has more than one distinct parse tree.",
+          "A grammar whose productions are not in Chomsky Normal Form.",
+          "A grammar that generates an infinite language."
+        ],
+        "correct_answer": "A grammar for which at least one string in the language has more than one distinct parse tree.",
+        "hint": "Think about multiple structural interpretations of the same terminal string.",
+        "explanation": "A context-free grammar G is called *ambiguous* if there exists at least one string w in L(G) that has two or more distinct parse trees (equivalently, two distinct leftmost or rightmost derivations).\n\nAmbiguity is about *syntactic structure*, not just membership. The same string w can be derived in two structurally different ways, leading to different parse trees. This means the grammar does not specify a unique structure for that string, which is problematic for many applications (e.g., programming languages, where meaning depends on structure).\n\nExample: Classic arithmetic expression grammar:\n  E → E + E | E * E | (E) | id\n\nThe expression \"id + id * id\" can be parsed as:\n  1. (id + id) * id   (if + has higher precedence)\n  2. id + (id * id)   (if * has higher precedence)\n\nBoth are allowed by this grammar, and hence the grammar is ambiguous. To remove ambiguity, we refine the grammar by encoding operator precedence and associativity:\n  E → E + T | T\n  T → T * F | F\n  F → (E) | id\n\nThis new grammar ensures that * has higher precedence than +, and parse trees become unique for arithmetic expressions under these rules.\n\nSome context-free languages are *inherently ambiguous*, meaning that *every* grammar generating that language is ambiguous. For such languages, it is impossible to design an unambiguous grammar.\n\nIn compiler design, unambiguous grammars (or controlled ambiguity resolved by precedence rules in the parser) are essential, since compilers need a unique parse for each source program.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0602 - Ambiguous Grammar",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 8,
+        "question": "What is the main purpose of converting a CFG into Chomsky Normal Form (CNF)?",
+        "options": [
+          "To reduce the language to a regular language.",
+          "To restrict productions to either A → BC or A → a, which simplifies theoretical proofs (like CYK parsing algorithm) and analysis.",
+          "To allow ε-productions in every rule.",
+          "To ensure the grammar is unambiguous."
+        ],
+        "correct_answer": "To restrict productions to either A → BC or A → a, which simplifies theoretical proofs (like CYK parsing algorithm) and analysis.",
+        "hint": "Think about normal forms as canonical shapes that make algorithms easier.",
+        "explanation": "Chomsky Normal Form (CNF) is a restricted form of CFG in which every production is of one of the following forms:\n  1. A → BC   (two non-terminals on the right-hand side),\n  2. A → a    (a single terminal),\n  3. S → ε    (only allowed if the language includes the empty string and S does not appear on the right-hand side of any rule).\n\nThe main purposes for converting to CNF are:\n  • To simplify theoretical analysis of context-free languages.\n  • To support algorithms like the CYK (Cocke–Younger–Kasami) parsing algorithm, which assumes CNF.\n  • To show closure properties and decidability results more easily.\n\nTransformation steps (overview):\n  1. Eliminate null (ε) productions, except possibly S → ε.\n  2. Eliminate unit productions (A → B).\n  3. Eliminate useless symbols (non-terminals that cannot derive any terminal string or are not reachable from S).\n  4. Convert remaining long right-hand sides into binary form using new non-terminals.\n  5. Ensure right-hand sides with a mixture of terminals and non-terminals are adjusted so that terminals appear alone (introduce new non-terminals for terminals if needed).\n\nImportant points:\n  • Language preserved: The new grammar generates the same language (possibly adjusting for ε).\n  • CNF does *not* guarantee unambiguity. An ambiguous grammar can be converted to a different ambiguous grammar in CNF.\n  • CNF is not for practical parser implementation (parsers often use other forms), but it is very useful in proofs (e.g., proving that every context-free language has a polynomial-time membership algorithm).\n\nThus, CNF is a canonical restricted form that simplifies reasoning about context-free grammars and supports theoretically clean parsing algorithms.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0602 - CNF",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 9,
+        "question": "What is a Pushdown Automaton (PDA) and how does it relate to context-free languages?",
+        "options": [
+          "A finite automaton with multiple tapes, used to recognize regular languages.",
+          "A finite automaton equipped with a stack, used to recognize exactly the class of context-free languages.",
+          "A Turing machine with no tape.",
+          "A device equivalent to a DFA."
+        ],
+        "correct_answer": "A finite automaton equipped with a stack, used to recognize exactly the class of context-free languages.",
+        "hint": "Think about the additional memory resource needed to handle languages like a^n b^n.",
+        "explanation": "A Pushdown Automaton (PDA) extends finite automata with an additional *stack* memory. Formally, a PDA is a 7-tuple:\n  M = (Q, Σ, Γ, δ, q₀, Z₀, F)\nwhere:\n  • Q is the finite set of states,\n  • Σ is input alphabet,\n  • Γ is stack alphabet,\n  • δ is transition function (Q × Σ_ε × Γ → P(Q × Γ*)),\n  • q₀ is start state,\n  • Z₀ is initial stack symbol,\n  • F is set of accepting states.\n\nThe stack allows the PDA to store unbounded information (in a last-in, first-out manner), enabling it to handle nested and balanced structures that finite automata cannot.\n\nRelationship to CFLs:\n  • Every context-free language (CFL) can be recognized by some PDA (often built from a CFG via standard constructions).\n  • Conversely, for every PDA there exists a CFG that generates exactly the same language.\n  • Therefore, PDAs and CFGs are equivalent in expressive power: both characterize context-free languages.\n\nIntuition:\n  • Regular languages are not powerful enough to handle patterns that require counting or nested dependencies (e.g., a^n b^n, balanced parentheses). A finite automaton has only finitely many states and hence limited memory.\n  • PDA's stack allows it to remember an unbounded number of symbols (e.g., count of 'a's) as long as the computation is well-structured.\n\nExample: Language L = { a^n b^n | n ≥ 0 }.\n  • PDA can push a symbol onto the stack for each a read, then pop one symbol for each b read. If stack is empty exactly when input ends, accept.\n\nAcceptance conditions for PDA:\n  • Acceptance by final state: reach an accepting state after consuming entire input (stack may be non-empty or empty depending on design).\n  • Acceptance by empty stack: consume input and empty the stack (final state not necessarily required).\n\nThus, PDA is the machine model corresponding to context-free grammars, just as finite automata correspond to regular expressions.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 3,
+        "topic": "ACtE0602 - PDA & CFL",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 10,
+        "question": "What does the pumping lemma for context-free languages state, in contrast to the pumping lemma for regular languages?",
+        "options": [
+          "It states that CFLs are closed under complement.",
+          "It gives a decomposition w = uvxyz with two pumpable parts v and y, instead of one (y) as in the regular pumping lemma.",
+          "It shows that all context-free languages are regular.",
+          "It says that any context-free grammar can be pumped into CNF."
+        ],
+        "correct_answer": "It gives a decomposition w = uvxyz with two pumpable parts v and y, instead of one (y) as in the regular pumping lemma.",
+        "hint": "Recall the conditions: |v y| > 0, |v x y| ≤ p, and u v^i x y^i z ∈ L for all i ≥ 0.",
+        "explanation": "The pumping lemma for context-free languages (CFLs) is a necessary condition for a language to be context-free, analogous in spirit to the pumping lemma for regular languages, but with a more complex decomposition.\n\nFormal (informal) statement:\nIf L is an infinite context-free language, then there exists a constant p (pumping length) such that any string w in L with |w| ≥ p can be written as w = u v x y z satisfying:\n  1. |v y| > 0 (at least one of v or y is non-empty),\n  2. |v x y| ≤ p (the 'middle' portion has bounded length),\n  3. For all i ≥ 0, the string u v^i x y^i z ∈ L.\n\nKey differences from regular pumping lemma:\n  • Regular lemma decomposes w into xyz with only one repeated segment y.\n  • CFL lemma decomposes w into uvxyz with two pumpable substrings v and y, which are pumped *in parallel* (both repeated i times).\n  • The decomposition is based on repeated non-terminals in a sufficiently deep parse tree derived from the pumping length.\n\nUsage:\n  • Like the regular pumping lemma, it is primarily a *negative* tool: to prove that a language is *not* context-free by showing it fails the lemma.\n  • Typical strategy: assume L is context-free, let p be pumping length, choose a particular w ∈ L with |w| ≥ p, consider all possible decompositions into uvxyz satisfying the conditions, and show there exists some i (often 0 or 2) such that u v^i x y^i z ∉ L.\n\nExample: L = { a^n b^n c^n | n ≥ 0 }.\n  • Intuitively non context-free (requires two equalities: number of a's = b's and b's = c's).\n  • Use pumping lemma for CFL to show any uvxyz decomposition cannot preserve both equalities for all i.\n\nImportant: As with the regular pumping lemma, the CFL pumping lemma is necessary but not sufficient. Some non-context-free languages may still satisfy the lemma, but no context-free language can violate it. Also, it is strictly weaker than other characterizations like Ogden’s lemma, which is often more convenient for non-CFL proofs.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "ACtE0602 - Pumping Lemma (CFL)",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 11,
+        "question": "Which of the following best describes a Turing machine (TM) as a model of computation?",
+        "options": [
+          "A finite automaton with a stack.",
+          "An automaton with finite control, a read-only input tape, and no memory.",
+          "An automaton with finite control and an infinite tape used as both input and unbounded memory, capable of simulating any effective algorithm.",
+          "A special kind of pushdown automaton."
+        ],
+        "correct_answer": "An automaton with finite control and an infinite tape used as both input and unbounded memory, capable of simulating any effective algorithm.",
+        "hint": "Think of a head moving left and right on an infinite tape, reading and writing symbols.",
+        "explanation": "A Turing machine (TM) is a mathematical abstraction proposed by Alan Turing to capture the intuitive notion of an effective procedure or algorithm. It consists of:\n  • A finite set of states (finite control), including start and possibly accepting/rejecting states.\n  • An infinite tape divided into discrete cells, each cell holding one symbol from a tape alphabet Γ (which contains the input alphabet Σ and a blank symbol ␣).\n  • A tape head that can read and write symbols on the tape and move one cell left or right at each step.\n\nA TM configuration is determined by its current state, current tape content, and current head position. A transition function typically has the form:\n  δ : Q × Γ → Q × Γ × {L, R}\nThis means: depending on the current state and tape symbol, the machine writes a new symbol, moves the head left or right, and enters a new state.\n\nWhy it is powerful:\n  • The infinite tape provides unbounded memory, unlike finite automata or PDA (which has stack but restricted access pattern).\n  • Turing machines can simulate any algorithm that can be executed by a real computer (ignoring resource limitations like time and memory). This leads to the *Church–Turing thesis*: the class of functions that are computable by a TM coincides with the class of functions intuitively computable by any effective method.\n\nVariants:\n  • Multi-tape TMs, multi-track tapes, non-deterministic TMs, etc., which are all equivalent in power to the standard TM. They may differ in time complexity but not in the class of decidable languages.\n\nTM as language recognizer:\n  • Accepts a string if it eventually enters an accepting state while processing that string, possibly halting.\n  • If it never halts on some input, the language is only *semi-decidable* (recursively enumerable).\n\nThus, the Turing machine is a core model for the theory of computation, providing a benchmark for what can and cannot be computed algorithmically.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0603 - Turing Machine Basics",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 12,
+        "question": "What is a Universal Turing Machine (UTM)?",
+        "options": [
+          "A TM that can recognize only regular languages.",
+          "A TM that simulates any other TM when given that TM’s description and input as its own input.",
+          "A TM that has infinitely many states.",
+          "A TM that always halts on every input."
+        ],
+        "correct_answer": "A TM that simulates any other TM when given that TM’s description and input as its own input.",
+        "hint": "Think of it like an interpreter that takes another machine plus its input encoded on the tape.",
+        "explanation": "A Universal Turing Machine (UTM) is a single Turing machine U that can simulate the behavior of *any* other Turing machine M on any input w, provided that an appropriate encoding of (M, w) is given as input on U's tape.\n\nFormally:\n  • Let ⟨M⟩ represent an encoding (as a string) of the description of some TM M (its states, transition function, and so on).\n  • Define a universal machine U such that for all M and w:\n      U(⟨M⟩, w) simulates M(w)\n  • If M halts and accepts w, then U also halts and accepts ⟨M⟩, w. If M halts and rejects, U does the same. If M does not halt, U does not halt.\n\nConceptual significance:\n  • It shows that a single fixed machine can interpret descriptions of programs and execute them, which is essentially what modern stored-program computers do.\n  • Demonstrates that data and programs can be encoded uniformly as strings; a UTM can treat both as input.\n  • This underpins the notion of *software* being data for a general-purpose hardware machine.\n\nEncoding:\n  • Turing machines, states, symbols, and transitions are all encoded as strings over some alphabet (e.g., binary) using a systematic scheme.\n  • The universal machine parses this encoding and then simulates transitions of the encoded machine step by step.\n\nChurch–Turing Thesis connection:\n  • The existence of a UTM supports the idea that all effectively calculable functions can be computed by one fixed machine that takes a program (encoding of an algorithm) and input data.\n\nIn complexity theory, variants of universal machines are considered when discussing simulation overhead, compilation, and interpretation costs. But from a language-recognition perspective, a UTM is simply a TM that can emulate any other TM when given its description.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0603 - Universal TM",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 13,
+        "question": "In computational complexity for Turing machines, what do time complexity and space complexity measure?",
+        "options": [
+          "Time complexity counts number of states, space complexity counts number of symbols in the alphabet.",
+          "Time complexity is the number of steps the TM takes for an input of length n; space complexity is the number of tape cells it scans or writes on for that input.",
+          "Time complexity is memory used; space complexity is CPU frequency.",
+          "Both are always equal for all algorithms."
+        ],
+        "correct_answer": "Time complexity is the number of steps the TM takes for an input of length n; space complexity is the number of tape cells it scans or writes on for that input.",
+        "hint": "Think about how the TM's head moves and how many cells it uses.",
+        "explanation": "In complexity theory, for a Turing machine M and an input x of length n = |x|:\n\nTime complexity:\n  • The time complexity T_M(n) is defined as the maximum number of steps (state transitions) that M performs on any input of length n, over all inputs of that length.\n  • Formally, T_M(n) = max_{|x|=n} t_M(x), where t_M(x) is the number of steps M takes on input x before halting.\n  • Big-O notation is used: if T_M(n) ≤ c·n^k for large n, we say the algorithm runs in polynomial time O(n^k).\n\nSpace complexity:\n  • The space complexity S_M(n) is the maximum number of distinct tape cells that M scans or writes on any input of length n (excluding the input portion if you use separate work tapes in multi-tape models).\n  • Formally, S_M(n) = max_{|x|=n} s_M(x), where s_M(x) is the number of cells used during computation.\n\nWhy they matter:\n  • Time and space give two primary resource measures for the feasibility of algorithms.\n  • Classes like P (problems solvable in polynomial time) and PSPACE (problems solvable in polynomial space) are defined using these measures.\n  • Intractability is often associated with super-polynomial or exponential time complexity, e.g., 2^n, n!.\n\nRelationship:\n  • Any TM that uses S(n) space must take at least S(n) time, since each cell used must be visited at least once.\n  • However, a machine can take huge time but very little space (e.g., repeatedly scanning the same small part of the tape).\n\nPractical analogies:\n  • Time complexity ~ running time on a real computer.\n  • Space complexity ~ memory consumption.\n\nIn the context of the course, understanding these notions lets you talk about tractable vs intractable problems, complexity classes, and limitations of computation.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "ACtE0603 - Time & Space Complexity",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 14,
+        "question": "In computer graphics, what is the key conceptual difference between raster-scan and vector (random-scan) displays?",
+        "options": [
+          "Raster-scan draws images as a matrix of pixels, while vector display draws images by directly tracing line segments and curves.",
+          "Raster-scan can only display text, vector display only images.",
+          "Raster-scan has infinite resolution, vector display has fixed resolution.",
+          "Vector displays use CRTs, raster-scan does not."
+        ],
+        "correct_answer": "Raster-scan draws images as a matrix of pixels, while vector display draws images by directly tracing line segments and curves.",
+        "hint": "Modern monitors (LCD, LED) are raster devices. Early graphic CRTs were often vector devices.",
+        "explanation": "The fundamental distinction lies in how the image is generated and refreshed on the screen:\n\nRaster-scan displays:\n  • The screen is divided into a grid of discrete picture elements (pixels).\n  • The display controller scans the screen line by line, from top-left to bottom-right (like reading text), refreshing every pixel at a fixed rate (refresh rate, e.g., 60 Hz, 120 Hz).\n  • The frame buffer (video memory) stores the intensity/color of each pixel. The raster hardware converts this digital information into analog (or digital) signals for the display panel.\n  • Modern monitors (CRT, LCD, LED, OLED) are all raster devices. Computer graphics APIs (OpenGL, DirectX) ultimately target a raster frame buffer.\n\nVector (random-scan) displays:\n  • Instead of scanning every pixel, the electron beam (in CRTs) directly draws geometric primitives (lines, curves) one by one.\n  • The display commands specify endpoints of lines and curves; the hardware deflects the beam along those paths.\n  • There is no fixed pixel grid; resolution can be very high for lines (until limited by the CRT and deflection speed).\n  • These displays were used in early CAD/CAM, oscilloscopes, and specialized graphic terminals.\n\nConsequences:\n  • Raster-scan: easier to handle general images (photographs, textures), supports filled regions, anti-aliasing via pixel operations; but needs large frame buffer and bandwidth.\n  • Vector: excellent for crisp line drawings and simple wireframes; limited for filled shapes and shaded images; suffers from flicker when many primitives are drawn (refresh overhead).\n\nArchitecture of raster-scan system includes:\n  • Frame buffer,\n  • Video controller,\n  • Display device.\n\nVector devices often have a display list of line-drawing commands.\n\nFor your course, remember: *raster* = pixel grid + frame buffer; *vector* = direct beam tracing of primitives.",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0604 - Graphics Hardware",
+        "source": "ACtE06 Revision Set 1"
+      },
+      {
+        "id": 15,
+        "question": "In 2D geometric transformations, how is a point (x, y) translated by (tx, ty) using homogeneous coordinates?",
+        "options": [
+          "By multiplying [x y 1]^T with a scaling matrix.",
+          "By multiplying [x y 1]^T with the translation matrix T = [[1 0 0],[0 1 0],[tx ty 1]].",
+          "By adding (tx, ty) directly without any matrix form.",
+          "Translation cannot be represented as a matrix operation."
+        ],
+        "correct_answer": "By multiplying [x y 1]^T with the translation matrix T = [[1 0 0],[0 1 0],[tx ty 1]].",
+        "hint": "Recall the 3×3 homogeneous matrix for 2D translation.",
+        "explanation": "In 2D graphics, homogeneous coordinates are used to represent geometric transformations uniformly as matrix multiplications, which allows composition via matrix multiplication.\n\nA 2D point (x, y) is represented in homogeneous form as a 3-component column vector:\n  P = [ x  y  1 ]^T\n\nThe 2D translation by (t_x, t_y) can be written as a 3×3 matrix:\n  T = [ 1  0  0\n        0  1  0\n        t_x t_y 1 ]\n\nThen the transformed point P' is computed as:\n  P' = P ·? or T · P\nBe careful with conventions. With column vectors, we typically use:\n  P' = T × P\nSo:\n  [ x' ]   [ 1  0  0 ] [ x ]   [ x + t_x ]\n  [ y' ] = [ 0  1  0 ] [ y ] = [ y + t_y ]\n  [ 1  ]   [ t_x t_y 1 ] [ 1 ] [   1     ]\n\nThus, homogeneous coordinates allow translation to be handled as a linear operation in 3D space (affine in 2D), whereas in standard 2D coordinates translation is an addition, not representable by a 2×2 matrix alone.\n\nAdvantages of homogeneous formulation:\n  • Unified framework: translation, rotation, scaling, shear, reflection all expressible as 3×3 matrices.\n  • Composite transformation: applying multiple transforms (e.g., scale then rotate then translate) becomes a single matrix multiplication T_total = T_translate · R · S.\n  • Hardware-friendly: GPUs and graphics pipelines operate with matrix multiplications.\n\nRemember the key transformation matrices in homogeneous 2D:\n  • Translation: as above.\n  • Scaling: S = [[Sx 0 0],[0 Sy 0],[0 0 1]].\n  • Rotation by θ: R = [[cosθ -sinθ 0],[sinθ cosθ 0],[0 0 1]].\n  • Shear, reflection similarly with proper matrix forms.\n\nThis homogeneous approach generalizes directly to 3D (4×4 matrices) in the next topic (ACtE0606).",
+        "chapter": "Chapter 6: Theory of Computation and Computer Graphics (ACtE06)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "ACtE0605 - 2D Transformations",
+        "source": "ACtE06 Revision Set 1"
+      }
+    ]
+  }
+  

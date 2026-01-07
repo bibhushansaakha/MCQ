@@ -1,0 +1,763 @@
+[
+    {
+      "id": 1,
+      "question": "Which number system is most commonly used in digital logic circuits?",
+      "options": ["Decimal (Base 10)", "Binary (Base 2)", "Octal (Base 8)", "Hexadecimal (Base 16)"],
+      "correct_answer": "Binary (Base 2)",
+      "hint": "Think about what signal states electronic circuits can represent.",
+      "explanation": "Binary (Base 2) is the fundamental number system in digital logic because electronic circuits can exist in two distinct states: HIGH (1) and LOW (0). These states correspond to voltage levels in physical hardware, such as a transistor being either conducting (ON) or non-conducting (OFF). While humans are comfortable with decimal, the hardware naturally works with two-level signals, so all information inside a digital system is encoded as strings of 0s and 1s. Other number systems like hexadecimal or octal are mainly conveniences for humans to represent long binary sequences more compactly (for example, one hexadecimal digit represents four binary bits). However, at the circuit level, every operation, from arithmetic in the ALU to memory addressing, is performed strictly in binary.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 2,
+      "question": "What is the binary equivalent of decimal 25?",
+      "options": ["11001", "10011", "11010", "10110"],
+      "correct_answer": "11001",
+      "hint": "Use repeated division by 2 and collect remainders from bottom to top.",
+      "explanation": "To convert decimal 25 to binary using repeated division: 25 ÷ 2 = 12 remainder 1, 12 ÷ 2 = 6 remainder 0, 6 ÷ 2 = 3 remainder 0, 3 ÷ 2 = 1 remainder 1, 1 ÷ 2 = 0 remainder 1. Now read the remainders from bottom to top: 11001. You can verify by converting back: 1×2^4 + 1×2^3 + 0×2^2 + 0×2^1 + 1×2^0 = 16 + 8 + 0 + 0 + 1 = 25. This method generalizes to any decimal integer. For larger numbers in digital design or debugging, hexadecimal is often preferred because grouping binary into 4-bit chunks is easier than manipulating long binary strings directly, but the underlying representation is always binary.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 3,
+      "question": "In digital logic circuits, what do logic levels represent?",
+      "options": ["Current values in amperes", "Voltage levels (HIGH and LOW states)", "Frequency of signals", "Power consumption in watts"],
+      "correct_answer": "Voltage levels (HIGH and LOW states)",
+      "hint": "Think about what the hardware actually measures to decide if a bit is 0 or 1.",
+      "explanation": "Logic levels in digital circuits correspond to specific voltage ranges that represent binary 0 and binary 1. For example, in traditional TTL technology, a voltage near 0 V (typically 0–0.8 V) is interpreted as logic LOW (0), while a voltage near 5 V (typically 2.4–5 V) is interpreted as logic HIGH (1). Voltages in between form an undefined or noise margin region. In CMOS systems, logic HIGH is close to the supply voltage (for example 3.3 V or 5 V) and LOW is close to 0 V. Digital input pins compare the incoming voltage against internal thresholds to decide the logical state. Correctly understanding logic levels is essential for interfacing different logic families (for example, connecting 5 V TTL outputs to 3.3 V CMOS inputs may require level shifting). The idea of logic levels is what makes binary abstraction possible: the circuit does not care about exact voltage as long as it falls clearly in the LOW or HIGH range.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 4,
+      "question": "What is the output of a 2-input AND gate when both inputs are 1?",
+      "options": ["0", "1", "Undefined", "Depends on timing"],
+      "correct_answer": "1",
+      "hint": "The AND operation is like logical multiplication.",
+      "explanation": "An AND gate outputs 1 only if all of its inputs are 1. For a 2-input AND gate, the truth table is: 0·0 = 0, 0·1 = 0, 1·0 = 0, 1·1 = 1. So with both inputs equal to 1, the output is 1. In Boolean algebra, AND is written as multiplication (AB), and the AND gate implements this operation in hardware. AND gates are fundamental for conditions where multiple requirements must be simultaneously true, such as address decoding (all certain address lines must be at required values), enabling control signals only when multiple status signals indicate readiness, and implementing parts of arithmetic circuits (for example, generating carry bits). Understanding the simple AND behavior is a basis for reasoning about more complex combinational logic.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 5,
+      "question": "Which logic gate produces output 1 when its two inputs are different?",
+      "options": ["AND gate", "OR gate", "XOR gate", "NAND gate"],
+      "correct_answer": "XOR gate",
+      "hint": "Exclusive OR is true for \"either A or B, but not both\".",
+      "explanation": "The XOR (Exclusive OR) gate outputs 1 only when the inputs are different: 0⊕0=0, 0⊕1=1, 1⊕0=1, 1⊕1=0. The Boolean expression is A⊕B = A'B + AB'. XOR is extremely important in digital design. It is used in binary adders to compute the sum bit (sum = A⊕B⊕Cin), in parity generators and checkers, in comparators (A⊕B=0 means equality), and in some encryption primitives (because XOR with a key bit flips or preserves a bit). At gate level, XOR can be constructed from AND, OR, and NOT gates using A⊕B = (A+B)·(A' + B'). In microprocessor ALUs, XOR is a basic instruction that allows efficient implementation of arithmetic and bit manipulation.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 6,
+      "question": "Which of the following is De Morgan's first theorem?",
+      "options": ["(A + B)' = A' · B'", "(A · B)' = A' + B'", "A + A' = 0", "A · A' = 1"],
+      "correct_answer": "(A + B)' = A' · B'",
+      "hint": "Think of the complement of an OR becoming an AND of complements.",
+      "explanation": "De Morgan's first theorem states that the complement of a sum is equal to the product of the complements: (A + B)' = A'·B'. The second theorem is the dual: (A·B)' = A' + B'. These are crucial identities when simplifying logic or converting between NAND/NOR implementations. For example, a NOR gate output is (A + B)' which, by De Morgan, equals A'·B'. This shows that a NOR gate followed by inverters on its inputs is equivalent to an AND gate. These theorems are used heavily in logic simplification, in designing with only NAND or only NOR gates (universal gate design), and in moving from a Sum-of-Products to Product-of-Sums representation and vice versa. They also have a direct software analogy when manipulating logical expressions in code.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 7,
+      "question": "What is the main purpose of using a Karnaugh map (K-map)?",
+      "options": ["To convert decimal to binary", "To draw circuit timing diagrams", "To simplify Boolean expressions by grouping minterms graphically", "To design memory hierarchies"],
+      "correct_answer": "To simplify Boolean expressions by grouping minterms graphically",
+      "hint": "It is a visual tool for minimization of logic functions.",
+      "explanation": "A Karnaugh map is a diagram that helps simplify Boolean expressions by arranging minterms in such a way that adjacent cells differ in only one variable. The designer places 1s in cells corresponding to minterms where the output is 1, then groups adjacent 1s in rectangles of sizes that are powers of two (1, 2, 4, 8, ...). Each group eliminates one or more variables, leading to a simpler expression. For example, a function of three variables F(A,B,C) can be plotted on an 8-cell map. Grouping four adjacent 1s might produce a simplified term like A (eliminating B and C). K-maps are especially useful up to about 4 variables; beyond that they become unwieldy and algorithmic methods like Quine–McCluskey are preferred. However, the K-map is the most intuitive way to see why minimization works and helps build an intuition about adjacency and redundancy in logic expressions.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 8,
+      "question": "Which Boolean algebra law is represented by A + A = A and A · A = A?",
+      "options": ["Identity law", "Idempotent law", "Absorption law", "Commutative law"],
+      "correct_answer": "Idempotent law",
+      "hint": "Repeating the same variable in OR or AND does not change the result.",
+      "explanation": "The idempotent law in Boolean algebra states that A + A = A and A·A = A. This captures the idea that combining a variable with itself (via OR or AND) cannot add new information. In a circuit, this means that feeding a signal through two parallel identical paths and then OR-ing (or AND-ing) them again is redundant and can be simplified to a single path. Idempotent laws are part of the standard toolkit for manual simplification, along with identity, null, complement, associative, distributive, and absorption laws. Using these systematically allows you to reduce gate count, lower power consumption, and improve delay characteristics of logic networks before even using Karnaugh maps.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 9,
+      "question": "Given F = A'BC + AB'C + ABC' + ABC, what is the simplified Sum-of-Products form?",
+      "options": ["F = AB + AC + BC", "F = ABC", "F = A + B + C", "F = A'B'C'"],
+      "correct_answer": "F = AB + AC + BC",
+      "hint": "Look for common factors among pairs of product terms and use A + A' = 1.",
+      "explanation": "Start with F = A'BC + AB'C + ABC' + ABC. Group terms with common factors:\n1) A'BC and ABC have common factor BC: BC(A' + A) = BC·1 = BC.\n2) AB'C and ABC have common factor AC: AC(B' + B) = AC·1 = AC.\n3) ABC' and ABC have common factor AB: AB(C' + C) = AB·1 = AB.\nCollecting these results gives F = AB + AC + BC. This expression is much simpler and uses fewer gates. Conceptually, the original function was 1 when at least two of the three variables are 1, which matches AB + AC + BC (any pair being 1 is enough). This is a classic example used in Karnaugh map minimization as well.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "hard",
+      "marks": 2,
+      "source": "AExE0201"
+    },
+    {
+      "id": 10,
+      "question": "Why is the Product-of-Sums (POS) form sometimes preferred over Sum-of-Products (SOP)?",
+      "options": [
+        "POS is always faster in hardware",
+        "POS is easier when the function has many zeros and few ones in the truth table",
+        "POS uses only NAND gates",
+        "POS cannot represent all Boolean functions"
+      ],
+      "correct_answer": "POS is easier when the function has many zeros and few ones in the truth table",
+      "hint": "Think in terms of using maxterms instead of minterms.",
+      "explanation": "The Sum-of-Products form is constructed by listing all minterms (input combinations) for which the function is 1. When the function output is 1 for many combinations and 0 for few, SOP can become long and unwieldy. The Product-of-Sums form, on the other hand, uses maxterms: each term corresponds to an input combination where the function is 0. If there are only a few zeros, POS will have fewer terms and can be simpler. POS is particularly natural when mapping to NOR-based designs, while SOP maps more directly to AND–OR networks. In practice, a designer chooses SOP or POS based on which leads to a smaller or faster final implementation. Karnaugh maps can also be used in both SOP (grouping 1s) and POS (grouping 0s) modes, and you pick whichever gives larger groups and fewer terms.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 11,
+      "question": "What is the essential function of a multiplexer (MUX)?",
+      "options": [
+        "To split one input into many outputs",
+        "To select one of several inputs and forward it to a single output",
+        "To encode multiple inputs into a binary code",
+        "To decode binary inputs into one active output"
+      ],
+      "correct_answer": "To select one of several inputs and forward it to a single output",
+      "hint": "Think of it as a \"digital selector switch\" controlled by select lines.",
+      "explanation": "A multiplexer takes N input signals and, based on the values of its select lines, routes one of them to a single output line. For a 2^n-to-1 MUX, there are 2^n data inputs, n select lines, and 1 output. For example, a 4-to-1 MUX has 4 inputs (I0–I3), 2 select lines (S1, S0), and one output Y. Internally, the MUX uses AND gates to gate each input with the appropriate select-line pattern and then ORs all these AND outputs together. In microprocessor systems, multiplexers are everywhere: they select ALU operands from registers, choose which device drives a bus, select addresses or data sources, implement configurable data paths, and more. Conceptually, a MUX behaves like an if–else ladder implemented in hardware: if select == 00 use input 0, if 01 use input 1, and so on.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 12,
+      "question": "How many select lines does an 8-to-1 multiplexer require?",
+      "options": ["2", "3", "4", "8"],
+      "correct_answer": "3",
+      "hint": "Use the relation: 2^n inputs need n select lines.",
+      "explanation": "An 8-to-1 MUX has 8 data inputs and one output. To uniquely select one of 8 possibilities, you need 3 control bits because 2^3 = 8. So it requires 3 select lines. More generally, a 2^n-to-1 multiplexer always uses n select lines. For instance, a 16-to-1 MUX uses 4 select lines. This relationship directly follows from the fact that n bits can encode 2^n distinct patterns. In actual design, these 3 select lines are decoded internally into 8 enable lines for the 8 data inputs.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 13,
+      "question": "Which circuit performs the opposite function of a multiplexer?",
+      "options": ["Encoder", "Decoder", "Demultiplexer", "Comparator"],
+      "correct_answer": "Demultiplexer",
+      "hint": "Instead of many-to-one, think one-to-many routing.",
+      "explanation": "A demultiplexer (DEMUX) takes a single input line and channels it to exactly one of many output lines, depending on the select inputs. So it is the conceptual inverse of a multiplexer. A 1-to-8 DEMUX with 3 select lines will route its single input to exactly one of 8 outputs. In microprocessor systems, DEMUX logic is commonly used in address decoding and chip select generation. For example, a demultiplexer can take a control signal and distribute it to one of many memory chips, with select lines derived from higher-order address bits. Multiplexers and demultiplexers are often used together in communication systems where data from many sources is time-multiplexed through a single line and then demultiplexed at the receiver.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 14,
+      "question": "What does a 2-to-4 decoder do for inputs A1A0?",
+      "options": [
+        "Produces a 2-bit binary sum",
+        "Activates exactly one of four outputs corresponding to the binary value of A1A0",
+        "Converts binary to Gray code",
+        "Outputs the complement of A1A0"
+      ],
+      "correct_answer": "Activates exactly one of four outputs corresponding to the binary value of A1A0",
+      "hint": "Each input combination maps to one unique active output line.",
+      "explanation": "A 2-to-4 decoder has 2 inputs (A1, A0) and 4 outputs (O0–O3). For each of the 4 possible input combinations, exactly one output is set to 1 and the others are 0. Typically: 00 → O0=1, 01 → O1=1, 10 → O2=1, 11 → O3=1. The Boolean equations are O0 = A1'A0', O1 = A1'A0, O2 = A1A0', O3 = A1A0. In general, an n-to-2^n decoder is a standard way to generate mutually exclusive select lines, such as chip selects for blocks of memory or I/O devices. In microprocessor design, decoders are at the heart of address decoding logic and instruction decoding.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 15,
+      "question": "What is the function of an encoder in digital logic?",
+      "options": [
+        "To convert a binary code into one active output line",
+        "To convert multiple mutually exclusive inputs into a binary code",
+        "To generate parity bits for error detection",
+        "To buffer signals and increase drive strength"
+      ],
+      "correct_answer": "To convert multiple mutually exclusive inputs into a binary code",
+      "hint": "It is conceptually the reverse operation of a decoder.",
+      "explanation": "An encoder takes 2^n input lines, where ideally only one line is active at a time, and encodes the index of that active line into an n-bit binary output. For example, a 4-to-2 encoder with inputs I0–I3 will output 00 if I0 is active, 01 if I1 is active, 10 if I2 is active, and 11 if I3 is active. A priority encoder extends this idea to handle cases where multiple inputs might be active, assigning higher priority to some inputs. In microprocessor systems, encoders appear in interrupt controllers, keyboard interfaces, and other cases where multiple requests must be translated into a smaller binary code (like an interrupt vector index).",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 16,
+      "question": "What is 1010₂ + 0110₂ in binary?",
+      "options": ["10000₂", "10100₂", "10010₂", "11000₂"],
+      "correct_answer": "10000₂",
+      "hint": "Add bit by bit from the right; remember that 1 + 1 = 10₂.",
+      "explanation": "Add 1010 and 0110:\n- LSB: 0 + 0 = 0, carry 0.\n- Next: 1 + 1 = 10₂ → write 0, carry 1.\n- Next: 0 + 1 + carry 1 = 0 + 1 + 1 = 10₂ → write 0, carry 1.\n- MSB: 1 + 0 + carry 1 = 1 + 0 + 1 = 10₂ → write 0, carry 1.\nWriting carry out as a new MSB gives 10000₂. In decimal, 1010₂ = 10 and 0110₂ = 6, so the sum is 16, which indeed is 10000₂. Conceptually, this demonstrates how carries propagate through a binary ripple adder. In ALUs, full adders are cascaded to handle this propagation across all bit positions.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 17,
+      "question": "What is 1010₂ − 0110₂ in binary (assuming unsigned arithmetic with no borrow from higher bits)?",
+      "options": ["0100₂", "0010₂", "0110₂", "1000₂"],
+      "correct_answer": "0100₂",
+      "hint": "You can either use direct subtraction with borrows or interpret in decimal and convert back.",
+      "explanation": "1010₂ is 10 in decimal and 0110₂ is 6 in decimal. Their difference is 4, which is 0100₂. Doing it directly in binary: from LSB to MSB,\n- LSB: 0 − 0 = 0.\n- Next: 1 − 1 = 0.\n- Next: 0 − 1 requires borrow. You borrow 1 from the MSB, so the MSB becomes 0 and the current bit becomes 10₂. Then 10₂ − 1 = 1.\n- MSB after borrow: was 1, we borrowed 1, so it becomes 0. Thus we get 0100. In hardware, subtraction is usually implemented using two’s complement addition: A − B = A + (two’s complement of B). Either way, the final result here is 0100₂.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 18,
+      "question": "With 8-bit two’s complement representation, what is the range of representable integers?",
+      "options": ["0 to 255", "-128 to 127", "-255 to 255", "-127 to 128"],
+      "correct_answer": "-128 to 127",
+      "hint": "For n bits in two’s complement, the range is -2^(n-1) to 2^(n-1) - 1.",
+      "explanation": "In two’s complement, the MSB is the sign bit. For an n-bit number, there are 2^n total patterns. Half of them represent negative numbers, the other half represent zero and positive numbers. The formula for the range is -2^(n-1) to 2^(n-1) − 1. For n = 8, this becomes -2^7 to 2^7 − 1, which is -128 to 127. For example, 10000000₂ is -128, 01111111₂ is +127, and 00000000₂ is 0. This asymmetric range (one extra negative number) is a side effect of how two’s complement is defined. Processors use this scheme universally because it makes addition and subtraction hardware simple and consistent across positive and negative values.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 19,
+      "question": "Why might a designer choose an unsigned representation instead of a signed one for an 8-bit quantity?",
+      "options": [
+        "Unsigned can represent negative values more accurately",
+        "Unsigned allows a larger positive range (0 to 255) compared to signed (-128 to 127)",
+        "Unsigned consumes less memory",
+        "Unsigned simplifies the hardware for addition and subtraction"
+      ],
+      "correct_answer": "Unsigned allows a larger positive range (0 to 255) compared to signed (-128 to 127)",
+      "hint": "For the same bit width, removing the sign bit gives you more positive values.",
+      "explanation": "An 8-bit unsigned number uses all 8 bits for magnitude, so its range is 0 to 255. An 8-bit signed two’s complement number uses the MSB as a sign bit, leaving 7 bits for magnitude, so its range is -128 to 127. When you know a value will never be negative (for example, counts, memory addresses, array indices, protocol lengths), using unsigned representation gives you a larger usable positive range without needing extra bits. The hardware for addition is essentially the same; the main difference is how overflow and comparisons are interpreted. In microprocessor instruction sets and in languages like C, the distinction between signed and unsigned directly affects how conditions and overflows behave, so it is important for both digital design and low-level programming.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 20,
+      "question": "What is the primary function of an RS (Set–Reset) latch or flip-flop?",
+      "options": [
+        "To add two binary numbers",
+        "To store a single bit of information using feedback",
+        "To generate a clock signal",
+        "To convert serial data to parallel form"
+      ],
+      "correct_answer": "To store a single bit of information using feedback",
+      "hint": "It has two stable states, representing 0 and 1, and maintains its state until changed.",
+      "explanation": "An RS latch is a basic memory element built from two cross-coupled NOR or NAND gates. It has two inputs, S (Set) and R (Reset), and typically two outputs, Q and Q̄. When S is asserted, Q is forced to 1 and the latch stores a 1. When R is asserted, Q is forced to 0 and the latch stores a 0. When both S and R are inactive, the outputs feed back to keep the latch in its previous state, giving it memory. This is the fundamental idea of sequential logic: outputs depend on both current inputs and previous state. The RS latch has an illegal or undefined condition when both S and R are asserted simultaneously (for the NOR-based version), which is why more refined flip-flops (D, JK, etc.) were developed. Nevertheless, the RS latch is the conceptual foundation for understanding how digital circuits can remember information.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0203"
+    },
+    {
+      "id": 21,
+      "question": "What distinguishes a gated (clocked) RS latch from a basic RS latch?",
+      "options": [
+        "It uses fewer gates",
+        "Its state can only change when an enable or clock input is active",
+        "It does not have a reset input",
+        "It cannot store data"
+      ],
+      "correct_answer": "Its state can only change when an enable or clock input is active",
+      "hint": "Think of an extra control signal that \"opens\" or \"closes\" the latch.",
+      "explanation": "A basic RS latch responds immediately to its S and R inputs at any time, which makes it sensitive to glitches and unsuitable for synchronous systems. A gated RS latch introduces an additional input, commonly called Enable (EN) or a level-type clock, and passes S and R to the latch only when this control input is asserted. Internally, S and R are ANDed with the enable signal before feeding the cross-coupled structure. When EN is low, the inner latch sees both S and R as inactive and thus holds its state regardless of changes on the external S and R. When EN is high, the latch responds to S and R just like a normal RS latch. This gating allows coordinated updates in sync with a clock, a key step toward building fully synchronous sequential circuits and flip-flops.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0203"
+    },
+    {
+      "id": 22,
+      "question": "In an edge-triggered flip-flop, when does the state actually change?",
+      "options": [
+        "Whenever inputs change",
+        "While the clock is high",
+        "Only at the active edge (rising or falling) of the clock",
+        "Randomly based on propagation delay"
+      ],
+      "correct_answer": "Only at the active edge (rising or falling) of the clock",
+      "hint": "The input is sampled at a specific instant, not during an entire level.",
+      "explanation": "An edge-triggered flip-flop is designed so that it samples its input only during a very narrow window around a clock transition (either the rising edge or the falling edge, depending on the design). Outside that window, changes on the input do not affect the stored state. This behavior prevents multiple updates within one clock period and avoids race problems common with level-sensitive latches, where inputs might propagate repeatedly while the clock level is active. Internally, an edge-triggered flip-flop is often implemented as a master–slave combination or with specialized pulse-generation circuitry. Edge triggering is essential for synchronous design in microprocessors, where every storage element must update in a coordinated way once per clock cycle.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0203"
+    },
+    {
+      "id": 23,
+      "question": "What design problem do Master–Slave flip-flops address?",
+      "options": [
+        "Clock generation",
+        "Race conditions and unwanted multiple transitions within one clock pulse",
+        "Excessive power consumption",
+        "Input voltage level shifting"
+      ],
+      "correct_answer": "Race conditions and unwanted multiple transitions within one clock pulse",
+      "hint": "They separate sampling and updating into two non-overlapping phases.",
+      "explanation": "A Master–Slave flip-flop consists of two latches in series: the master stage and the slave stage, driven by opposite phases of the clock. When the clock is high, the master latch is active and samples the input, but the slave latch is closed and holds its previous value. When the clock goes low, the master is closed (holding the sampled input), and the slave becomes active and copies the master's value to the output. This ensures that even if the input continues to change while the clock is high, those changes do not propagate directly to the output during the same clock period. It effectively turns a level-sensitive structure into a controlled edge-based behavior, thereby preventing race conditions where outputs might ripple through several stages during a single clock level.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "hard",
+      "marks": 2,
+      "source": "AExE0203"
+    },
+    {
+      "id": 24,
+      "question": "What is a primary use of shift registers in digital systems?",
+      "options": [
+        "Implementing combinational logic",
+        "Converting between serial and parallel data representations",
+        "Generating clock pulses",
+        "Storing programs permanently"
+      ],
+      "correct_answer": "Converting between serial and parallel data representations",
+      "hint": "Data is moved bit by bit through flip-flops on each clock edge.",
+      "explanation": "A shift register is essentially a chain of flip-flops where the output of one feeds the input of the next. On each clock pulse, the content shifts one position to the left or right. A Serial-In Parallel-Out (SIPO) shift register accepts bits serially on a single input line and after enough clock pulses, its outputs collectively present the full word in parallel. A Parallel-In Serial-Out (PISO) register does the reverse. This capability is critical in serial communication interfaces, where data must be serialized for transmission over a single line but processed in parallel within the CPU. Shift registers are also used for simple time delays, implementing arithmetic shifts (multiply/divide by 2), and in some state machine designs.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0203"
+    },
+    {
+      "id": 25,
+      "question": "How is an asynchronous (ripple) counter typically implemented?",
+      "options": [
+        "All flip-flops share the same clock edge",
+        "The output of one flip-flop serves as the clock input for the next flip-flop",
+        "Using only combinational gates and no flip-flops",
+        "Using ROM to store the count sequence"
+      ],
+      "correct_answer": "The output of one flip-flop serves as the clock input for the next flip-flop",
+      "hint": "The clock \"ripples\" through the stages one by one.",
+      "explanation": "In an asynchronous or ripple counter, only the first flip-flop in the chain receives the external clock signal. The output of this flip-flop then acts as the clock input for the next flip-flop, and so on down the chain. As a result, state changes propagate sequentially, so the later bits update slightly later than the earlier bits. This leads to the characteristic rippling effect through the binary count. While asynchronous counters are simple and require less combinational logic, their propagation delay accumulates across stages, limiting maximum clock frequency and causing short-lived invalid states during transitions. For higher-speed or more complex counting, synchronous counters are preferred.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0203"
+    },
+    {
+      "id": 26,
+      "question": "What is the key feature of a synchronous counter compared to an asynchronous counter?",
+      "options": [
+        "It counts in Gray code instead of binary",
+        "All flip-flops receive the same clock signal and change state simultaneously",
+        "It does not require flip-flops",
+        "It cannot be used for high-speed applications"
+      ],
+      "correct_answer": "All flip-flops receive the same clock signal and change state simultaneously",
+      "hint": "Think of everything driven by a single global clock edge.",
+      "explanation": "In a synchronous counter, every flip-flop is clocked directly by the same clock signal, so they all see the clock edge at the same time. Combinational logic between flip-flops determines which ones toggle on a given edge, but the actual state updates are simultaneous. This removes the rippling effect and cumulative propagation delay found in asynchronous counters. Consequently, synchronous counters can operate at much higher frequencies and provide clean transitions from one valid count state to the next. This behavior matches the overall philosophy of synchronous digital design and is used widely in clock dividers, address generators, and event counters inside microprocessors and digital systems.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "hard",
+      "marks": 2,
+      "source": "AExE0203"
+    },
+    {
+      "id": 27,
+      "question": "What are the main internal components of a typical microprocessor?",
+      "options": [
+        "ALU, registers, control unit, and internal buses",
+        "Only memory and I/O ports",
+        "Just a clock and an ALU",
+        "ROM, RAM, and cache only"
+      ],
+      "correct_answer": "ALU, registers, control unit, and internal buses",
+      "hint": "Think of how instructions are fetched, decoded, and executed.",
+      "explanation": "A microprocessor’s internal architecture is usually described in terms of four major blocks: (1) The Arithmetic Logic Unit (ALU), which performs arithmetic operations like addition and subtraction and logical operations like AND, OR, XOR, and NOT; (2) The register file, including general-purpose registers, special-purpose registers such as the accumulator, program counter, stack pointer, and status flags; (3) The control unit, which fetches instructions from memory, decodes them, and generates the control signals needed to operate the ALU, registers, and buses; (4) Internal buses (data bus, address bus, and sometimes dedicated control buses) that move data and addresses between these blocks. Additional structures like instruction pipelines, caches, and branch predictors build on top of this core architecture in more advanced processors.",
+      "chapter": "2.4 Microprocessor",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0204"
+    },
+    {
+      "id": 28,
+      "question": "What is the primary role of the accumulator register in many classic microprocessors (such as 8085)?",
+      "options": [
+        "To hold the address of the next instruction",
+        "To store one operand and the result of most arithmetic and logic operations",
+        "To count the number of executed instructions",
+        "To store stack addresses"
+      ],
+      "correct_answer": "To store one operand and the result of most arithmetic and logic operations",
+      "hint": "Most arithmetic and logical instructions implicitly use this register.",
+      "explanation": "In accumulator-based architectures, the accumulator is the central working register. Instructions like ADD B, SUB C, ANA D, ORA E typically use the accumulator as one operand and then store the result back into it. For example, ADD B means A ← A + B. This design simplifies the instruction set and required hardware, since many instructions do not need to encode both source and destination registers explicitly. Although modern RISC processors favor a larger set of general-purpose registers rather than a single special accumulator, the conceptual role remains similar: fast registers hold intermediate results and operands to minimize memory accesses.",
+      "chapter": "2.4 Microprocessor",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0204"
+    },
+    {
+      "id": 29,
+      "question": "What does the Program Counter (PC) register store?",
+      "options": [
+        "The total number of executed instructions",
+        "The address of the current or next instruction to be fetched",
+        "The address of the top of the stack",
+        "The result of the last arithmetic operation"
+      ],
+      "correct_answer": "The address of the current or next instruction to be fetched",
+      "hint": "It keeps track of the control flow of the program.",
+      "explanation": "The Program Counter (PC) is a special-purpose register whose content points to the memory address of the instruction that the processor will fetch next. During sequential execution, after fetching an instruction, the PC is incremented by the instruction length so that it points to the next instruction in memory. Control transfer instructions (jumps, branches, calls, returns) modify the PC explicitly to implement loops, conditionals, and subroutines. When an interrupt occurs, the processor saves the current PC (often on the stack) and loads the PC with the address of the corresponding Interrupt Service Routine. When the ISR finishes, it restores the PC so that normal program execution resumes from the correct point.",
+      "chapter": "2.4 Microprocessor",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0204"
+    },
+    {
+      "id": 30,
+      "question": "What is assembly language best described as?",
+      "options": [
+        "A portable high-level language",
+        "A human-readable form of machine instructions specific to a processor",
+        "A way to describe circuits graphically",
+        "A type of microcode stored in ROM"
+      ],
+      "correct_answer": "A human-readable form of machine instructions specific to a processor",
+      "hint": "Each mnemonic closely corresponds to a machine opcode.",
+      "explanation": "Assembly language provides mnemonics like MOV, ADD, JMP in place of raw numeric opcodes. Each assembly instruction typically corresponds very closely to a single machine instruction of a specific CPU architecture. Assemblers translate this human-friendly text into the binary machine code that the processor executes. Because assembly is architecture-specific, 8085 assembly will be quite different from ARM or x86 assembly. Programmers use assembly when they need precise control over hardware, need to optimize critical sections, or are implementing very low-level software like bootloaders, interrupt handlers, or hardware drivers.",
+      "chapter": "2.4 Microprocessor",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0204"
+    },
+    {
+      "id": 31,
+      "question": "What is the function of the Stack Pointer (SP) in a microprocessor?",
+      "options": [
+        "To point to the next instruction",
+        "To hold the address of the top element of the stack",
+        "To store the number of stack frames",
+        "To cache recent memory accesses"
+      ],
+      "correct_answer": "To hold the address of the top element of the stack",
+      "hint": "The stack is a LIFO structure used for calls, returns, and local storage.",
+      "explanation": "The Stack Pointer (SP) holds the address of the current top of the stack, which is a region of memory used for temporary storage such as return addresses, saved registers, and local variables. On a PUSH operation, the SP is adjusted (often decremented in architectures where the stack grows downward) and the new value is used as the address where data is stored. On a POP, data is read from the current SP address and the SP is adjusted in the opposite direction. During function calls, the return address is pushed to the stack, and during returns, it is popped back into the program counter. Correct management of SP is essential for reliable subroutine calls, recursion, interrupt handling, and context switching.",
+      "chapter": "2.4 Microprocessor",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0204"
+    },
+    {
+      "id": 32,
+      "question": "What is the fundamental difference between RAM and ROM?",
+      "options": [
+        "RAM is non-volatile, ROM is volatile",
+        "RAM is volatile, ROM is non-volatile",
+        "Both are volatile but ROM is faster",
+        "Both are non-volatile but RAM is larger"
+      ],
+      "correct_answer": "RAM is volatile, ROM is non-volatile",
+      "hint": "Consider what happens to stored data when power is turned off.",
+      "explanation": "Random Access Memory (RAM) loses its stored data when power is removed, which makes it volatile. It is used for temporary storage of code and data during program execution. Read-Only Memory (ROM), in contrast, retains its data even when power is off, making it non-volatile. ROM (and its modern variants like Flash) is typically used to store firmware, bootloaders, and other code that must be preserved across power cycles. In a microprocessor-based system, the CPU typically starts execution from a fixed address in ROM after reset, where boot code resides, and then may copy or map parts of that program into RAM for faster execution.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 33,
+      "question": "What is the main purpose of cache memory in a microprocessor system?",
+      "options": [
+        "To permanently store the operating system",
+        "To buffer I/O devices",
+        "To reduce the average time to access data by storing frequently used data closer to the CPU",
+        "To increase the size of main memory"
+      ],
+      "correct_answer": "To reduce the average time to access data by storing frequently used data closer to the CPU",
+      "hint": "Think of temporal and spatial locality of reference.",
+      "explanation": "Cache memory is a small, fast memory that sits between the CPU and main memory (RAM). It stores copies of data and instructions that are frequently accessed or are close in address to recently accessed items. Due to temporal locality, code or data recently used is likely to be used again soon; due to spatial locality, addresses near recently used addresses are likely to be accessed next. When the CPU requests data, the cache is checked first. If the data is found (cache hit), it can be supplied much faster than from RAM. If not (cache miss), it must be fetched from main memory and also stored in the cache for future use. Multi-level cache hierarchies (L1, L2, L3) further optimize this behavior. Efficient cache design and cache-friendly code can significantly improve performance, especially in modern processors where CPU speed is much higher than main memory speed.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 34,
+      "question": "What is carried on the address bus in a microprocessor system?",
+      "options": [
+        "Data values to be read or written",
+        "Memory or I/O addresses to be accessed",
+        "Control signals like Read and Write",
+        "Clock pulses"
+      ],
+      "correct_answer": "Memory or I/O addresses to be accessed",
+      "hint": "It selects which location in memory or which device is involved in a transfer.",
+      "explanation": "The address bus is a set of lines that carries the binary address specifying which memory location or I/O port the CPU intends to read from or write to. For a 16-bit address bus, the processor can address 2^16 = 65,536 distinct locations. For a 32-bit address bus, the space is 4 GB, and so on. When the CPU initiates a memory operation, it places an address on the address bus, asserts the appropriate control signals (such as RD or WR), and the memory subsystem decodes that address to select the correct memory chip and cell. In systems with memory-mapped I/O, peripheral devices are also selected based on particular address ranges, using essentially the same address bus mechanism.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 35,
+      "question": "What is the role of the control bus in a microprocessor system?",
+      "options": [
+        "To transmit only data bits",
+        "To carry only addresses",
+        "To carry signals such as Read, Write, Interrupt, and Reset that coordinate operations",
+        "To supply power to memory chips"
+      ],
+      "correct_answer": "To carry signals such as Read, Write, Interrupt, and Reset that coordinate operations",
+      "hint": "Think about non-data, non-address signals that orchestrate each transfer.",
+      "explanation": "The control bus is a collection of individual control lines that the CPU uses to coordinate and manage its interactions with memory and I/O devices. Common signals include RD (read), WR (write), MEM/IO (distinguishing memory access from I/O access), interrupt request lines, interrupt acknowledge lines, bus request and grant lines for DMA, RESET, and sometimes clock-related signals. During a memory read, for example, the CPU will place the address on the address bus, assert MEM and RD, and then wait for the memory to place the requested data on the data bus. The control bus makes sure all subsystems interpret and respond to operations consistently and at the right time.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 36,
+      "question": "What is a Programmable Peripheral Interface (such as the Intel 8255) used for?",
+      "options": [
+        "Generating clock signals for the CPU",
+        "Providing programmable parallel I/O ports that can be configured as input or output by software",
+        "Storing microprocessor instructions in non-volatile form",
+        "Converting analog signals to digital"
+      ],
+      "correct_answer": "Providing programmable parallel I/O ports that can be configured as input or output by software",
+      "hint": "It gives flexible general-purpose I/O without rewiring hardware.",
+      "explanation": "A PPI like the Intel 8255 offers several 8-bit ports (usually named Port A, Port B, and Port C) whose direction (input or output) and mode of operation can be defined by writing a control word to an internal control register. This allows the same physical pins to be repurposed in different configurations depending on the needs of the software. Modes include simple input/output and strobed or handshake modes for more reliable data transfer. Without such a device, the designer would have to hardwire discrete latches and buffers and could not easily reconfigure them at runtime. In early microprocessor systems, PPIs were standard building blocks for connecting to keyboards, displays, printers, and other parallel devices.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 37,
+      "question": "What is the key difference between synchronous and asynchronous serial transmission?",
+      "options": [
+        "Synchronous uses a shared clock signal; asynchronous uses start and stop bits for each word",
+        "Synchronous can only transmit data, asynchronous can transmit control signals",
+        "Asynchronous requires more wires than synchronous",
+        "There is no timing difference, only different voltage levels"
+      ],
+      "correct_answer": "Synchronous uses a shared clock signal; asynchronous uses start and stop bits for each word",
+      "hint": "How does the receiver know when to sample each bit?",
+      "explanation": "In synchronous serial transmission, the sender and receiver share a clock signal (either as a separate line or embedded in the data stream using coding schemes). The receiver uses this clock to sample bits at precise intervals, and data is usually sent in continuous blocks without start/stop bits per character. Protocols like SPI and I²C are synchronous. In asynchronous transmission, such as classic UART/RS-232, each character is framed with a start bit and one or more stop bits, and each side has its own clock, which is nominally at the agreed baud rate but not exactly phase-aligned. The receiver detects the start bit’s edge and then samples the following data bits at calculated intervals. Asynchronous schemes are simpler in wiring (no dedicated clock line) but have more overhead bits and slightly more susceptibility to clock drift.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 38,
+      "question": "Which of the following best describes RS-232?",
+      "options": [
+        "A parallel bus standard for memory modules",
+        "An asynchronous serial communication standard with voltage swings around ±12 V",
+        "A wireless communication protocol",
+        "A synchronous serial bus like SPI"
+      ],
+      "correct_answer": "An asynchronous serial communication standard with voltage swings around ±12 V",
+      "hint": "Think of the classic PC COM port.",
+      "explanation": "RS-232 is a long-standing standard for serial communication between data terminal equipment (like a PC) and data communication equipment (like a modem). It uses asynchronous framing with start and stop bits and relatively low baud rates (9600, 19200, etc.). The voltage levels are bipolar: logic 1 (mark) is represented by a negative voltage (e.g., −12 V) and logic 0 (space) by a positive voltage (e.g., +12 V), which is inverted with respect to TTL logic. This necessitates line driver/receiver ICs (like MAX232) to interface between TTL-level UART pins and RS-232 cabling. Though now largely replaced by USB in consumer devices, RS-232 remains common in industrial, embedded, and legacy systems.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 39,
+      "question": "What does Direct Memory Access (DMA) allow in a microprocessor system?",
+      "options": [
+        "The CPU to access ROM directly",
+        "Peripheral devices to transfer data directly to/from memory without continuous CPU involvement",
+        "Memory to access other memory chips without a bus",
+        "The CPU to execute instructions directly from I/O ports"
+      ],
+      "correct_answer": "Peripheral devices to transfer data directly to/from memory without continuous CPU involvement",
+      "hint": "It reduces CPU overhead for large data transfers.",
+      "explanation": "DMA is a mechanism where a DMA controller (either standalone or integrated) manages data transfers between memory and peripherals such as disk controllers, network interfaces, or high-speed ADCs. The CPU sets up the DMA controller with the source address, destination address, and transfer size, then issues a command to start the transfer. During the transfer, the DMA controller takes over the system bus (via signals like HOLD/HLDA) and reads from and writes to memory directly. The CPU is free to perform other tasks or can be halted if the architecture requires. When the transfer finishes, the DMA controller usually triggers an interrupt to inform the CPU. DMA offloads repetitive data movement work from the CPU and is essential for high-bandwidth I/O.",
+      "chapter": "2.5 Microprocessor System",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0205"
+    },
+    {
+      "id": 40,
+      "question": "In the context of microprocessors, what is an interrupt?",
+      "options": [
+        "A polling loop that checks device status",
+        "A signal that causes the CPU to temporarily suspend its current execution and jump to a service routine",
+        "A power failure in the system",
+        "A type of cache miss"
+      ],
+      "correct_answer": "A signal that causes the CPU to temporarily suspend its current execution and jump to a service routine",
+      "hint": "It is a hardware or software event that requests immediate attention.",
+      "explanation": "An interrupt is an event, often signaled by hardware (like a timer, I/O device, or external pin), that forces the CPU to stop its current execution flow at a well-defined boundary and start executing an Interrupt Service Routine (ISR). Interrupts allow processors to respond quickly to external events without constant polling. When an interrupt is accepted, the CPU typically completes the current instruction, saves the current program counter and status on the stack, disables further interrupts if necessary, and then loads the ISR address (either from a fixed vector or via an interrupt controller). After servicing the event, the ISR executes a return-from-interrupt instruction, which restores the saved context and resumes the interrupted program as if nothing had happened.",
+      "chapter": "2.6 Interrupt Operations",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0206"
+    },
+    {
+      "id": 41,
+      "question": "What is an Interrupt Service Routine (ISR)?",
+      "options": [
+        "A special hardware register storing interrupt vectors",
+        "The software routine executed in response to a specific interrupt",
+        "A data structure listing I/O devices",
+        "Another name for the main program"
+      ],
+      "correct_answer": "The software routine executed in response to a specific interrupt",
+      "hint": "It is like a callback function tied to an interrupt event.",
+      "explanation": "An ISR is a piece of code that runs when a particular interrupt occurs. Its job is to handle the condition that triggered the interrupt, such as reading data from an I/O port, updating a counter, or clearing a hardware flag. The ISR runs with a special calling convention: the CPU saves sufficient context (at least the return address, sometimes additional registers) before jumping into it, and the ISR must finish by executing a specific return-from-interrupt instruction that restores the context. Good ISR design keeps the code as short and fast as possible, often deferring heavier work to the main program via flags or queues, to reduce interrupt latency and avoid blocking other interrupts for too long.",
+      "chapter": "2.6 Interrupt Operations",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0206"
+    },
+    {
+      "id": 42,
+      "question": "Which of the following correctly describes the typical interrupt processing sequence?",
+      "options": [
+        "CPU immediately stops mid-instruction and jumps to random memory",
+        "CPU finishes current instruction, saves context, fetches ISR address, jumps to ISR, then restores context and resumes",
+        "CPU ignores all interrupts while executing the main program",
+        "CPU executes ISR in parallel on a different core"
+      ],
+      "correct_answer": "CPU finishes current instruction, saves context, fetches ISR address, jumps to ISR, then restores context and resumes",
+      "hint": "Instructions are atomic; context must be preserved and restored.",
+      "explanation": "A well-behaved interrupt mechanism never breaks an instruction mid-execution. When an interrupt request is recognized, the CPU completes the current instruction, then saves the return address (and often the status flags and some registers) onto the stack. It then determines the appropriate ISR address, typically by indexing into an interrupt vector table, and sets the program counter to that address. After the ISR finishes, a special return-from-interrupt instruction causes the saved context (program counter and possibly flags/registers) to be restored so that execution continues exactly where it left off. This sequence ensures both correctness (no corrupted partial instructions) and transparency (the main program does not have to be explicitly aware of the interrupt timing).",
+      "chapter": "2.6 Interrupt Operations",
+      "difficulty": "hard",
+      "marks": 2,
+      "source": "AExE0206"
+    },
+    {
+      "id": 43,
+      "question": "What is the purpose of an interrupt vector table?",
+      "options": [
+        "To store configuration registers for devices",
+        "To hold the starting addresses of all interrupt service routines",
+        "To buffer incoming interrupts until the CPU is ready",
+        "To log the history of interrupts"
+      ],
+      "correct_answer": "To hold the starting addresses of all interrupt service routines",
+      "hint": "It is like a lookup table that maps interrupt numbers to handler addresses.",
+      "explanation": "An interrupt vector table is a region of memory where each entry corresponds to a particular interrupt source and contains the address of that interrupt’s service routine. When an interrupt occurs, the hardware or an interrupt controller generates an interrupt number, which the CPU uses to index into the table and fetch the ISR address. This design makes interrupt handling flexible: changing which routine runs for a given interrupt can be done by modifying the table entry, without changing CPU hardware. In some architectures, the vector table is at a fixed address in memory; in others, its base address can be relocated for more advanced operating system designs.",
+      "chapter": "2.6 Interrupt Operations",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0206"
+    },
+    {
+      "id": 44,
+      "question": "What is the output of a 2-input OR gate when A = 1 and B = 0?",
+      "options": ["0", "1", "Undefined", "Same as A AND B"],
+      "correct_answer": "1",
+      "hint": "OR outputs 1 if at least one input is 1.",
+      "explanation": "The OR gate truth table for two inputs is: 0+0 = 0, 0+1 = 1, 1+0 = 1, 1+1 = 1. So with A = 1 and B = 0, the output is 1. In Boolean algebra, OR corresponds to logical addition and is used whenever any one of multiple conditions being true should produce a true output. In digital systems, OR gates are often used to combine multiple request or interrupt lines, select among possible conditions, or create wired-OR functions (with open-collector outputs).",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 45,
+      "question": "Convert hexadecimal 2A₁₆ to binary.",
+      "options": ["00101000₂", "00101010₂", "00011010₂", "00100110₂"],
+      "correct_answer": "00101010₂",
+      "hint": "Each hex digit corresponds to exactly 4 binary bits.",
+      "explanation": "Hex digit 2 corresponds to 0010 in binary, and A (which is 10 in decimal) corresponds to 1010. Combining them gives 2A₁₆ = 00101010₂. You can verify by converting to decimal: 2A₁₆ = 2×16 + 10 = 42. In binary, 00101010₂ = 32 + 8 + 2 = 42. Hexadecimal is preferred over binary for representation in debugging and documentation because it is far more compact while still mapping cleanly to bit patterns.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 46,
+      "question": "What is the output of a NAND gate when both inputs are 1?",
+      "options": ["0", "1", "Undefined", "Always floating"],
+      "correct_answer": "0",
+      "hint": "NAND is the logical negation of AND.",
+      "explanation": "A NAND gate performs the NOT of the AND operation. For two inputs A and B, the AND produces 1 only when A = 1 and B = 1; NAND then inverts this, so when both inputs are 1, the output is 0. For all other input combinations, NAND outputs 1. NAND is a universal gate, meaning any Boolean function can be implemented solely using NAND gates. This universality and implementation efficiency (especially in CMOS technology) make NAND a fundamental building block in integrated circuit design.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 47,
+      "question": "Convert binary 101110₂ to octal.",
+      "options": ["54₈", "56₈", "46₈", "64₈"],
+      "correct_answer": "56₈",
+      "hint": "Group bits in sets of three from the right and convert each group.",
+      "explanation": "Starting from the right, group bits in sets of three: 101110₂ becomes 101 110. 101₂ is 5 in decimal and 110₂ is 6 in decimal. So the octal representation is 56₈. As a check, 101110₂ is 46 in decimal (32 + 8 + 4 + 2). 56₈ is also 5×8 + 6 = 46. Though hexadecimal has largely replaced octal for most work, octal remains in use in some contexts such as Unix file permissions and certain legacy systems.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 48,
+      "question": "In a 3-to-8 decoder, how many inputs and outputs are present?",
+      "options": [
+        "3 inputs and 3 outputs",
+        "8 inputs and 3 outputs",
+        "3 inputs and 8 outputs",
+        "8 inputs and 8 outputs"
+      ],
+      "correct_answer": "3 inputs and 8 outputs",
+      "hint": "A 3-to-8 decoder expands 3 bits into 8 distinct lines.",
+      "explanation": "A 3-to-8 decoder takes a 3-bit binary input and activates exactly one of 8 outputs, one for each possible 3-bit combination. It is the natural extension of the 2-to-4 decoder. This kind of circuit is central in memory address decoding: for instance, three high-order address bits can select one of eight memory banks, each bank then handling more detailed addressing internally. The general pattern is that an n-to-2^n decoder has n inputs and 2^n outputs.",
+      "chapter": "2.2 Combinational and Arithmetic Circuits",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "AExE0202"
+    },
+    {
+      "id": 49,
+      "question": "What does Binary Coded Decimal (BCD) represent?",
+      "options": [
+        "A pure base-2 number system",
+        "A coding where each decimal digit is represented by its own 4-bit binary pattern",
+        "A parity-based error detection scheme",
+        "A way to store negative numbers only"
+      ],
+      "correct_answer": "A coding where each decimal digit is represented by its own 4-bit binary pattern",
+      "hint": "Each decimal digit 0–9 is separately encoded.",
+      "explanation": "In BCD, each decimal digit (0 through 9) is represented by its 4-bit binary equivalent. For instance, 39 in BCD is 0011 1001, while the pure binary representation of 39 is 00100111. The codes 1010 through 1111 are invalid in standard BCD. BCD is useful where decimal precision and exact digit representation are important, such as in financial calculations or on digital displays, because it avoids rounding errors that can appear when representing decimal fractions in pure binary. However, BCD is less space-efficient and generally slower for arithmetic than pure binary, so it is used selectively.",
+      "chapter": "2.1 Digital Logic",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0201"
+    },
+    {
+      "id": 50,
+      "question": "What is the main advantage of a D (Data) flip-flop over a basic RS flip-flop?",
+      "options": [
+        "It can store two bits instead of one",
+        "It eliminates the invalid state by having only one data input",
+        "It does not require a clock",
+        "It is purely combinational"
+      ],
+      "correct_answer": "It eliminates the invalid state by having only one data input",
+      "hint": "D flip-flop ensures that S and R are never asserted simultaneously.",
+      "explanation": "A basic RS flip-flop has an invalid condition when both S and R inputs are asserted simultaneously (in NOR-based form, that forces both Q and Q̄ to 0 temporarily, violating the requirement that they be complements). The D flip-flop solves this by taking a single data input D and internally generating S and R such that S and R cannot both be active at the same time. At a clock edge, the flip-flop simply copies D to Q and its complement to Q̄. Between clock edges, the outputs hold. This clean behavior, together with edge triggering, makes D flip-flops the fundamental building blocks of registers, shift registers, and many forms of synchronous sequential logic used inside microprocessors and digital systems.",
+      "chapter": "2.3 Sequential Logic Circuits",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "AExE0203"
+    }
+  ]
+  

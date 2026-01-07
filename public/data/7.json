@@ -1,0 +1,853 @@
+[
+    {
+      "id": 1,
+      "question": "Which of the following best distinguishes a data structure from an abstract data type (ADT)?",
+      "options": [
+        "A data structure is theoretical; an ADT is implementation-oriented",
+        "A data structure is a concrete implementation; an ADT is a logical model specifying operations and behavior",
+        "Both terms mean exactly the same thing in computer science",
+        "An ADT is always implemented using arrays, never linked lists"
+      ],
+      "correct_answer": "A data structure is a concrete implementation; an ADT is a logical model specifying operations and behavior",
+      "hint": "Think about interface vs implementation: \"what\" vs \"how\".",
+      "explanation": "An abstract data type (ADT) describes *what* operations are available and the logical behavior of a collection of data, without prescribing *how* the operations are implemented. For example, a Stack ADT specifies push, pop, top, isEmpty, and their semantics (LIFO), but it does not say whether the stack is realized with an array or a linked list. A data structure is the concrete representation in memory and the algorithms that implement those operations: for instance, an array-based stack with a top index, or a linked-list-based stack with a head pointer. Separating ADT from data structure gives design flexibility: client code can depend on the ADT interface and later swap implementations for better performance or memory usage without changing that code. This distinction is foundational for algorithm design, API design, and clean software architecture.",
+      "chapter": "7.1 Data Structures Basics",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 2,
+      "question": "In asymptotic analysis, what does Big-O notation primarily describe?",
+      "options": [
+        "The exact running time of an algorithm for all input sizes",
+        "The upper bound on the growth rate of an algorithm's time or space as input size tends to infinity",
+        "The lower bound on the running time of an algorithm",
+        "The average running time of an algorithm over all inputs"
+      ],
+      "correct_answer": "The upper bound on the growth rate of an algorithm's time or space as input size tends to infinity",
+      "hint": "Think of it as a worst-case growth rate classification, ignoring constant factors.",
+      "explanation": "Big-O notation, written as O(f(n)), provides an asymptotic upper bound on how an algorithm's resource usage (time or space) grows with input size n. It captures the dominant term of a complexity function and discards constant factors and lower-order terms. For example, if an algorithm takes T(n) = 3n^2 + 5n + 20 steps, we say T(n) = O(n^2) because, for sufficiently large n, n^2 dominates the growth. Big-O is typically used for worst-case analysis: for instance, worst-case time of insertion sort is O(n^2). Complementary notations are Big-Omega Ω(f(n)), which gives an asymptotic lower bound, and Big-Theta Θ(f(n)), which simultaneously gives both an asymptotic upper and lower bound, tightly characterizing growth. Mastering these notations is essential for comparing algorithms independently of specific hardware or implementation details.",
+      "chapter": "7.1 Data Structures Basics",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 3,
+      "question": "For an algorithm with time complexity T(n) = 5n log n + 2n + 100, which of the following asymptotic bounds is tight (Big-Theta)?",
+      "options": [
+        "Θ(n)",
+        "Θ(n log n)",
+        "Θ(n^2)",
+        "Θ(log n)"
+      ],
+      "correct_answer": "Θ(n log n)",
+      "hint": "Identify the dominant term as n grows large and ignore constants.",
+      "explanation": "The time complexity T(n) = 5n log n + 2n + 100 consists of three terms. Among these, n log n grows faster than n and any constant as n → ∞. The coefficient 5 does not affect the asymptotic class. Therefore, T(n) is in O(n log n) (upper bound) and Ω(n log n) (lower bound), which together imply T(n) = Θ(n log n). A Θ bound means that n log n both upper-bounds and lower-bounds T(n) up to constant factors. This kind of reasoning is standard when analyzing divide-and-conquer algorithms like mergesort and heapsort, which typically have Θ(n log n) time complexity.",
+      "chapter": "7.1 Data Structures Basics",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 4,
+      "question": "Which of the following operations is typically O(1) for an array-based implementation of a stack with a fixed capacity (ignoring overflow/underflow checks)?",
+      "options": [
+        "Push",
+        "Searching for an element",
+        "Removing an element from the bottom of the stack",
+        "Merging two stacks"
+      ],
+      "correct_answer": "Push",
+      "hint": "Focus on operations that touch only the top and a single index variable.",
+      "explanation": "In an array-based stack, the stack is represented by an array and a top index that indicates the position of the current top element. A push operation increments the top index and writes the new value at that position, which is a constant-time operation independent of the number of elements, so its time complexity is O(1). Similarly, pop is also O(1) because it just reads from the top index and decrements it. Operations such as searching or removing from the bottom require traversing multiple elements, giving O(n) in the worst case. This constant-time top access is precisely why stacks are efficient and heavily used in language runtimes (for function calls), expression evaluation, and backtracking algorithms.",
+      "chapter": "7.1 Stacks and Queues",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 5,
+      "question": "Which of the following expressions correctly represents a postfix (Reverse Polish) form of the infix expression (A + B) * (C - D)?",
+      "options": [
+        "AB+CD-*",
+        "AB+*CD-",
+        "A+B*C-D",
+        "ABCD+-*"
+      ],
+      "correct_answer": "AB+CD-*",
+      "hint": "In postfix, operators appear after their operands; handle inner parentheses first.",
+      "explanation": "To convert (A + B) * (C - D) to postfix, process the innermost sub-expressions: A + B becomes AB+, and C - D becomes CD-. Then the entire expression is (AB+) * (CD-), so the postfix is AB+CD-*. In general, postfix notation places the operator after its operands and eliminates parentheses, relying on the operator position and stack-based evaluation. This format is ideal for stack evaluation algorithms: scanning from left to right, operands are pushed on a stack and operators pop operands, compute a result, and push it back. Many expression evaluators, compiler back ends, and calculators use postfix or similar internal representations because they make precedence and associativity explicit and unambiguous.",
+      "chapter": "7.1 Stacks and Expression Processing",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 6,
+      "question": "During evaluation of a postfix expression using a stack, what is the correct order of operand usage when an operator is encountered?",
+      "options": [
+        "Pop first operand as right, second as left",
+        "Pop first operand as left, second as right",
+        "Use any order; it does not matter",
+        "Always treat both popped operands as commutative"
+      ],
+      "correct_answer": "Pop first operand as right, second as left",
+      "hint": "Think of how \"A B -\" should be evaluated as A - B, not B - A.",
+      "explanation": "When evaluating a postfix expression, each time an operator is encountered, two operands are popped from the stack. The first popped operand corresponds to the *right* operand, and the second popped operand corresponds to the *left* operand. For example, for the postfix sequence \"A B -\", after pushing A then B, encountering '-' means: pop B (right operand), pop A (left operand), compute A − B, and push the result. This order is crucial for non-commutative operations such as subtraction and division. If you reversed them, you would compute B − A, which is incorrect. This right-then-left rule ensures postfix representation faithfully captures the original infix semantics.",
+      "chapter": "7.1 Stacks and Expression Processing",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 7,
+      "question": "In a singly linked list, what is the time complexity of inserting a new node at the head (front) of the list?",
+      "options": [
+        "O(1)",
+        "O(log n)",
+        "O(n)",
+        "O(n log n)"
+      ],
+      "correct_answer": "O(1)",
+      "hint": "You only need to change a constant number of pointers.",
+      "explanation": "In a singly linked list where you maintain a pointer to the head node, inserting at the front requires only allocating a new node, setting its next pointer to the current head, and then updating the head pointer to the new node. These are all constant-time operations, independent of the list length, so the insertion at the head is O(1). In contrast, inserting at the tail is O(1) only if you also maintain a tail pointer; otherwise, it is O(n) because you must traverse the list to find the last node. Understanding these costs is key when choosing between array-based and linked-list-based representations for lists, stacks, and queues.",
+      "chapter": "7.1 Linked Lists",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 8,
+      "question": "Which of the following linked list types allows traversal in both forward and backward directions without extra data structures?",
+      "options": [
+        "Singly linked list",
+        "Doubly linked list",
+        "Circular singly linked list",
+        "Static array-based list"
+      ],
+      "correct_answer": "Doubly linked list",
+      "hint": "Each node maintains two links.",
+      "explanation": "In a doubly linked list, each node maintains two pointers: one to the next node and one to the previous node. This structure allows traversal in both forward and backward directions by following next and prev pointers respectively. It also makes certain operations such as deletion of a known node easier, because you can directly access both its predecessor and successor without a separate search. A singly linked list only stores next pointers, so to move backward you would have to start again from the head or maintain auxiliary structures. Circular lists alter the boundary behavior (last node points back to first) but do not inherently add backward traversal unless they are circular doubly linked lists.",
+      "chapter": "7.1 Linked Lists",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 9,
+      "question": "What is a key advantage of a circular linked list over a simple singly linked list for certain applications?",
+      "options": [
+        "It eliminates the need for a head pointer",
+        "It allows easily cycling through all nodes from any starting node without hitting a null pointer",
+        "It reduces memory usage for pointers",
+        "It guarantees faster search operations"
+      ],
+      "correct_answer": "It allows easily cycling through all nodes from any starting node without hitting a null pointer",
+      "hint": "Think about structures that model rings or round-robin scheduling.",
+      "explanation": "In a circular linked list, the last node points back to the first node instead of storing a null next pointer. This makes the list logically circular. As a result, if you start from any node and keep following next pointers, you will eventually return to the starting node after visiting all others, and you will never hit a null. This property is useful in applications like round-robin scheduling, buffer management, or games where you conceptually move around a ring of elements. However, circular lists do not by themselves improve time complexity for search or insertion; they mostly affect boundary conditions and traversal patterns.",
+      "chapter": "7.1 Linked Lists",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 10,
+      "question": "In a binary tree, what is the height of a tree with a single node (no children), assuming the convention that height is the number of edges on the longest path from root to a leaf?",
+      "options": [
+        "-1",
+        "0",
+        "1",
+        "2"
+      ],
+      "correct_answer": "0",
+      "hint": "Count the number of edges, not nodes, on the longest root-to-leaf path.",
+      "explanation": "If height is defined as the number of edges on the longest simple path from the root to any leaf, then a single-node tree (with just the root, which is also a leaf) has height 0, because there are no edges. Some texts instead define height as the number of nodes on that path, in which case the same tree would have height 1. It is important to check the convention being used. For algorithm analysis involving trees (such as AVL trees or heaps), the edge-based definition (height 0 for a single node) is common, because each level adds one edge of distance from the root.",
+      "chapter": "7.1 Trees and Binary Trees",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 11,
+      "question": "Which traversal of a binary search tree (BST) will visit the nodes in sorted (non-decreasing) order of their keys?",
+      "options": [
+        "Pre-order traversal",
+        "In-order traversal",
+        "Post-order traversal",
+        "Level-order traversal"
+      ],
+      "correct_answer": "In-order traversal",
+      "hint": "Visit left subtree, then root, then right subtree.",
+      "explanation": "For a Binary Search Tree, by definition all keys in the left subtree of a node are less than the node’s key and all keys in the right subtree are greater. An in-order traversal (Left, Root, Right) recursively visits all nodes in the left subtree, then the node itself, then all nodes in the right subtree. Because of the BST ordering property, this yields the keys in non-decreasing sorted order. This property is fundamental: many BST-based algorithms rely on in-order traversal to output sorted sequences or to check that a tree maintains the BST invariant.",
+      "chapter": "7.1 Trees and Binary Trees",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 12,
+      "question": "In an AVL tree, what is the balance factor of a node?",
+      "options": [
+        "The number of children of the node",
+        "The height of the node's left subtree minus the height of its right subtree",
+        "The number of nodes in its left subtree",
+        "The total height of the tree"
+      ],
+      "correct_answer": "The height of the node's left subtree minus the height of its right subtree",
+      "hint": "AVL trees keep this value within -1, 0, or +1 for every node.",
+      "explanation": "The balance factor of a node in an AVL tree is defined as BF(node) = height(left subtree) − height(right subtree). For an AVL tree, this balance factor must be −1, 0, or +1 for every node. If insertion or deletion causes the balance factor of some node to go outside this range, the tree is rebalanced by performing one or more rotations (LL, RR, LR, RL) to restore the AVL property. By maintaining strictly bounded imbalance, AVL trees guarantee that the tree height stays in O(log n), providing O(log n) worst-case time for search, insertion, and deletion, unlike plain BSTs which can degenerate to O(n) height in pathological cases.",
+      "chapter": "7.1 Trees and AVL Trees",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0701"
+    },
+    {
+      "id": 13,
+      "question": "Which of the following correctly describes an internal (in-place) sorting algorithm?",
+      "options": [
+        "It requires additional memory proportional to the input size (O(n))",
+        "It performs sorting by using only a constant amount of extra memory, aside from the input array",
+        "It can only sort small datasets that fit in main memory",
+        "It always uses recursion"
+      ],
+      "correct_answer": "It performs sorting by using only a constant amount of extra memory, aside from the input array",
+      "hint": "Focus on extra space overhead, not whether the data fits into RAM.",
+      "explanation": "An internal or in-place sorting algorithm rearranges elements within the original array or list using only a constant amount of additional memory, typically O(1) extra space. Classic examples include insertion sort, selection sort, bubble sort, heapsort, and in-place variants of quicksort. External sorting deals with data sets that are too large to fit in main memory and therefore require disk or external storage; such algorithms (like external mergesort) are not in-place, since they rely on additional temporary files or buffers. Space complexity is important in environments with limited memory, such as embedded systems or when handling large in-memory datasets.",
+      "chapter": "7.2 Sorting and Searching",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 14,
+      "question": "What is the worst-case time complexity of insertion sort on an array of n elements?",
+      "options": [
+        "O(n)",
+        "O(n log n)",
+        "O(n^2)",
+        "O(log n)"
+      ],
+      "correct_answer": "O(n^2)",
+      "hint": "Each inserted element may need to be compared with almost all previous elements.",
+      "explanation": "Insertion sort builds a sorted prefix by repeatedly taking the next element and inserting it into the correct position within the already-sorted part. In the worst case (when the array is in reverse order), each insertion of the i-th element requires comparing and shifting roughly i − 1 elements. Summing over i from 1 to n gives 1 + 2 + … + (n − 1) = O(n^2). However, insertion sort has O(n) best-case complexity (when the array is already sorted) and performs very well on small or nearly sorted data, which is why it is often used as the base case in hybrid sorting algorithms like introsort.",
+      "chapter": "7.2 Sorting and Searching",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 15,
+      "question": "In merge sort, what is the main reason its time complexity is Θ(n log n) in all cases?",
+      "options": [
+        "It only uses swapping operations",
+        "It does not use recursion",
+        "It always performs log n levels of merging, each processing n elements",
+        "It uses a heap structure internally"
+      ],
+      "correct_answer": "It always performs log n levels of merging, each processing n elements",
+      "hint": "Think in terms of repeatedly dividing and then merging.",
+      "explanation": "Merge sort works by repeatedly splitting the array into halves (recursively) until subarrays of size 1 are reached, and then merging those subarrays back together in sorted order. The depth of this recursion tree is about log₂ n (you can divide n by 2 only log n times before reaching 1). At each level of the recursion tree, the algorithm processes all n elements in the merging step. Therefore, the total cost is approximately n (work per level) × log n (number of levels) = Θ(n log n). Mergesort has this complexity in the best, average, and worst cases because the splitting and merging pattern does not depend on the initial arrangement of data.",
+      "chapter": "7.2 Sorting and Searching",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 16,
+      "question": "What is the main idea behind radix sort for sorting integers?",
+      "options": [
+        "Comparing pairs of keys and swapping them",
+        "Using a binary search tree to store keys and then traversing it",
+        "Sorting keys digit by digit using a stable stable subroutine (like counting sort) for each digit position",
+        "Randomly shuffling elements until they are sorted"
+      ],
+      "correct_answer": "Sorting keys digit by digit using a stable stable subroutine (like counting sort) for each digit position",
+      "hint": "It is a non-comparison-based algorithm that exploits the structure of keys.",
+      "explanation": "Radix sort sorts integers (or string-like keys) by processing individual digits (or characters) from least significant to most significant (LSD) or vice versa (MSD). For LSD radix sort on base-10 numbers, you repeatedly group numbers according to their 1s digit, then 10s digit, then 100s digit, etc., each time using a stable sorting algorithm like counting sort to preserve the relative order of elements with the same digit. Because it does not rely on direct comparisons between keys, radix sort can achieve O(d·(n + k)) time, where d is the number of digits and k is the digit range (base). For fixed-size integers, d and k are bounded constants, giving linear time complexity in n. Radix sort is effective when keys have fixed maximum length and the base is chosen appropriately.",
+      "chapter": "7.2 Sorting and Searching",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 17,
+      "question": "Which of the following best describes the binary search algorithm on a sorted array?",
+      "options": [
+        "It scans the array from left to right until the element is found",
+        "It repeatedly divides the search interval in half by comparing the target to the middle element",
+        "It builds a search tree and then performs in-order traversal",
+        "It hashes all elements and checks the hash table"
+      ],
+      "correct_answer": "It repeatedly divides the search interval in half by comparing the target to the middle element",
+      "hint": "Each comparison discards half of the remaining search space.",
+      "explanation": "Binary search maintains a search interval [low, high] on a sorted array. At each step, it computes mid = (low + high)/2, compares the target value to arr[mid], and discards half the interval: if target < arr[mid], it continues searching in [low, mid − 1]; if target > arr[mid], it continues in [mid + 1, high]. This halving continues until the element is found or the interval becomes empty. Because the search space size halves at each step, the worst-case running time is O(log n). Binary search is one of the classic divide-and-conquer algorithms and relies critically on the array being sorted and random access being O(1).",
+      "chapter": "7.2 Sorting and Searching",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 18,
+      "question": "What is the main purpose of a hash function in a hash table?",
+      "options": [
+        "To sort all keys before insertion",
+        "To map keys to array indices in a way that spreads them out uniformly",
+        "To ensure cryptographic security of stored data",
+        "To compress large files"
+      ],
+      "correct_answer": "To map keys to array indices in a way that spreads them out uniformly",
+      "hint": "It converts a key into an index into the bucket array.",
+      "explanation": "A hash function h(key) takes a key (for example, a string, integer, or other object) and computes an integer index within the bounds of the hash table array. A good hash function distributes keys approximately uniformly across the table to minimize the number and length of collisions (when different keys map to the same index). Ideal hashing would give O(1) expected time for lookup, insertion, and deletion, but in practice some collisions are unavoidable. Collision resolution strategies (like chaining or open addressing) are used in combination with the hash function. While cryptographic hash functions also map arbitrary data to fixed-size outputs, hash tables typically use faster non-cryptographic hash functions designed for uniform distribution rather than security.",
+      "chapter": "7.2 Hashing",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 19,
+      "question": "Which collision resolution technique in hashing uses a linked list at each table slot?",
+      "options": [
+        "Linear probing",
+        "Quadratic probing",
+        "Separate chaining",
+        "Double hashing"
+      ],
+      "correct_answer": "Separate chaining",
+      "hint": "Colliding keys are stored in a secondary structure attached to each bucket.",
+      "explanation": "In separate chaining, each index (bucket) of the hash table stores a pointer to a linked list (or another structure like a balanced tree). All keys that hash to the same index are inserted into that list. Lookup and deletion involve traversing only the list for that bucket. If the load factor (n / table_size) remains bounded (by resizing when too large), the expected length of each chain remains constant, keeping average operation times near O(1). This method is simple to implement and works well when the underlying memory allocator handles small allocations efficiently. Open addressing schemes like linear probing, quadratic probing, and double hashing instead store all keys directly in the array and resolve collisions by probing alternative indices.",
+      "chapter": "7.2 Hashing",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 20,
+      "question": "In an undirected graph with n vertices and no self-loops, what is the maximum possible number of edges?",
+      "options": [
+        "n^2",
+        "n(n − 1)",
+        "n(n − 1)/2",
+        "2n"
+      ],
+      "correct_answer": "n(n − 1)/2",
+      "hint": "Think of choosing any unordered pair of distinct vertices.",
+      "explanation": "In an undirected simple graph (no parallel edges, no self-loops), each edge connects a distinct unordered pair of vertices. The number of such pairs is the binomial coefficient C(n, 2) = n(n − 1)/2. This is the maximum number of edges because any additional edge would either duplicate an existing edge between the same two vertices or create a self-loop, both of which are disallowed in a simple graph. Graph density, adjacency matrix vs adjacency list storage, and complexity of algorithms like DFS and BFS all depend strongly on the number of edges relative to n.",
+      "chapter": "7.2 Graphs",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 21,
+      "question": "Which traversal algorithm always uses a queue data structure to explore a graph level by level?",
+      "options": [
+        "Depth First Search (DFS)",
+        "Breadth First Search (BFS)",
+        "Dijkstra's algorithm",
+        "Prim's algorithm"
+      ],
+      "correct_answer": "Breadth First Search (BFS)",
+      "hint": "It visits all neighbors of a vertex before going deeper.",
+      "explanation": "Breadth First Search explores a graph in layers starting from a source vertex. It uses a FIFO queue: initially, the source vertex is enqueued, then BFS repeatedly dequeues a vertex, visits it, and enqueues all its unvisited neighbors. This leads to a level-order traversal where all vertices at distance 1 from the source are visited before those at distance 2, and so on. BFS is used to compute shortest paths in unweighted graphs, to test connectivity, and as a building block in algorithms like bipartite graph checking. DFS, in contrast, uses a stack (explicit or via recursion) and explores as deep as possible along each path before backtracking.",
+      "chapter": "7.2 Graphs",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 22,
+      "question": "Which of the following algorithms is specifically designed to compute a minimum spanning tree (MST) of a connected weighted undirected graph?",
+      "options": [
+        "Dijkstra's algorithm",
+        "Kruskal's algorithm",
+        "Bellman–Ford algorithm",
+        "Warshall's algorithm"
+      ],
+      "correct_answer": "Kruskal's algorithm",
+      "hint": "It repeatedly picks the lightest edge that does not create a cycle.",
+      "explanation": "Kruskal's algorithm is a greedy algorithm for finding a minimum spanning tree in a connected weighted undirected graph. It sorts all edges in non-decreasing order of weight and then, starting from an empty forest, repeatedly adds the lightest edge that does not form a cycle until all vertices are connected. Cycle detection is typically implemented with a disjoint-set (union–find) data structure. Prim's algorithm is another MST algorithm that grows a tree from an arbitrary root by repeatedly selecting the minimum-weight edge that connects a visited vertex to an unvisited vertex. Dijkstra's and Bellman–Ford are shortest-path algorithms, and Warshall's algorithm computes transitive closure/all-pairs reachability.",
+      "chapter": "7.2 Graphs and MST",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 23,
+      "question": "What problem does Dijkstra's algorithm solve on a weighted graph?",
+      "options": [
+        "Finding a minimum spanning tree",
+        "Finding a topological ordering",
+        "Finding single-source shortest paths in a graph with non-negative edge weights",
+        "Computing the transitive closure"
+      ],
+      "correct_answer": "Finding single-source shortest paths in a graph with non-negative edge weights",
+      "hint": "It uses a greedy strategy with a priority queue to relax edges.",
+      "explanation": "Dijkstra's algorithm finds the shortest path from a single source vertex to all other vertices in a weighted graph, assuming all edge weights are non-negative. It maintains a set of vertices whose shortest distance from the source is known, and in each step, selects the vertex with the minimum tentative distance (often using a min-priority queue) and relaxes its outgoing edges. Repeating this process n times in a graph with adjacency list representation and a binary heap yields time complexity O((V + E) log V). If negative edge weights are present, Dijkstra's algorithm can give incorrect results and algorithms like Bellman–Ford or Johnson's algorithm are used instead.",
+      "chapter": "7.2 Shortest Paths",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 24,
+      "question": "In a relational database, what does a functional dependency X → Y signify?",
+      "options": [
+        "Y uniquely determines X",
+        "Whenever two tuples agree on attributes X, they must also agree on attributes Y",
+        "X and Y are independent attributes",
+        "X and Y must both be primary keys"
+      ],
+      "correct_answer": "Whenever two tuples agree on attributes X, they must also agree on attributes Y",
+      "hint": "Think of X as determining Y in any valid relation instance.",
+      "explanation": "A functional dependency X → Y in a relation R means that for any two tuples t1 and t2 in any valid instance of R, if t1.X = t2.X then t1.Y must equal t2.Y. In other words, the attributes in X functionally determine the attributes in Y. This concept is central to normalization: higher normal forms restrict the presence of certain types of functional dependencies to reduce redundancy and anomalies. A key of a relation is a set of attributes K such that K → all attributes in R, and no proper subset of K has that property. Understanding functional dependencies is necessary to reason about schema design, normalization, and lossless-join and dependency-preserving decompositions.",
+      "chapter": "7.3 Data Models and Normalization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 25,
+      "question": "A relation schema R(A, B, C, D) has functional dependencies A → B and B → C. Which of the following is true?",
+      "options": [
+        "A functionally determines C via transitivity",
+        "C functionally determines A",
+        "A and C are independent",
+        "D is functionally determined by A"
+      ],
+      "correct_answer": "A functionally determines C via transitivity",
+      "hint": "Use Armstrong’s axiom of transitivity: if X → Y and Y → Z, then X → Z.",
+      "explanation": "Given A → B and B → C, Armstrong’s transitivity axiom implies A → C: since knowing A determines B and knowing B determines C, knowing A is sufficient to determine C. There is no given functional dependency involving D, so nothing can be concluded about D from these dependencies alone. Reasoning about closures of attribute sets under given FDs (using reflexivity, augmentation, transitivity, etc.) is a standard technique for testing keys, checking normal forms, and designing decompositions.",
+      "chapter": "7.3 Data Models and Normalization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 26,
+      "question": "Which normal form specifically eliminates transitive functional dependencies of non-key attributes on a candidate key?",
+      "options": [
+        "First Normal Form (1NF)",
+        "Second Normal Form (2NF)",
+        "Third Normal Form (3NF)",
+        "Boyce–Codd Normal Form (BCNF)"
+      ],
+      "correct_answer": "Third Normal Form (3NF)",
+      "hint": "It addresses dependencies like key → X → Y with Y non-key.",
+      "explanation": "Third Normal Form (3NF) requires that, for every non-trivial functional dependency X → A in a relation, either X is a superkey or A is a prime attribute (part of some candidate key). This condition eliminates transitive dependencies where a non-key attribute depends on a key via another non-key attribute. For example, if in a table we have key K, and K → X, X → Y, and Y is non-key, then K → Y is a transitive dependency that 3NF aims to remove by decomposition. 2NF only eliminates partial dependencies (where a non-key attribute depends on part of a composite key), while BCNF is stricter than 3NF and demands that for every non-trivial FD X → A, X be a superkey, with no exception for prime attributes.",
+      "chapter": "7.3 Data Models and Normalization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 27,
+      "question": "In the Entity–Relationship (E-R) model, what distinguishes a weak entity set from a strong entity set?",
+      "options": [
+        "A weak entity set can have attributes; a strong entity set cannot",
+        "A weak entity set does not have a primary key and is identified by being related to another entity set",
+        "A weak entity set cannot participate in relationships",
+        "There is no difference; the terms are synonyms"
+      ],
+      "correct_answer": "A weak entity set does not have a primary key and is identified by being related to another entity set",
+      "hint": "Think of entities that depend on another entity for identity, like 'Dependents' of an 'Employee'.",
+      "explanation": "A strong entity set has a primary key that uniquely identifies each of its entities independently. A weak entity set, however, does not have a sufficient primary key of its own. It is identified by a combination of its partial key (a discriminator) and the primary key of an owning or identifying strong entity set, through an identifying relationship. For example, in an HR database, an 'Employee' is a strong entity (identified by EmployeeID), while 'Dependent' (child or spouse of employee) may be modeled as a weak entity identified by (EmployeeID, DependentName). This modeling is reflected later in relational design by foreign keys and composite primary keys.",
+      "chapter": "7.3 Data Models and Normalization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 28,
+      "question": "Which SQL command category does the CREATE TABLE statement belong to?",
+      "options": [
+        "Data Definition Language (DDL)",
+        "Data Manipulation Language (DML)",
+        "Data Control Language (DCL)",
+        "Transaction Control Language (TCL)"
+      ],
+      "correct_answer": "Data Definition Language (DDL)",
+      "hint": "Think about commands that define schema objects.",
+      "explanation": "CREATE TABLE is a Data Definition Language (DDL) command that defines a new relation (table) in the database schema, specifying its attributes, data types, constraints, and keys. Other DDL commands include ALTER TABLE (to change an existing schema) and DROP TABLE (to remove a relation). Data Manipulation Language (DML) commands such as SELECT, INSERT, UPDATE, and DELETE operate on the data within existing schema objects. DCL (like GRANT, REVOKE) controls privileges, and TCL (like COMMIT, ROLLBACK) manages transaction boundaries.",
+      "chapter": "7.3 SQL and Relational Model",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 29,
+      "question": "Which of the following best describes ACID properties in transaction processing?",
+      "options": [
+        "Atomicity, Consistency, Isolation, Durability",
+        "Association, Concurrency, Integrity, Durability",
+        "Atomicity, Concurrency, Independence, Distribution",
+        "Accuracy, Consistency, Isolation, Distribution"
+      ],
+      "correct_answer": "Atomicity, Consistency, Isolation, Durability",
+      "hint": "Each letter corresponds to a fundamental guarantee of a transaction.",
+      "explanation": "ACID stands for Atomicity, Consistency, Isolation, and Durability. Atomicity means that a transaction's operations are all-or-nothing: either all are performed or none are. Consistency means that a transaction, when executed alone, takes the database from one valid state to another, preserving all defined integrity constraints. Isolation means that concurrent executions of transactions do not interfere in a way visible to each transaction; each transaction behaves as if it were executing alone. Durability means that once a transaction commits, its effects survive system crashes, typically ensured by writing to stable storage (logs, checkpoints). Together, these properties form the cornerstone of reliable transaction processing in database systems.",
+      "chapter": "7.4 Transactions and Concurrency",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0704"
+    },
+    {
+      "id": 30,
+      "question": "What is the main goal of a lock-based concurrency control protocol in a DBMS?",
+      "options": [
+        "To ensure that all transactions run as slowly as possible",
+        "To prevent any two transactions from ever running at the same time",
+        "To coordinate concurrent access to data items so that the resulting schedule is serializable",
+        "To avoid logging overhead by eliminating undo/redo operations"
+      ],
+      "correct_answer": "To coordinate concurrent access to data items so that the resulting schedule is serializable",
+      "hint": "Think of locks as a way to serialize conflicting operations while allowing non-conflicting ones to overlap.",
+      "explanation": "Lock-based protocols (such as two-phase locking) use locks (shared and exclusive) to regulate which transactions can access which data items at what times. The idea is that operations that could conflict (for example, two writes to the same item, or a read and a write) are prevented from executing simultaneously by requiring one transaction to wait until another releases its lock. A well-designed locking protocol, especially strict two-phase locking, guarantees conflict-serializable schedules, meaning the effect of interleaved execution is equivalent to some serial order of the transactions. This preserves the Isolation property of ACID without sacrificing all concurrency.",
+      "chapter": "7.4 Transactions and Concurrency",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0704"
+    },
+    {
+      "id": 31,
+      "question": "Which of the following is a typical cause of deadlock in a lock-based concurrency control system?",
+      "options": [
+        "A transaction releasing all locks before acquiring new ones",
+        "Two transactions each holding a lock on one item and waiting for a lock on the other's item",
+        "Using read-only transactions",
+        "Having only one transaction in the system"
+      ],
+      "correct_answer": "Two transactions each holding a lock on one item and waiting for a lock on the other's item",
+      "hint": "Think of a circular wait scenario where each waits for the other.",
+      "explanation": "Deadlock occurs when there is a circular wait among two or more transactions: each transaction holds a lock on some data item that the others need and simultaneously waits to acquire locks that will never be released because the waiting transactions cannot proceed. For example, T1 locks A and then requests B, while T2 locks B and then requests A. Neither can proceed, and both are blocked indefinitely. Deadlock handling strategies include prevention (ensuring one of the Coffman conditions never holds), avoidance (like wait-die and wound-wait schemes), detection (periodically building a wait-for graph and looking for cycles), and recovery (aborting one or more transactions to break the cycle).",
+      "chapter": "7.4 Transactions and Concurrency",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0704"
+    },
+    {
+      "id": 32,
+      "question": "What is the primary purpose of log-based recovery in a DBMS?",
+      "options": [
+        "To compress database files",
+        "To record changes so that the system can undo or redo them after a crash",
+        "To speed up query processing",
+        "To avoid the need for concurrency control"
+      ],
+      "correct_answer": "To record changes so that the system can undo or redo them after a crash",
+      "hint": "Think of the log as a chronological history of all updates.",
+      "explanation": "A write-ahead log (WAL) records all modifications to the database before they are applied to the data pages on disk. Each log record typically specifies the transaction ID, the affected data item, and the old and new values. In case of a crash, the DBMS recovers by reading the log: undo records for transactions that had not committed (to roll back their partial effects) and redo records for committed transactions whose changes might not have reached stable storage. This ensures Atomicity (incomplete transactions are undone) and Durability (completed transactions are redone if necessary) even in the presence of system failures. Logging is central to modern recovery algorithms such as ARIES.",
+      "chapter": "7.4 Transactions and Recovery",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0704"
+    },
+    {
+      "id": 33,
+      "question": "Which of the following best describes a process in an operating system?",
+      "options": [
+        "A program stored on disk",
+        "An instance of a program in execution, including its code, data, and execution context",
+        "A single CPU instruction",
+        "A function call within a program"
+      ],
+      "correct_answer": "An instance of a program in execution, including its code, data, and execution context",
+      "hint": "Think of dynamic execution plus its OS-managed state, not just the static code.",
+      "explanation": "A process is an active entity that represents a running program. It includes the program code (text segment), data segments (global, heap), stack, and the current execution context: register contents, program counter, and other OS-managed metadata such as open file descriptors and scheduling information. A program on disk is a passive entity (an executable file), while a process represents that program in motion. Multiple processes can be instances of the same program. The OS uses the Process Control Block (PCB) to store per-process state and to perform context switches among processes.",
+      "chapter": "7.5 Operating System and Process Management",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 34,
+      "question": "What is the main difference between a process and a thread within an operating system?",
+      "options": [
+        "A process has no address space; a thread does",
+        "Threads within the same process share the same address space, while processes have separate address spaces",
+        "A thread cannot be scheduled independently",
+        "Only processes can perform I/O operations"
+      ],
+      "correct_answer": "Threads within the same process share the same address space, while processes have separate address spaces",
+      "hint": "Focus on memory protection and sharing.",
+      "explanation": "A process has its own virtual address space, including code, data, heap, and stack segments, and is isolated from other processes at the memory level. Threads are lighter-weight execution units that run within a process. All threads of a process share the same address space and many OS resources (such as open files), but each thread has its own stack and registers (i.e., its own execution context). This sharing makes context switches between threads cheaper than between processes and allows efficient inter-thread communication via shared variables, at the cost of requiring explicit synchronization (locks, semaphores, etc.) to avoid race conditions.",
+      "chapter": "7.5 Operating System and Process Management",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 35,
+      "question": "In CPU scheduling, which algorithm may cause starvation of long-running processes if small time quanta are used?",
+      "options": [
+        "First-Come, First-Served (FCFS)",
+        "Shortest Job Next (SJN) without preemption",
+        "Round Robin (RR)",
+        "Preemptive priority scheduling without aging"
+      ],
+      "correct_answer": "Preemptive priority scheduling without aging",
+      "hint": "Consider a low-priority process that is always preempted by higher-priority arrivals.",
+      "explanation": "In preemptive priority scheduling, the CPU is always assigned to the ready process with the highest priority. If new high-priority processes arrive frequently, low-priority processes may never get CPU time, a situation called starvation. Without aging (a technique that gradually increases the priority of waiting processes), these low-priority processes might be postponed indefinitely. FCFS and non-preemptive SJN do not cause starvation by design (though SJN can be unfair in other ways), while Round Robin ensures all ready processes eventually get time slices, preventing starvation at the expense of potential overhead due to frequent context switching.",
+      "chapter": "7.5 Operating System and Scheduling",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 36,
+      "question": "What is a race condition in the context of concurrent processes or threads?",
+      "options": [
+        "A situation where processes compete for CPU time but are scheduled fairly",
+        "A condition where the output depends on the relative timing of concurrent operations on shared data",
+        "A performance optimization technique for parallel programs",
+        "A method of allocating memory dynamically"
+      ],
+      "correct_answer": "A condition where the output depends on the relative timing of concurrent operations on shared data",
+      "hint": "If operations interleave differently, the final result can change unpredictably.",
+      "explanation": "A race condition occurs when two or more concurrent threads or processes access shared data, and at least one of them performs a write, without proper synchronization. The program's behavior then depends on the precise timing and interleaving of operations, which is usually unpredictable and non-deterministic. For example, if two threads increment a shared counter without atomic operations or locks, interleavings can cause increments to be lost. Proper synchronization mechanisms (critical sections, mutexes, semaphores, monitors) are needed to enforce mutual exclusion, ensuring that critical regions of code are not executed by more than one thread at the same time and thus avoiding race conditions.",
+      "chapter": "7.5 Concurrency and Synchronization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 37,
+      "question": "Which of the following synchronization primitives provides a mutual exclusion mechanism with only two operations, often called wait (P) and signal (V)?",
+      "options": [
+        "Monitor",
+        "Semaphore",
+        "Message queue",
+        "Condition variable"
+      ],
+      "correct_answer": "Semaphore",
+      "hint": "It can be binary or counting and was introduced by Dijkstra.",
+      "explanation": "A semaphore is an abstract data type that maintains a non-negative integer value and supports two atomic operations: wait (P) and signal (V). A wait operation decrements the semaphore if it is positive or blocks the calling process if it is zero; a signal operation increments the semaphore and may wake up a blocked process. A binary semaphore (value 0 or 1) can implement mutual exclusion by allowing only one process into a critical section at a time. Counting semaphores generalize this to allow up to N concurrent entries. Semaphores are powerful but can be error-prone if misused (for example, forgetting to signal), so higher-level constructs like monitors and mutex locks are often preferred in modern systems.",
+      "chapter": "7.5 Concurrency and Synchronization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 38,
+      "question": "In virtual memory systems, what is demand paging?",
+      "options": [
+        "Loading all pages of a process into memory before execution starts",
+        "Loading pages into memory only when they are actually referenced",
+        "Keeping all processes permanently in memory",
+        "Swapping out all pages whenever memory is full"
+      ],
+      "correct_answer": "Loading pages into memory only when they are actually referenced",
+      "hint": "It avoids bringing in unused pages at process start.",
+      "explanation": "Demand paging is a lazy loading strategy for virtual memory in which only those pages that a process actually accesses are brought into physical memory. Initially, many of a process's pages are marked as not present. When the CPU attempts to access such a page, a page fault occurs. The operating system then locates the page on disk (in the swap area or program file), brings it into a free frame, updates the page table, and resumes execution. This strategy can significantly reduce memory usage and startup time, especially for large programs that do not use all their pages. However, if the working set of pages does not fit in memory or if the replacement algorithm is poor, the system can thrash, spending most of its time handling page faults.",
+      "chapter": "7.6 Memory Management and Virtual Memory",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 39,
+      "question": "Which page replacement algorithm replaces the page that has not been used for the longest period of time?",
+      "options": [
+        "First-In, First-Out (FIFO)",
+        "Least Recently Used (LRU)",
+        "Optimal (Belady's)",
+        "Clock (Second Chance)"
+      ],
+      "correct_answer": "Least Recently Used (LRU)",
+      "hint": "It approximates the optimal algorithm based on recency of use.",
+      "explanation": "The Least Recently Used (LRU) page replacement algorithm selects for eviction the page that has not been referenced for the longest time in the past, based on the heuristic that pages used recently are likely to be used again soon (temporal locality). LRU is not the optimal algorithm (which would require knowledge of the future), but it is a good practical approximation. Implementing exact LRU can be expensive, requiring tracking usage order precisely, so real systems often use approximations such as the Clock algorithm or NFU (Not Frequently Used). FIFO replaces the oldest loaded page, which can perform poorly (Belady's anomaly). Optimal (Belady's algorithm) is theoretical, replacing the page that will not be used for the longest time in the future.",
+      "chapter": "7.6 Memory Management and Virtual Memory",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 40,
+      "question": "What is internal fragmentation in the context of memory allocation?",
+      "options": [
+        "Unallocated memory between allocated blocks",
+        "Wasted space inside an allocated block due to fixed-size allocation units",
+        "Memory left unused at the end of physical memory",
+        "Loss of memory due to page replacement"
+      ],
+      "correct_answer": "Wasted space inside an allocated block due to fixed-size allocation units",
+      "hint": "The process receives more memory than it requested, and the remainder cannot be used by others.",
+      "explanation": "Internal fragmentation occurs when memory is allocated in fixed-size units (such as fixed-size partitions or pages), and a process does not use the entire allocated unit. For example, if the system allocates memory in 4 KB pages and a process segment needs 6 KB, it will use two pages (8 KB), leaving 2 KB unused but reserved within the second page. This unused space cannot be allocated to other processes and is thus wasted internally. External fragmentation, by contrast, refers to small free holes scattered between allocated blocks that are collectively large enough to satisfy a request but not contiguous. Paging eliminates external fragmentation but not internal fragmentation; segmentation has the opposite trade-offs.",
+      "chapter": "7.6 Memory Management and Fragmentation",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 41,
+      "question": "In a typical file system, what is the role of a directory?",
+      "options": [
+        "To store the actual file contents",
+        "To map file names to file metadata (such as inode or file control block) and sometimes to their locations",
+        "To manage disk scheduling",
+        "To perform data compression"
+      ],
+      "correct_answer": "To map file names to file metadata (such as inode or file control block) and sometimes to their locations",
+      "hint": "Think of it as a table of contents mapping names to file descriptors.",
+      "explanation": "A directory is a special type of file that stores entries associating file names with their metadata and sometimes disk location information. In Unix-like file systems, a directory maps file names to inode numbers, and the inode then contains information about file type, permissions, owner, size, timestamps, and disk block addresses. This separation allows multiple directory entries (hard links) to reference the same inode. In other systems, the directory may store a full file control block (FCB) with all metadata and pointers. Directories allow hierarchical naming: users perceive a tree of directories and files, while the file system translates these paths into specific metadata structures and disk blocks.",
+      "chapter": "7.6 File Systems",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 42,
+      "question": "Which file allocation strategy stores each file as a linked list of disk blocks, with each block containing a pointer to the next block?",
+      "options": [
+        "Contiguous allocation",
+        "Linked allocation",
+        "Indexed allocation",
+        "Hashed allocation"
+      ],
+      "correct_answer": "Linked allocation",
+      "hint": "Think of following pointers from block to block.",
+      "explanation": "In linked allocation, each file is a linked list of disk blocks. Each block contains a pointer to the next block in the file. The directory entry stores the starting block (and sometimes the last block) for each file. This scheme eliminates external fragmentation, since any free block can be used, and file size can grow dynamically. However, random access is inefficient because to reach the k-th block of a file, the system must follow k − 1 pointers from the start, leading to O(k) access. To improve this, some systems maintain a File Allocation Table (FAT) in memory that stores these links centrally, allowing faster traversal and partial indexing.",
+      "chapter": "7.6 File Systems",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 43,
+      "question": "During system startup (boot), which of the following tasks is typically performed by the operating system?",
+      "options": [
+        "Executing user login scripts only",
+        "Loading the kernel into memory, initializing device drivers, mounting file systems, and starting system services",
+        "Formatting all disks",
+        "Deleting temporary files from user directories"
+      ],
+      "correct_answer": "Loading the kernel into memory, initializing device drivers, mounting file systems, and starting system services",
+      "hint": "Think about the core steps that transition from firmware to a running OS environment.",
+      "explanation": "During boot, the firmware (BIOS or UEFI) initializes basic hardware and locates a bootloader. The bootloader then loads the operating system kernel into memory, transfers control to it, and the kernel proceeds to initialize core subsystems (memory management, process scheduler), load and initialize device drivers, mount root and other essential file systems, and start system services or daemons (such as logging, networking, and display managers). Only after these steps does the system present a login prompt or graphical login to the user. Shutdown performs the reverse: stopping services, syncing and unmounting file systems, and powering off safely to avoid data loss.",
+      "chapter": "7.6 System Administration",
+      "difficulty": "easy",
+      "marks": 1,
+      "source": "ACtE0706"
+    },
+    {
+      "id": 44,
+      "question": "Which graph algorithm is commonly used to compute the transitive closure of a directed graph represented as an adjacency matrix?",
+      "options": [
+        "Warshall's algorithm",
+        "Prim's algorithm",
+        "Kruskal's algorithm",
+        "DFS tree construction"
+      ],
+      "correct_answer": "Warshall's algorithm",
+      "hint": "It is an all-pairs reachability algorithm based on dynamic programming.",
+      "explanation": "Warshall's algorithm (often called Floyd–Warshall when extended to weighted graphs) computes the transitive closure of a directed graph, meaning it determines for every pair of vertices (i, j) whether there exists a path from i to j. Using an adjacency matrix representation, it iteratively updates reachability information by allowing intermediate vertices in paths. At each step k, it checks whether going from i to j via k gives a new reachable path. The algorithm runs in O(V^3) time for a graph with V vertices and is especially suitable when V is relatively small and the graph is dense. For sparse graphs, repeated DFS or BFS from each vertex may be more efficient.",
+      "chapter": "7.2 Graphs",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 45,
+      "question": "Which of the following describes a topological ordering of a directed acyclic graph (DAG)?",
+      "options": [
+        "An ordering of vertices where every edge goes from a vertex later in the order to one earlier",
+        "An ordering of vertices such that for every directed edge u → v, u appears before v in the ordering",
+        "An ordering that minimizes the number of edges",
+        "An ordering produced only by breadth-first search"
+      ],
+      "correct_answer": "An ordering of vertices such that for every directed edge u → v, u appears before v in the ordering",
+      "hint": "It respects all precedence constraints encoded by edges.",
+      "explanation": "A topological sort of a DAG is a linear ordering of its vertices such that if there is a directed edge u → v, then u precedes v in the order. This is possible only if the graph has no cycles. Topological ordering is fundamental in scheduling tasks with dependencies, resolving symbol dependencies in compilers, and evaluating circuits. Standard algorithms to compute such an order use DFS (recording vertices in reverse post-order) or Kahn’s algorithm (repeatedly removing nodes with zero in-degree). Both rely on the acyclic nature of the graph.",
+      "chapter": "7.2 Graphs and Topological Sorting",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0702"
+    },
+    {
+      "id": 46,
+      "question": "In relational algebra, which operation corresponds most closely to the SQL SELECT-FROM-WHERE combination (ignoring projection of specific columns)?",
+      "options": [
+        "Selection followed by Cartesian product",
+        "Join followed by union",
+        "Selection (σ) over a Cartesian product (×) of relations",
+        "Projection (π) only"
+      ],
+      "correct_answer": "Selection (σ) over a Cartesian product (×) of relations",
+      "hint": "Conceptually, SQL joins are selection over product, plus projection.",
+      "explanation": "In basic relational algebra, the FROM clause that lists multiple tables corresponds to the Cartesian product of those relations. The WHERE clause then restricts the rows via selection (σ) with a predicate. Finally, the SELECT clause projects specific attributes (π). Thus, a simple SQL query like SELECT A.x, B.y FROM A, B WHERE A.id = B.id AND A.z > 10 is represented as π_{x,y}(σ_{A.id = B.id ∧ A.z > 10}(A × B)). Modern relational algebra adds explicit join operators, but joins are logically definable as selection over Cartesian product. Understanding this mapping is crucial for reasoning about query optimization and expressing queries formally.",
+      "chapter": "7.3 Relational Algebra and SQL",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 47,
+      "question": "Which DBMS concept ensures that a transaction's intermediate results are not visible to other concurrent transactions, thereby preventing phenomena like dirty reads?",
+      "options": [
+        "Atomicity",
+        "Consistency",
+        "Isolation",
+        "Durability"
+      ],
+      "correct_answer": "Isolation",
+      "hint": "It controls the visibility of partial updates among concurrent transactions.",
+      "explanation": "Isolation is the ACID property dealing with concurrency anomalies. It ensures that concurrently executing transactions do not interfere with each other in a way that would reveal partial or intermediate states. Ideally, each transaction behaves as if it were executing alone on the system, yielding a schedule that is equivalent to some serial ordering of transactions (serializability). In practice, different isolation levels (such as Read Uncommitted, Read Committed, Repeatable Read, Serializable) provide different trade-offs between strict isolation and performance. Dirty reads, non-repeatable reads, and phantom reads are examples of phenomena controlled by appropriate isolation levels and concurrency control mechanisms like locking and timestamp ordering.",
+      "chapter": "7.4 Transactions and Isolation",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0704"
+    },
+    {
+      "id": 48,
+      "question": "Which of the following best describes the purpose of query optimization in a relational DBMS?",
+      "options": [
+        "To change the meaning of the query",
+        "To find an equivalent logical formulation that uses fewer relations",
+        "To choose an efficient physical execution plan for a given logical query expression",
+        "To automatically normalize the schema"
+      ],
+      "correct_answer": "To choose an efficient physical execution plan for a given logical query expression",
+      "hint": "The logical query is fixed; we are selecting the best way to execute it.",
+      "explanation": "Query optimization takes a logical query (usually an algebraic expression derived from SQL) and explores alternative physical execution plans (different join orders, join algorithms, index usage, and access paths) to minimize estimated cost (I/O, CPU, memory). The optimizer uses statistics about table sizes, value distributions, and index selectivity to estimate costs of various plans. It then picks a near-optimal plan. The logical meaning of the query does not change; only the method of evaluation does. Effective query optimization is crucial to performance in large-scale database systems where naive plans could be orders of magnitude slower.",
+      "chapter": "7.3 Query Optimization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0703"
+    },
+    {
+      "id": 49,
+      "question": "Which classic synchronization problem illustrates the need for careful use of semaphores or monitors to avoid both deadlock and starvation among competing processes?",
+      "options": [
+        "Producer–Consumer problem",
+        "Readers–Writers problem",
+        "Dining Philosophers problem",
+        "Bounded Buffer problem"
+      ],
+      "correct_answer": "Dining Philosophers problem",
+      "hint": "Think about philosophers needing two shared resources (forks) to eat.",
+      "explanation": "The Dining Philosophers problem, introduced by Dijkstra, involves a number of philosophers sitting around a table with one fork between each pair. To eat, a philosopher needs to hold both forks adjacent to them. If each philosopher picks up one fork and waits for the other, a deadlock can occur. Solutions must balance mutual exclusion (only one philosopher may use a fork at a time) with avoidance of deadlock and starvation (some philosophers never getting to eat). The problem is often used to illustrate subtleties in lock acquisition ordering, resource hierarchy, and fairness in scheduling. Producer–Consumer and Readers–Writers are also classical problems but with different characteristics and solutions.",
+      "chapter": "7.5 Concurrency and Synchronization",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0705"
+    },
+    {
+      "id": 50,
+      "question": "Which search structure can guarantee O(log n) time for search, insertion, and deletion by maintaining a height-balanced binary search tree?",
+      "options": [
+        "Unbalanced binary search tree",
+        "AVL tree",
+        "Singly linked list",
+        "Hash table with chaining"
+      ],
+      "correct_answer": "AVL tree",
+      "hint": "It uses rotations after insert/delete to keep the tree balanced.",
+      "explanation": "An AVL tree is a self-balancing binary search tree in which the height difference (balance factor) between the left and right subtrees of any node is at most 1. After every insertion or deletion, the tree is checked for balance factor violations; if found, local tree rotations (single or double) are performed to restore the AVL property. Because the height of an AVL tree with n nodes remains O(log n), searching, inserting, and deleting all take O(log n) in the worst case. In contrast, an unbalanced BST can degenerate into a chain with O(n) height. Hash tables typically have O(1) expected-time operations but not the strict worst-case logarithmic bound, and they do not maintain a sorted key order.",
+      "chapter": "7.1 Trees and AVL Trees",
+      "difficulty": "medium",
+      "marks": 1,
+      "source": "ACtE0701"
+    }
+  ]
+  

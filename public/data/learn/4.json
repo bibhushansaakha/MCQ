@@ -1,0 +1,351 @@
+[
+  {
+    "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+    "chapter_code": "ACtE04",
+    "total_questions": 75,
+    "set": "Complete MCQ Set - Control & CPU Architecture",
+    "question_type": "Comprehensive MCQs with Detailed Explanations",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the primary function of the Control Unit in CPU architecture?",
+        "options": [
+          "Perform arithmetic and logical operations on data",
+          "Fetch, decode, and execute instructions from memory",
+          "Store temporary data during computation",
+          "Manage input/output operations with peripheral devices"
+        ],
+        "correct_answer": "Fetch, decode, and execute instructions from memory",
+        "hint": "Think about the orchestration of instruction processing in the fetch-decode-execute cycle.",
+        "explanation": "The Control Unit is the central orchestrator of the CPU that manages the entire instruction execution process. It fetches instructions from the main memory using the Program Counter, decodes the instruction to understand what operation must be performed, and then executes the instruction by coordinating with the ALU and other components. The Control Unit generates appropriate control signals and timing pulses that direct every operation in the CPU. Without the Control Unit, the CPU would be unable to coordinate its various components or process instructions in the correct sequence. The Control Unit essentially acts as the 'traffic director' of the processor, ensuring that each instruction flows through the processor in an orderly fashion and that all necessary operations occur at the right time.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 2,
+        "question": "Explain the concept of Control Memory and its role in microinstruction execution.",
+        "options": [
+          "RAM used for storing temporary data during program execution",
+          "A special memory that stores microinstructions and microprogram control sequences",
+          "Cache memory that speeds up instruction fetching",
+          "Virtual memory used by the operating system"
+        ],
+        "correct_answer": "A special memory that stores microinstructions and microprogram control sequences",
+        "hint": "Consider the relationship between microinstructions and the basic control operations in the CPU.",
+        "explanation": "Control Memory (also called Microprogram Memory or ROM) is a specialized storage within the Control Unit that contains the microinstructions and microprograms that define how the CPU executes each machine instruction. Each machine-level instruction (like ADD, MOV, etc.) is broken down into a sequence of microinstructions - smaller, more primitive operations that the hardware can directly execute. These microinstructions include signals for reading from registers, performing ALU operations, writing results, and managing data paths. The Control Memory typically uses ROM (Read-Only Memory) because these microprograms are fixed and don't change during program execution. When the Control Unit needs to execute a machine instruction, it looks up the corresponding microprogram in Control Memory and executes the sequence of microinstructions. This design allows for the implementation of complex instruction sets without making the hardware overly complicated. The size and organization of Control Memory directly impact the complexity of the machine instruction set that can be supported.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 3,
+        "question": "What is the purpose of microinstruction addressing and sequencing?",
+        "options": [
+          "To determine the order in which microinstructions are executed from Control Memory",
+          "To allocate memory addresses for user programs",
+          "To manage virtual memory page tables",
+          "To handle interrupt requests from peripheral devices"
+        ],
+        "correct_answer": "To determine the order in which microinstructions are executed from Control Memory",
+        "hint": "How does the Control Unit know which microinstruction to fetch next from Control Memory?",
+        "explanation": "Microinstruction addressing and sequencing is the mechanism that determines which microinstruction should be executed next in the microprogram. When a machine instruction is decoded, the Control Unit must fetch a sequence of microinstructions from Control Memory to execute that instruction. The microinstruction address sequencing can be implemented in several ways: (1) Sequential - simply incrementing the microprogram counter to fetch the next microinstruction in sequence; (2) Branching - jumping to a different address in Control Memory based on specific conditions; (3) Direct addressing - using bits within the microinstruction itself to specify the address of the next microinstruction; (4) Conditional branching - selecting between different microinstruction sequences based on condition codes. The design of the microinstruction sequencing logic affects both the speed of instruction execution and the complexity of the Control Unit. Efficient sequencing requires careful consideration of data dependencies, pipelining opportunities, and the conditional branching requirements of different machine instructions.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 4,
+        "question": "Which format is used for microinstruction design in hardwired control units?",
+        "options": [
+          "Vertical microinstruction format with many control bits",
+          "Horizontal microinstruction format with individual control signals",
+          "Compressed microinstruction format for reduced Control Memory size",
+          "Both horizontal and vertical formats depending on the specific instruction"
+        ],
+        "correct_answer": "Horizontal microinstruction format with individual control signals",
+        "hint": "Think about the trade-off between Control Memory size and execution speed.",
+        "explanation": "Microinstruction formats in hardwired and microprogrammed control units are typically designed using horizontal or vertical approaches. Horizontal microinstruction format directly encodes individual control signals as separate bits in the microinstruction word. Each bit or group of bits represents a specific control action (e.g., read from register, write to ALU, assert a particular control line). This format has a very wide microinstruction word but offers maximum parallelism - multiple control operations can occur simultaneously in a single microinstruction cycle. Although horizontal format requires more Control Memory (due to the large word width), it enables faster instruction execution because fewer microinstruction cycles are needed. In contrast, vertical microinstruction format is more compact but requires more microinstruction cycles to achieve the same operations, as control actions must be encoded and partially decoded. For high-performance processors, horizontal format is preferred despite the larger memory footprint. Many modern designs use a hybrid approach, combining some aspects of both formats to balance memory efficiency with execution speed.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 5,
+        "question": "What is Computer Configuration in the context of CPU design?",
+        "options": [
+          "The selection of peripheral devices connected to a computer",
+          "The organization and interconnection of CPU components (ALU, registers, buses, memory)",
+          "The BIOS settings for processor performance",
+          "The arrangement of cache memory levels"
+        ],
+        "correct_answer": "The organization and interconnection of CPU components (ALU, registers, buses, memory)",
+        "hint": "Consider how different components of a processor are arranged and connected to form a functional unit.",
+        "explanation": "Computer Configuration refers to the architectural design and physical organization of how CPU components are interconnected to form a cohesive processing system. This includes decisions about: (1) Number and types of registers available; (2) The width and organization of the data, address, and control buses; (3) The connection between the ALU and registers; (4) The placement and role of the Control Unit; (5) The integration of cache memory within the CPU; (6) The address decoding and memory access pathways. Different configurations lead to different processor characteristics - a simple configuration might have a single 32-bit bus and basic registers, while a modern configuration might have multiple buses, extensive register sets, and multi-level cache hierarchies. The configuration also determines the instruction set architecture (ISA) and how instructions interact with hardware resources. Von Neumann architecture with separate control and data paths differs significantly from modified Harvard architectures used in embedded systems. Configuration decisions directly impact processor performance, cost, power consumption, and complexity. These decisions must balance practical constraints (chip size, manufacturing capability, power dissipation) with performance objectives.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 6,
+        "question": "Describe the structure and organization of a typical Arithmetic and Logic Unit (ALU).",
+        "options": [
+          "A collection of registers for temporary data storage during computation",
+          "A functional unit that performs arithmetic and logic operations on operands from registers",
+          "A memory interface controller for accessing main memory",
+          "A peripheral device controller for managing I/O operations"
+        ],
+        "correct_answer": "A functional unit that performs arithmetic and logic operations on operands from registers",
+        "hint": "What core operations does the ALU need to support for program execution?",
+        "explanation": "The Arithmetic and Logic Unit (ALU) is a fundamental functional unit within the CPU responsible for performing all arithmetic and logical operations required by the instruction set. The ALU typically contains: (1) Arithmetic circuits for addition, subtraction, multiplication, and division using binary arithmetic; (2) Logic circuits for AND, OR, XOR, NOT operations; (3) Shift and rotate circuits for bit manipulation; (4) Comparison circuits for detecting condition flags (zero, overflow, carry, sign). The ALU receives two operands (usually from registers) on its input lines, performs the specified operation based on control signals from the Control Unit, and produces a result that is typically stored back in a register or used for conditional branching. Modern ALUs incorporate multiple functional units that can operate in parallel - for example, having a separate adder/subtractor unit, multiplier unit, and logic unit working simultaneously. The width of the ALU (8-bit, 16-bit, 32-bit, 64-bit) determines the size of operands it can handle and significantly impacts processor performance. Advanced ALU designs include support for floating-point operations, SIMD (Single Instruction Multiple Data) operations, and specialized functions. The ALU also generates status/condition flags (stored in the flag register) that indicate properties of the result - these flags are crucial for conditional instructions and program flow control.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 7,
+        "question": "What are the different instruction formats and how do they affect CPU design?",
+        "options": [
+          "All instructions must be fixed-length to simplify the Control Unit",
+          "Fixed-length and variable-length formats, each with trade-offs in decoding complexity and instruction density",
+          "Instruction format is irrelevant to CPU performance",
+          "Only variable-length formats can support complex instruction sets"
+        ],
+        "correct_answer": "Fixed-length and variable-length formats, each with trade-offs in decoding complexity and instruction density",
+        "hint": "Think about RISC processors with fixed-length instructions versus CISC processors with variable-length instructions.",
+        "explanation": "Instruction format design significantly impacts CPU architecture and performance. Fixed-length instruction formats (like in RISC architectures) have constant word length (typically 32 or 64 bits), where each field has a fixed position. Advantages include: simplified instruction decoding hardware, efficient pipeline operation, consistent fetch times, and easier parallel instruction processing. However, fixed-length instructions may waste bits and require more instructions to achieve complex operations. Variable-length instruction formats (like in x86 and other CISC architectures) allow instructions of different lengths (1-15 bytes in x86), optimizing code density and reducing memory/cache requirements. However, variable-length formats complicate decoding logic, require more complex sequencing, and can create pipeline hazards due to unpredictable instruction boundaries. Modern hybrid approaches include: (1) Primarily fixed-length with some variable-length extensions (ARM Thumb mode); (2) Multiple fixed lengths (MIPS has some 16-bit instructions); (3) Pre-decoding to identify instruction boundaries before main decoding stage. The choice of instruction format affects not only hardware complexity but also code size, memory bandwidth requirements, cache efficiency, and instruction-level parallelism achievable through pipelining. Designers must balance instruction density (code size) against decoding simplicity and pipeline efficiency.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 8,
+        "question": "Explain the concept of addressing modes and their role in instruction execution.",
+        "options": [
+          "Methods for calculating the effective address of operands in memory",
+          "Techniques for managing virtual memory translation",
+          "Strategies for cache replacement in multi-level caches",
+          "Mechanisms for handling interrupt prioritization"
+        ],
+        "correct_answer": "Methods for calculating the effective address of operands in memory",
+        "hint": "Consider how an instruction specifies where its operands are located.",
+        "explanation": "Addressing modes are the various methods by which instructions specify the location (effective address) of their operands. Different addressing modes provide flexibility in accessing data and enable different programming techniques: (1) Immediate addressing - operand value is directly embedded in the instruction; (2) Direct/Absolute addressing - instruction contains the absolute memory address of operand; (3) Register addressing - operand is located in a register; (4) Indirect addressing - instruction contains an address of a register that holds the operand's address; (5) Indexed addressing - effective address = base address + index register value; (6) Relative addressing - effective address calculated relative to current instruction (used for jumps); (7) Implied addressing - operand location is implicitly determined by the instruction type. Each addressing mode has specific applications: immediate for constants, direct for global variables, indexed for array access, indirect for dynamic data structures, relative for position-independent code. The number and types of addressing modes supported by a processor affect instruction set completeness, code size, and programming flexibility. RISC processors typically support fewer, simpler addressing modes to simplify hardware, while CISC processors support many complex addressing modes. The effective address calculation itself can require additional hardware (adders, shifters) and may introduce pipeline delays. Addressing mode selection during compilation significantly impacts program size and execution efficiency.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 9,
+        "question": "What is data transfer and manipulation in the context of CPU operations?",
+        "options": [
+          "Moving data between registers and memory, and performing operations like shift, rotate, and bit manipulation",
+          "The process of translating virtual addresses to physical addresses",
+          "Managing data consistency in multi-core processors",
+          "Compressing and decompressing data for storage"
+        ],
+        "correct_answer": "Moving data between registers and memory, and performing operations like shift, rotate, and bit manipulation",
+        "hint": "Think about instructions like MOV, LOAD, STORE, and bitwise operations.",
+        "explanation": "Data transfer and manipulation instructions form a fundamental category of CPU operations essential for program execution. Data transfer operations include: (1) Register-to-register moves; (2) Load operations - transferring data from memory to registers; (3) Store operations - transferring data from registers to memory; (4) I/O operations - data transfer with peripheral devices. Data manipulation operations include: (1) Shift operations - left/right shifting bits; (2) Rotate operations - circular bit rotations; (3) Bitwise logical operations - AND, OR, XOR, NOT for individual bit manipulation; (4) Bit extraction and insertion operations; (5) Byte/word swapping for endianness conversion. These operations are essential for: array and string processing, extracting fields from packed data, implementing algorithms that require bit-level operations, and data format conversions. The efficiency of these operations significantly impacts overall program performance, especially for data-intensive applications. Modern processors include specialized shift and rotate units within the ALU to execute these operations in single or few cycles. Load/store operations are particularly critical because they require memory access which is much slower than register operations. Cache hierarchies and load/store optimization techniques are essential for maintaining processor performance despite this bottleneck. Effective addressing mode support is crucial for making data transfer operations efficient.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 10,
+        "question": "Compare and contrast RISC and CISC processor design philosophies.",
+        "options": [
+          "RISC uses simple instructions and many registers; CISC uses complex instructions and fewer registers",
+          "RISC is only for embedded systems; CISC is for general-purpose computers",
+          "CISC is always faster than RISC",
+          "They have identical performance characteristics but different manufacturing costs"
+        ],
+        "correct_answer": "RISC uses simple instructions and many registers; CISC uses complex instructions and fewer registers",
+        "hint": "Consider the fundamental design tradeoffs between instruction complexity and execution speed.",
+        "explanation": "RISC (Reduced Instruction Set Computer) and CISC (Complex Instruction Set Computer) represent two major processor design philosophies with fundamental differences: RISC Design: (1) Simple, atomic instructions that execute in single cycle; (2) Large register file (32-128+ registers) for holding operands and intermediate results; (3) Only LOAD/STORE instructions access memory; (4) Uniform instruction format enabling efficient pipelining; (5) Simpler control logic and decoding; (6) Higher clock rates possible due to simpler operations; (7) Examples: MIPS, ARM, PowerPC. CISC Design: (1) Complex instructions that perform multiple operations (e.g., LOAD, operate, STORE in one instruction); (2) Smaller register file (8-16 registers) due to implicit operand locations; (3) Many addressing modes supporting complex memory access patterns; (4) Variable-length instruction format; (5) More complex control logic for decoding and execution; (6) Lower clock rates but fewer instructions needed per program; (7) Examples: x86, x86-64, m68k. Performance Implications: RISC achieves high performance through parallelism and pipelining, requiring more instructions but enabling faster cycles and simpler hardware. CISC achieves efficiency through instruction density, requiring fewer instructions but with more complex hardware. Modern processors increasingly adopt hybrid approaches: modern x86 processors internally decode CISC instructions into RISC-like micro-operations; ARM has added more complex instructions while maintaining RISC core; many RISC architectures added compression extensions for better code density. The RISC vs CISC debate is less about which is definitively better and more about different tradeoffs suitable for different applications.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 11,
+        "question": "Explain the concept of instruction pipelining and how it improves processor performance.",
+        "options": [
+          "A technique where multiple instructions are executed simultaneously by dividing execution into pipeline stages",
+          "A method for increasing memory bandwidth by buffering instructions",
+          "A compression technique for reducing instruction size",
+          "A scheduling algorithm for managing interrupt latency"
+        ],
+        "correct_answer": "A technique where multiple instructions are executed simultaneously by dividing execution into pipeline stages",
+        "hint": "Think of an assembly line where different stages process different instructions in parallel.",
+        "explanation": "Instruction pipelining is a critical performance enhancement technique where instruction execution is divided into multiple stages, and different instructions are processed in different stages simultaneously. In a classic 5-stage pipeline: (1) Fetch (IF) - retrieve instruction from memory; (2) Decode (ID) - decode instruction and read operands from registers; (3) Execute (EX) - perform ALU operation; (4) Memory (MEM) - access memory if needed; (5) Writeback (WB) - write results back to registers. With pipelining, while instruction N is in the execute stage, instruction N+1 is in decode, instruction N+2 is in fetch, etc. Ideally, the pipeline completes one instruction per cycle after filling, compared to 5 cycles per instruction without pipelining - a 5x speedup! However, pipelining introduces complications: (1) Pipeline hazards - dependencies between instructions; (2) Data hazards - when an instruction depends on results from previous instructions; (3) Control hazards - when branch instructions change the instruction flow; (4) Structural hazards - when multiple instructions need the same hardware resource. Modern processors use sophisticated techniques to handle hazards: (1) Forwarding/bypassing - directly routing results to dependent instructions without waiting for writeback; (2) Pipeline stalling - delaying instructions when hazards occur; (3) Branch prediction - speculating branch directions to avoid stalling on branches; (4) Out-of-order execution - executing independent instructions ahead of dependent ones. Deeper pipelines (10-20+ stages in modern processors) increase clock frequency but intensify hazard problems and penalty costs when hazards occur. Cache misses cause pipeline stalls lasting many cycles. The effectiveness of pipelining depends on code characteristics and hazard frequency.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 12,
+        "question": "What are pipeline hazards and how can they be mitigated?",
+        "options": [
+          "Situations where pipeline stalls occur due to instruction dependencies or resource conflicts",
+          "Errors that cause incorrect instruction execution",
+          "Memory access delays from slow caches",
+          "Thermal issues in high-performance processors"
+        ],
+        "correct_answer": "Situations where pipeline stalls occur due to instruction dependencies or resource conflicts",
+        "hint": "Consider what prevents a pipeline from sustaining one instruction per cycle throughput.",
+        "explanation": "Pipeline hazards are situations where the pipeline must stall (introduce delays) because the normal flow of instructions cannot proceed. Three main types: DATA HAZARDS occur when an instruction needs a value produced by a preceding instruction not yet available: (1) Read-After-Write (RAW) - most common, instruction needs result from previous instruction; (2) Write-After-Read (WAR) - write to a register needed by preceding instruction (rare in simple pipelines); (3) Write-After-Write (WAW) - multiple writes to same register. Example: ADD R1, R2, R3; ADD R4, R1, R5 - second instruction needs R1 from first. CONTROL HAZARDS occur when branch instructions change instruction flow unpredictably: When a branch instruction is decoded, the next instruction to fetch isn't known until the branch is resolved. The processor may have fetched and partially executed wrong instructions. Example: BEQ R1, L1; ADD R2, R3, R4 - which instruction comes after BEQ? STRUCTURAL HAZARDS occur when multiple instructions need the same hardware resource simultaneously: For example, both an instruction fetch and a load/store operation needing memory access, or multiple instructions needing the ALU. Mitigation techniques: (1) FORWARDING/BYPASSING - route results directly to dependent instructions bypassing writeback; (2) INSTRUCTION SCHEDULING - compiler reorders instructions to avoid hazards; (3) BRANCH PREDICTION - predict branch outcomes, speculatively execute instructions, and correct if prediction wrong; (4) SPECULATION WITH RECOVERY - speculate past uncertain instructions, recovering if speculation incorrect; (5) MULTIPLE PIPELINES - replicate hardware to avoid structural conflicts; (6) REGISTER RENAMING - eliminate WAW and WAR hazards by renaming registers; (7) OUT-OF-ORDER EXECUTION - execute independent instructions out of order to hide hazard latencies. The effectiveness of hazard mitigation significantly impacts pipelined processor performance.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 13,
+        "question": "Explain parallel processing and its relationship to multiprocessor systems.",
+        "options": [
+          "Using multiple processors or multiple cores to execute different programs or parts of programs simultaneously",
+          "Increasing clock frequency to speed up single processor execution",
+          "Caching frequently used data to reduce memory latency",
+          "Optimizing compilers to generate more efficient code"
+        ],
+        "correct_answer": "Using multiple processors or multiple cores to execute different programs or parts of programs simultaneously",
+        "hint": "Consider how multiple CPUs or cores on a single chip can work together.",
+        "explanation": "Parallel processing involves using multiple processing units working simultaneously to solve problems faster. This can be achieved through: (1) MULTIPROCESSOR SYSTEMS - multiple independent processors connected via shared memory and buses, each capable of independent computation; (2) MULTI-CORE PROCESSORS - multiple processor cores on a single chip, sharing some resources (cache levels, memory controller) but with independent execution resources; (3) GPU ACCELERATION - specialized graphics processors with massive parallelism for data-parallel tasks. Parallel processing is essential for modern computing because single-processor performance has reached physical limits (heat dissipation, power consumption). Forms of parallelism include: (1) TASK PARALLELISM - different processors execute different programs or different threads of same program; (2) DATA PARALLELISM - same operation applied to different data elements on different processors (SIMD, MIMD); (3) PIPELINE PARALLELISM - different stages of a computation on different processors. Challenges in parallel processing: (1) SYNCHRONIZATION - coordinating access to shared data to prevent race conditions; (2) LOAD BALANCING - distributing work evenly among processors; (3) COMMUNICATION OVERHEAD - time spent moving data between processors may exceed computation benefits; (4) MEMORY CONTENTION - multiple processors contending for memory access; (5) CACHE COHERENCE - ensuring all processors see consistent view of shared memory. Multiprocessor systems require sophisticated designs: (1) Cache coherence protocols (write-through, write-back, invalidation-based); (2) Interconnection networks optimized for low-latency, high-bandwidth communication; (3) Memory hierarchy designed for multiprocessor scenarios; (4) Synchronization primitives (locks, barriers, memory fences). Effective parallel programming requires careful design to minimize synchronization overhead and communication costs. The speedup achievable by parallel processing is limited by Amdahl's Law: speedup depends on the fraction of code that can be parallelized and the number of processors available.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 14,
+        "question": "What is arithmetic overflow and how is it detected in CPU operations?",
+        "options": [
+          "When the result of an arithmetic operation exceeds the range that can be represented in the available bits",
+          "Excessive memory allocation causing system crash",
+          "Data that exceeds the instruction cache size",
+          "Unintended interrupt signals during computation"
+        ],
+        "correct_answer": "When the result of an arithmetic operation exceeds the range that can be represented in the available bits",
+        "hint": "What happens when you add two positive numbers and get a negative result?",
+        "explanation": "Arithmetic overflow occurs when the result of an arithmetic operation cannot be properly represented in the designated number of bits. For example, adding 127 + 1 in 8-bit signed representation would overflow because the result 128 cannot be represented in 8-bit signed integer range (-128 to +127). Overflow detection depends on the data representation: UNSIGNED INTEGERS: Overflow occurs when carry-out from the most significant bit is generated. Example: in 8-bit unsigned, 255 + 1 generates a carry that is lost. SIGNED INTEGERS (Two's Complement): Overflow occurs when: (1) Adding two positive numbers produces negative result; (2) Adding two negative numbers produces positive result; (3) The carry-into sign bit differs from carry-out of sign bit. Example: in 8-bit signed, 127 + 1 = -128 (incorrect due to overflow). The CPU sets OVERFLOW FLAG in the status register when overflow is detected. Hardware detection circuits monitor operand signs and result sign, comparing against expected signs. Different ISAs handle overflow differently: (1) Some generate exceptions/traps for overflow; (2) Some set flags but continue; (3) Some wrap-around (saturation arithmetic for DSP applications). Proper handling of overflow is critical for: (1) Numeric computations requiring accuracy; (2) Safety-critical applications; (3) Cryptographic operations; (4) Digital signal processing. Compilers and programmers must be aware of overflow potential and use appropriate data types (wider integers, floating-point) or checking code when necessary. Undefined behavior or silent incorrect results from overflow can be catastrophic in critical applications.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 15,
+        "question": "Explain the design and function of the Program Counter (PC) in CPU architecture.",
+        "options": [
+          "A register that holds the address of the currently executing instruction",
+          "A counter that tracks the number of instructions executed",
+          "A buffer for storing intermediate computation results",
+          "A device for measuring processor performance metrics"
+        ],
+        "correct_answer": "A register that holds the address of the currently executing instruction",
+        "hint": "How does the CPU know which instruction to fetch next?",
+        "explanation": "The Program Counter (PC), also called Instruction Pointer (IP) in some architectures, is a fundamental CPU register that holds the memory address of the instruction currently being executed or about to be fetched. During normal instruction execution: (1) PC is used to fetch the current instruction from memory; (2) After fetching, PC is typically incremented by the instruction length to point to the next instruction; (3) When a branch instruction is executed, PC is loaded with the target address rather than incremented. The PC is essential for: (1) SEQUENTIAL PROGRAM FLOW - allowing instructions to be executed in order; (2) BRANCHING - enabling jump instructions to change program flow; (3) RETURN ADDRESSES - storing where to resume after function calls (saved on stack); (4) EXCEPTION HANDLING - recording where exceptions occurred. PC width determines the maximum addressable memory - a 32-bit PC can address 2^32 different memory locations. In fixed-instruction-length architectures (RISC), PC typically increments by 4 bytes per instruction. In variable-length architectures, incrementing depends on instruction length. Special considerations: (1) PIPELINE - PC must be managed carefully in pipelined processors; (2) BRANCH PREDICTION - processors may speculatively update PC before branch resolves; (3) VIRTUAL MEMORY - PC contains virtual addresses translated to physical by MMU; (4) INTERRUPTS - PC must be saved when interrupts occur; (5) DEBUGGING - PC is critical for debuggers to track program execution. The design and management of PC is crucial for correct program execution and represents one of the simplest yet most important CPU components.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 16,
+        "question": "What is the role of Status/Condition Flags (also called Flags Register) in CPU operation?",
+        "options": [
+          "Storing status bits that reflect results of ALU operations for conditional branching and program flow control",
+          "Tracking memory page translation information",
+          "Managing cache replacement policies",
+          "Monitoring thermal and power characteristics"
+        ],
+        "correct_answer": "Storing status bits that reflect results of ALU operations for conditional branching and program flow control",
+        "hint": "Think about how conditional branches (if statements) work in assembly language.",
+        "explanation": "The Status/Condition Flags Register (or Flags Register/EFLAGS in x86) contains individual flag bits that reflect properties of the most recent ALU operation or system state. Common flags: (1) ZERO FLAG (Z) - set if result was zero, used for equality testing; (2) SIGN FLAG (S/N) - set if result was negative; (3) CARRY FLAG (C) - set if arithmetic operation produced carry/borrow; (4) OVERFLOW FLAG (V) - set if signed arithmetic overflowed; (5) PARITY FLAG (P) - set if result had even parity; (6) HALF-CARRY FLAG (H) - set if carry from lower nibble; (7) INTERRUPT FLAG (I) - enables/disables interrupts; (8) TRAP FLAG (T) - enables single-step debugging. These flags enable: (1) CONDITIONAL EXECUTION - branches based on flags (BZ, BNZ, BV, BNC, etc.); (2) LOOP CONTROL - loop conditions often use flags; (3) ERROR CHECKING - overflow flag indicates computation errors; (4) COMPARISON OPERATIONS - subtraction sets flags for comparison without storing result; (5) PROGRAM FLOW CONTROL - essential for if-else, loops, and switch statements. Architectural considerations: (1) FLAG GENERATION - all ALU operations must set appropriate flags; (2) FLAG PRESERVATION - flags must be preserved across function calls if needed; (3) FLAG LATENCY - flags must be available quickly for dependent branches; (4) FLOATING-POINT FLAGS - FP exceptions stored separately in FP status register. Different ISAs define flags differently - x86 has many flags, ARM has 4 primary flags, MIPS has none (conditional test determines branch). Proper use of flags is essential for efficient conditional logic and is typically handled automatically by compilers.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 17,
+        "question": "Describe the role of general-purpose registers and special-purpose registers in CPU design.",
+        "options": [
+          "General-purpose for data/address storage, special-purpose for specific functions (PC, SP, Flags, etc.)",
+          "Both types are identical in function but different in size",
+          "General-purpose are only used in RISC processors",
+          "Special-purpose registers cannot be directly accessed by programs"
+        ],
+        "correct_answer": "General-purpose for data/address storage, special-purpose for specific functions (PC, SP, Flags, etc.)",
+        "hint": "Think about registers needed for holding data versus managing program execution.",
+        "explanation": "CPU registers are high-speed storage locations that hold operands and results. They are organized into two categories: GENERAL-PURPOSE REGISTERS: Available for programmer use to hold data and addresses. Typical ISAs provide 8-32 general-purpose registers. Advantages: (1) Extremely fast access (zero latency); (2) Reduce memory traffic; (3) Enable efficient code generation; (4) Support register allocation by compilers. Usage patterns: (1) Holding loop counters and variables; (2) Temporary operand storage; (3) Return values from functions; (4) Arguments to functions; (5) Saved state across function calls. Some ISAs designate roles (accumulator for results, register for specific purposes) but most modern ISAs allow flexible use. SPECIAL-PURPOSE REGISTERS: Dedicated to specific functions in program/system control: (1) PROGRAM COUNTER (PC/IP) - holds next instruction address; (2) STACK POINTER (SP) - points to top of stack for PUSH/POP; (3) STATUS/FLAGS REGISTER - holds condition codes; (4) MEMORY MANAGEMENT REGISTERS - page tables, TLB entries; (5) INSTRUCTION REGISTER - holds current instruction being decoded; (6) MEMORY ADDRESS REGISTER (MAR) - holds address for memory operations; (7) MEMORY DATA REGISTER (MDR) - holds data for memory operations. Some ISAs allow limited programmer access to special-purpose registers while others restrict access. Architectural considerations: (1) REGISTER COUNT - more registers reduce memory traffic but increase chip complexity; (2) REGISTER WIDTH - must match or exceed data word size; (3) REGISTER ORGANIZATION - some ISAs have register windows for function calls; (4) CONTEXT SWITCHING - saving/restoring register state is critical for multitasking. The distinction between general and special-purpose reflects the different needs: general-purpose flexibility for diverse computation versus special-purpose efficiency for critical system functions.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 18,
+        "question": "In a pipelined processor with control hazards, what is branch prediction and why is it important?",
+        "options": [
+          "A technique to guess whether a branch will be taken and speculatively fetch/execute instructions from the predicted path",
+          "A method to prevent branch instructions from being executed",
+          "A hardware mechanism to prevent pipeline stalls entirely",
+          "A compiler optimization to eliminate all conditional branches"
+        ],
+        "correct_answer": "A technique to guess whether a branch will be taken and speculatively fetch/execute instructions from the predicted path",
+        "hint": "Why does a pipelined processor have a problem with branch instructions?",
+        "explanation": "Branch prediction is a critical optimization technique in modern pipelined processors that addresses the control hazard problem. Without branch prediction, when a branch instruction is decoded, the processor doesn't know the next instruction address until the branch condition is evaluated (which occurs late in the pipeline). This creates a pipeline stall lasting many cycles. Branch prediction solves this by guessing the branch outcome early and speculatively fetching instructions from the predicted path. If prediction is correct, execution continues without stall. If prediction is wrong (mispredict), the speculatively executed instructions are discarded and execution restarts from correct path. Prediction accuracy is crucial - even 90% accurate prediction is very useful because on 10% of branches a small stall penalty occurs. PREDICTION METHODS: (1) STATIC - fixed prediction (always-taken, always-not-taken) based on instruction characteristics; (2) DYNAMIC - hardware learns branch behavior: (a) 1-bit predictor - flips on each misprediction; (b) 2-bit saturating counter - requires 2 misses to change prediction, handles occasional branches differently; (c) Pattern history table (PHT) - indexed by instruction address, stores counters; (3) CORRELATING PREDICTOR - prediction depends on outcomes of previous branches; (4) TOURNAMENT PREDICTOR - multiple predictors compete, chooser selects best. Modern processors use sophisticated predictors achieving 95%+ accuracy. INDIRECT BRANCH PREDICTION: Return address stacks cache function return addresses. Indirect branch target buffers cache previously seen target addresses. PENALTY: Modern processors stall 10-20+ cycles on misprediction due to deep pipelines. Branch misprediction is a major performance limiter alongside cache misses. Effective branch prediction is essential for high-performance execution, especially as pipelines deepen and execution becomes more speculative.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 19,
+        "question": "Explain superscalar execution and its benefits for processor performance.",
+        "options": [
+          "Issuing and executing multiple instructions per clock cycle from a sequential instruction stream",
+          "Increasing processor clock frequency without changing architecture",
+          "Using larger caches to reduce memory latency",
+          "Implementing more pipeline stages for better instruction throughput"
+        ],
+        "correct_answer": "Issuing and executing multiple instructions per clock cycle from a sequential instruction stream",
+        "hint": "What if a processor could execute more than one instruction per cycle?",
+        "explanation": "Superscalar execution is an advanced processor design technique where multiple independent instructions are issued and executed in parallel during a single clock cycle, even from a sequential instruction stream. Unlike VLIW (Very Long Instruction Word) processors where the compiler explicitly schedules multiple instructions, superscalar processors use hardware logic to dynamically identify independent instructions that can execute together. Key aspects: (1) INSTRUCTION FETCH - fetch multiple instructions per cycle from instruction cache; (2) INSTRUCTION DISPATCH - decode multiple instructions and check for dependencies; (3) PARALLEL EXECUTION UNITS - multiple ALUs, multipliers, load/store units allow independent operations; (4) REGISTER RENAMING - eliminates false dependencies (WAW and WAR hazards) allowing more parallelism; (5) OUT-OF-ORDER EXECUTION - execute independent instructions out of order, completing in different order than issued. Example: four 3-issue superscalar can execute up to 4 instructions per cycle from independent operations. Benefits: (1) IMPROVED IPC (Instructions Per Cycle) - from 1 to 2-4+ depending on degree; (2) FREQUENCY INDEPENDENCE - increased throughput without raising clock frequency; (3) BACKWARD COMPATIBLE - works with sequential instruction streams; (4) DYNAMIC OPTIMIZATION - adapts to instruction-level parallelism in actual code. Challenges: (1) COMPLEXITY - multiple fetch, dispatch, execution stages require sophisticated logic; (2) POWER CONSUMPTION - multiple execution units consume significant power; (3) DEPENDENCY DETECTION - must efficiently detect all data dependencies; (4) ISSUE LOGIC - complexity grows quadratically with issue width; (5) MEMORY HIERARCHY - must supply multiple instructions per cycle; (6) CODE CHARACTERISTICS - actual IPC varies greatly with code; (7) VERIFICATION - testing is extremely complex. Modern processors are heavily superscalar: modern x86 (Intel, AMD), ARM, MIPS use 4-6 wide issue. Diminishing returns exist - moving from 3-wide to 4-wide is harder than 2-wide to 3-wide. Out-of-order superscalar is one of most power-hungry components of modern processors.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      },
+      {
+        "id": 20,
+        "question": "What is speculative execution and what are the associated risks?",
+        "options": [
+          "Executing instructions ahead of branch/load resolution and discarding if prediction was wrong; risks include security vulnerabilities and power waste",
+          "Executing instructions in random order to improve cache utilization",
+          "Predicting memory access patterns to prefetch data",
+          "Parallel execution of instructions on multiple cores"
+        ],
+        "correct_answer": "Executing instructions ahead of branch/load resolution and discarding if prediction was wrong; risks include security vulnerabilities and power waste",
+        "hint": "Modern processors execute instructions that might not actually be needed - what could go wrong?",
+        "explanation": "Speculative execution is a fundamental optimization in modern processors where instructions are executed before it's certain they will actually be needed, based on predictions of branch outcomes or load/store dependencies. Examples: (1) Branch prediction allows speculative execution down predicted path; (2) Load speculation in out-of-order processors executes loads before preceding stores are resolved; (3) Address speculation when load address depends on result of previous instruction. Benefits: (1) Masks branch/load latencies; (2) Enables deeper pipelines and higher frequencies; (3) Improves out-of-order execution efficiency. Risks and challenges: (1) POWER WASTE - executing speculative instructions that don't contribute to final result wastes energy; (2) POLLUTION - speculative loads fill caches with data not used, evicting useful data; (3) EXCEPTION HANDLING - exceptions in speculative instructions must be suppressed/deferred; (4) PRECISION - interrupts during speculation can cause imprecise exceptions; (5) SECURITY VULNERABILITIES - (most critical) speculative execution enables Spectre and Meltdown attacks where timing differences from cache state leaked through speculation can reveal secrets (encryption keys, passwords, etc.). Spectre/Meltdown: Attackers trick processor into speculatively executing code that accesses secret data, then observe timing/cache effects to deduce data values even though speculative execution is rolled back. This led to: (1) Microcode patches disabling some speculation; (2) Instruction set extensions (LFENCE) to prevent speculation; (3) Significant performance penalties (5-30% depending on workload); (4) Hardware isolation mechanisms (IBRS, STIBP); (5) Process isolation improvements; (6) Flushing caches on context switches. The Spectre/Meltdown vulnerabilities revealed fundamental security issues with modern CPU designs and created ongoing tension between performance (enabled by speculation) and security.",
+        "chapter": "Chapter 4: Computer Organization and Embedded Systems",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0401"
+      }
+    ]
+  }
+]

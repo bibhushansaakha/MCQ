@@ -1,0 +1,1031 @@
+[
+  {
+    "chapter": "Chapter 3: Programming Language and Its Applications",
+    "chapter_code": "ACtE03",
+    "total_questions": 90,
+    "set": "Complete C and C++ Programming with OOP",
+    "question_type": "Mixed Questions (Detailed Explanations)",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What are C Tokens?",
+        "options": [
+          "Keywords and identifiers only",
+          "Smallest individual units of a C program",
+          "Comments in the code",
+          "Memory allocation units"
+        ],
+        "correct_answer": "Smallest individual units of a C program",
+        "hint": "C tokens are the building blocks of source code - think of what compiler recognizes.",
+        "explanation": "C Tokens are the smallest individual units of a C program that the compiler recognizes. They include keywords (like int, void, return), identifiers (variable names), constants (literal values like 5, 3.14, 'a'), strings (\"hello\"), operators (+, -, *, /), and special symbols ({}, [], ()). Every valid C program is a sequence of tokens separated by whitespace. For example, in 'int x = 5;', the tokens are: int, x, =, 5, and ;. Tokens cannot be broken down further without losing meaning. Understanding tokens is fundamental because the lexical analyzer (first phase of compilation) converts source code into a token stream, which the parser then uses to build the syntax tree.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 2,
+        "question": "Which of the following is NOT a C token?",
+        "options": [
+          "int x;",
+          "int",
+          "x",
+          ";"
+        ],
+        "correct_answer": "int x;",
+        "hint": "Tokens are individual units, not complete statements.",
+        "explanation": "'int x;' is a complete statement consisting of multiple tokens: 'int' (keyword token), 'x' (identifier token), and ';' (special symbol token). A statement is a sequence of tokens, not a single token. Each component 'int', 'x', and ';' individually are tokens. This distinction is crucial in understanding how compilers parse code - they first break code into tokens, then analyze token sequences to understand program structure. The semicolon marks statement termination and is itself a token.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 3,
+        "question": "What are the main categories of C operators?",
+        "options": [
+          "Arithmetic and logical only",
+          "Arithmetic, logical, relational, assignment, bitwise, and special operators",
+          "Mathematical operations only",
+          "Comparison operators only"
+        ],
+        "correct_answer": "Arithmetic, logical, relational, assignment, bitwise, and special operators",
+        "hint": "Consider operators like +, &&, ==, =, &, and others like sizeof.",
+        "explanation": "C supports multiple operator categories: (1) Arithmetic operators (+, -, *, /, %) for mathematical operations; (2) Relational operators (==, !=, <, >, <=, >=) for comparison returning boolean values; (3) Logical operators (&&, ||, !) for boolean logic; (4) Assignment operators (=, +=, -=, *=, /=, %=, etc.) for variable assignment; (5) Bitwise operators (&, |, ^, ~, <<, >>) for bit-level operations; (6) Special operators like sizeof (memory size), & (address), * (pointer dereference), ?: (ternary), and comma. Operator precedence and associativity determine evaluation order - for example, * and / have higher precedence than + and -. Understanding all operator categories is essential for writing correct expressions and avoiding logical errors.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 4,
+        "question": "What is the purpose of formatted input in C?",
+        "options": [
+          "To convert data into specific formats",
+          "To read input data according to specified format specifications",
+          "To align output on screen",
+          "To encrypt user data"
+        ],
+        "correct_answer": "To read input data according to specified format specifications",
+        "hint": "Think about scanf() and how %d, %f, %s work.",
+        "explanation": "Formatted input in C uses functions like scanf() and fscanf() to read data from standard input or files according to format specifications. Format specifiers (%d for integer, %f for float, %s for string, %c for character, %x for hexadecimal, %o for octal) tell the function what type of data to expect and how to interpret the input stream. For example, scanf(\"%d %f %s\", &integer, &floating, string) expects an integer, then a float, then a string from input. This allows reading mixed data types in a structured manner. The advantage is flexibility in input handling, but disadvantages include complexity and potential buffer overflow risks with %s. Format specifications also include width and precision modifiers like %5d (read 5 characters) or %.2f (2 decimal places). Proper format specification matching with variable types is critical to prevent undefined behavior.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 5,
+        "question": "What does unformatted input in C do?",
+        "options": [
+          "Reads data without format specifications",
+          "Reads data character by character or in raw form",
+          "Converts input to specific data types automatically",
+          "Encrypts incoming data"
+        ],
+        "correct_answer": "Reads data character by character or in raw form",
+        "hint": "Functions like getchar(), gets(), and fgets() are unformatted.",
+        "explanation": "Unformatted input in C reads data without requiring format specifications, processing input as-is. Functions include getchar() (reads single character), getche() (reads character with echo), getch() (reads character without echo), gets() (reads entire line - UNSAFE, causes buffer overflow), and fgets() (safe alternative to gets(), reads line with specified size limit). Unformatted input is simpler and faster than formatted input but lacks automatic type conversion. For example, getchar() returns an int (ASCII value) of the character read, or EOF (-1) on end-of-file. This approach is useful when you want to process data character-by-character or handle raw input. Important: gets() is deprecated and removed from modern C standards due to security risks; fgets() is preferred as it allows specifying maximum characters to read. Unformatted functions are also useful in interactive programs where you want immediate character processing.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 6,
+        "question": "What is the difference between if-else and switch control statements?",
+        "options": [
+          "No significant difference",
+          "if-else handles ranges, switch handles exact values",
+          "switch is faster than if-else",
+          "if-else can check multiple conditions, switch checks single variable"
+        ],
+        "correct_answer": "if-else can check multiple conditions, switch checks single variable",
+        "hint": "Consider what each statement is best used for - flexibility vs. simplicity.",
+        "explanation": "if-else and switch are both control statements but serve different purposes: if-else allows checking multiple independent conditions with boolean expressions (if x > 10 && y < 5), handles ranges, and uses comparison operators. switch evaluates a single expression and compares it against multiple constant cases, executing matching case block. switch is more efficient when checking one variable against many discrete values, as it may use jump tables. However, if-else is more flexible for complex conditions. Example: switch (day) {case 1: ...; break; case 2: ...} vs if (day==1) {...} else if (day==2) {...}. switch requires break statements to prevent fall-through (executing subsequent cases). switch cases must be constants, while if-else conditions can be complex expressions. For simple discrete value comparisons, switch is preferred; for range checks or multiple condition logic, if-else is necessary. The default case in switch is like final else in if-else chain.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 7,
+        "question": "What are the types of loops in C?",
+        "options": [
+          "for and while only",
+          "for, while, and do-while",
+          "for and do-while only",
+          "while and nested loops only"
+        ],
+        "correct_answer": "for, while, and do-while",
+        "hint": "How many different loop constructs does C provide?",
+        "explanation": "C provides three types of loops: (1) while loop: checks condition before each iteration, may not execute at all if condition is false initially. Syntax: while(condition) { statements }. Best for unknown iteration count. (2) do-while loop: executes body first, then checks condition, guaranteeing at least one execution. Syntax: do { statements } while(condition). Best for input validation where you must process at least once. (3) for loop: most compact, combines initialization, condition, and increment. Syntax: for(init; condition; increment) { statements }. Best for known iteration count. Additionally, C supports nested loops (loop inside another loop), break statement (exits current loop), continue statement (skips current iteration), and goto statement (though discouraged). Understanding loop selection is crucial: for loops suit array iterations, while loops suit event-driven processing, and do-while suits menu systems. Loop control variables should be carefully managed to prevent infinite loops.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 8,
+        "question": "What is function prototyping in C?",
+        "options": [
+          "Creating sample functions",
+          "Declaring function signature before definition",
+          "Testing functions before use",
+          "Copying function implementations"
+        ],
+        "correct_answer": "Declaring function signature before definition",
+        "hint": "Why do we write function declarations at the top of files?",
+        "explanation": "Function prototyping is declaring a function's signature (return type, name, and parameters) before its implementation. Syntax: return_type function_name(parameter_types); without the body. Prototypes allow forward declaration, enabling the compiler to verify function calls before seeing the actual implementation. Benefits: (1) Type checking - compiler ensures calls match declaration; (2) Organization - main() can call functions defined later; (3) Compilation - prevents 'function undeclared' errors; (4) Readability - clearly documents function interfaces. Example: int add(int a, int b); before int add(int a, int b) { return a+b; }. Prototypes are typically placed in header files or at file top. Parameters can be empty () or specified with types. Parameter names in prototypes are optional: int add(int, int) is valid. This is different from function definition which includes the implementation body. Modern C standards (C99, C11) recommend explicit prototyping of all functions.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 9,
+        "question": "What is a recursive function?",
+        "options": [
+          "Function that calls itself directly or indirectly",
+          "Function that repeats in a loop",
+          "Function that calls another function multiple times",
+          "Function with repeated code"
+        ],
+        "correct_answer": "Function that calls itself directly or indirectly",
+        "hint": "Think of factorial or Fibonacci calculations.",
+        "explanation": "A recursive function is one that calls itself (direct recursion) or calls another function that eventually calls back to it (indirect recursion). Every recursive function needs: (1) Base case - condition that stops recursion to prevent infinite loops; (2) Recursive case - call with simplified/modified parameters approaching base case; (3) Progress toward base case. Example: factorial(n) = n * factorial(n-1) with base case factorial(0) = 1. Recursion uses the call stack, storing return addresses and local variables. Each recursive call creates new stack frame. Disadvantages: stack overflow risk, slower than iteration, higher memory usage. Advantages: elegant solution for inherently recursive problems (trees, divide-and-conquer), cleaner code. Tail recursion (recursive call is last operation) can be optimized by compilers. Common recursive problems: factorial, Fibonacci, tree traversal, permutations, binary search. Understanding stack depth is crucial - deep recursion can exhaust stack memory. Iterative solutions are often more efficient than recursive ones, but recursion provides conceptual clarity for certain algorithms.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 10,
+        "question": "What are one-dimensional arrays in C?",
+        "options": [
+          "Arrays with one row and multiple columns",
+          "Linear collection of elements of same type with single index",
+          "Arrays with only one element",
+          "Arrays stored in one memory location"
+        ],
+        "correct_answer": "Linear collection of elements of same type with single index",
+        "hint": "Think of a simple list or vector accessed by single index.",
+        "explanation": "One-dimensional (1D) arrays are linear collections of elements of the same data type accessed using a single index. Declaration: type array_name[size]; Example: int arr[5]; creates integer array for 5 elements indexed 0-4. Memory allocation: contiguous block of (size * sizeof(type)) bytes. Initialization: int arr[] = {1,2,3,4,5} or int arr[5] = {0}. Accessing: arr[i] retrieves i-th element. Array operations: traversal (loop through all), search (find element), sorting, mathematical operations. Passing arrays to functions: decays to pointer (int* arr), so array modifications affect original. Advantages: random access (O(1)), cache-friendly, simple. Disadvantages: fixed size (in C, dynamic allocation needed for variable size), requires bounds checking to prevent overflow. String arrays: char str[50] stores null-terminated strings. Multi-dimensional arrays are treated as arrays of arrays. Important: array indices are 0-based; arr[5] in size-5 array is undefined (out of bounds). Arrays form foundation for data structures like queues, stacks, and heaps.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 11,
+        "question": "What is a two-dimensional array in C?",
+        "options": [
+          "Array with rows and columns like a matrix",
+          "Array containing two elements",
+          "Array with two types of data",
+          "Array accessed with two operations"
+        ],
+        "correct_answer": "Array with rows and columns like a matrix",
+        "hint": "Think of a spreadsheet or matrix structure.",
+        "explanation": "Two-dimensional (2D) arrays are tables with rows and columns, representing matrices. Declaration: type array[rows][cols]; Example: int matrix[3][4] creates 3x4 integer matrix. Memory layout: stored row-major order in C - all of row 0, then row 1, etc. Access: matrix[i][j] accesses element at row i, column j. Initialization: int matrix[2][3] = {{1,2,3},{4,5,6}}; Total size: 3*4*sizeof(int) bytes contiguous. Passing to functions: void func(int arr[][4]) - second dimension must be specified because compiler calculates stride. Nested loops for traversal: for(i=0;i<rows;i++) for(j=0;j<cols;j++) process matrix[i][j]. Applications: image processing (pixels), game boards, spreadsheets, mathematical matrices. Alternative: array of pointers (int *arr[3]) creates jagged array with flexible row sizes. Multidimensional arrays generalize to 3D, 4D, etc., but overhead increases. Memory is still contiguous in C, unlike some languages. Index bounds checking is programmer's responsibility - out-of-bounds access is undefined behavior. Understanding memory layout is crucial for passing to functions and pointer arithmetic.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 12,
+        "question": "What is string manipulation in C?",
+        "options": [
+          "Changing integers to strings",
+          "Operations on character arrays terminated by null character",
+          "Removing special characters from strings",
+          "Converting strings to uppercase"
+        ],
+        "correct_answer": "Operations on character arrays terminated by null character",
+        "hint": "Strings in C are char arrays ending with '\\0'. Consider operations like strlen, strcpy, etc.",
+        "explanation": "String manipulation involves operations on null-terminated character arrays. Strings in C: char str[20] = \"hello\" stores h,e,l,l,o,\\0 (null terminator marks end). Key operations: strlen(str) returns string length excluding null. strcpy(dest, src) copies string src to dest (unsafe, no bounds check). strncpy(dest, src, n) copies max n characters (safer). strcat(dest, src) concatenates src to dest. strncat(dest, src, n) concatenates max n characters. strcmp(str1, str2) compares strings, returns 0 if equal. strchr(str, c) finds character c in string. strstr(str1, str2) finds substring str2 in str1. sprintf(buffer, format, ...) formats string into buffer. String operations require string.h header. Common pitfalls: buffer overflow with strcpy (use strncpy), forgetting null terminator, comparing pointers instead of content with ==. Modern approach: use safer functions with size limits. Strings are immutable in sense that operations create new copies or modify arrays. Understanding null-termination is crucial - forgetting it causes undefined behavior. String functions are fundamental for text processing, parsing input, and data manipulation.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 13,
+        "question": "What is multidimensional array in C?",
+        "options": [
+          "Arrays with more than two dimensions",
+          "Three-dimensional arrays only",
+          "Arrays with varying dimensions",
+          "Arrays stored in multiple memory locations"
+        ],
+        "correct_answer": "Arrays with more than two dimensions",
+        "hint": "Generalization of 2D arrays to 3D, 4D, and beyond.",
+        "explanation": "Multidimensional arrays extend beyond 2D to any number of dimensions. Declaration: type array[d1][d2][d3]...[dn]; Example: int cube[3][3][3] creates 3x3x3 array (27 elements). Memory: allocated contiguously in row-major order. Access: cube[i][j][k] accesses element using all indices. Storage: total size = d1*d2*d3*...*dn*sizeof(type). Initialization: int cube[2][2][2] = {{{1,2},{3,4}},{{5,6},{7,8}}}; Traversal: nested loops for each dimension. Practical applications: 3D graphics (x,y,z coordinates), 3D grids (physics simulations), time-series data (3D with time dimension), image stacks. Passing to functions requires specifying all but first dimension: void func(int arr[][3][3]) for 3D array. Memory layout understanding critical - for cube[i][j][k], memory position calculated as: base + ((i*d2*d3 + j*d3 + k)*sizeof(type)). Performance: cache efficiency decreases with dimensions due to fewer elements per cache line. Pointers of pointers alternative: int ***arr for dynamic allocation but more complex. Higher dimensions increase complexity significantly; careful memory management essential.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 14,
+        "question": "What does printf() do in C?",
+        "options": [
+          "Reads formatted input from keyboard",
+          "Writes formatted output to stdout",
+          "Declares print format",
+          "Prints only integers"
+        ],
+        "correct_answer": "Writes formatted output to stdout",
+        "hint": "Formatted output function - think of how you display variables.",
+        "explanation": "printf() writes formatted output to standard output (stdout). Syntax: printf(format_string, arguments); Format specifiers: %d (int), %f (float), %lf (double), %c (char), %s (string), %x (hex), %o (octal), %p (pointer). Modifiers: %5d (width 5), %.2f (2 decimal places), %-5d (left-aligned), %05d (zero-padded). Example: printf(\"Value: %d, Name: %s\\n\", 42, \"test\") outputs formatted text with values. Return value: number of characters printed (or negative on error). Escape sequences: \\n (newline), \\t (tab), \\\" (quote), \\\\ (backslash). Printf advantage: single function for multiple data types. Disadvantages: no type checking (dangerous), complex format strings, slower than direct output. Variants: fprintf(FILE*, format, args) writes to file; sprintf(buffer, format, args) writes to string buffer; snprintf(buffer, size, format, args) with size limit (safer). Format string vulnerabilities: untrusted format strings cause security issues. Understanding format specifiers crucial - %d for pointer using %p, mismatches cause undefined behavior. Printf is fundamental for debugging and user interaction, but modern C developers prefer snprintf for safety.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 15,
+        "question": "What is the difference between formatted and unformatted output in C?",
+        "options": [
+          "No significant difference",
+          "Formatted specifies output format, unformatted outputs as-is",
+          "Formatted is for strings, unformatted for numbers",
+          "Formatted is slower than unformatted"
+        ],
+        "correct_answer": "Formatted specifies output format, unformatted outputs as-is",
+        "hint": "Compare printf with putchar or puts.",
+        "explanation": "Formatted output uses format specifiers to control output appearance: printf(\"%5d %.2f\", x, y) - explicit format. Unformatted output displays data as-is without specification: putchar(c) outputs character, puts(str) outputs string with newline, putch(c) with echo. Key differences: Formatted: requires format string with specifiers (%d, %f, %s, etc.), supports width/precision, allows multiple arguments, slower due to parsing, risk of format vulnerabilities. Unformatted: simple character/string output, faster (direct write), no format parsing, suitable for raw output. Examples: printf(\"Number: %d\", 42) vs putchar('x'). Use formatted for structured output (reports, formatted tables, numbers with specific precision). Use unformatted for simple character I/O, interactive menus, raw data output. Unformatted functions: putchar() (single char), putch() (char with echo), puts() (string + newline), fputc() (to file), fputs() (string to file). Modern practice: printf/fprintf/sprintf family dominates due to flexibility. Buffer flushing: fflush(stdout) ensures output appears immediately. Understanding performance difference matters for high-frequency output scenarios.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 16,
+        "question": "What are user-defined functions in C?",
+        "options": [
+          "Functions provided by standard library",
+          "Functions written by programmer for specific tasks",
+          "Functions with user input parameters",
+          "Functions that modify user data"
+        ],
+        "correct_answer": "Functions written by programmer for specific tasks",
+        "hint": "Functions you write yourself, not from library.",
+        "explanation": "User-defined functions are functions written by programmers to perform specific tasks, promoting code reusability and modularity. Structure: return_type function_name(parameters) { function body; return value; }. Example: int add(int a, int b) { return a + b; }. Benefits: code reuse, modularity, easier debugging, improved readability, maintainability. Function components: (1) Function signature: defines interface. (2) Function body: implementation. (3) Return statement: sends value back to caller. (4) Parameters: input values. Scope rules: local variables exist within function, global variables accessible from anywhere. Parameter passing: pass-by-value (copy of value), pass-by-pointer (address, allows modification). Return types: void (no return), int, float, pointer, struct, array (as pointer). Recursion: function calling itself. Function pointers: void (*funcPtr)(int); pointing to functions. Benefits for larger programs: divide complex logic into manageable pieces, enable team development (different team members write functions), facilitate testing. Organization: function declaration (prototype), then main(), then function definitions. Many programmers place function definitions before main() to avoid forward declarations. Understanding scope, parameter passing, and return values essential for effective function use.",
+        "chapter": "Chapter 3: Programming Language - ACtE0301",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0301 - Introduction to C Programming"
+      },
+      {
+        "id": 17,
+        "question": "How do arrays and pointers relate in C?",
+        "options": [
+          "Arrays and pointers are completely unrelated",
+          "Arrays decay to pointers when used in expressions",
+          "Pointers are always faster than arrays",
+          "Arrays cannot be used with pointers"
+        ],
+        "correct_answer": "Arrays decay to pointers when used in expressions",
+        "hint": "Consider how arr[i] relates to *(arr+i).",
+        "explanation": "Arrays and pointers are intimately related in C. Array name represents address of first element (except with sizeof or &). When array appears in expression, it automatically converts (decays) to pointer to first element. Example: int arr[5]; declares array, arr is equivalent to &arr[0]. Pointer arithmetic: *(arr+i) is equivalent to arr[i]. Accessing: arr[3] translates to *(arr+3). This relationship is why functions receiving arrays get pointers: void func(int arr[]) is identical to void func(int *arr) - both receive pointer to array. Multi-dimensional arrays: int matrix[3][4]; matrix is pointer to array of 4 ints, matrix[i] is pointer to int, matrix[i][j] is int. Differences: sizeof(arr) gives total array size; sizeof(&arr[0]) gives pointer size. & on array: &arr gives pointer to whole array (type int (*)[5] for int arr[5]), not same as arr (type int*). String arrays: \"hello\" is array decaying to pointer to 'h'. Using this decay concept: for(int *p = arr; p < arr+5; p++) iterates through array using pointers. Understanding this relationship crucial for pointer arithmetic, function parameters, dynamic allocation patterns. Modern trend: using pointers more than arrays for flexibility, but understanding both essential.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 18,
+        "question": "What is pointer arithmetic in C?",
+        "options": [
+          "Arithmetic using pointer variables as operands",
+          "Mathematical operations on addresses stored in pointers",
+          "Calculations that pointers perform automatically",
+          "Using pointers to store mathematical results"
+        ],
+        "correct_answer": "Mathematical operations on addresses stored in pointers",
+        "hint": "When you do ptr+1, ptr-2, etc., what actually happens to the address?",
+        "explanation": "Pointer arithmetic involves mathematical operations on pointer values (addresses). Operations: increment (ptr++), decrement (ptr--), addition (ptr+n), subtraction (ptr-n), comparison (ptr1 < ptr2), difference (ptr1-ptr2). Crucial: increment/decrement scale by data type size. For int *p, p++ moves pointer by sizeof(int) bytes (usually 4), not 1 byte. Example: if p = 1000 (address), p++ becomes 1004 for int pointer. This scaling automatic based on pointer type. Pointer difference: (ptr2 - ptr1) gives number of elements between, not bytes. Uses: array traversal with pointers, dynamic array management, building linked lists. Allowed operations: ++ (increment), -- (decrement), +n (advance n positions), -n (retreat n positions), comparison (<, >, <=, >=), subtraction (two pointers), +=, -=. Disallowed: multiplication, division, addition of two pointers. Valid: comparison of pointers from same array, subtraction of pointers from same array. Out-of-bounds arithmetic: technically allowed but undefined behavior if dereferenced. Array iteration: for(int *p = arr; p < arr+5; ++p) uses pointer arithmetic. Void pointers: void *p cannot be incremented (don't know size). Understanding scaling essential for correct pointer operations and avoiding off-by-one errors.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 19,
+        "question": "How are pointers and arrays passed to functions?",
+        "options": [
+          "Arrays passed by value, pointers by reference",
+          "Both decay to pointers, function receives address",
+          "Arrays copy entire data, pointers send reference",
+          "Different mechanisms for arrays and pointers"
+        ],
+        "correct_answer": "Both decay to pointers, function receives address",
+        "hint": "When you pass arr[] to function, what does it actually receive?",
+        "explanation": "Arrays and pointers passed to functions share a common mechanism: arrays decay to pointers to first element. Function declaration: void func(int arr[10]) is identical to void func(int arr[]) and void func(int *arr) - all receive pointer to array's first element. This means: (1) Array size info lost in function - must pass size separately or use sentinel. (2) Modifications in function affect original array (passed by reference effectively). (3) No array copying occurs - efficient even for large arrays. Example: int arr[100]; func(arr) passes &arr[0], not entire array. For comparison: structs passed by value (copied) unless pointer passed, arrays always by reference. Multi-dimensional arrays: void func(int arr[][5]) receives pointer to array of 5 ints. Other dimensions required: void func(int (*ptr)[5][10]) for 3D array. Function pointers: void (*func)(int arr[]) can point to function receiving array. Return considerations: cannot return array from function (cannot create array on stack of unknown size), must return pointer to dynamically allocated array. For 2D arrays: void func(int **arr) works for ragged arrays, void func(int arr[][5]) for rectangular arrays. Understanding this decay crucial for function parameter design and memory safety.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 20,
+        "question": "What does passing pointers to functions enable?",
+        "options": [
+          "Better performance only",
+          "Multiple return values and variable modification",
+          "Faster array access",
+          "Simpler function syntax"
+        ],
+        "correct_answer": "Multiple return values and variable modification",
+        "hint": "If you want function to modify original variable or return multiple values, what do you pass?",
+        "explanation": "Passing pointers to functions enables multiple important capabilities: (1) Modifying caller's variables: void swap(int *a, int *b) can modify both arguments by dereferencing. (2) Multiple return values: instead of single return, use output parameters (pointers). Example: void divmod(int a, int b, int *quo, int *rem) returns quotient and remainder through pointers. (3) Dynamic memory allocation: allocate in function, pass pointer back. (4) Avoiding large data copies: pass pointer to large structure instead of copying entire structure. (5) Building complex data structures: linked lists, trees use pointers extensively. (6) Callback functions: pass function pointer for flexible function behavior. Pointer parameter patterns: input parameters (const int *), output parameters (int *), input-output (modify and use). Example: void double_it(int *x) { *x = *x * 2; } modifies original variable. Contrast with pass-by-value: void double_it(int x) { x = x * 2; } modifies only local copy. Dangers: null pointer dereference, dangling pointers (freed memory), uninitialized pointers. Best practices: validate pointer before use, use const for input-only pointers, document which parameters are output. Modern C: use const pointers for read-only, document intent clearly. In C++, references often preferred over pointers for cleaner syntax, but concept similar.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 21,
+        "question": "What is the difference between struct and union in C?",
+        "options": [
+          "No significant difference",
+          "Struct allocates separate memory for each member, union shares memory",
+          "Union is faster than struct",
+          "Struct can have functions, union cannot"
+        ],
+        "correct_answer": "Struct allocates separate memory for each member, union shares memory",
+        "hint": "Think about memory layout - do all members get their own space?",
+        "explanation": "Struct vs Union - fundamental difference in memory allocation: Struct: allocates memory for ALL members. struct Point { int x; int y; } has size = sizeof(int) + sizeof(int). Each member independent, all exist simultaneously. Access: point.x and point.y both valid. Union: members share same memory location. union Data { int i; float f; } has size = max(sizeof(int), sizeof(float)). Only one member can hold value at a time. Access: data.i or data.f, but setting one overwrites other. Use cases - Struct: grouping related data (person name, age, address). Union: memory-constrained systems, hardware registers (different data types in same location), variant data types. Example: network packet header (fixed fields in struct) vs hardware register (different interpretations in union). Padding/alignment: struct size ≥ sum of members (compiler adds padding), union size = largest member. Union efficiency: saves memory (only one variant active), but requires careful management. Nested: union within struct or vice versa possible. Sizeof: struct A { int x; char c; } likely 8 bytes (int 4 + char 1 + padding 3). Union U { int x; char c; } size 4 (max of int/char). Accessing wrong union member returns garbage - type safety burden on programmer. C doesn't enforce which union member is active. Tagged unions (struct with int tag and union) provide safe variant handling. Useful in interpreters, protocol implementations, embedded systems.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 22,
+        "question": "What is an array of structures in C?",
+        "options": [
+          "Array containing different data types",
+          "Array where each element is a structure",
+          "Structure containing multiple arrays",
+          "Array of pointers to structures"
+        ],
+        "correct_answer": "Array where each element is a structure",
+        "hint": "Like a table where each row is a structure instance.",
+        "explanation": "Array of structures: array where each element is a structure instance. Declaration: struct Student { char name[50]; int id; float gpa; } students[100]; creates array of 100 Student structures. Memory: contiguous block where each Student occupies sizeof(struct Student) bytes. Accessing: students[0].name accesses name of first student, students[i].id accesses id of i-th student. Nested: structure already contains arrays (name[50] is array within structure). Initialization: struct Student s[3] = { {\"Alice\", 1, 3.8}, {\"Bob\", 2, 3.5}, {\"Charlie\", 3, 3.9} }; Iteration: for(int i=0; i<100; i++) process_student(&students[i]); Passing: arrays decay to pointers, so function receives struct Student *arr. Sorting: qsort(students, 100, sizeof(struct Student), compare_func) sorts array. Comparison function: int compare_func(const void *a, const void *b) { return ((struct Student*)a)->id - ((struct Student*)b)->id; }. Dynamic allocation: struct Student *arr = malloc(n * sizeof(struct Student)); for flexible sizing. Advantages: organize related data (each student's complete info), efficient storage (contiguous memory), cache-friendly access. Common in: databases (records), game development (entities), scientific computing (datasets). Understanding memory layout crucial for pointer arithmetic and efficient access patterns.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 23,
+        "question": "How are structures passed to functions?",
+        "options": [
+          "Structures always passed by value (copied)",
+          "Structures passed by value by default, by pointer if specified",
+          "Structures always passed by reference",
+          "Only pointers to structures can be passed"
+        ],
+        "correct_answer": "Structures passed by value by default, by pointer if specified",
+        "hint": "What happens - does entire structure get copied or just address?",
+        "explanation": "Structures passed to functions by value by default - entire structure copied to function's stack frame. void process(struct Student s) receives copy of s, modifications don't affect original. For large structures, this copying is inefficient. Alternative: pass by pointer - void process(struct Student *s) receives address only, modifies original. Pointer parameters: void set_id(struct Student *s, int id) { s->id = id; } modifies original through pointer. Accessing pointer members: use -> operator (s->id) instead of . operator (s.id). Efficiency: for structures > 2-3 pointers, pass by pointer preferred. Const pointers: void display(const struct Student *s) for read-only access, compiler prevents modifications. Return values: functions can return structures by value (struct Student create_student()) but inefficient for large structures. Pattern: for output parameters, use pointers (void func(struct Student *out)). Dynamic allocation: struct Student *s = malloc(sizeof(struct Student)); then pass s to functions. Array of structures: arrays passed as pointers automatically (struct Student arr[100] becomes struct Student *arr in function). Memory consideration: stack limited, large structure copies waste stack space. Rule of thumb: pass primitive types by value, structures/arrays by pointer. Modern practice: C++ uses references for cleaner syntax, but concept similar. Understanding calling convention crucial for performance and correctness.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 24,
+        "question": "What is the relationship between structure and pointer in C?",
+        "options": [
+          "No relationship - different concepts",
+          "Pointers point to structures, enabling dynamic allocation and modification",
+          "Structures contain pointers only",
+          "Pointers store structure data"
+        ],
+        "correct_answer": "Pointers point to structures, enabling dynamic allocation and modification",
+        "hint": "How do you work with structures dynamically? How do you access structure members through pointers?",
+        "explanation": "Structures and pointers closely related: pointers point to structures, enabling dynamic allocation, flexible data structures, and efficient passing. Pointer to structure: struct Student *ptr; or struct Student *ptr = &s; Accessing members: ptr->field (equivalent to (*ptr).field). Arrow operator -> preferred for readability. Dynamic allocation: struct Student *ptr = malloc(sizeof(struct Student)); ptr->id = 1; creates structure on heap. Linked structures: struct Node { int data; struct Node *next; } builds linked lists. Self-referential structures use pointers to own type. Pointer arrays: struct Student *students[100] - array of pointers, flexible sizing. Dynamic array: struct Student **arr = malloc(n * sizeof(struct Student*)); for array of pointers to structures. Typedef for cleaner syntax: typedef struct { int x; int y; } Point; then Point *p; Advantages: dynamic memory (allocate/deallocate as needed), data structure building (linked lists, trees), efficient passing (no copying). Memory layout: structure pointer stores address, accessing member calculates offset. Null check essential: if(ptr != NULL) before accessing members. Linked structures: struct Node { int data; struct Node *left; struct Node *right; } enables trees. Common pattern: struct with function pointers for object-oriented behavior. Understanding pointer-structure relationship crucial for building complex data structures and dynamic memory management.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 25,
+        "question": "What are file operations in C?",
+        "options": [
+          "Manipulating data within files",
+          "Creating and deleting files only",
+          "Opening, reading, writing, and closing files",
+          "Encrypting file contents"
+        ],
+        "correct_answer": "Opening, reading, writing, and closing files",
+        "hint": "Think about complete file lifecycle - from opening to closing.",
+        "explanation": "File operations involve complete file handling cycle: (1) Opening: FILE *fp = fopen(\"file.txt\", \"r\") opens file (modes: r-read, w-write, a-append, r+, w+, a+); (2) Reading: fgetc(fp) reads character, fgets(line, size, fp) reads line, fread(buffer, size, count, fp) reads binary; (3) Writing: fputc(c, fp) writes character, fputs(line, fp) writes line, fwrite(buffer, size, count, fp) writes binary; (4) Closing: fclose(fp) closes file, flushing buffers. File pointer: FILE * represents stream, maintains file state (position, EOF, error). Status checking: feof(fp) checks end-of-file, ferror(fp) checks errors, fgetc returns EOF (-1) at end. Seeking: fseek(fp, offset, origin) positions pointer (origins: SEEK_SET start, SEEK_CUR current, SEEK_END end). ftell(fp) returns current position. rewind(fp) goes to start. Modes: text mode handles newline conversion, binary mode preserves exact bytes. Common patterns: while(!feof(fp)) { /* read */ } or while(fgets(line, sizeof(line), fp)) { /* process */ }. Error handling: check return values, validate file opened successfully. File operations essential for data persistence, logging, configuration files. Binary vs Text: text for human-readable data, binary for fixed-size records, images, executables. Safety: always close files, even on error (use cleanup code or close in finally equivalent). Resource leaks: unclosed files waste OS resources. File I/O slower than memory access - buffer strategically for performance.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 26,
+        "question": "What is sequential access to files in C?",
+        "options": [
+          "Accessing file from beginning only",
+          "Reading/writing file from start to end in order",
+          "Accessing file records randomly",
+          "Accessing file through pointers"
+        ],
+        "correct_answer": "Reading/writing file from start to end in order",
+        "hint": "You process file data in order, not jumping around - like reading book page by page.",
+        "explanation": "Sequential access: reading/writing file data from beginning to end in order, without skipping or jumping. Suitable for: text files, log files, data streams where linear processing sufficient. Example: FILE *fp = fopen(\"data.txt\", \"r\"); while(fgets(line, sizeof(line), fp)) { process(line); } reads entire file sequentially. Characteristics: simple, efficient for full-file processing, natural for streaming. Operations: fgetc (next character), fgets (next line), fread (next block). Position: always moves forward, fseek seldom used. Search: to find specific record, must read from start (O(n) complexity). Advantages: straightforward logic, suitable for large files (memory-efficient streaming), commonly used for text processing. Disadvantages: inefficient for finding specific records, must re-read from start for multiple passes. Contrast with random access: jumping to specific record using fseek. Performance: sequential often faster than random due to disk head positioning and prefetching. Common uses: log file analysis, data import/export, stream processing, ETL (extract-transform-load). Implementation: maintain state variables for custom record format. Combined approach: sequential for parsing, random for specific lookups if structure known. Error handling: feof(), ferror() for end-of-file and error detection. Understanding sequential vs random access helps choose appropriate file handling strategy.",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 27,
+        "question": "What is random access to files in C?",
+        "options": [
+          "Accessing file data in any order",
+          "Using fseek to position file pointer at specific location",
+          "Reading file without sequence",
+          "Accessing random file from system"
+        ],
+        "correct_answer": "Using fseek to position file pointer at specific location",
+        "hint": "You can jump to specific positions in file using fseek.",
+        "explanation": "Random access: jumping directly to specific file position without reading from start. Enabled by fseek(): fseek(fp, offset, whence) positions file pointer. Whence values: SEEK_SET (beginning, offset 0), SEEK_CUR (current position), SEEK_END (end of file). Examples: fseek(fp, 100, SEEK_SET) moves to byte 100; fseek(fp, -10, SEEK_CUR) moves back 10 bytes; fseek(fp, 0, SEEK_END) moves to end. Fixed-record files: if records are fixed size (e.g., 256 bytes each), random access efficient: fseek(fp, record_num * 256, SEEK_SET) jumps directly to record. ftell(): returns current position (bytes from start). rewind(): equivalent to fseek(fp, 0, SEEK_SET). Binary files: random access natural, text files problematic (variable-length records). Use case: database files, lookup by record number, editing specific portion. Advantages: O(1) access to any record (vs O(n) sequential), efficient for large files with specific record access. Disadvantages: requires fixed structure or index, not suitable for streaming. Typical pattern: open file, fseek to position, fread block, modify, fseek to original position, fwrite. Implementation detail: some systems (non-seekable) don't support fseek (pipes, sockets). Error checking: fseek returns 0 on success, non-zero on failure. Index files: separate index stores record positions for efficient lookup. Comparison with sequential: sequential simple but slow for specific records; random fast for lookups but requires structure. Modern databases use both: indexes (fast lookup) and sequential scans (bulk operations).",
+        "chapter": "Chapter 3: Programming Language - ACtE0302",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0302 - Pointers, Structure and Data Files"
+      },
+      {
+        "id": 28,
+        "question": "What are namespaces in C++?",
+        "options": [
+          "Memory allocation regions",
+          "Scopes for declaring names to avoid conflicts",
+          "Function calling mechanisms",
+          "Object storage areas"
+        ],
+        "correct_answer": "Scopes for declaring names to avoid conflicts",
+        "hint": "Multiple libraries might have function with same name - how do you avoid collision?",
+        "explanation": "Namespaces: organize code into logical groups, avoiding name conflicts in large projects. Declaration: namespace MyLib { function definitions, class definitions, variables }. Prevents collisions: two libraries with function calc() can coexist in different namespaces. Accessing: MyLib::calc() or using namespace MyLib; then calc(). Nested namespaces: namespace A { namespace B { class C { }; } } accessed as A::B::C. Using statement: using namespace std; brings std namespace into current scope (avoid at global scope in headers - causes pollution). Using declaration: using std::cout; imports specific identifier. Scope: identifiers in namespace not visible outside unless qualified or using declaration. Example: namespace math { int square(int x) { return x*x; } } then math::square(5) or using math::square; square(5). Standard library: std namespace contains cout, cin, vector, etc. Alias: namespace fs = std::filesystem; shortens names. Unnamed namespace: namespace { /* internal linkage */ } makes identifiers private to translation unit (internal linkage). Advantages: organize large codebases, prevent name pollution, support versioning (different lib versions in different namespaces). Best practice: put library code in namespace, avoid using namespace MyLib; at global scope. Anonymous namespaces more preferred than static for internal linkage. C doesn't have namespaces (uses module/header structure instead). Understanding namespace scope crucial for managing large C++ projects and library integration.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 29,
+        "question": "What is function overloading in C++?",
+        "options": [
+          "Calling function multiple times",
+          "Multiple functions with same name but different parameters",
+          "Loading function at runtime",
+          "Allocating more memory to function"
+        ],
+        "correct_answer": "Multiple functions with same name but different parameters",
+        "hint": "Can you have multiple add() functions that work differently?",
+        "explanation": "Function overloading: multiple functions with same name differentiated by parameter list (number, type, or order). Compiler generates unique internal names (name mangling) for each version. Examples: int add(int a, int b) { return a+b; } and double add(double a, double b) { return a+b; } and string add(string a, string b) { return a+b; }. Selection: compiler chooses based on argument types: add(3, 5) calls int version, add(3.5, 2.1) calls double version. Rules: (1) Parameter count must differ or parameter types different. (2) Return type alone insufficient (can't overload on return type only). (3) const qualifier on parameters: const int* vs int* treated as different. Parameter order matters: void foo(int, double) differs from void foo(double, int). Coercion: compiler tries implicit conversions if exact match not found. Ambiguity: foo(5, 5) could match foo(int, int) or foo(double, double) if implicit conversion possible - compiler rejects as ambiguous. Default parameters: foo(int a, int b = 0) with foo(int) allows calling with one argument. Advantages: same operation, intuitive interface (add works for int, double, string), cleaner code. Disadvantages: debugging harder (which version called?), compile-time complexity, risk of ambiguity. Prefix/postfix operators: operator++ can be overloaded as prefix vs postfix using dummy int parameter. Virtual functions: overloading differs from overriding (inheritance). Can combine overloading with inheritance. Modern practice: favor overloading for related operations, templates for generic code. Understanding overloading essential for C++ API design and avoiding errors.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 30,
+        "question": "What are inline functions in C++?",
+        "options": [
+          "Functions written within single line",
+          "Functions expanding at call site to improve performance",
+          "Functions without implementation",
+          "Functions called repeatedly"
+        ],
+        "correct_answer": "Functions expanding at call site to improve performance",
+        "hint": "Compiler optimization that replaces function call with function body.",
+        "explanation": "Inline functions: compiler replaces function call with function body directly, eliminating function call overhead (parameter passing, stack frame creation, return). Declaration: inline return_type function_name(parameters) { body }; Implicit inline: member functions defined in class body automatically inline. Advantages: eliminates call overhead (beneficial for small functions called frequently), enables compiler optimizations, can be faster than macros (type-safe). Disadvantages: code size increase (body duplicated at each call site), compilation slower, not suitable for large functions, implementation visible to users (header files), can't recurse. When beneficial: small functions (1-3 lines) called frequently (loops, callbacks). When inefficient: large functions, recursive functions, functions called rarely. Compiler discretion: inline is hint, compiler may ignore for complex functions. Modern practice: compiler often makes inlining decisions better than hints. Rule of thumb: let compiler decide (don't use inline keyword unless profiling shows benefit). Template functions: implicitly inline (needed in header files). Lambda functions: automatically inline. Recursive inline: compiler typically expands limited times. Virtual functions: virtual prevents inlining (runtime dispatch). Debugging: inlined functions harder to debug (breakpoints, stepping). Performance profiling: measure before optimizing with inline. Example: inline int square(int x) { return x*x; } called 1000 times avoids 1000 function call overheads. Understanding inlining crucial for performance tuning without sacrificing code organization.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 31,
+        "question": "What are default arguments in C++ functions?",
+        "options": [
+          "Arguments passed when calling function",
+          "Parameter values used if argument not provided",
+          "Values stored in function memory",
+          "Required parameters in function"
+        ],
+        "correct_answer": "Parameter values used if argument not provided",
+        "hint": "void func(int x = 5) - what happens if you call func() without arguments?",
+        "explanation": "Default arguments: parameter values used when argument not provided in function call. Declaration: int multiply(int a, int b = 2) { return a * b; }. Call: multiply(5) uses b=2, multiply(5, 3) uses b=3. Rules: (1) defaults must be rightmost parameters - int func(int a = 1, int b) invalid; (2) only in declaration, not definition (usually); (3) can be expression not just constant: int func(int a = getDefault()). Examples: cout << setprecision(6) uses default, file open with default permissions. Multiple defaults: int func(int a = 1, int b = 2, int c = 3) all have defaults, can omit from right. Partial defaults: int func(int a, int b = 2) requires first argument, second optional. Benefits: backward compatibility (add parameters with defaults to existing functions), reduce function overloading, cleaner API (optional parameters). Drawbacks: can make code less clear (hidden parameters), debugging harder (which version called?), difficult with function pointers. Overloading vs defaults: func(int) and func(int, int) as overloads vs func(int, int = 0) as defaults both valid, different trade-offs. Variadic functions: alternative to defaults for variable arguments. Template defaults: template<typename T = int> class MyClass. Constructor defaults: MyClass(int size = 10) { }. Common pattern: void init(string name = \"\", int value = 0, bool flag = false). Understanding defaults improves API design and reduces verbosity.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 32,
+        "question": "What does pass by reference mean in C++?",
+        "options": [
+          "Passing memory address to function",
+          "Parameter becomes alias to original variable",
+          "Copying variable value to function",
+          "Passing pointer to function"
+        ],
+        "correct_answer": "Parameter becomes alias to original variable",
+        "hint": "int& ref vs int* ptr - what's the difference in usage?",
+        "explanation": "Pass by reference: parameter becomes alias (alternative name) to original variable, not separate copy. Declaration: void swap(int& a, int& b) { int t=a; a=b; b=t; }. Usage: int x=5, y=10; swap(x, y) modifies x and y directly. Differences from pointer: reference cannot be null, cannot rebind, syntactically cleaner (no dereferencing). Reference characteristics: (1) must be initialized at declaration. (2) bound to same variable throughout lifetime. (3) syntactically like original variable (no * or ->). (4) compiler implements via pointers internally. Const reference: const int& ref prevents modification through reference. Example: void print(const string& s) { cout << s; } avoids string copy. Return by reference: int& get_ref() { return value; }; must return valid reference (not local variable). Use: minimize copying for large objects. Advantages: cleaner syntax than pointers, efficient (no copy), prevents accidental null. Disadvantages: const reference can extend lifetime of temporaries (returns reference to temporary valid while reference exists). Reference vs pointer: both achieve same at assembly level, references safer (no null), pointers more flexible (rebindable). Array references: int (&arr)[10] reference to 10-element array. Function references: int (&func)() reference to function returning int. Forward reference: forward declare class for reference members. Common pattern: template<typename T> void swap(T& a, T& b) works with any type. Rvalue reference: int&& rvalue_ref moves semantics. Understanding references crucial for modern C++ and efficient coding.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 33,
+        "question": "What is a class in C++?",
+        "options": [
+          "Syntax for declaring variables",
+          "User-defined data type containing data members and member functions",
+          "Derived type from struct",
+          "Memory allocation mechanism"
+        ],
+        "correct_answer": "User-defined data type containing data members and member functions",
+        "hint": "Think of class as blueprint combining data and operations on that data.",
+        "explanation": "Class: user-defined type bundling data (member variables) and functions (methods) operating on data, encapsulating state and behavior. Declaration: class ClassName { public: data members, methods; private: data members, methods; }. Object: instance of class, created on stack/heap. Example: class Student { private: int id; string name; public: void setId(int i) { id = i; } int getId() { return id; } }. Key differences from struct: default access private (struct default public). Encapsulation: hide implementation details, expose interface. Inheritance: class derived : public base { }; enables code reuse. Polymorphism: virtual functions enable runtime dispatch. Abstraction: present high-level interface, hide complexity. Composition: class contains other classes. Member initialization: in constructor. Static members: shared by all instances. Friend: external function accessing private data. Constructor: initializes object state. Destructor: cleans up resources. Access specifiers: public (anyone), protected (derived classes), private (only class). This pointer: refers to current object. Const member functions: const void display() { } don't modify state. Mutable: fields modified in const functions. Example uses: Point (x, y coordinates), Bank Account (balance, transactions), Game Character (health, inventory). Objects in memory: each instance has own member variables, shared method code. Understanding classes fundamental to OOP and modern C++ design.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 34,
+        "question": "What are access specifiers in C++ classes?",
+        "options": [
+          "Keywords defining variable types",
+          "Controls visibility and accessibility of class members",
+          "Parameters in function calls",
+          "Memory allocation directives"
+        ],
+        "correct_answer": "Controls visibility and accessibility of class members",
+        "hint": "public, private, protected - what do they control?",
+        "explanation": "Access specifiers: control member visibility and accessibility. Three levels: (1) public: accessible from anywhere (outside class, derived classes). (2) private: accessible only within class (not derived classes or outside). (3) protected: accessible within class and derived classes, not outside. Default: class has private default (struct has public). Example: class MyClass { private: int secret; public: void setSecret(int s) { secret = s; } int getSecret() { return secret; } }; secret accessible only through public methods. Encapsulation: hide internal state (private), expose interface (public). Benefits: control access, validate data (setters can check), change implementation without breaking API. Derived classes: inherit all members, but private members inaccessible (even through inheritance), protected members accessible. Friend classes: friend class OtherClass allows OtherClass accessing private members (breaks encapsulation, use carefully). Friend functions: friend void func() accesses private. Const objects: only const member functions callable. Static: class-level members, shared by all instances. Example architecture: class BankAccount { private: double balance; public: void deposit(double amount) { if(amount > 0) balance += amount; } }. Getters/setters: data hiding pattern (getSalary(), setSalary(val)). Inheritance: class Derived : private Base (inherits all as private by default), : public Base (inherits public as public). Understanding access control essential for data protection and maintainability.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 35,
+        "question": "What are member functions in C++?",
+        "options": [
+          "Functions that operate on class members",
+          "Functions outside class using member data",
+          "Member variables of function type",
+          "Functions in multiple classes"
+        ],
+        "correct_answer": "Functions that operate on class members",
+        "hint": "Methods defined inside class definition - what do they do with data members?",
+        "explanation": "Member functions (methods): functions defined within class, operating on class data members. Declaration: class Circle { private: double radius; public: void setRadius(double r) { radius = r; } double getArea() { return 3.14 * radius * radius; } }. Implicit this pointer: member functions have hidden 'this' parameter (pointer to object). Example: setRadius(5) becomes setRadius(&object, 5) internally. Accessing members: direct access (radius = r) without this-> (implicit). Const member functions: void display() const { /* read-only */ } cannot modify members. Mutable members: modified even in const functions. Static member functions: static void staticFunc() { } no 'this' pointer, access only static members. Virtual functions: virtual void func() { } enabling polymorphism. Inline definition: defined in class body, implicitly inline. Separate definition: void MyClass::func() { } defined outside class. Example: class List { private: vector<int> data; public: void add(int val) { data.push_back(val); } int size() { return data.size(); } void display() { for(int x : data) cout << x; } }. Friend: non-member function accessing private data. Operator overloading: member functions for operators (+, [], (), etc.). Constructors/destructors: special member functions. Getters: return member values. Setters: modify members with validation. Callbacks: function pointers, functors, lambdas. Understanding member functions crucial for OOP design and encapsulation.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 36,
+        "question": "What are constructors in C++?",
+        "options": [
+          "Functions that construct buildings",
+          "Special functions initializing object state",
+          "Functions building classes",
+          "Compiler directives"
+        ],
+        "correct_answer": "Special functions initializing object state",
+        "hint": "Called automatically when object created - what does it do?",
+        "explanation": "Constructor: special member function automatically called when object created, initializing member variables. Characteristics: (1) Same name as class. (2) No return type. (3) Can be overloaded. (4) Automatically called (cannot call explicitly except with new). Types: Default constructor (no parameters): MyClass() { }. Parameterized constructor: MyClass(int id, string name) { this->id=id; this->name=name; }. Copy constructor: MyClass(const MyClass& obj) { /* copy members */ }. Move constructor: MyClass(MyClass&& obj) { /* move members */ }. Initialization list: MyClass(int x) : id(x), name(\"\") { } initializes before body. Delegating: MyClass() : MyClass(0, \"\") { } calls another constructor. Example: class Person { private: string name; int age; public: Person() { name=\"\"; age=0; } Person(string n, int a) { name=n; age=a; } Person(const Person& p) { name=p.name; age=p.age; } }. Default initialization: Person p creates object with default constructor. Explicit: explicit MyClass(int) prevents implicit conversion. Deleted: MyClass(const MyClass&) = delete; prevents copying. Default: MyClass(const MyClass&) = default; compiler-generated copy. Base class constructor: Derived() : Base(args) { }. Advantages: guaranteed initialization, can validate input. Disadvantages: complex with inheritance, rule of five (constructor, destructor, copy constructor, copy assignment, move constructor/assignment). Best practice: define all constructors explicitly or =default/=delete. Understanding constructors essential for object lifecycle management.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 37,
+        "question": "What are destructors in C++?",
+        "options": [
+          "Functions that destroy objects",
+          "Special functions cleaning up resources when object destroyed",
+          "Functions removing class members",
+          "Operators for object deletion"
+        ],
+        "correct_answer": "Special functions cleaning up resources when object destroyed",
+        "hint": "Called automatically when object lifetime ends - releases allocated resources.",
+        "explanation": "Destructor: special member function automatically called when object destroyed, cleaning up resources. Characteristics: (1) Tilde (~) prefix: ~MyClass() { }. (2) No parameters, no return type. (3) Cannot be overloaded. (4) Automatically called (stack objects on scope exit, heap objects with delete). Purpose: release dynamically allocated memory, close files, release locks, cleanup resources. Example: class File { private: FILE* handle; public: File(string path) { handle=fopen(path.c_str(), \"r\"); } ~File() { if(handle) fclose(handle); } }. Virtual destructor: virtual ~MyClass() { } necessary for polymorphic classes (derived class cleanup called). No cleanup needed: if all members managed (string, vector), compiler-generated destructor sufficient. Delete: object *obj = new object(); delete obj; calls destructor before freeing memory. Smart pointers: unique_ptr, shared_ptr automatically call destructor (RAII pattern). Copy and swap: MyClass& operator=(const MyClass& other) { MyClass temp(other); swap(*this, temp); return *this; }. Exception safety: destructors shouldn't throw (undefined behavior). Resource acquisition is initialization (RAII): constructor acquires, destructor releases. Rule of five: if defining destructor, usually need copy constructor, copy assignment, move constructor, move assignment. Example: class Database { private: Connection* conn; public: ~Database() { if(conn) conn->close(); } }. Understanding destructors crucial for resource management and preventing leaks.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 38,
+        "question": "What is dynamic memory allocation for objects in C++?",
+        "options": [
+          "Creating objects at compile time",
+          "Using new/delete operators to allocate/deallocate memory on heap",
+          "Automatically allocating memory",
+          "Allocating fixed memory amounts"
+        ],
+        "correct_answer": "Using new/delete operators to allocate/deallocate memory on heap",
+        "hint": "MyClass* obj = new MyClass() creates object where? How to destroy?",
+        "explanation": "Dynamic allocation: creating objects on heap at runtime using new, deallocating with delete. Syntax: MyClass *ptr = new MyClass(); destroys with delete ptr; Stack vs Heap: stack (limited, automatic cleanup), heap (larger, manual management). Object creation: new MyClass() calls constructor, returns pointer. Example: class Point { public: Point(int x, int y) { /* init */ } }; Point *p = new Point(3, 4); creates object on heap. Deallocation: delete p; calls destructor, frees memory. Array allocation: MyClass *arr = new MyClass[10]; delete[] arr; (note: delete[] for arrays). Constructor called: new calls constructor for each element. Destructor called: delete/delete[] calls destructor before freeing. Null check: always verify new didn't fail (though modern C++ throws bad_alloc on failure). Memory leak: forgetting delete causes memory leak (allocated memory never freed). Dangling pointer: using pointer after delete causes undefined behavior. Smart pointers: unique_ptr<MyClass> auto-deletes when out of scope (preferred modern approach). Example: unique_ptr<MyClass> obj(new MyClass()); no explicit delete needed. Advantages dynamic: flexible size, allocate/deallocate as needed, build complex structures. Disadvantages: manual management error-prone, performance slower than stack, fragmentation risk. Exception safety: if exception thrown after new but before assignment, memory leaks. Solution: smart pointers. Variably-sized objects: arrays of user-determined size (not possible on stack with fixed size). Custom allocators: overload new/delete for specialized allocation. Understanding dynamic allocation essential for building flexible data structures.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 39,
+        "question": "What is the this pointer in C++?",
+        "options": [
+          "Pointer to current function",
+          "Pointer to current object within member function",
+          "Pointer to class definition",
+          "Pointer declared with this keyword"
+        ],
+        "correct_answer": "Pointer to current object within member function",
+        "hint": "In member function, how do you refer to current object? Is it implicit or explicit?",
+        "explanation": "This pointer: implicit pointer to object on which member function operates. Implicit: compiler adds automatically, usually invisible. Usage: accessing ambiguous members: class MyClass { int x; void setX(int x) { this->x = x; } }. Explicit use: returning self reference: MyClass& getThis() { return *this; }. Chaining: MyClass& setValue(int v) { value=v; return *this; } enables obj.setValue(5).display(). Accessing members: this->member equivalent to member in same context. Non-member functions: no 'this' (static member functions, free functions). Const member: void func() const { // this is const MyClass* this } - points to const object. Non-const member: void func() { // this is MyClass* this }. Using explicitly: method operators -> in recursive structures. Comparison: if(this == &obj) checks if operating on same object. Example: class List { void append(List& other) { if(this == &other) return; /* avoid self-append */ } }. Implementing swap: void swap(MyClass& other) { swap(*this, other); }. Self-assignment check: operator= check avoids issues. Address passing: methods receiving own object via this pointer. Memory: 'this' stored in register for efficiency, not additional memory per object. Cannot modify: 'this' is const pointer, cannot make point to different object. Smart use: returning *this in assignment operators, chaining operations, self-reference checks. Understanding 'this' crucial for method implementation and operator overloading.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 40,
+        "question": "What are static data members in C++?",
+        "options": [
+          "Data members allocated on stack",
+          "Class-level variables shared by all instances",
+          "Immutable data members",
+          "Data members constant throughout program"
+        ],
+        "correct_answer": "Class-level variables shared by all instances",
+        "hint": "Data belonging to class, not individual objects - shared by all instances.",
+        "explanation": "Static data members: variables shared by all class instances, storage at class level not object level. Declaration: class Counter { static int count; public: Counter() { count++; } }. Definition outside: int Counter::count = 0; (must be defined outside class). Access: Counter::count accesses from class, obj.count from object (not recommended). Characteristics: (1) Shared by all instances. (2) Initialized once. (3) Lifetime extends entire program. (4) Default-initialized to zero. Uses: counters (count instances), configuration (shared settings), caches. Example: class MyClass { private: static int instances; public: MyClass() { instances++; } static int getInstances() { return instances; } }. Static member function: static void staticFunc() { } no 'this', access only static members. Mutable static: static int value can be modified in const member functions if mutable. Thread safety: static initialization thread-safe (C++11), but access not thread-safe (need locks). Const static: static const int MAX = 100; compile-time constant. Constexpr: constexpr static int VALUE = 42; (C++17, can be used in compile-time expressions). Disadvantages: global state (complicates testing, hidden dependencies), thread-safety issues. Testing: difficult with static members (persist across tests). Workaround: reset in constructor/destructor or friend test classes. Design consideration: prefer instance members when possible, use static only when truly class-level. Singleton pattern: static instance of class. Understanding static members essential for resource management and class-level state.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 41,
+        "question": "What are constant member functions in C++?",
+        "options": [
+          "Functions with constant parameters",
+          "Functions that don't modify object state",
+          "Functions returning constants",
+          "Functions with const return type"
+        ],
+        "correct_answer": "Functions that don't modify object state",
+        "hint": "void func() const - what does const at end mean?",
+        "explanation": "Const member functions: methods that don't modify object state, 'this' pointer becomes const pointer to const. Declaration: int getValue() const { return value; }. Guarantee: compiler prevents accidental modifications. Example: class Vector { private: double x, y; public: double length() const { return sqrt(x*x + y*y); } void scale(double factor) { x *= factor; y *= factor; } }; length() const, scale() non-const. Benefits: (1) Intent clarity (read-only operation). (2) Compiler enforcement. (3) Callable on const objects. (4) Callable on const references. Const objects: const Vector v(3, 4); can only call const methods. Const reference: void display(const Vector& v) can pass any Vector, calls const methods. Mutable members: mutable int cache_value can be modified in const methods (for caching). Example: class Square { private: double side; mutable double cached_area; public: double area() const { cached_area = side*side; return cached_area; } }. Overloading on const: can have both const and non-const versions. Example: class Container { public: int& operator[](int i) { return data[i]; } const int& operator[](int i) const { return data[i]; } }. Const correctness: best practice to mark all non-modifying functions const. Volatile: volatile methods for hardware variables. Thread-safety: const doesn't guarantee thread-safety (only single-thread). Bitwise vs logical: compiler enforces bitwise const (not logical const with mutable). Practice: use const liberally for safer, more maintainable code. Understanding const member functions crucial for API design and correctness.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 42,
+        "question": "What are friend functions and classes in C++?",
+        "options": [
+          "Functions that are friends of other functions",
+          "External functions/classes granted access to private members",
+          "Classes that inherit from each other",
+          "Mutually dependent classes"
+        ],
+        "correct_answer": "External functions/classes granted access to private members",
+        "hint": "How can non-member function access private class data?",
+        "explanation": "Friend: mechanism allowing non-member function or another class to access private/protected members. Friend function: friend ostream& operator<<(ostream& os, const MyClass& obj) { os << obj.private_data; return os; }. Usage: declared inside class, defined outside. Not member function: not inherited, no 'this' pointer. Example: class Complex { private: double real, imag; friend Complex add(Complex a, Complex b); }; add() can access real and imag. Friend class: friend class OtherClass allows OtherClass all access. Declaration: friend class OtherClass inside MyClass. Uses: (1) Operator overloading (<<, >>, stream operators). (2) Utility functions. (3) Related classes (iterator with container). Advantages: non-member function can access private (cleaner for operators). Disadvantages: breaks encapsulation, creates coupling. Bidirectional: friendship not inherited, one-way (A friend of B, doesn't make B friend of A). Scope: friend declared in class but not member, defined outside like free function. Best practice: minimize friends, prefer accessors when possible. Example: nested class (has natural access): class Outer { private: int data; class Inner { Outer& outer; }; }. Forward declaration: friend class Forward; (class Forward not yet defined). Iterator pattern: friend allows iterator accessing container's private members. Testing: friend often used for unit testing (test class as friend). Understanding friends crucial for operator overloading and library design.",
+        "chapter": "Chapter 3: Programming Language - ACtE0303",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0303 - C++ Language Constructs with Objects and Classes"
+      },
+      {
+        "id": 43,
+        "question": "What is operator overloading in C++?",
+        "options": [
+          "Using operators multiple times",
+          "Defining custom behavior for operators with objects",
+          "Creating new operators",
+          "Applying operators to different types"
+        ],
+        "correct_answer": "Defining custom behavior for operators with objects",
+        "hint": "Complex c1 + c2 - how does compiler know what + means for Complex?",
+        "explanation": "Operator overloading: defining custom behavior for C++ operators when applied to user-defined types. Syntax: ReturnType operator@(parameters) { }. Examples: Complex operator+(const Complex& a, const Complex& b) { return Complex(a.real+b.real, a.imag+b.imag); }. Member function: Complex operator+(const Complex& other) const { return Complex(real+other.real, imag+other.imag); }. Non-member: friend Complex operator+(const Complex& a, const Complex& b). Overloadable: arithmetic (+,-,*,/,%), comparison (==,!=,<,>,<=,>=), logical (&&,||,!), bitwise (&,|,^,~,<<,>>), assignment (=,+=,-=,*=,/=,%=), subscript ([]), function call (()), member access (->), increment/decrement (++,--), smart pointer (* and ->). Cannot overload: scope resolution (::), member selection (.), pointer-to-member (.*), ternary (?:), sizeof, typeid. Member-only operators: assignment (=), subscript ([]), function call (()), member access (->). Unary vs binary: prefix/postfix increment differentiated by dummy int parameter. Example: MyClass& operator++() { /* prefix */ } vs MyClass operator++(int) { /* postfix */ }. Return types: arithmetic return by value, assignment return by reference (&). Const correctness: operator+(const MyClass&) const. Chaining: assignment returns reference enabling a=b=c. Implicit conversion: operator int() { return value; } converts object to int. Conversion constructor: MyClass(int) { } converts int to MyClass. Advantages: intuitive syntax (obj1 + obj2 vs obj1.add(obj2)), natural expression. Disadvantages: can confuse (+ might not mean traditional addition), complicates implementation. Best practice: maintain expected semantics, avoid surprising behavior. Example: string concatenation with +, vector index with []. Understanding operator overloading essential for creating natural-feeling APIs.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 44,
+        "question": "What is data conversion (type conversion) in C++?",
+        "options": [
+          "Converting strings to numbers",
+          "Implicit or explicit conversion between types",
+          "Converting variables during assignment",
+          "Changing data structure types"
+        ],
+        "correct_answer": "Implicit or explicit conversion between types",
+        "hint": "int i = 5.5; - automatic conversion from double to int, or cast for control.",
+        "explanation": "Data conversion: changing one type to another. Implicit (automatic): int x = 5.5; converts double to int (loses precision). Explicit (casting): (int)5.5, int(5.5) (C-style), static_cast<int>(5.5) (C++ style). C++ casts: (1) static_cast<T>(value) type-safe conversion (int from double, base to derived). (2) dynamic_cast<T*>(ptr) safe polymorphic conversion (returns null if invalid). (3) reinterpret_cast<T*>(ptr) unsafe, bitwise reinterpretation (pointer to int). (4) const_cast<T&>(value) adds/removes const. Implicit conversion rules: arithmetic promotion (int to double), pointer conversion (derived* to base*), user-defined conversion (conversion constructor, conversion operator). Conversion constructor: class MyClass { MyClass(int x) { } }; int i=5; MyClass m = i; implicit conversion via constructor. Conversion operator: operator int() { return value; }; int i = obj; implicit conversion via operator. Narrowing: converting larger type to smaller (double to int) loses data - modern C++ warns/errors in some contexts. Example: std::vector<int> v = {1, 2, 3.5}; error (3.5 narrowing to 3). Const conversion: const_cast<string&>(const_str) removes const. Pointer conversion: static_cast<Base*>(derived_ptr) safe, dynamic_cast<Derived*>(base_ptr) safe with RTTI. String conversions: stoi(), stof(), to_string() in modern C++. Best practice: explicit casts for clarity, avoid unsafe reinterpret_cast, use static_cast for type-safe conversions. Understanding conversions crucial for type safety and preventing errors.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 45,
+        "question": "What is inheritance in C++ - specifically single inheritance?",
+        "options": [
+          "Deriving multiple classes from multiple bases",
+          "Single derived class from single base class",
+          "Classes inheriting from interface",
+          "Sharing methods between classes"
+        ],
+        "correct_answer": "Single derived class from single base class",
+        "hint": "class Derived : public Base { } - one parent, one child.",
+        "explanation": "Single inheritance: derived class inherits from one base class. Syntax: class Derived : public Base { }. Access: public (inherits as public), private (inherits as private), protected (inherits as protected). Characteristics: (1) Derived is-a Base relationship. (2) Inherits all non-private members. (3) Can override virtual functions. (4) Constructor chains. Example: class Vehicle { protected: string make; public: virtual void drive() { } }; class Car : public Vehicle { public: void drive() override { cout << \"Driving car\"; } }. Public inheritance: public members stay public, protected stay protected. Private inheritance: public/protected become private (rarely used). Protected inheritance: public become protected, protected stay protected. Method override: derived defines function with same signature as base. Virtual call: Vehicle *v = new Car(); v->drive() calls Car::drive(). Member access: Car can access public/protected Vehicle members. Hidden: if derived defines non-virtual function with same name as base, hides base version. Constructor: derived constructor must call base constructor (explicitly or implicitly). Initialization: Car() : Vehicle(args) { } initializes base first. Disadvantage single inheritance: less flexible than multiple inheritance. Code reuse: inherit common functionality from base. Polymorphism: base pointer/reference points to derived object. Diamond problem: avoided (only one base). Best practice: public inheritance for is-a relationships, prefer composition when not true is-a. Understanding single inheritance crucial for OOP and code reuse.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 46,
+        "question": "What is multiple inheritance in C++?",
+        "options": [
+          "One class inheriting from multiple base classes",
+          "Multiple classes inheriting from single base",
+          "Inheritance chain (A->B->C)",
+          "Inheriting from inherited classes"
+        ],
+        "correct_answer": "One class inheriting from multiple base classes",
+        "hint": "class Derived : public Base1, public Base2 { } - two parents.",
+        "explanation": "Multiple inheritance: derived class inherits from multiple base classes. Syntax: class Derived : public Base1, public Base2 { }. Mix access: class Derived : public A, private B, protected C { }. Uses: combining unrelated features from multiple bases. Example: class Employee { virtual void work() { } }; class Manager { virtual void manage() { } }; class ProjectManager : public Employee, public Manager { void work() override { } void manage() override { } }. Diamond problem: if both bases inherit from common ancestor. Example: class A { }; class B : public A { }; class C : public A { }; class D : public B, public C { }; D has two copies of A (ambiguous). Solution 1 - Virtual inheritance: class B : virtual public A, class C : virtual public A creates single A. Virtual base: D has one A instance, accessed via B and C. Initialization: D() : B(args), C(args), A(args) { } must initialize virtual base explicitly. Ambiguity resolution: B::func() or C::func() if both define same. Complexity: multiple inheritance increases complexity, harder to understand. Best practice: avoid unless necessary, prefer composition (has-a over is-a). Interface classes: pure virtual (resembles multiple inheritance). Mixins: small classes with specific functionality (thread-safe, comparable). Modern C++: prefer composition and single inheritance. Testing: harder with multiple inheritance (more dependencies). Use case: practical multiple inheritance uncommon in modern code. Understanding multiple inheritance important for legacy code and advanced patterns.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 47,
+        "question": "What is multilevel inheritance in C++?",
+        "options": [
+          "Single inheritance repeated in chain",
+          "Multiple inheritance levels (A->B->C)",
+          "Inheriting same level",
+          "Parallel inheritance paths"
+        ],
+        "correct_answer": "Multiple inheritance levels (A->B->C)",
+        "hint": "class C : public B where B : public A - three levels.",
+        "explanation": "Multilevel inheritance: inheritance chain where derived class becomes base for another. Example: class Animal { }; class Mammal : public Animal { }; class Dog : public Mammal { }. Dog inherits from Mammal, which inherits from Animal. Inheritance chain: Dog is-a Mammal is-a Animal. Member access: Dog can access public/protected members of both Mammal and Animal. Constructor: Dog() : Mammal() { } or Dog() : Mammal(), Animal() { } must call constructors in order (base first). Method override: each level can override or introduce methods. Virtual functions: enable polymorphic behavior across levels. Example: class Shape { virtual void draw() { } }; class 2DShape : public Shape { }; class Circle : public 2DShape { void draw() override { } }. Ambiguity: no diamond problem with multilevel (linear chain). Scope: searching for member starts at current class, then parent, then grandparent. Hidden: non-virtual methods hidden if overridden at any level. Complexity grows: deeper inheritance more complex, harder to understand. Best practice: limit depth (usually 3 levels max). Code reuse: inherit behavior progressively (general -> specific -> most specific). Polymorphism: common use case for heterogeneous collections (vector<Shape*>). Maintenance: changes to base affect all derived (for better or worse). Understanding multilevel inheritance important for hierarchical design.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 48,
+        "question": "What is hybrid inheritance in C++?",
+        "options": [
+          "Combining different inheritance types",
+          "Only inheritance with interfaces",
+          "Inheritance without virtual functions",
+          "Temporary inheritance"
+        ],
+        "correct_answer": "Combining different inheritance types",
+        "hint": "Mix of single, multiple, and multilevel inheritance in same hierarchy.",
+        "explanation": "Hybrid inheritance: combining multiple, single, and/or multilevel inheritance in complex hierarchy. Example structure: class A { }; class B : public A { }; class C : public A { }; class D : public B, public C { }; (multilevel + multiple + potential diamond). Diamond problem possible: if multiple paths lead to common base, virtual inheritance resolves. Real example: Graphics system - Shape (base), RectangleBase : public Shape, FillableBase : public Shape, FilledRectangle : public RectangleBase, public FillableBase. Complexity: increases significantly, harder to understand relationships. Benefits: model complex real-world hierarchies (e.g., objects with multiple capabilities). Challenges: ambiguity, virtual base initialization, maintenance. Virtual inheritance: class RectangleBase : virtual public Shape resolves diamond. Initialization order: virtual bases initialized before non-virtual. Methods: resolving which method to call requires careful analysis. Best practice: minimize, document clearly, consider composition instead. Example resolution: FilledRectangle calls both draw() from shape and fill() from fillable. Debugging: complex diamond problems hard to debug. Alternative: composition - FilledRectangle has Shape, Fill components instead. Modern design: hybrid inheritance rare in modern code, prefer composition. Understanding hybrid inheritance important for working with legacy systems.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 49,
+        "question": "What is multipath inheritance in C++?",
+        "options": [
+          "Single class accessed through multiple paths",
+          "Multiple bases with common ancestor",
+          "Multiple constructors",
+          "Multiple inheritance levels"
+        ],
+        "correct_answer": "Single class accessed through multiple paths",
+        "hint": "Diamond problem - multiple paths to same base class.",
+        "explanation": "Multipath inheritance (diamond inheritance): derived class reachable through multiple inheritance paths. Classic diamond: A is base, B inherits A, C inherits A, D inherits B and C. D has two paths to A (D->B->A and D->C->A). Problem without virtual: A instantiated twice, ambiguous member access, wasted memory. Without virtual base: D has two A sub-objects (one via B, one via C). Accessing: member of A ambiguous - d.member? comes from B's A or C's A? Solution: virtual inheritance. class B : virtual public A makes A virtual base. class C : virtual public A shared copy of A. With virtual: D has single A instance. Initialization: D() : B(), C(), A() explicitly initializes virtual base. Member access: d.member unambiguous. Virtual function calls resolved correctly. Example: Unix file system (File), Symbolic file (inherits File), Hard link (inherits File), Union (inherits both) - same file accessed through two paths. Real-world example: Multiple interface implementation. Cost: virtual inheritance adds indirection (pointer to virtual base), slightly slower access. Best practice: document virtual inheritance clearly, test thoroughly. Ambiguity without virtual: D d; d.member error (ambiguous). With virtual: works correctly. Avoid unless necessary: increases complexity. Alternative: use interfaces/mixins. Understanding multipath inheritance crucial for working with complex diamond hierarchies.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 50,
+        "question": "What are constructors and destructors in inheritance?",
+        "options": [
+          "Only derived classes have constructors",
+          "Base and derived constructors both called, destructors in reverse order",
+          "Only destructors matter in inheritance",
+          "Inherited classes don't need constructors"
+        ],
+        "correct_answer": "Base and derived constructors both called, destructors in reverse order",
+        "hint": "When Derived created, does Base also initialize? Destruction order?",
+        "explanation": "Constructor/destructor in inheritance: automatic chain calling, specific order. Constructor order: Base first, then Derived. Example: class Base { public: Base() { cout << \"Base\"; } }; class Derived : public Base { public: Derived() : Base() { cout << \"Derived\"; } }; Derived d; outputs \"BaseDerived\". Destructor order: Derived first, then Base (reverse of construction). ~Derived() called first, then ~Base() automatically. Destructor chain: ~Derived() { cout << \"~Derived\"; } calls ~Base() implicitly. Purpose: base resource cleanup after derived cleanup. Virtual destructor: important for polymorphism. Base *b = new Derived(); delete b; without virtual ~Base(), calls only ~Base(). With virtual: calls ~Derived() then ~Base(). Initialization list: Derived(int x) : Base(x), member(x) { }. Explicit base call: must chain if base has no default constructor. Constructor inheritance (C++11): using Base::Base; inherits base constructors. Delegating constructor: Derived() : Derived(0) { } calls another derived constructor. Example multilevel: class A { }; class B : public A { }; class C : public B { }; creating C calls A(), then B(), then C(). Destruction: ~C(), then ~B(), then ~A(). Virtual base: virtual base initialized before non-virtual bases. Parameterized base: must explicitly initialize. Exception safety: if derived constructor throws before base initialization, undefined. Best practice: explicit constructor chains, virtual destructors in polymorphic classes. Understanding constructor/destructor order crucial for resource management in inheritance.",
+        "chapter": "Chapter 3: Programming Language - ACtE0304",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0304 - Features of Object-Oriented Programming"
+      },
+      {
+        "id": 51,
+        "question": "What are virtual functions in C++?",
+        "options": [
+          "Functions that don't have implementation",
+          "Functions supporting runtime polymorphism through dynamic dispatch",
+          "Functions existing only at compile time",
+          "Functions shared between objects"
+        ],
+        "correct_answer": "Functions supporting runtime polymorphism through dynamic dispatch",
+        "hint": "virtual void func() enables derived override, correct version called at runtime.",
+        "explanation": "Virtual functions: enable runtime polymorphism, correct derived version called through base pointer/reference. Declaration: virtual void func() { }. Override: derived redefines with same signature. Dynamic dispatch: selecting method based on actual object type, not pointer type. Example: class Shape { virtual void draw() { } }; class Circle : public Shape { void draw() override { cout << \"Circle\"; } }; Shape *s = new Circle(); s->draw() calls Circle::draw(), not Shape::draw(). V-table: compiler creates virtual method table for each class. Virtual call: looks up v-table entry, calls appropriate function. Cost: pointer dereference (slight performance hit). Non-virtual: call resolved at compile time (fast). Pure virtual: virtual void func() = 0; abstract function. Abstract class: cannot instantiate, must override pure virtuals in derived. Final (C++11): virtual void func() final; prevents further overriding. Override (C++11): void func() override; ensures overriding virtual function (compiler error if not). Example: class Animal { virtual void sound() { } }; class Dog : public Animal { void sound() override { cout << \"Woof\"; } }. Polymorphic call: vector<Animal*> animals; for(auto a : animals) a->sound() calls appropriate version. Without virtual: all calls resolve to Shape::draw() (no polymorphism). Inheritance hierarchy: virtual defined at any level works through whole hierarchy. Base class pointer: can point to any derived object, virtual ensures correct behavior. Virtual destructor: essential for polymorphism (discussed separately). Understanding virtual functions fundamental to OOP and polymorphism.",
+        "chapter": "Chapter 3: Programming Language - ACtE0305",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0305 - Pure Virtual Functions and File Handling"
+      },
+      {
+        "id": 52,
+        "question": "What is dynamic binding in C++?",
+        "options": [
+          "Binding variables to types at runtime",
+          "Resolving virtual function calls at runtime based on actual object type",
+          "Binding memory dynamically",
+          "Linking libraries at runtime"
+        ],
+        "correct_answer": "Resolving virtual function calls at runtime based on actual object type",
+        "hint": "vs static binding (compile-time), dynamic binding checks actual object type.",
+        "explanation": "Dynamic binding: runtime resolution of method calls based on actual object type, not apparent type. Enabled by: virtual functions + polymorphism. Static binding: compile-time resolution (normal functions). Example: class Animal { public: virtual void speak() { } }; class Dog : public Animal { public: void speak() { cout << \"Woof\"; } }; Animal *a = new Dog(); a->speak() uses dynamic binding, calls Dog::speak(). Without virtual: static binding, calls Animal::speak(). How it works: (1) Base pointer/reference holds derived object. (2) Virtual function call. (3) Compiler generates code to look up v-table at runtime. (4) Finds correct function for actual type. (5) Calls derived implementation. V-table lookup: small overhead (pointer dereference, array lookup). Multiple dispatch: single dispatch (C++) vs multiple dispatch (Visitor pattern). Performance: slightly slower than static (1-3% typically). Optimization: compiler may devirtualize if type known. Example without dynamic binding: Shape *s = new Circle(); if(typeid(*s)==typeid(Circle)) ((Circle*)s)->draw() - ugly and slow. With dynamic binding: s->draw() - clean and still polymorphic. Polymorphic collections: vector<Shape*> shapes; shapes.push_back(new Circle()); shapes.push_back(new Square()); for(auto s : shapes) s->draw() works correctly. Design pattern: enables extensible code (new derived classes without changing code using base). Cost-benefit: small performance cost for huge design flexibility. Understanding dynamic binding crucial for polymorphic design.",
+        "chapter": "Chapter 3: Programming Language - ACtE0305",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0305 - Pure Virtual Functions and File Handling"
+      },
+      {
+        "id": 53,
+        "question": "What is exception handling in C++ - try, catch, throw?",
+        "options": [
+          "Error prevention mechanisms",
+          "Mechanism for managing errors and abnormal conditions",
+          "Debugging technique",
+          "Memory management method"
+        ],
+        "correct_answer": "Mechanism for managing errors and abnormal conditions",
+        "hint": "try block executes, throw propagates error, catch handles.",
+        "explanation": "Exception handling: mechanism to gracefully handle errors and exceptional conditions. Three components: (1) Try: wraps code that might throw. (2) Catch: handles thrown exception. (3) Throw: signals error, passes control to catch. Syntax: try { /* code */ } catch(ExceptionType e) { /* handle */ }. Example: try { int x = stoi(\"abc\"); } catch(invalid_argument e) { cout << \"Invalid\"; }. Multiple catch: try { /* code */ } catch(DivideByZero e) { } catch(OutOfRange e) { }. Catch-all: catch(...) { } catches any exception. Throw: throw std::runtime_error(\"Error message\"); creates and throws exception object. Exception propagation: unhandled exception propagates up call stack. Example: void func() { throw runtime_error(\"Error\"); } main calls func, error propagates. Standard exceptions: runtime_error, invalid_argument, out_of_range, bad_alloc, etc. Custom exceptions: class MyException : public std::exception { }. What throws: throw MyException(\"Custom error\"). Cleanup: destructors called during unwinding (RAII cleanup). Const &: catch(const std::exception& e) preferred (polymorphic handling). STL containers: throw out_of_range, bad_alloc. Re-throw: catch { /* handle */ throw; } re-throws original exception. Nested try-catch: try inside catch block. Exception safety: noexcept void func() noexcept; specifies no exceptions. Benefits: error handling decoupled from normal flow, clear error codes (exception type). Disadvantages: overhead (performance), complex control flow. Best practice: throw early (detect errors quickly), catch specific exceptions, clean up in destructors. Understanding exception handling essential for robust error management.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 54,
+        "question": "What are function templates in C++?",
+        "options": [
+          "Template design for functions",
+          "Generic functions working with multiple types",
+          "Functions with template parameters",
+          "Pre-defined function patterns"
+        ],
+        "correct_answer": "Generic functions working with multiple types",
+        "hint": "template<typename T> T max(T a, T b) - one function for all types.",
+        "explanation": "Function templates: generic functions accepting type parameters, one template generates multiple concrete functions. Syntax: template<typename T> T func(T a, T b) { /* implementation */ }. Usage: int x = max(5, 3); double y = max(3.5, 2.1); string z = max(\"abc\", \"xyz\"); one template, three specializations generated. Type deduction: compiler deduces T from arguments (or explicitly max<int>(5, 3)). Multiple type parameters: template<typename T, typename U> T func(T a, U b) { }. Non-type parameters: template<int N> void func() { }; fixed N at compile-time. Default type parameters: template<typename T = int> T func() { }. Constraints: template applies to all types unless constrained. Specialization: explicit specialization for specific type. Example: template<> string func<string>(string a, string b) { special handling }. Advantages: code reuse across types, type-safe, compiler optimizations. Disadvantages: compilation slower (instantiation), error messages complex, larger executable. Instantiation: compiler creates function for each type used. Example: max template instantiated for int, double, string separately. Performance: no runtime overhead (generated at compile-time). SFINAE: substitution failure is not an error (advanced). Concepts (C++20): specify type requirements. Example swap template: template<typename T> void swap(T& a, T& b) { T t=a; a=b; b=t; }. STL: all STL algorithms templates (sort, find, transform). Understanding function templates essential for generic programming.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 55,
+        "question": "What are class templates in C++?",
+        "options": [
+          "Template design for classes",
+          "Generic classes accepting type parameters",
+          "Classes with template methods",
+          "Pre-defined class patterns"
+        ],
+        "correct_answer": "Generic classes accepting type parameters",
+        "hint": "template<typename T> class Container { T data; }; Container<int>, Container<string>, etc.",
+        "explanation": "Class templates: generic classes accepting type parameters, creating type-specific classes. Syntax: template<typename T> class MyClass { private: T data; public: void set(T val) { data = val; } T get() { return data; } }. Usage: MyClass<int> intObj; MyClass<string> strObj; MyClass<double> doubleObj. Instantiation: compiler generates three different classes (MyClass<int>, MyClass<string>, etc.). Member functions: all members work with type T. Multiple type parameters: template<typename T, typename U> class Pair { T first; U second; }. Static members: each instantiation has own static member. Example: vector, list, map, set are class templates. Specialization: explicit specialization for specific type. Example: template<> class MyClass<string> { special implementation }. Partial specialization: template<typename T> class MyClass<T*> { /* pointer specialization */ }. Inheritance: class Derived : public MyClass<int> { }. Constraints: template<typename T> requires Addable<T> class MyClass (C++20). Advantages: strong type safety, no void pointer casts, flexibility. Disadvantages: code bloat (separate code for each type), longer compilation, complex error messages. STL containers: vector<T>, list<T>, set<T>, map<K,V> are class templates. Default type: template<typename T = int> class MyClass. Non-type parameters: template<typename T, int N> class Array { T data[N]; }. Understanding class templates fundamental to modern C++ and generic containers.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 56,
+        "question": "What is the Standard Template Library (STL) in C++?",
+        "options": [
+          "Library of standard C++ functions",
+          "Collection of generic containers, algorithms, and iterators",
+          "Built-in data structure library",
+          "Standard function templates"
+        ],
+        "correct_answer": "Collection of generic containers, algorithms, and iterators",
+        "hint": "vector, list, map, sort, find, for_each - these are STL components.",
+        "explanation": "STL: provides generic, reusable components. Three main parts: (1) Containers: data structures (vector, list, deque, set, map, etc.). (2) Algorithms: operations on containers (sort, find, transform, etc.). (3) Iterators: generalized pointers for container traversal. Containers: sequential (vector, list, deque), associative (set, map, multiset, multimap), unordered (unordered_set, unordered_map). Algorithms: sorting (sort, stable_sort), searching (find, binary_search, lower_bound), modification (transform, copy), numeric (accumulate, inner_product). Iterators: input, output, forward, bidirectional, random access. Example: vector<int> v = {3,1,4,1,5}; sort(v.begin(), v.end()); find(v.begin(), v.end(), 4). Advantages: proven, optimized implementations, consistency across containers, flexibility. Iterator abstraction: algorithms work with any container. Example: sort works on vector, deque, arrays (with different iterators). Functional objects: std::less, std::greater for custom comparison. Lambda expressions: algorithm callbacks. Example: sort(v.begin(), v.end(), [](int a, int b) { return a > b; }) sorts descending. Performance: optimized implementations (O(n log n) sort), cache-friendly. Containers: O(1) or O(log n) operations. Learning curve: steep for complex usage, but mastering STL essential for modern C++. Understanding STL fundamental to effective C++ programming.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 57,
+        "question": "What are iterators in STL?",
+        "options": [
+          "Functions that iterate",
+          "Generalized pointers for container traversal",
+          "Loop constructs",
+          "Container indices"
+        ],
+        "correct_answer": "Generalized pointers for container traversal",
+        "hint": "v.begin(), v.end(), ++it, *it - iterator operations.",
+        "explanation": "Iterators: generalized pointers allowing access and traversal of container elements. Categories: (1) Input: read-only, single-pass. (2) Output: write-only, single-pass. (3) Forward: read-write, single-pass. (4) Bidirectional: read-write, bidirectional (++, --). (5) Random access: read-write, random (+=, -=, [i]). Operations: *it (dereference), ++it (increment), it->member (member access). Example: vector<int> v = {1,2,3}; for(auto it = v.begin(); it != v.end(); ++it) cout << *it;. Range-based for: for(int x : v) simpler, equivalent. Type: vector<int>::iterator, list<int>::iterator (different types). Const iterator: const_iterator read-only, reverse_iterator backwards. Algorithms: work with iterators. Example: find(v.begin(), v.end(), 2) finds element 2. Distance: distance(it1, it2) steps between iterators (random access O(1), bidirectional O(n)). Advance: advance(it, n) moves iterator n positions. Invalid iterators: after erase, capacity change invalidates (container dependent). Performance: O(1) dereference, O(1) increment (forward+). Container choice affects iterator type. Example: vector (random), list (bidirectional), set (bidirectional). Advantages: algorithm abstraction (same algorithm works on any container), clean syntax. Disadvantages: confusing at first, need to understand category constraints. Invalidation rules: erase invalidates following iterators in vector, all in list. Understanding iterators essential for STL and generic algorithms.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 58,
+        "question": "What is the difference between containers in STL?",
+        "options": [
+          "All containers identical",
+          "Different data structures optimized for different use cases",
+          "Only difference is template type parameter",
+          "Containers for different industries"
+        ],
+        "correct_answer": "Different data structures optimized for different use cases",
+        "hint": "vector vs list vs set - what are tradeoffs?",
+        "explanation": "STL Containers: different data structures, different performance characteristics. vector<T>: dynamic array, O(1) random access, O(1) push_back, O(n) insert/erase middle. Use: fast access, append. list<T>: doubly-linked list, O(n) access, O(1) insert/erase anywhere, bidirectional. Use: frequent insertion/deletion. deque<T>: double-ended queue, O(1) access/push_pop front-back, O(n) insert/erase middle. Use: queues. set<T>: ordered tree, O(log n) operations, unique elements. Use: sorted unique collection. map<K,V>: ordered tree, O(log n) lookup/insert/erase, key-value pairs. Use: associative array. unordered_set<T>: hash table, O(1) average operations, unordered. Use: fast unique lookup. unordered_map<K,V>: hash table, O(1) average lookup. Use: fast dictionary. multiset<T>/multimap<K,V>: allow duplicates. priority_queue<T>: heap, O(1) top, O(log n) push/pop. Use: priority queues. Stack (LIFO): vector/deque/list adapter, LIFO access. Queue (FIFO): vector/deque/list adapter, FIFO access. Choice criteria: (1) Access pattern (random vs sequential). (2) Insertion/deletion (frequent?). (3) Search (ordered vs fast). (4) Memory (linked lists use more). Example: log file processing (vector append), network packet processing (queue), priority events (priority_queue), cache (unordered_map). Performance comparison: access time, insertion time, deletion time, memory overhead. Selecting container crucial for application performance. Understanding container tradeoffs essential for algorithm optimization.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 59,
+        "question": "What are STL algorithms?",
+        "options": [
+          "Steps for solving problems",
+          "Generic functions operating on containers via iterators",
+          "Container implementation details",
+          "Mathematical calculations"
+        ],
+        "correct_answer": "Generic functions operating on containers via iterators",
+        "hint": "sort, find, transform, copy - operations on containers.",
+        "explanation": "STL algorithms: generic functions performing operations on container ranges via iterators. Categories: (1) Sorting: sort(), stable_sort(), partial_sort(), nth_element(). (2) Searching: find(), binary_search(), find_if(), lower_bound(), upper_bound(). (3) Mutation: transform(), fill(), replace(), shuffle(). (4) Removal: remove(), unique(). (5) Numeric: accumulate(), inner_product(), partial_sum(). (6) Iteration: for_each(), transform(). Examples: vector<int> v = {3,1,4,1,5,9}; sort(v.begin(), v.end()). auto it = find(v.begin(), v.end(), 4); transform(v.begin(), v.end(), v.begin(), [](int x) { return x*2; }). Advantages: (1) Container-independent (work with any container). (2) Efficient implementations. (3) Consistent interface. (4) Composable. Predicates: custom comparison/condition. Example: sort(v.begin(), v.end(), greater<int>()) descending. Lambda expressions: inline predicates. Example: find_if(v.begin(), v.end(), [](int x) { return x > 3; }). Non-modifying: find, count, search. Modifying: sort, reverse, rotate, shuffle. Performance: sort O(n log n), find O(n), binary_search O(log n). Ranges (C++20): easier syntax, same algorithms. Understanding algorithms enables powerful generic code. Writing efficient algorithms crucial for performance.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      },
+      {
+        "id": 60,
+        "question": "What is multiple exception handling in C++?",
+        "options": [
+          "Throwing multiple exceptions",
+          "Catching different exception types in separate catch blocks",
+          "Handling exceptions multiple times",
+          "Exceptions with many parameters"
+        ],
+        "correct_answer": "Catching different exception types in separate catch blocks",
+        "hint": "try { } catch(TypeA) { } catch(TypeB) { } catch(...) { }",
+        "explanation": "Multiple exception handling: try block with multiple catch blocks for different exception types. Syntax: try { /* code */ } catch(ExceptionType1 e) { /* handle type 1 */ } catch(ExceptionType2 e) { /* handle type 2 */ } catch(...) { /* handle any */ }. Order matters: catch blocks checked in order, first matching catches. Example: try { int x = stoi(\"abc\"); int y = 10/0; } catch(invalid_argument& e) { cout << \"Invalid arg: \" << e.what(); } catch(exception& e) { cout << \"General error: \" << e.what(); }. Specific to general: more specific exceptions first (derived class before base). Exception hierarchy: std::exception base, runtime_error, invalid_argument, out_of_range derived. Polymorphic catch: catch(const std::exception& e) catches any standard exception. What(): get error message string. Custom exceptions: class MyError : public std::exception { public: const char* what() const override { return \"My error\"; } }. Multiple sources: different operations throw different exceptions. Example: parsing code - invalid_argument, encoding error, file read - io_error. Catch-all: catch(...) { } last resort, catches anything (even non-standard). Re-throw: catch(MyException& e) { log(e); throw; } re-throws original. Chaining: catch one exception type, throw another. Example: catch(FileNotFound& e) { throw ProcessingError(e); }. Exception safety: strong guarantee (all-or-nothing), basic guarantee (some recovery). Best practice: specific catches first, catch-all last or omit, throw appropriate types. Understanding multiple exception handling essential for robust error management.",
+        "chapter": "Chapter 3: Programming Language - ACtE0306",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0306 - Generic Programming and Exception Handling"
+      }
+    ]
+  }
+]

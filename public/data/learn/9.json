@@ -1,0 +1,394 @@
+[
+  {
+    "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+    "chapter_code": "ACtE09",
+    "total_questions": 30,
+    "set": "Set 1 - AI Basics, Agents, and Search (ACtE0901–ACtE0902)",
+    "question_type": "Comprehensive MCQs with Detailed Explanations",
+    "questions": [
+      {
+        "id": 1,
+        "question": "Which of the following best captures the core idea of Artificial Intelligence (AI)?",
+        "options": [
+          "Building machines that can compute very fast",
+          "Building machines that can imitate human behavior without reasoning",
+          "Building systems that perceive, reason, learn, and act to achieve goals in their environment",
+          "Building software that automates any repetitive task"
+        ],
+        "correct_answer": "Building systems that perceive, reason, learn, and act to achieve goals in their environment",
+        "hint": "Think in terms of agents, environment, and goal-directed behavior rather than just speed or automation.",
+        "explanation": "Artificial Intelligence is not simply about fast computation or blind automation. Classical definitions from Russell & Norvig describe AI as the study and design of intelligent agents: systems that perceive their environment through sensors and act upon that environment through actuators in a way that maximizes their chances of achieving goals. Four classical perspectives help clarify this: (1) Systems that think like humans (cognitive modeling), (2) Systems that act like humans (Turing test), (3) Systems that think rationally (laws of thought), and (4) Systems that act rationally (rational agents). Modern AI largely follows the rational agent perspective. An intelligent system should: (a) Perceive: interpret inputs such as images, speech, text, or sensor readings, (b) Reason: build internal representations and draw inferences from them, (c) Learn: improve its performance from experience instead of relying only on fixed rules, and (d) Act: choose actions that are appropriate for its goals and environment dynamics. Fast computation, automation, or mimicry of human behavior are sometimes side-effects of AI techniques, but they do not fully define AI. For instance, a simple script that clicks a button automatically is not intelligent; it does not perceive changing context, adapt, or optimize towards a goal. In contrast, a self-driving car that observes the road, predicts other vehicles’ behavior, plans routes, and continuously improves via data is operating as an intelligent agent.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 2,
+        "question": "Which combination correctly matches the four classical AI perspectives?",
+        "options": [
+          "Thinking humanly, acting humanly, thinking rationally, acting rationally",
+          "Thinking symbolically, acting statistically, learning probabilistically, planning optimally",
+          "Thinking logically, acting logically, learning logically, optimizing logically",
+          "Perceiving, reasoning, learning, and remembering"
+        ],
+        "correct_answer": "Thinking humanly, acting humanly, thinking rationally, acting rationally",
+        "hint": "Recall the categorization based on human vs rational and thought vs behavior.",
+        "explanation": "Foundations of AI textbooks describe four high-level perspectives on AI, based on two axes: human vs rational and thought vs behavior. This yields four quadrants: (1) Thinking humanly: Trying to model how humans actually think internally (cognitive science, cognitive modeling). This requires psychological experiments and possibly brain imaging to check whether the model matches human reasoning patterns. (2) Acting humanly: Trying to make machines behave indistinguishably from humans, regardless of how they internally work. The Turing test is the classical example: if a judge cannot reliably distinguish the machine from a human in conversation, the machine is said to exhibit human-level intelligence in that domain. (3) Thinking rationally: Emphasizing correct reasoning according to formal logic. Early AI research tried to encode knowledge and reasoning using logical systems, proving theorems and deriving conclusions that are always sound and logically valid. (4) Acting rationally: Focusing on rational agents that choose actions that maximize expected goal achievement given their beliefs and constraints. This perspective is more flexible than strict logic, because it can handle uncertainty, limited computation, and noisy sensors. Modern AI tends to emphasize rational agency: design agents that do the “right” thing given their objectives, knowledge, and computational resources. The other options in the question either mix unrelated terms or miss this canonical 2×2 classification.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 3,
+        "question": "Which of the following is the most accurate definition of an intelligent agent?",
+        "options": [
+          "Any program that runs autonomously without user input",
+          "An entity that perceives its environment and takes actions that maximize its expected performance measure",
+          "Any system that uses machine learning algorithms",
+          "A rule-based system that always follows predefined instructions"
+        ],
+        "correct_answer": "An entity that perceives its environment and takes actions that maximize its expected performance measure",
+        "hint": "Focus on perception, action, and performance measure in a specific environment.",
+        "explanation": "An intelligent agent is formally defined as an entity that perceives its environment via sensors and acts upon that environment via actuators, choosing actions so as to maximize its expected performance measure over time. Several components are important here: (1) Percepts: At each time step, the agent receives percepts (observations) from the environment, which might be partial or noisy. For example, a robot receives camera images, distance sensor readings, and encoder values. (2) Actions: The agent has a set of possible actions it can execute, such as moving forward, turning, speaking, or firing a control signal. (3) Performance measure: Rather than simply “doing something”, the agent is evaluated according to a performance measure defined by the system designer (for example, safety, speed, fuel efficiency, or game score). The agent’s goal is to maximize this measure, not necessarily to mimic human behavior. (4) Agent function vs agent program: The agent function maps percept histories to actions. The agent program is a concrete implementation of that function on some hardware. An autonomous script that just runs without user input but does not sense the environment or optimize a performance measure is not necessarily an intelligent agent. Similarly, a static rule-based system that never adapts can still be an agent, but whether it is intelligent depends on whether it chooses actions that reasonably maximize performance in its environment. Intelligence is judged relative to what was feasible for an ideal agent with the same information. This definition is general enough to cover simple reflex agents, model-based agents, goal-based planners, and utility-based agents.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 4,
+        "question": "In the PEAS framework for agent description, what does PEAS stand for?",
+        "options": [
+          "Percepts, Environment, Actions, Sensors",
+          "Performance measure, Environment, Actuators, Sensors",
+          "Performance measure, Environment, Actions, States",
+          "Perception, Execution, Adaptation, Strategy"
+        ],
+        "correct_answer": "Performance measure, Environment, Actuators, Sensors",
+        "hint": "Think of what the designer specifies: how success is measured, where the agent lives, what it can do, and what it can sense.",
+        "explanation": "PEAS is a useful checklist for specifying a task environment for an intelligent agent before designing the agent itself. It stands for: (1) Performance measure: The quantitative or qualitative criteria used to evaluate the agent’s success. For a self-driving car, this might include safety, travel time, comfort, and legal compliance. For a chess agent, it is usually winning the game. Defining the performance measure carefully is critical; a poorly chosen measure can lead to undesirable behavior. (2) Environment: The external world with which the agent interacts. This includes other agents, physical constraints, rules, and dynamics. For a vacuum-cleaning robot, the environment might be rooms, dirt distribution, furniture, and humans walking around. Specifying the environment helps determine its properties (deterministic vs stochastic, static vs dynamic, etc.). (3) Actuators: The mechanisms through which the agent affects the environment. Examples include wheels and motors for a robot, keystrokes or API calls for a software agent, arms and grippers in industrial robotics, or network packets for a network management agent. (4) Sensors: The input channels through which the agent perceives the environment. These could be cameras, microphones, IR sensors, keyboard/mouse input, or system logs. Distinguishing sensors from actuators clarifies what information the agent receives and what it can change. A good PEAS specification provides a structured way to think about the design problem and directly influences the choice of agent architecture (simple reflex, model-based, goal-based, or utility-based) and the algorithms used (search, planning, learning, etc.).",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 5,
+        "question": "Which of the following is a correct pairing between agent type and its main characteristic?",
+        "options": [
+          "Simple reflex agent – maintains an internal model of the world",
+          "Model-based reflex agent – chooses actions solely based on current percept",
+          "Goal-based agent – selects actions to reach desired states regardless of utilities",
+          "Utility-based agent – optimizes a numeric preference function over states or outcomes"
+        ],
+        "correct_answer": "Utility-based agent – optimizes a numeric preference function over states or outcomes",
+        "hint": "Think about which agent explicitly uses a utility function, not just a goal test.",
+        "explanation": "Agent architectures in AI can be arranged from simple to sophisticated: (1) Simple reflex agents act only on the basis of the current percept, ignoring history. They apply condition–action rules like “if dirty then suck, else move right”. They have no internal model of the world’s dynamics. This makes them easy to implement but fragile in partially observable or changing environments. (2) Model-based reflex agents maintain some internal state to track aspects of the world that are not directly observed in the current percept. They use a model of how the world evolves and how actions affect the world, allowing them to handle partial observability and remember past information. They are still driven by condition–action rules but with state as input. (3) Goal-based agents introduce explicit representation of goals (desired states). Rather than simply reacting, they plan: they search for action sequences that lead from the current state (or belief state) to a goal state. They may consider multiple paths and choose one that reaches a goal, but they treat all goal states as equally acceptable without measuring degrees of preference. (4) Utility-based agents extend goal-based behavior by associating numeric utilities (preferences) with states or outcomes. They choose actions that maximize expected utility, taking into account trade-offs among conflicting objectives (such as speed vs safety vs comfort). This is especially important in stochastic or multi-objective environments where simply reaching a goal is not enough. Therefore, only the utility-based agent explicitly optimizes a numeric preference function. The other options in the question mix characteristics: simple reflex agents do not maintain internal models, and model-based agents do not act solely on current percept; they use state. Goal-based agents use goals, not utilities, as their primary evaluation criterion.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 6,
+        "question": "In terms of environment properties, which combination correctly classifies a typical chess game against a computer opponent?",
+        "options": [
+          "Deterministic, fully observable, static, single-agent",
+          "Deterministic, fully observable, sequential, multi-agent",
+          "Stochastic, partially observable, dynamic, single-agent",
+          "Stochastic, semi-observable, episodic, multi-agent"
+        ],
+        "correct_answer": "Deterministic, fully observable, sequential, multi-agent",
+        "hint": "Think about whether there is uncertainty in the rules, whether both players see the entire board, and how actions unfold over time.",
+        "explanation": "To classify an environment, several dimensions are considered: (1) Deterministic vs stochastic: Chess is deterministic because the result of an action (moving a piece) is completely determined by the rules and current board state; there is no randomness in transitions. Stochastic environments involve random effects (for example, dice rolls in some board games). (2) Fully observable vs partially observable: In chess, both players can see the entire board configuration at all times; there is no hidden information. Therefore, it is fully observable. Games like poker are partially observable because players cannot see opponents’ cards. (3) Static vs dynamic: A static environment does not change while the agent is deliberating; chess is essentially static in this sense because the environment changes only when a player makes a move, not spontaneously. In contrast, driving a car is dynamic: the world changes continuously. (4) Episodic vs sequential: In episodic environments, the agent’s current action does not depend on previous actions. Chess is sequential: the current decision depends heavily on the sequence of prior moves and has long-term consequences. (5) Single-agent vs multi-agent: Chess clearly involves two agents (our agent and the opponent) whose goals conflict, so it is a competitive multi-agent environment (adversarial). Thus, the best classification among the options is deterministic, fully observable, sequential, multi-agent. This classification guides the choice of solution methods: adversarial search algorithms like minimax and alpha–beta pruning are appropriate rather than single-agent shortest-path search.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0901"
+      },
+      {
+        "id": 7,
+        "question": "Which description best matches the idea of a problem as a state-space search?",
+        "options": [
+          "Enumerating all possible inputs and outputs of an algorithm",
+          "Modeling the problem as states, actions, transition model, start state, and goal test, then searching for a path from start to goal",
+          "Representing all knowledge in first-order logic and querying it",
+          "Using probability distributions over all possible outcomes"
+        ],
+        "correct_answer": "Modeling the problem as states, actions, transition model, start state, and goal test, then searching for a path from start to goal",
+        "hint": "Think about nodes in a graph, edges as actions, and search strategies like BFS and DFS.",
+        "explanation": "In classical AI planning and search, a problem is typically formulated as a state-space search. This means: (1) States: Abstract representations of the world at a given time. For instance, the board configuration in 8-puzzle or location of a robot in a grid. (2) Initial state: The state from which the agent starts. (3) Actions: The set of actions available in each state. Actions have preconditions (when they can be applied) and effects (how they change the state). (4) Transition model: A function that, given a state and an action, returns the resulting state (or distribution over states if stochastic). (5) Goal test: A procedure that checks whether a given state satisfies the goal condition (e.g., puzzle solved, destination reached). (6) Path cost function: Optional but often included to evaluate the cost of sequences of actions. Once the problem has been formulated in this way, it can be represented as a graph or tree, where nodes are states and edges are actions. Search algorithms like Breadth-First Search (BFS), Depth-First Search (DFS), Uniform Cost Search, A*, etc., then explore this graph to find a path from the initial state to some goal state. This abstraction separates problem description (what is the problem) from problem-solving strategy (how we search). The other options in the question refer to algorithm analysis, knowledge representation, or probabilistic reasoning, which are related AI topics but do not describe the standard state-space search formulation.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 8,
+        "question": "Which of the following is a characteristic of a well-defined search problem in AI?",
+        "options": [
+          "It has at least one optimal solution but no explicit goal test",
+          "It provides an initial state, a set of actions, a transition model, a goal test, and optionally a path cost function",
+          "It is guaranteed to be solvable in polynomial time",
+          "It can only be represented using logical formulas"
+        ],
+        "correct_answer": "It provides an initial state, a set of actions, a transition model, a goal test, and optionally a path cost function",
+        "hint": "Think of the components that algorithms like BFS or A* require to operate.",
+        "explanation": "A well-defined search problem must specify enough information for a search algorithm to systematically explore possible solutions. The key components are: (1) Initial state: The starting point of the agent in the state space. Without this, the algorithm would not know where to begin. (2) Actions (successor function): For each state, we must know what actions are available and what successor states each action leads to. This is sometimes called the successor function. (3) Transition model: A description of the effect of each action, i.e., a function Result(s, a) that returns the state reached from state s after action a. In deterministic domains, this is a single next state; in stochastic domains, it might be a probability distribution over possible next states. (4) Goal test: A function that checks whether a given state satisfies the goal condition. This may be a simple predicate (“is the robot at target cell?”) or more complex. (5) Path cost function (optional but very common): A function that assigns a numeric cost to each path. Commonly, each action has a step cost, and path cost is the sum. This allows algorithms to distinguish between cheaper and more expensive solutions and define optimality. Once these are specified, a search algorithm can conceptually explore the state space and find solutions. There is no requirement that the problem be solvable in polynomial time or that it be represented in logic. In fact, many interesting search problems (like optimal route planning with complex constraints) are NP-hard or worse, but they are still well-defined search problems.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 9,
+        "question": "Which statement correctly distinguishes uninformed (blind) search from informed (heuristic) search?",
+        "options": [
+          "Uninformed search uses heuristics while informed search does not",
+          "Uninformed search has access to the goal test, informed search does not",
+          "Informed search uses additional problem-specific knowledge (heuristics) to guide exploration toward the goal",
+          "Informed search always finds the optimal solution while uninformed search never does"
+        ],
+        "correct_answer": "Informed search uses additional problem-specific knowledge (heuristics) to guide exploration toward the goal",
+        "hint": "Think: what extra information does A* or Greedy Best-First Search use that BFS or DFS does not?",
+        "explanation": "Uninformed (or blind) search algorithms know only the problem definition in terms of state transitions and goal test; they do not have any domain-specific hints about where the goal is located in the state space. Examples include Depth-First Search (DFS), Breadth-First Search (BFS), Uniform Cost Search (if considered without heuristics), Depth-Limited Search, Iterative Deepening Search, and Bidirectional Search. They are systematic but can explore huge regions of the state space that are irrelevant to the goal, particularly in large or infinite spaces. Informed (heuristic) search algorithms, in contrast, exploit problem-specific knowledge to estimate how promising each state is with respect to reaching the goal. This knowledge is encoded in a heuristic function h(n), which approximates the cost (or distance) from node n to the nearest goal. Examples of informed search include: (1) Greedy Best-First Search, which selects nodes with smallest h(n) (most promising according to heuristic) regardless of cost so far; (2) A* Search, which selects nodes with minimal f(n) = g(n) + h(n), balancing cost so far (g(n)) and estimated remaining cost (h(n)); (3) Hill Climbing, which moves in the direction of decreasing heuristic cost (like gradient-based local search); (4) Simulated Annealing, which uses heuristic costs but occasionally allows uphill moves to escape local minima. Informed search does not guarantee optimality by default; only under conditions like an admissible and consistent heuristic does A* guarantee optimal solutions. So it is incorrect to claim that informed search always finds an optimal solution or that uninformed search never does. For example, BFS finds optimal solutions in unweighted graphs, and Uniform Cost Search finds optimal paths with non-negative step costs.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 10,
+        "question": "Which search strategy is guaranteed to find an optimal solution in a tree with uniform step costs, assuming the branching factor and solution depth are finite?",
+        "options": [
+          "Depth-First Search (DFS)",
+          "Breadth-First Search (BFS)",
+          "Depth-Limited Search",
+          "Greedy Best-First Search"
+        ],
+        "correct_answer": "Breadth-First Search (BFS)",
+        "hint": "Think about which algorithm explores all nodes at depth d before exploring any node at depth d+1.",
+        "explanation": "Breadth-First Search (BFS) explores the search tree level by level: it visits the start node, then all nodes at depth 1, then all nodes at depth 2, and so on. In a tree (no repeated states) with uniform step costs (e.g., cost = 1 per action), the first time BFS reaches a goal node, that node is at the shallowest depth among all goal nodes. Since path cost is proportional to depth when costs are uniform, the shallowest goal also has minimal path cost, so BFS is guaranteed to find an optimal solution under these conditions. Depth-First Search (DFS), on the other hand, dives as deep as possible along one path before backtracking. It may find a deep goal even if a shallower (cheaper) goal exists, so it is not optimal. Depth-Limited Search behaves like DFS but stops after a fixed depth limit; it can miss shallow solutions if the limit is poorly chosen and is not inherently optimal. Greedy Best-First Search uses a heuristic h(n) to choose the node that appears closest to the goal, ignoring path cost so far g(n); it often finds a solution quickly, but has no guarantee of optimality unless the heuristic happens to preserve ordering of true costs, which is rarely proven. For non-uniform step costs, Uniform Cost Search or A* with a consistent heuristic are used instead of BFS for optimality.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 11,
+        "question": "Which of the following correctly pairs an uninformed search algorithm with one of its main characteristics?",
+        "options": [
+          "Depth-First Search – complete and optimal in infinite-depth spaces",
+          "Breadth-First Search – complete and optimal when step costs are equal",
+          "Iterative Deepening Search – requires storing all frontier nodes at once, using a lot of memory",
+          "Bidirectional Search – explores only one direction from the initial state"
+        ],
+        "correct_answer": "Breadth-First Search – complete and optimal when step costs are equal",
+        "hint": "Think about completeness and optimality properties under uniform step costs.",
+        "explanation": "Uninformed search algorithms have well-studied properties: (1) Depth-First Search (DFS) is neither complete in infinite-depth or cyclic state spaces nor optimal. DFS may get stuck going down an infinite path and never reach shallow solutions elsewhere. It also does not guarantee minimal path cost. (2) Breadth-First Search (BFS) is complete when the branching factor is finite and a solution exists. With uniform step costs, BFS is also optimal because it finds the shallowest goal. However, BFS has high memory cost because it stores all nodes at the current frontier. (3) Iterative Deepening Search (IDS) combines benefits of BFS and DFS. It performs depth-limited DFS repeatedly with increasing depth limits (0, 1, 2, …). IDS is complete and optimal under uniform step costs like BFS, but uses memory comparable to DFS (O(bd) time and O(bd) space instead of O(b^d) space for BFS). It does not require storing all frontier nodes simultaneously; instead, it repeatedly re-explores upper levels, which is surprisingly not too expensive because most nodes are at the deepest level. (4) Bidirectional Search simultaneously searches forward from the initial state and backward from the goal, aiming to meet in the middle. If both directions can be efficiently implemented and a predecessor function is available, bidirectional search can dramatically reduce time complexity from O(b^d) to roughly O(b^{d/2}) in each direction, but it is more complex and requires storing both frontiers. Therefore, the only correct pairing among the options is that BFS is complete and optimal when all step costs are equal.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 12,
+        "question": "Which statement about the A* search algorithm is correct when using an admissible and consistent heuristic?",
+        "options": [
+          "A* is complete but not optimal",
+          "A* is optimal but may not terminate on finite graphs",
+          "A* is complete and optimal, expanding no node with f(n) greater than the cost of an optimal solution",
+          "A* is neither complete nor optimal, but runs in linear time"
+        ],
+        "correct_answer": "A* is complete and optimal, expanding no node with f(n) greater than the cost of an optimal solution",
+        "hint": "Recall conditions on the heuristic: admissibility (never overestimates) and consistency (triangle inequality).",
+        "explanation": "A* search is an informed search algorithm that uses a combined evaluation function f(n) = g(n) + h(n), where g(n) is the cost from the start to node n, and h(n) is a heuristic estimate of the cost from n to a goal. Under certain conditions on the heuristic, A* enjoys strong guarantees: (1) Admissible heuristic: h(n) is admissible if it never overestimates the true minimal cost h*(n) to reach a goal from n (i.e., 0 ≤ h(n) ≤ h*(n) for all n). Under admissibility alone, A* is optimal in tree search (no repeated states), but in graph search, it may still re-expand nodes unless consistency is also satisfied. (2) Consistent (monotone) heuristic: h is consistent if for every edge (n, n') with cost c, h(n) ≤ c + h(n'). Intuitively, this enforces a triangle inequality: estimated cost from n to goal is no more than cost of going to successor n' plus estimated cost from n' to goal. Consistency implies admissibility and also ensures that f(n) values along any path are non-decreasing. For graph search, with a consistent heuristic, A* is complete and optimally efficient among all optimal algorithms using the same heuristic information: it is guaranteed to find an optimal solution (minimum path cost) and will not expand any node whose f(n) exceeds the optimal solution cost. It also ensures that each node needs to be expanded at most once. The algorithm terminates on finite graphs because: (a) only finitely many nodes have f(n) less than or equal to the optimal cost, and (b) A* expands them in increasing f(n) order. So the correct statement is that A* is complete and optimal and expands no node with f(n) greater than the optimal solution cost when h is both admissible and consistent.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 13,
+        "question": "In local search algorithms like hill climbing, which problem is most characteristic and often leads to failure to find the global optimum?",
+        "options": [
+          "Excessive memory usage due to storing all visited states",
+          "Lack of a goal test in the search process",
+          "Getting stuck in local maxima, plateaus, or ridges on the search landscape",
+          "Inability to evaluate any heuristic function at all"
+        ],
+        "correct_answer": "Getting stuck in local maxima, plateaus, or ridges on the search landscape",
+        "hint": "Visualize the search as climbing a hill using only local slope information.",
+        "explanation": "Local search algorithms like hill climbing, steepest-ascent hill climbing, and sometimes simulated annealing operate directly on complete states and usually keep only a small number of states in memory. Their goal is not to discover an explicit path but to find a good solution state by iteratively improving the current state according to some objective or heuristic function. In hill climbing, from a current state, the algorithm evaluates neighboring states and moves to the neighbor that most improves the objective. This greedy local move can cause characteristic problems: (1) Local maxima: A state whose objective value is better than that of all its neighbors, but not the best possible globally. The algorithm has no incentive to move away because all neighbors are worse, so it becomes stuck. (2) Plateaus: A flat region where neighboring states have the same objective value (no ascent). The algorithm may wander randomly or terminate, failing to find a direction that leads upward. (3) Ridges: Regions where the optimal path to higher values is not aligned with any single coordinate direction, so naive local steps cannot easily ascend without coordinated moves. These issues mean hill climbing can fail to locate global optima even when they exist and be extremely sensitive to the starting state. Simulated annealing addresses these issues by sometimes accepting worse states with a probability controlled by a “temperature” parameter, allowing it to escape local maxima early in the search. Stochastic hill climbing and random restarts are additional strategies to reduce the chance of getting stuck, but they do not eliminate it entirely. The primary limitation is not memory or absence of goal tests but the local, greedy nature of the improvement process.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 14,
+        "question": "In adversarial search for two-player, zero-sum, perfect-information games, what does the minimax value of a node represent?",
+        "options": [
+          "The maximum heuristic value of any child below that node",
+          "The best guaranteed outcome for the maximizing player assuming optimal play from both players",
+          "The probability of winning from that node under random play",
+          "The minimal cost path from the node to a terminal state"
+        ],
+        "correct_answer": "The best guaranteed outcome for the maximizing player assuming optimal play from both players",
+        "hint": "Think in terms of worst-case analysis from the perspective of the maximizing player.",
+        "explanation": "In adversarial search, particularly in deterministic two-player zero-sum games with perfect information (like chess, checkers, and tic-tac-toe), the minimax algorithm assigns a value to each game state. This minimax value is defined recursively: (1) For terminal states (game over), the value is given by the utility function (for example, +1 for a win, 0 for a draw, −1 for a loss from the perspective of the maximizing player). (2) For non-terminal states where it is the maximizing player’s turn, the minimax value is the maximum of the minimax values of its successor states (because the maximizing player chooses the move that maximizes the final outcome). (3) For non-terminal states where it is the minimizing player’s turn, the minimax value is the minimum of the minimax values of its successor states (because the opponent chooses the move that minimizes the maximizing player’s outcome). Thus, the minimax value of a node from the maximizing player’s perspective represents the utility of the game outcome under optimal play from both players: the maximizing player chooses moves to maximize this value, while the minimizing (opponent) player chooses moves to minimize it. It is a worst-case guarantee for the maximizing player: even if the opponent plays perfectly adversarially, the maximizing player can secure at least that utility by following the corresponding minimax strategy. It is not simply the maximum heuristic value among children (that would ignore the opponent’s choices) and not a probability of winning unless utilities are chosen in that way. It also does not represent a cost in the path-planning sense, but rather game-theoretic utility.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0902"
+      },
+      {
+        "id": 15,
+        "question": "What is the main purpose of alpha–beta pruning in minimax search?",
+        "options": [
+          "To approximate minimax values using heuristics instead of exact search",
+          "To reduce the number of nodes evaluated by pruning branches that cannot influence the final decision",
+          "To convert a zero-sum game into a non-zero-sum game",
+          "To ensure that the search always reaches terminal states"
+        ],
+        "correct_answer": "To reduce the number of nodes evaluated by pruning branches that cannot influence the final decision",
+        "hint": "Think about using bounds (alpha and beta) to detect when further exploration is unnecessary.",
+        "explanation": "Alpha–beta pruning is an optimization of the minimax algorithm that uses bounds to avoid exploring parts of the game tree that cannot possibly affect the final decision. It does not change the result of minimax; it only reduces the number of nodes evaluated. Two values are maintained during depth-first traversal: (1) alpha (α): The best value (highest lower bound) found so far along any path for the maximizing player. It is a lower bound on the final outcome that the maximizing player can guarantee given choices already considered. (2) beta (β): The best value (lowest upper bound) found so far along any path for the minimizing player. It is an upper bound on the outcome from the maximizing player’s perspective because the minimizing player will try to reduce the value. When exploring a node: (a) For a MAX node: if its current value becomes greater than or equal to β, further exploration of its remaining children is unnecessary, because the minimizing player (ancestor MIN node) will never allow this branch to be chosen (it has a better or equal alternative). This is called a beta cut-off. (b) For a MIN node: if its current value becomes less than or equal to α, further exploration is unnecessary because the maximizing player has a better or equal alternative already. This is called an alpha cut-off. With optimal move ordering, alpha–beta pruning can reduce the effective branching factor dramatically. In the best case, it prunes enough branches to make search complexity roughly O(b^{d/2}) instead of O(b^d), where b is branching factor and d is depth. This makes deeper lookahead feasible in practice. However, alpha–beta does not approximate minimax with heuristics (that would be evaluation functions at cut-off depth), nor does it guarantee reaching terminal states. Its purpose is purely to prune branches that cannot affect the final choice.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0902"
+      }
+    ]
+  },
+  {
+    "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+    "chapter_code": "ACtE09",
+    "total_questions": 30,
+    "set": "Set 2 - Knowledge Representation and Reasoning (ACtE0903)",
+    "question_type": "Comprehensive MCQs with Detailed Explanations",
+    "questions": [
+      {
+        "id": 16,
+        "question": "Which of the following best describes the goal of a knowledge representation (KR) scheme in AI?",
+        "options": [
+          "To store as much raw data as possible in a database",
+          "To encode information in a form that a computer can reason with effectively and efficiently",
+          "To compress sensory data using lossless algorithms",
+          "To represent only numerical facts and ignore relationships"
+        ],
+        "correct_answer": "To encode information in a form that a computer can reason with effectively and efficiently",
+        "hint": "Think beyond storage: reasoning, inference, and problem solving are central.",
+        "explanation": "Knowledge Representation (KR) in AI is not merely about storing data in some structured form like a database. The primary objective is to encode knowledge about the world (objects, properties, relations, rules, and uncertainty) in a symbolic or probabilistic format that supports efficient reasoning and decision-making. An effective KR scheme should satisfy several requirements: (1) Representational adequacy: It must be expressive enough to capture the kinds of knowledge needed for the target domain: facts, taxonomies (is-a relations), part–whole relations, temporal and causal relations, procedural knowledge, default assumptions, and uncertainty. (2) Inferential adequacy: It must support sound and (ideally) complete inference mechanisms to derive new knowledge from existing knowledge. For example, resolution in propositional or first-order logic, or Bayesian inference in probabilistic models. (3) Inferential efficiency: Reasoning should not only be sound but also computationally feasible. Some logics are very expressive but make inference undecidable or intractable. KR often balances expressiveness against tractability by restricting the language (e.g., Horn clauses). (4) Acquisitional efficiency: It should be relatively easy for humans (or automated tools) to add, maintain, and modify knowledge. This is crucial in expert systems and large-scale knowledge bases. Examples of KR formalisms include propositional logic, first-order predicate logic, semantic networks, frames, ontologies, production rules, probabilistic graphical models (like Bayesian networks), and fuzzy logic systems. Each comes with its own syntax, semantics, and inference methods. The correct answer emphasizes that KR is about representing information in a form that supports effective and efficient reasoning, not just storing raw data or focusing solely on numbers.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 17,
+        "question": "Which of the following is a key issue in knowledge representation?",
+        "options": [
+          "Ensuring that all knowledge is purely numerical",
+          "Choosing a representation that balances expressiveness, efficiency, and ease of use",
+          "Avoiding the use of any inference mechanism",
+          "Limiting the knowledge base to less than 100 rules"
+        ],
+        "correct_answer": "Choosing a representation that balances expressiveness, efficiency, and ease of use",
+        "hint": "Think about trade-offs between what can be expressed and how hard it is to compute with it.",
+        "explanation": "Several important issues arise when designing a knowledge representation for an AI system: (1) Expressiveness vs. efficiency: A very expressive language (such as full first-order logic with unrestricted quantification, higher-order predicates, or temporal operators) can represent complex facts and relationships, but inference may become undecidable or computationally intractable. More restricted languages (like Horn clauses or certain description logics) may be less expressive but allow efficient reasoning (polynomial or at least semi-decidable). Designers must choose a level of expressiveness that is “just enough” for the domain. (2) Reasoning support: The representation should support sound and preferably complete inference methods. It should be clear what kinds of questions can be answered (entailment, consistency, explanation, planning) and what algorithms are available (resolution, forward/backward chaining, belief propagation, etc.). (3) Handling incomplete and uncertain knowledge: Real-world domains rarely allow complete or certain information. KR must address defaults, exceptions, uncertainty, and inconsistency (through default logic, Bayesian networks, fuzzy logic, or non-monotonic reasoning). (4) Modularity and maintainability: Knowledge bases inevitably evolve. The representation should allow incremental additions and modifications without breaking the entire system. Good modularity (through frames, objects, or ontologies) helps maintain and scale knowledge. (5) Mapping to the real world: Symbols must be grounded in perception and action; otherwise, the system risks the “symbol grounding problem,” where internal symbols are manipulated without clear relation to external reality. (6) Computational properties: It is important to consider whether inference will run in acceptable time and memory limits for realistic problem sizes. The answer options that talk about purely numerical representation, avoiding inference, or arbitrary size limits do not capture these core issues. The central design problem is finding a good balance between expressiveness, efficiency, and usability.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 18,
+        "question": "In propositional logic (PL), which of the following is a tautology?",
+        "options": [
+          "P ∧ ¬P",
+          "P ∨ ¬P",
+          "P → ¬P",
+          "¬(P ∨ P)"
+        ],
+        "correct_answer": "P ∨ ¬P",
+        "hint": "A tautology is true under every possible truth assignment to its atomic propositions.",
+        "explanation": "In propositional logic, a tautology is a formula that evaluates to true under every possible truth assignment of its atomic propositions. Consider each candidate: (1) P ∧ ¬P: This formula is a contradiction. If P is true, then ¬P is false, and the conjunction is false. If P is false, ¬P is true, but the conjunction is still false. So P ∧ ¬P is false in all cases and is the opposite of a tautology. (2) P ∨ ¬P: This is an instance of the Law of the Excluded Middle. If P is true, then the disjunction is true; if P is false, then ¬P is true, so the disjunction is again true. There is no assignment of P that makes P ∨ ¬P false, so it is a tautology. (3) P → ¬P: This is not a tautology. If P is true, then ¬P is false, so the implication P → ¬P is false in that case. If P is false, the implication is true (because an implication with false antecedent is true), so the formula is true in some models and false in others, not a tautology. (4) ¬(P ∨ P): This simplifies to ¬P, which is clearly not always true because for P = false, ¬P is true, but for P = true, ¬P is false. Therefore, only P ∨ ¬P is a tautology. Understanding tautologies is important for logical equivalence, proof transformations, and simplifying formulas in automated reasoning systems.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 19,
+        "question": "Which of the following is TRUE about resolution in propositional logic?",
+        "options": [
+          "Resolution is a sound and complete inference rule for propositional logic when applied to clauses in CNF",
+          "Resolution is sound but incomplete; it cannot derive all logical consequences",
+          "Resolution is complete but unsound; it sometimes derives wrong conclusions",
+          "Resolution cannot be used for automated theorem proving"
+        ],
+        "correct_answer": "Resolution is a sound and complete inference rule for propositional logic when applied to clauses in CNF",
+        "hint": "Think of refutation-based theorem proving: converting to CNF and deriving the empty clause.",
+        "explanation": "Resolution is a single inference rule that, when applied to a set of clauses in Conjunctive Normal Form (CNF), is both sound and complete for propositional logic. (1) Soundness means that any clause derived by resolution is logically entailed by the original set of clauses. That is, resolution never produces a false conclusion from true premises. The rule works as follows: from (A ∨ L) and (¬L ∨ B), resolution derives (A ∨ B), where L is a literal and ¬L is its negation. This new clause is a logical consequence of the premises. (2) Completeness means that if a formula logically entails a conclusion, then resolution will eventually be able to derive a contradiction when attempting to refute its negation (provided we systematically apply it in all possible ways). The standard use is refutation: to show that a set of clauses entails some sentence S, one adds ¬S to the knowledge base, converts everything to CNF, and repeatedly applies resolution. If the empty clause (contradiction) is derived, the original set entails S. For propositional logic, this approach is complete, meaning that if S is indeed entailed, resolution will eventually find a proof. Resolution becomes the basis for many SAT solvers and theorem provers in propositional logic. In first-order logic, resolution with unification can also be made complete (for refutation) but requires additional machinery such as Skolemization and handling of variables. Therefore, the correct statement is that resolution is sound and complete for propositional logic when used on CNF. The other options misunderstand its role or properties.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 20,
+        "question": "In first-order predicate logic (FOPL), what is the purpose of unification in the resolution process?",
+        "options": [
+          "To convert formulas into CNF",
+          "To rename variables to avoid clashes",
+          "To find a substitution that makes different logical expressions identical so that literals can be resolved",
+          "To eliminate existential quantifiers"
+        ],
+        "correct_answer": "To find a substitution that makes different logical expressions identical so that literals can be resolved",
+        "hint": "Think about matching predicates like P(x, f(y)) and P(a, f(z)).",
+        "explanation": "In first-order predicate logic, resolution extends the propositional resolution rule by allowing variables and quantified formulas. To resolve two clauses that contain complementary literals (for example, P(t1, …, tk) and ¬P(s1, …, sk)), we must ensure that the predicates and their arguments match. However, because arguments can contain variables, we need a way to find a substitution for these variables that makes the two literals syntactically identical. Unification is the algorithmic process that finds such a substitution (if one exists). Specifically: (1) A substitution θ is a mapping from variables to terms (constants, variables, or function applications). (2) Applying θ to an expression E, written Eθ, replaces every variable in E according to θ. (3) Two expressions E1 and E2 are said to unify if there exists a substitution θ such that E1θ = E2θ (syntactically equal after substitution). (4) A unifier is such a substitution; a most general unifier (MGU) is a unifier that makes the fewest commitments, from which all other unifiers can be obtained by further substitutions. During resolution, when we want to resolve clauses C1 and C2 containing complementary literals L and ¬L', we first attempt to unify L and L'. If unification succeeds with substitution θ, we then apply θ to all literals in both clauses and form a new resolvent clause containing all remaining literals. For example, from clause1: P(x, f(y)) ∨ A and clause2: ¬P(a, f(z)) ∨ B, unification finds θ = {x/a, y/z}. Applying θ yields P(a, f(z)) and ¬P(a, f(z)), which can be resolved, producing Aθ ∨ Bθ. Unification is therefore central to first-order resolution because it allows matching of patterns with variables. The other options describe related preprocessing steps: conversion to CNF includes Skolemization and moving quantifiers, and variable renaming avoids confusion between bound variables, but unification specifically performs pattern matching for resolution.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "hard",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 21,
+        "question": "Bayes' rule can be written as P(A|B) = P(B|A) P(A) / P(B). In AI, what is the most common interpretation of this formula?",
+        "options": [
+          "It relates prior, likelihood, and posterior probabilities to update beliefs given evidence",
+          "It computes the logical entailment of A from B",
+          "It guarantees maximum-likelihood estimates without priors",
+          "It describes the structure of any decision tree"
+        ],
+        "correct_answer": "It relates prior, likelihood, and posterior probabilities to update beliefs given evidence",
+        "hint": "Think: prior belief about A, evidence B, and how B changes your belief in A.",
+        "explanation": "Bayes' rule is fundamental in probabilistic reasoning and learning. It expresses how to update the probability of a hypothesis given observed evidence. In the formula P(A|B) = [P(B|A) P(A)] / P(B): (1) P(A) is the prior probability of hypothesis A before observing any evidence B. It encodes our initial belief. (2) P(B|A) is the likelihood: the probability of observing evidence B assuming that hypothesis A is true. It describes how compatible the evidence is with the hypothesis. (3) P(B) is the marginal probability of the evidence B under all possible hypotheses. It acts as a normalizing constant to ensure that posterior probabilities sum to 1. It can be computed as P(B) = Σ_i P(B|Ai) P(Ai), summing over mutually exclusive hypotheses Ai. (4) P(A|B) is the posterior probability: our updated belief in hypothesis A after we have seen evidence B. Bayes' rule says that posterior ∝ likelihood × prior. In AI, this formula is used in many contexts: (a) Naive Bayes classifiers for text classification and spam detection, (b) Bayesian networks for reasoning under uncertainty, (c) Bayesian parameter estimation in machine learning, (d) probabilistic robotics (localization, mapping), (e) medical diagnosis, and more. It does not express logical entailment; probabilities are degrees of belief, not truth values. It also does not correspond to maximum-likelihood estimation (which ignores priors) but rather to Bayesian inference that combines prior beliefs with evidence. Decision trees are based on information gain and splitting criteria, not directly on Bayes' rule.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0903"
+      },
+      {
+        "id": 22,
+        "question": "What is a Bayesian network (belief network) in AI?",
+        "options": [
+          "A fully connected neural network used for classification",
+          "A directed acyclic graph (DAG) where nodes are random variables and edges encode conditional dependencies",
+          "A tree structure representing only independent events",
+          "A rule-based expert system encoded in first-order logic"
+        ],
+        "correct_answer": "A directed acyclic graph (DAG) where nodes are random variables and edges encode conditional dependencies",
+        "hint": "Think of nodes as variables and edges as direct influences with conditional probability tables.",
+        "explanation": "A Bayesian network, also called a belief network, is a compact representation of a joint probability distribution over a set of random variables using a directed acyclic graph (DAG). Its key components are: (1) Graph structure: Nodes correspond to random variables (e.g., Disease, Symptom1, Symptom2, Weather). Directed edges represent direct probabilistic influences, typically from cause to effect. The graph is acyclic, meaning there are no directed cycles. (2) Local conditional probability distributions (CPDs): For each node X with parents Pa(X), the network specifies P(X | Pa(X)). For root nodes (nodes without parents), these are just prior probabilities P(X). (3) Markov condition: The graph encodes conditional independence assumptions: each node is independent of its non-descendants given its parents. This drastically reduces the number of parameters required compared to a full joint distribution. For n binary variables, a full joint would need 2^n − 1 probabilities; a sparse Bayesian network needs far fewer. (4) Inference: Given evidence (observed variables), Bayesian networks can be used to compute posterior probabilities of query variables. Inference can be done exactly (variable elimination, belief propagation in polytrees) or approximately (sampling methods, loopy belief propagation) when the graph is complex. Bayesian networks are used for diagnostic reasoning (effect to cause), predictive reasoning (cause to effect), intercausal reasoning (explaining away), and mixed inference. They do not require full connectivity; in fact, sparse connectivity is desirable. They are not neural networks nor pure rule systems, although they can sometimes be compiled from conditional rules. They provide a principled way to model uncertainty and perform reasoning in domains such as medical diagnosis, fault detection, spam filtering, and robotics.",
+        "chapter": "Chapter 9: Artificial Intelligence and Neural Networks",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0903"
+      }
+    ]
+  }
+]

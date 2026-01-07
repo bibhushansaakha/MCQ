@@ -1,0 +1,266 @@
+[
+  {
+    "chapter": "Chapter 5: Computer Networks and Network Security",
+    "chapter_code": "CH5",
+    "total_questions": 35,
+    "set": "Extended Network and Security Questions (Questions 41-75)",
+    "question_type": "Mixed Questions (1-2 marks each)",
+    "questions": [
+      {
+        "id": 41,
+        "question": "What is a Bridge in network architecture and how does it differ from a Switch?",
+        "options": [
+          "Bridge connects LANs, learns MAC addresses, creates separate collision domains; differs from Switch mainly in speed and port count",
+          "Bridge and Switch are identical devices",
+          "Bridge operates at Layer 3 like Switch",
+          "Bridge is faster than Switch"
+        ],
+        "correct_answer": "Bridge connects LANs, learns MAC addresses, creates separate collision domains; differs from Switch mainly in speed and port count",
+        "hint": "Both are Layer 2 devices, but when was each technology developed and what features do they have?",
+        "explanation": "Bridges and Switches are both Layer 2 (Data Link layer) devices that learn and forward based on MAC addresses, but differ in sophistication and performance: (1) Bridge characteristics: Connects two or more LAN segments. Learns MAC addresses of devices on each port by examining source MAC of frames. Forwards frames only to ports where destination MAC is known, flooding to all ports if destination unknown. Creates separate collision domains for each port (reduces collisions). Historically used before Switches became affordable. Typically 2-4 ports. Simple logic - straightforward frame forwarding. (2) Switch characteristics: Modern equivalent of Bridge with many more ports (24-48+). Multiple forwarding engines enable simultaneous frame forwarding on different ports (parallel processing). Learning same as Bridge - builds MAC address table. VLAN support - allows logical network segmentation. Advanced features: port security, span tree protocol to prevent loops, QoS marking, port mirroring for monitoring. (3) Key differences: Port count - Bridges are simple with few ports, Switches are complex with many. Backplane capacity - Bridges have limited throughput, Switches have high-speed backplane. Cost - Bridges obsolete/rare, Switches standard and cheap. Features - Switches support many advanced features, Bridges are basic. Learning mechanism - both use same MAC learning. (4) Collision domains: Both create separate collision domains. Frame transmission on one port doesn't affect other ports. (5) Broadcast domain: Both forward broadcast frames (destination FF:FF:FF:FF:FF:FF) to all ports (creating one broadcast domain). This is why Layer 3 routing is needed to separate broadcast domains. (6) Historical context: Bridges developed in 1980s when Ethernet grew beyond single cable. Switches emerged in 1990s with technological advances making many-port, high-speed switching feasible and affordable. Bridges are now obsolete technology. (7) Use case: If you had a large LAN exceeding cable length, Bridges connected segments. Modern networks use Switches exclusively for this purpose.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 42,
+        "question": "What is the significance of the Network Address Translation (NAT) in modern networks?",
+        "options": [
+          "NAT translates private IP addresses to public, enabling private networks to communicate with Internet",
+          "NAT encrypts network traffic",
+          "NAT increases bandwidth",
+          "NAT replaces DHCP"
+        ],
+        "correct_answer": "NAT translates private IP addresses to public, enabling private networks to communicate with Internet",
+        "hint": "NAT allows many devices on a private network to share one public IP address.",
+        "explanation": "Network Address Translation (NAT) is crucial for modern networking, solving address scarcity and providing security: (1) Basic function: Translates source IP addresses in outgoing packets from private (10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16) to public IP addresses. Translates destination IP in return traffic from public back to private addresses. Maintains translation table mapping private IP:port to public IP:port. (2) IPv4 address scarcity: IPv4 has only 4.3 billion addresses. NAT allows entire organizations/homes to use private addresses, sharing a few public addresses. Extends IPv4 life indefinitely (though IPv6 eventually replaces this). (3) Static NAT: Maps one private address to one public address (1:1). Used for web servers accessed from Internet. (4) Dynamic NAT: Maps private addresses to pool of public addresses (many:many). (5) Port Address Translation (PAT): Maps many private addresses to one public address using port numbers as differentiator (many:1). Router changes source port in outgoing packets. Return traffic distinguished by port. This is most common (home routers, small businesses). (6) Example: Internal device 192.168.1.100:50000 sends traffic. Router changes to 203.0.113.50:5000. Return traffic to 203.0.113.50:5000 translated back to 192.168.1.100:50000. (7) Stateful inspection: NAT device maintains state table. Unsolicited inbound traffic with no corresponding state is dropped, providing implicit firewall function. (8) Benefits: Enables private network addressing (unlimited internal addresses). Provides some security (hides internal structure). Conserves public IP addresses. (9) Limitations: Breaks peer-to-peer applications requiring two-way initiation. Complicates some protocols (VoIP, FTP, games). Violates end-to-end principle (intermediate routers modifying packets). IPv4 header checksum requires recalculation. Some applications embed IP addresses in payload (FTP), requiring complex deep packet inspection. (10) Solutions to NAT issues: UPnP (Universal Plug and Play) allows applications to request port mappings. STUN (Session Traversal Utilities for NAT) helps applications detect external address. Hole punching enables P2P through NAT. IPv6 eliminates need for NAT with abundant addresses.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 43,
+        "question": "Explain DHCP (Dynamic Host Configuration Protocol) and its role in network administration.",
+        "options": [
+          "DHCP automatically assigns IP addresses and network configuration to devices",
+          "DHCP encrypts network traffic",
+          "DHCP routes packets between networks",
+          "DHCP manages DNS servers"
+        ],
+        "correct_answer": "DHCP automatically assigns IP addresses and network configuration to devices",
+        "hint": "Without DHCP, network administrators would need to manually configure each device.",
+        "explanation": "DHCP (Dynamic Host Configuration Protocol) automates IP address assignment and network configuration, essential for network scalability: (1) DHCP process (DORA): Discovery - client broadcasts DHCP DISCOVER message seeking DHCP server. Offer - DHCP server responds with DHCP OFFER containing available IP address and configuration. Request - client broadcasts DHCP REQUEST accepting the offered address. Acknowledgment - server sends DHCP ACK confirming assignment. Client now has IP address, lease duration, gateway, DNS servers, other parameters. (2) Address lease: IP address is assigned for limited duration (24 hours typical). Client must renew before expiration. If not renewed, address returns to pool for reassignment. Prevents address depletion from devices that fail without releasing addresses. (3) Configuration parameters: IP address and subnet mask. Default gateway (router to exit network). DNS server addresses. NTP server, domain name, and other options via option field. (4) DHCP server considerations: DHCP server maintains pool of available addresses. Tracks assigned addresses and leases. Can exclude certain addresses for servers. Can configure address ranges for different device types. (5) DHCP relay: DHCP uses broadcast (limited to local segment). In multi-subnet networks, DHCP relay agent on each subnet forwards broadcasts to central DHCP server. (6) Static DHCP: DHCP server can be configured with MAC address to always assign same IP (useful for servers, printers). (7) Benefits: Eliminates manual configuration. Enables network mobility (devices get new addresses joining different networks). Simplifies administration (changes IP pool in DHCP, all devices automatically reconfigure). Prevents address conflicts (DHCP prevents duplicate assignments). (8) Limitations: Dependency on DHCP server (failure prevents new device connection). Initial configuration chicken-and-egg problem (device needs IP to contact DHCP server to get IP). Solved via link-local addresses (APIPA). Potential security - any DHCP server on network can respond (rogue DHCP attacks). (9) DHCP snooping: Switch feature preventing rogue DHCP servers by allowing trusted ports to send DHCP offers. (10) Comparison with static IP: Static IP needed for servers/infrastructure. DHCP for client devices. DHCP essential for large networks with frequent device changes.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 44,
+        "question": "What is VLAN (Virtual Local Area Network) and what benefits does network segmentation provide?",
+        "options": [
+          "VLAN logically segments networks allowing separate broadcast domains on same switch",
+          "VLAN increases bandwidth",
+          "VLAN encrypts traffic",
+          "VLAN replaces routers"
+        ],
+        "correct_answer": "VLAN logically segments networks allowing separate broadcast domains on same switch",
+        "hint": "VLANs allow logical network divisions even though devices may be physically on same switch.",
+        "explanation": "VLAN (Virtual Local Area Network) technology enables logical network segmentation providing many benefits: (1) VLAN concept: Creates separate broadcast domains on same physical switch. Devices on different VLANs cannot communicate without routing. Example: VLAN 10 (Accounting) and VLAN 20 (Engineering) on same switch - broadcast from VLAN 10 doesn't reach VLAN 20. (2) VLAN implementation: Ports tagged with VLAN ID (12-bit field allows 4096 VLANs). Tagged frames include VLAN ID in Ethernet frame. Untagged frames default to VLAN on that port. (3) VLAN types: (a) Port-based - all devices on port belong to same VLAN. (b) Protocol-based - VLAN determined by protocol type. (c) MAC-address based - devices assigned to VLAN by MAC address (complex, rarely used). (4) VLAN benefits: (a) Security - separate sensitive departments (Finance, HR). Compromised device cannot reach other VLANs without routing. (b) Traffic management - broadcast storms limited to VLAN, reducing unnecessary traffic. (c) Performance - smaller broadcast domains improve efficiency. (d) Flexibility - reorganize networks by reassigning ports without physical moves. (e) Cost - leverage existing switch infrastructure instead of buying separate switches. (f) Multicast handling - more efficient multicast using IGMP snooping within VLANs. (5) Trunk links: Ports connecting switches are trunks carrying multiple VLANs. Tagged frames indicate VLAN. Allows VLAN spanning across multiple switches. Trunks typically use higher bandwidth (10 Gbps) than access ports (1 Gbps). (6) Routing between VLANs: Requires router (or Layer 3 switch). Router receives frames from VLAN 10, forwards to VLAN 20 based on IP addresses. Creates router-on-stick configuration (single physical link carrying traffic for multiple VLANs). (7) VLAN examples: Large company: Accounting on VLAN 10, Finance on VLAN 20, Engineering on VLAN 30. All connected to same switch/VLAN infrastructure. Router provides inter-VLAN routing. Printer on VLAN 40 (management). (8) Voice VLAN: Special VLAN for VoIP phones. Separate from data VLAN for QoS priority. Phone automatically identifies Voice VLAN using LLDP protocol. (9) VLAN security considerations: VLAN hopping attacks exploit misconfigurations to access other VLANs. Requires proper VLAN configuration and native VLAN settings. (10) VLAN trunking protocol (VTP): Cisco proprietary for VLAN configuration distribution. Simplifies large network management but has security implications.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 45,
+        "question": "What is QoS (Quality of Service) and how does it enable different service levels for network traffic?",
+        "options": [
+          "QoS prioritizes traffic based on type/importance ensuring consistent service levels",
+          "QoS increases bandwidth",
+          "QoS prevents packet loss entirely",
+          "QoS encrypts network traffic"
+        ],
+        "correct_answer": "QoS prioritizes traffic based on type/importance ensuring consistent service levels",
+        "hint": "QoS allows important traffic like VoIP to be prioritized over less critical traffic.",
+        "explanation": "QoS (Quality of Service) is set of techniques ensuring applications receive necessary resources and performance. Essential when network capacity is limited: (1) Traffic classification: Mark traffic based on source/destination IP, ports, protocol, DSCP (Differentiated Services Code Point), IEEE 802.1p (CoS - Class of Service), or application type. Different applications require different treatment (VoIP vs. file backup). (2) Queuing disciplines: Packets waiting in buffer are served according to priority. Strict Priority Queuing (SPQ) - high-priority queues served first, can starve low-priority. Weighted Fair Queuing (WFQ) - each priority gets percentage of bandwidth. Class-Based WFQ (CBWFQ) - administrators define classes and weights. Low Latency Queuing (LLQ) - interactive traffic gets priority while ensuring throughput. (3) Traffic shaping/policing: Shape - smooth traffic to specified rate, buffering excess. Police - drop excess traffic beyond specified rate. Prevents traffic bursts from consuming all bandwidth. (4) Bandwidth reservation: Reserve percentage of link for specific application (VoIP gets 20%, file backup gets 30%). Remaining 50% shared as available. (5) DSCP (Differentiated Services Code Point): IP header field (6 bits) marking traffic class. Routers/switches respect DSCP markings. Example: EF (Expedited Forwarding) for VoIP, AF (Assured Forwarding) for video, BE (Best Effort) for general traffic. (6) Benefits: VoIP quality - jitter/latency-sensitive traffic prioritized. Video streaming - consistent bitrate ensuring smooth playback. File backup - can run with lower priority, not disrupting critical applications. Game responsiveness - player input prioritized. Interactive protocol (SSH/Telnet) - keyboard input prioritized over background transfers. (7) QoS parameters managed: Bandwidth - guaranteed/maximum rate. Latency - maximum delay acceptable. Jitter - consistency of delay. Packet loss - percentage of packets dropped. (8) Implementation points: At ingestion (edge routers mark traffic). In the network (core routers forward according to marks). At egress (output queued according to priority). End-to-end QoS requires cooperation across path. (9) Challenges: Complex configuration - many parameters to tune. Measurement - determining if QoS achieves goals. Not all networks support QoS (Internet best-effort). (10) Modern use: Enterprise networks heavily use QoS. ISPs offer QoS guarantees in SLAs. Cloud providers implement QoS. Home networks increasingly support QoS (prioritizing streaming over P2P).",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0504"
+      },
+      {
+        "id": 46,
+        "question": "Explain the concept of Spanning Tree Protocol (STP) and why it's important in switched networks.",
+        "options": [
+          "STP prevents loops in switch networks by blocking redundant links while maintaining connectivity",
+          "STP increases network bandwidth",
+          "STP encrypts traffic",
+          "STP manages VLAN configurations"
+        ],
+        "correct_answer": "STP prevents loops in switch networks by blocking redundant links while maintaining connectivity",
+        "hint": "Multiple switches create redundant paths for reliability, but can cause loops. How is this handled?",
+        "explanation": "Spanning Tree Protocol (STP) is critical for switched network stability. Without it, redundant switch connections create loops causing catastrophic failures: (1) Loop problem: Ethernet frames have no TTL (Time To Live) to prevent infinite circulation. Broadcast frames flooded to all ports indefinitely. Source MAC learning gets confused with frames arriving from multiple ports. Bandwidth exhausted by looping traffic. Network becomes unusable. (2) STP solution: Creates tree topology from switch mesh removing redundant links. Selects root bridge (typically highest priority/lowest MAC). Calculates shortest paths from root. Blocks ports that would create loops, leaving one active path between any two switches. (3) STP operation: Root bridge election - switches send Bridge Protocol Data Units (BPDUs). Lowest bridge ID becomes root. Root calculates BPDU with path cost to itself. Other switches receive BPDUs, compare costs, select best path to root. Ports are designated (forward frames to root), root (connected to root), or blocked. (4) Port costs: Inversely proportional to bandwidth - 10 Mbps link=100 cost, 100 Mbps=19, 1 Gbps=4, 10 Gbps=2. Faster links have lower cost, preferred. (5) BPDU: Contains root bridge ID, cost to root, sending bridge ID. Sent every 2 seconds. Absence of BPDU for 20 seconds causes bridge to change spanning tree. (6) Port states: Disabled (no STP), Blocking (receives BPDUs only, no forwarding), Listening (30 seconds, prepares to forward), Learning (15 seconds, learns MAC addresses), Forwarding (active). Transition takes 30 seconds after topology change. (7) Rapid STP (RSTP): Improves convergence from 30+ seconds to < 1 second using different state transitions (Discarding, Learning, Forwarding). More responsive to topology changes. (8) Multiple Spanning Tree (MSTP): Allows different spanning trees for different VLAN groups, reducing blocking overhead. (9) Benefits: Network redundancy - failure of single link doesn't disconnect network. Recovery automatic. (10) Disadvantages: Blocks legitimate paths (reduces available bandwidth). Convergence time (30 seconds in STP) causes temporary outages. Overhead from BPDU processing.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 47,
+        "question": "What is SNMP (Simple Network Management Protocol) and what information can it collect from network devices?",
+        "options": [
+          "SNMP collects device statistics (CPU, memory, traffic, errors) for network monitoring and management",
+          "SNMP encrypts network traffic",
+          "SNMP configures routers",
+          "SNMP is only for servers"
+        ],
+        "correct_answer": "SNMP collects device statistics (CPU, memory, traffic, errors) for network monitoring and management",
+        "hint": "SNMP is a monitoring protocol. What metrics would you want to monitor on your network devices?",
+        "explanation": "SNMP (Simple Network Management Protocol) enables centralized monitoring and management of network devices: (1) Architecture: Manager (monitoring station) queries agents (software on managed devices). Agents respond with requested information. Agents can also send unsolicited traps (notifications of events). (2) MIB (Management Information Base): Hierarchical database of manageable objects. Each object has OID (Object Identifier) like 1.3.6.1.2.1.1.3.0 (system uptime). MIBs standardized for different device types. Example: IF-MIB for interface statistics. (3) SNMPv1 (original): Simple but limited. Plaintext community string (password). No authentication of responses. Vulnerable to spoofing and eavesdropping. Still widely used despite known vulnerabilities. (4) SNMPv2c: Improved with 64-bit counters (SNMPv1 limited to 32-bit). Bulk retrieval capability. Plaintext community string remains security issue. (5) SNMPv3: Adds security: User/password authentication. Encryption (DES/3DES) of messages. HMAC for integrity verification. Recommended for new deployments. (6) Operations: GET - retrieve single object value. GET-NEXT - retrieve next object (walk through tables). GET-BULK - retrieve many objects efficiently. SET - modify device configuration remotely. TRAP - unsolicited notification from agent. (7) Monitored objects: System: uptime, contact, description. Interfaces: bandwidth, speed, errors, discards, packets in/out. Routing: routing table, ARP table. TCP/UDP: connection counts, statistics. Host resources: CPU load, memory usage, running processes. (8) Example data collection: Check router interface traffic to detect congestion. Monitor server CPU/memory for capacity planning. Check for link errors indicating physical layer problems. Count TCP connections for security analysis. (9) SNMP polling: Manager sends GET requests periodically (every 5 minutes typical). Responses graphed for trends. Thresholds configured - alerts if CPU > 80%, interface down, errors > threshold. (10) Tools: MRTG/PRTG use SNMP for monitoring. Nagios, Zabbix, Prometheus collect SNMP data. Network device dashboards use SNMP. (11) Security issues: SNMPv1/v2c send plaintext community strings (easily captured). Writable community strings allow remote device configuration. SNMP can be used for DDoS amplification attacks. Recommendation: Use SNMPv3 with strong authentication or isolate SNMP traffic in management VLAN.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 48,
+        "question": "What are the differences between OSI model and TCP/IP model regarding encapsulation?",
+        "options": [
+          "Both encapsulate data with headers, but differ in layer count and which layers combine functions",
+          "Encapsulation is identical in both models",
+          "TCP/IP doesn't use encapsulation",
+          "OSI model has no encapsulation"
+        ],
+        "correct_answer": "Both encapsulate data with headers, but differ in layer count and which layers combine functions",
+        "hint": "How does data get wrapped with headers as it moves down the layers?",
+        "explanation": "Encapsulation is the process of adding headers/trailers at each layer. Both models use encapsulation but structure differs: (1) Encapsulation process (downward): Application layer data → Transport layer adds header (TCP/UDP) creating segment → Network layer adds header (IP) creating packet → Data Link layer adds header/trailer (Ethernet) creating frame → Physical layer converts to signals. (2) Decapsulation (upward): Physical layer receives signals → Data Link layer removes frame header/trailer → Network layer removes IP header → Transport layer removes TCP/UDP header → Application receives data. (3) OSI model (7 layers): Session (Layer 5) and Presentation (Layer 6) add headers between Transport and Application. More separation of concerns. Each layer has clear responsibilities. (4) TCP/IP model (5 layers): Application layer combines OSI's Session, Presentation, and Application. Fewer layers but same fundamental concept. Reflects practical Internet implementation. (5) Naming terminology: TCP/IP calls: OSI calls: Application layer data - SDU (Service Data Unit) or PDU (Protocol Data Unit). Transport layer unit - Segment (TCP) or Datagram (UDP). Network layer unit - Packet. Data Link layer unit - Frame. Physical layer unit - Bits. (6) Encapsulation detail: Each header contains: Source/destination addresses (MAC on Data Link, IP on Network). Protocol identifier (what's in payload). Sequence/acknowledgment numbers (TCP). Checksums/length fields. Size grows from application to physical layer. Final frame typically 1500 bytes maximum (including all headers). (7) MTU (Maximum Transmission Unit): Data Link layer limit on frame size. Typically 1500 bytes for Ethernet. If IP packet exceeds MTU, fragmented into smaller packets. Each fragment has IP header. (8) OSI detailed: Physical (bits), Data Link (frame with MAC), Network (packet with IP), Transport (segment/datagram with TCP/UDP port), Session (sessions), Presentation (encryption/compression), Application (HTTP/SMTP/FTP data). (9) TCP/IP detailed: Physical (bits), Link (frame with MAC), Internet (packet with IP), Transport (segment with TCP/UDP port), Application (HTTP/SMTP/FTP data). Same fundamental concept, fewer layers. (10) Practical implication: Understanding encapsulation helps troubleshooting. Packet capture shows headers at different layers. Protocol analyzers show entire encapsulation. Network overhead from headers - large number of small packets uses more bandwidth due to header percentage.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 49,
+        "question": "Explain the concept of bandwidth vs. throughput in networks.",
+        "options": [
+          "Bandwidth is maximum capacity; throughput is actual data transferred, often less than bandwidth",
+          "Bandwidth and throughput are identical",
+          "Throughput is always higher than bandwidth",
+          "Bandwidth only refers to wireless networks"
+        ],
+        "correct_answer": "Bandwidth is maximum capacity; throughput is actual data transferred, often less than bandwidth",
+        "hint": "A network link might be rated 100 Mbps but might not achieve that in practice.",
+        "explanation": "Understanding the difference between bandwidth and throughput is crucial for network analysis: (1) Bandwidth: Theoretical maximum data transmission rate. Measured in bits per second (Mbps, Gbps, etc.). Determined by physical media and technology: Ethernet 10BASE-T = 10 Mbps, 100BASE-TX = 100 Mbps, 1000BASE-T = 1 Gbps. WiFi 802.11ac = up to 1300 Mbps theoretical. This is the link capacity - what the equipment is capable of. (2) Throughput: Actual data transmitted successfully. Measured in bits per second (Mbps, Gbps). Varies based on network conditions. Always equal to or less than bandwidth. (3) Reasons throughput < bandwidth: (a) Protocol overhead - TCP/IP headers consume bandwidth. Ethernet header 18 bytes, IP header 20+ bytes, TCP header 20+ bytes. For small packets, overhead percentage is large. (b) Collisions (in shared media) - retransmissions waste bandwidth. (c) Retransmissions - lost packets retransmitted, not counted as throughput. (d) Congestion - buffered packets experience latency. (e) Physical layer inefficiencies - encoding/framing overhead. (f) Flow control/windowing - sender limits rate. (4) Goodput: Data actually useful to application. Even less than throughput. Example: 100 Mbps link, throughput 80 Mbps (due to overhead), goodput 70 Mbps (application sees 70 Mbps useful data). (5) Efficiency calculation: Efficiency = Throughput / Bandwidth × 100%. Example: 100 Mbps link with 80 Mbps throughput = 80% efficiency. (6) Practical example: Home Internet advertised as '100 Mbps' (bandwidth). Speedtest shows 85 Mbps (throughput). Actual application sees 75 Mbps (goodput) due to TCP overhead. (7) Factors improving throughput/efficiency: Larger packets (amortize overhead). Hardware offloading (checksums, segmentation). Efficient protocols (less overhead). Good network conditions (fewer errors). (8) Measurement tools: iperf measures throughput between two endpoints. speedtest.net measures ISP speeds. Network packet analyzer captures actual traffic. (9) Capacity planning: Can't assume link will carry full bandwidth. Rule of thumb: plan for 70-80% of bandwidth. (10) Impact: Network slow? Check link utilization. If using 50 Mbps on 100 Mbps link, might not be bottleneck. If using 95 Mbps, probably congested. Understanding this distinction enables proper network design and troubleshooting.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 50,
+        "question": "What is ICMP (Internet Control Message Protocol) and what is its primary use?",
+        "options": [
+          "ICMP provides error reporting and diagnostics (ping, traceroute) at network layer",
+          "ICMP encrypts data",
+          "ICMP manages IP addresses",
+          "ICMP is only for IPv6"
+        ],
+        "correct_answer": "ICMP provides error reporting and diagnostics (ping, traceroute) at network layer",
+        "hint": "When you ping a server or run traceroute, what protocol is being used?",
+        "explanation": "ICMP (Internet Control Message Protocol) is Network layer protocol (IPv4) providing error reporting and diagnostic capabilities: (1) Error reporting: Destination Unreachable - no route to destination, port not open. Time Exceeded - packet's TTL reached zero (sent by routers along path). Parameter Problem - malformed packet header. Fragmentation Needed - packet requires fragmentation but DF (Don't Fragment) flag set. Source Quench - router congestion (rarely used in modern networks). (2) Query messages: Echo Request (ping) - host sends, expecting Echo Reply. Used for reachability testing and latency measurement. Timestamp Request/Reply - obtain time information. Address Mask Request/Reply - determine subnet mask. (3) Ping utility: Sends ICMP Echo Request. Waits for Echo Reply. Measures round-trip time. Indicates if destination reachable. Example: 'ping 8.8.8.8' confirms network connectivity. (4) Traceroute utility: Sends series of packets with increasing TTL values. First packet TTL=1 expires at first hop, returns Time Exceeded from first router. Second packet TTL=2 expires at second hop. Continues until reaching destination. Reveals path packets take through Internet. Shows latency at each hop. (5) Ping sweep: Sends pings to range of addresses discovering active hosts. (6) ICMP filtering: Firewalls often filter ICMP for security (prevent ping-based reconnaissance). However, filtering all ICMP breaks diagnostics. Better to filter selectively (allow replies, block requests). (7) ICMP-based attacks: Ping of Death - oversized ping packets crashing old systems (fixed in modern systems). Smurf attack - broadcast ping to network amplifying traffic to target. (8) ICMP DoS: Sending massive ping requests to target. DDoS magnified through botnets. Firewalls mitigate with rate limiting. (9) IPv6 equivalent: ICMPv6 performs similar functions in IPv6 networks. (10) Uses in networks: Debugging connectivity issues. Determining network topology. Measuring latency (ping). Discovering path characteristics (traceroute). Network monitoring - ICMP timeouts detect equipment failures.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 51,
+        "question": "What is a Proxy Server and what security/privacy benefits does it provide?",
+        "options": [
+          "Proxy server acts as intermediary between clients and servers, hiding IP addresses and controlling access",
+          "Proxy servers increase bandwidth",
+          "Proxy servers encrypt all traffic automatically",
+          "Proxy servers are only for web traffic"
+        ],
+        "correct_answer": "Proxy server acts as intermediary between clients and servers, hiding IP addresses and controlling access",
+        "hint": "Proxy means 'agent' or 'representative'. How does a proxy represent clients?",
+        "explanation": "Proxy servers are intermediaries between clients and servers providing multiple benefits: (1) Web proxy (HTTP/HTTPS): Client connects to proxy instead of web server. Proxy fetches content from web server. Returns content to client. Benefits: (a) IP address hiding - web server sees proxy's IP, not client's true IP. (b) Caching - popular content cached, reducing bandwidth and latency for repeated access. (c) Access control - organization controls what sites employees visit. (d) Content filtering - blocks inappropriate/dangerous sites. (e) Data anonymity - hiding true IP prevents tracking. (f) Malware protection - proxy can scan downloaded content. (2) Reverse proxy: Sits in front of web servers. Clients connect to reverse proxy. Reverse proxy forwards to actual servers. Benefits: (a) Load balancing - distributes requests across multiple servers. (b) Compression - reverse proxy compresses responses before sending to clients. (c) SSL offloading - proxy handles encryption/decryption, reducing server load. (d) Security - hides server details from outside world. (e) Caching - improves response times. (3) SOCKS proxy: Generic proxy for any protocol (not just HTTP). TCP and UDP. Applications must be SOCKS-aware. (4) Transparent proxy: Intercepts traffic without requiring client configuration. ISPs use transparent proxies. Clients don't know proxy exists. (5) Proxy in security: Man-in-the-Middle (MITM) on purpose. Deep packet inspection (DPI) examines content. Stops malware downloads. Enforces security policies. (6) Limitations: Proxy knows everything about traffic (privacy concern). Single point of failure (if proxy down, no connection). Performance impact (latency added). HTTPS proxying requires certificate installation. P2P applications may bypass proxy. (7) Proxy chain: Multiple proxies in sequence. Client → Proxy 1 → Proxy 2 → Web Server. Anonymity improves with multiple proxies (Tor network). But latency increases. (8) Home proxy vs. organizational: Home users might use anonymizing proxy for privacy. Organizations use proxy for access control and security. (9) Tools: Squid (open source proxy), Tinyproxy (lightweight), nginx (can act as proxy), Charles (debugging proxy for developers). (10) Privacy considerations: Using proxy doesn't prevent actual anonymity if proxy logs traffic. Many free proxies monetize data. Paid VPNs with no-log policy more trustworthy. HTTPS provides end-to-end encryption regardless of proxy.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 52,
+        "question": "What is a BGP (Border Gateway Protocol) Hijack and how could it be prevented?",
+        "options": [
+          "BGP hijack is when attacker announces false IP prefixes routing traffic to attacker; prevented with RPKI/BGPsec",
+          "BGP hijack only affects small networks",
+          "All BGP hijacks are government attacks",
+          "BGP hijack cannot be prevented"
+        ],
+        "correct_answer": "BGP hijack is when attacker announces false IP prefixes routing traffic to attacker; prevented with RPKI/BGPsec",
+        "hint": "BGP relies on trust between routers. What happens if a router claims to own IP addresses it doesn't?",
+        "explanation": "BGP hijacking is serious routing attack exploiting BGP's trust model: (1) BGP basics recap: BGP is Internet's routing protocol. Each AS (Autonomous System) announces IP prefixes it 'owns'. Routers believe these announcements. Packets routed to announced origin. (2) Hijack mechanism: Attacker operates AS or compromises AS. Announces IP prefix claiming to own it. Other ASes believe announcement. Route traffic through attacker's AS. Attacker can intercept, modify, or discard traffic. (3) Real-world example: 2008 Pakistan YouTube hijack - Pakistan Telecom announced YouTube prefix, hijacking traffic intended for YouTube. Users worldwide couldn't access YouTube. (4) Types of hijacks: (a) Prefix hijack - announce entire IP block. (b) Sub-prefix hijack - announce smaller block within legitimate block (more specific route preferred). (c) Path hijack - claim shorter path to legitimate prefix. (5) Impact: Traffic interception (MITM attacks). Traffic dropping (DoS). Data modification. Eavesdropping. BGP hijack affects large-scale traffic, not just one connection. (6) Prevention methods: (a) RPKI (Resource Public Key Infrastructure) - Certification Authority signs route origins. ASes can verify route announcements. Routers validate signatures before accepting routes. Deployment is improving but adoption still low. (b) BGPsec - cryptographic path validation. Prevents route path forgery. More secure than RPKI but complex. (c) ROA (Route Origin Authorization) - AS publishes which prefixes it originates. RPKI validates against ROA. (d) Monitoring - detecting unusual announcements (suddenly appearing routes, suspicious ASes). (e) Route filtering - filtering obvious invalid routes (private IP ranges, never-routable space). (f) ASPA (AS Path Authentication) - validates entire path not just origin. (7) Current state: RPKI adoption increasing but still < 50% of routes signed. BGPsec rarely deployed due to complexity. Internet vulnerable to hijacking. (8) Detection: RPKI-invalid routes could be filtered. Monitoring services watch for suspicious announcements. Large providers implement filters. (9) Historical incidents: AS7007 incident (2010) - accidentally announced entire Internet. Pakistan YouTube (2008). Google DNS (2010). AWS (2020). Many undiscovered incidents suspected. (10) Future: RPKI deployment essential. BGPsec eventual standard. Path validation becoming requirement. ASPA adds another layer.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 53,
+        "question": "What is AES (Advanced Encryption Standard) and why is it considered secure?",
+        "options": [
+          "AES is symmetric encryption using 128/192/256-bit keys with mathematical security through substitution-permutation network",
+          "AES uses asymmetric encryption",
+          "AES was broken in 2015",
+          "AES is only for classified information"
+        ],
+        "correct_answer": "AES is symmetric encryption using 128/192/256-bit keys with mathematical security through substitution-permutation network",
+        "hint": "AES is the modern standard for symmetric encryption. Why did government adopt it?",
+        "explanation": "AES (Advanced Encryption Standard) is most widely used symmetric encryption algorithm, adopted as US government standard: (1) Selection process: NIST held competition for replacement of DES (broken due to small 56-bit key). Rijndael algorithm selected (Belgian design). Standardized as FIPS 197 in 2001. (2) Key sizes: AES-128 (128-bit key, 10 rounds). AES-192 (192-bit key, 12 rounds). AES-256 (256-bit key, 14 rounds). Larger key = more rounds = higher security but slower. AES-128 sufficient for non-classified information. AES-256 for long-term classified information. (3) Block size: 128-bit fixed. Plaintext split into 16-byte blocks. Each block independently encrypted (though modes combine blocks). (4) Rounds: Sequence of substitutions and permutations: SubBytes - substitution table (S-box) replaces bytes. ShiftRows - rows shifted by different amounts. MixColumns - matrix multiplication in Galois field. AddRoundKey - XOR with round key derived from original key. (5) Why secure: (a) No known practical attacks against full AES. (b) Key size sufficient - even AES-128 has 2^128 possible keys. Brute force infeasible. (c) Mathematical properties - S-boxes designed to resist linear/differential cryptanalysis. (d) Proven against known attack types. (e) 20+ years analysis with no breaks (unlike DES after ~25 years). (6) Modes of operation: ECB (Electronic Codebook) - insecure, identical plaintext blocks produce identical ciphertext blocks. CBC (Cipher Block Chaining) - each block XORed with previous ciphertext, requires IV. CTR (Counter) - converts block cipher to stream cipher using counter. GCM (Galois/Counter Mode) - authenticated encryption (confidentiality + integrity). (7) Authenticated encryption: GCM provides both encryption and authentication in one operation. Prevents tampering. Modern TLS uses AES-GCM. (8) Hardware acceleration: Modern processors have AES instructions (AES-NI), making AES very fast in hardware. Negligible performance overhead. (9) Quantum computing: AES-256 resistant to quantum attacks (Grover's algorithm reduces security to equivalent 128-bit classical). AES-128 vulnerable (Grover reduces to 64-bit equivalent). Recommendation: use AES-256 for long-term security. (10) Deployment: Every secure connection uses AES (TLS). Encrypted messaging (Signal, WhatsApp). File encryption (BitLocker, FileVault). Password managers. Database encryption. Military/government communications. AES is ubiquitous in modern security infrastructure.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 54,
+        "question": "What is a Man-in-the-Middle (MITM) attack and what defenses prevent it?",
+        "options": [
+          "MITM attack where attacker intercepts communication; prevented with encryption, certificates, and mutual authentication",
+          "MITM only works on wireless networks",
+          "MITM cannot be detected",
+          "Encryption alone prevents all MITM attacks"
+        ],
+        "correct_answer": "MITM attack where attacker intercepts communication; prevented with encryption, certificates, and mutual authentication",
+        "hint": "MITM requires attacker to position themselves between two communicating parties.",
+        "explanation": "Man-in-the-Middle (MITM) attack is sophisticated attack where attacker intercepts and potentially modifies communication: (1) Basic MITM mechanism: Attacker positions themselves between two communicating parties (Alice and Bob). Can be on same network (ARP spoofing), control network (ISP level), or control routing (BGP hijack). Attacker relays communications between Alice and Bob while eavesdropping. May modify messages transparently. Alice and Bob unaware of attack. (2) ARP spoofing: Attacker sends ARP replies claiming their MAC address is the gateway. Victims' ARP cache updated. Traffic to gateway routes to attacker instead. Attacker forwards traffic to actual gateway. Transparent MITM. (3) DNS spoofing: Attacker controls DNS response. User requests IP of 'bank.com', attacker responds with attacker's IP. User visits attacker's fake bank site, enters credentials. Credential harvesting attack. (4) MITM with HTTPS: Attacker can still MITM if victim doesn't verify certificate. Attacker uses own certificate. Browser shows certificate warning (if victim notices). Self-signed certificate raises red flags. However, users often click through warnings. (5) SSL stripping: Attacker downgrades HTTPS to HTTP. User sees normal-looking HTTP site without encryption awareness. Attacker sees all plaintext traffic. Works if victim doesn't explicitly use HTTPS. Modern browsers (HSTS) prevent this. (6) Defense methods: (a) Encryption - even if eavesdropped, ciphertext useless to attacker. Only works with proper key distribution. (b) Certificates - verify you're talking to who you think. CAs sign certificates proving identity. Protects against MITM if certificates validated properly. (c) Mutual authentication - both sides verify each other's identity. (d) HTTPS - encrypts transport, validates certificate. HSTS forces HTTPS. Certificate pinning - app trusts specific certificate/key, prevents unauthorized certificates. (e) VPN - all traffic encrypted end-to-end through tunnel. (f) 2FA - even if password captured, second factor needed. (g) Network segmentation - trusted networks only. (h) ARP security - static ARP entries, DHCP snooping. (i) Monitoring - intrusion detection noticing suspicious patterns. (7) Modern challenges: Wildcards in certificates (*.example.com) less restrictive. Self-signed certificates sometimes accepted. Users ignoring warnings. Encrypted traffic hides MITM from detection. (8) Certificate pinning: Mobile apps can pin certificates. Even valid certificate from CA might not be accepted if it doesn't match pinned cert. Protects against compromised CAs. (9) HSTS (HTTP Strict Transport Security): Header telling browsers to always use HTTPS. Prevents SSL stripping if pre-loaded. (10) MITM relevance: Still dangerous attack. Public WiFi common venue. Corporate networks vulnerable to insider MITM. Nation-state MITM attacks (intercepting international undersea cables). Defending requires multiple layers: encryption (TLS), certificate validation, monitoring, user awareness.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 55,
+        "question": "What is Denial of Service (DoS) and how does DDoS differ from traditional DoS?",
+        "options": [
+          "DoS is one attacker; DDoS uses many attackers/sources creating amplified attack making it harder to block",
+          "DoS and DDoS are identical",
+          "DDoS is only possible on government networks",
+          "DoS cannot be mitigated"
+        ],
+        "correct_answer": "DoS is one attacker; DDoS uses many attackers/sources creating amplified attack making it harder to block",
+        "hint": "The difference is in the number of sources. How does multiple sources complicate mitigation?",
+        "explanation": "Denial of Service (DoS) and Distributed DoS (DDoS) attacks make services unavailable by overwhelming targets: (1) DoS attack: Single attacker sends excessive traffic/requests to target. Overwhelms target's resources (bandwidth, CPU, memory). Service becomes unavailable to legitimate users. Examples: SYN flood (many TCP SYN packets), UDP flood (many UDP packets), HTTP flood (many web requests). (2) DDoS attack: Multiple attack sources (compromised computers, botnets) simultaneously attack target. Amplifies attack magnitude. Makes source blocking impossible (too many sources). Overwhelms larger bandwidth targets. (3) Botnet: Network of compromised computers controlled by attacker. Commonly created with malware. Infected computers become 'bots'. Thousands/millions of bots under attacker control. Used for DDoS without victims' knowledge. (4) DoS attack methods: (a) Bandwidth saturation - floods target with high-volume traffic (UDP, ICMP floods). Uses all available bandwidth. (b) Protocol exploitation - sends malformed packets exploiting bugs. Example: Ping of Death, Teardrop attack (fixed in modern systems). (c) Application layer - high-volume legitimate-looking requests. Harder to distinguish from real traffic. Example: HTTP flood. (d) Slowloris - sends HTTP requests slowly, causing server to hold connections. (e) Amplification - attacker sends small requests to third-party servers (DNS, NTP), which respond to target with large responses. (5) DDoS methods: Usually bandwidth-based (multiple sources = massive volume). Harder to stop because traffic appears from many locations. ISP cannot easily null-route traffic (would need to block all sources). (6) DDoS mitigation: (a) Rate limiting - routers drop excess traffic. (b) Blackhole routing - drop all traffic to target (nuclear option, service down but not disrupted). (c) DDoS mitigation services (CloudFlare, Akamai, AWS Shield) - absorb attack, filter bad traffic. (d) Redundancy - distributed infrastructure disperses attack. (e) Firewalls - drop suspicious traffic. (f) IDS/IPS - detect/block attack patterns. (g) BGP flowspec - upstream routers drop attack traffic. (h) Network monitoring - quick detection enables faster response. (7) Defenses against DoS: Patch vulnerabilities (protocol exploits). Configure timeouts to prevent resource exhaustion. Implement access controls. Firewall rules dropping suspicious patterns. Load balancing distributing traffic. Redundancy providing capacity. (8) Legal consequences: DoS/DDoS illegal in most countries. Felony charges, fines, imprisonment possible. Even 'testing' without permission is illegal. (9) Legitimate uses: Stress testing (with permission). Security testing (authorized penetration testing). (10) Impact: Entire services down for hours. Financial loss (lost transactions, reputational damage). Examples: 2016 Dyn attack (affected major sites), 2020 AWS attacks (GitHub, Twitter, others), gaming servers frequently targeted.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      }
+    ]
+  }
+]

@@ -1,0 +1,606 @@
+[
+  {
+    "chapter": "Chapter 8: Software Engineering and Object-Oriented Analysis & Design",
+    "chapter_code": "ACtE08",
+    "total_questions": 95,
+    "set": "Complete Software Engineering and OOAD",
+    "question_type": "Mixed Questions (Detailed Explanations)",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What are the key software characteristics?",
+        "options": [
+          "Source code length and compilation speed",
+          "Intangibility, evolving nature, and complexity",
+          "Hardware requirements and memory size",
+          "Programming language and development tools"
+        ],
+        "correct_answer": "Intangibility, evolving nature, and complexity",
+        "hint": "Software isn't physical like hardware - think about what makes it unique.",
+        "explanation": "Software characteristics distinguish it from hardware and other engineering products. Key characteristics: (1) Intangibility - software doesn't have physical form, exists only as code/instructions. Can't touch, see, or measure directly. (2) Evolving nature - software constantly changes (bug fixes, features, enhancements) throughout lifecycle. Unlike physical products with fixed design. (3) Complexity - software systems contain many interconnected components, logic, states, making understanding difficult. (4) Conformity - software must conform to environment (OS, hardware, user expectations). (5) Flexibility - easily modifiable (both advantage and disadvantage). (6) Non-linear development - unlike manufacturing with sequential steps, software development is iterative and unpredictable. (7) Invisible product - difficult to demonstrate progress (unlike partially built bridge). (8) Maintenance-intensive - ongoing support and updates required. These characteristics make software engineering challenging - hard to estimate, easy to introduce bugs, difficult to verify completeness. Understanding these characteristics crucial for applying appropriate development methodologies and managing expectations.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 2,
+        "question": "What are software quality attributes?",
+        "options": [
+          "Programming language choice and IDE selection",
+          "Measurable characteristics defining software quality",
+          "Number of lines of code and compilation time",
+          "Team size and development cost"
+        ],
+        "correct_answer": "Measurable characteristics defining software quality",
+        "hint": "Properties that define how good software is - reliability, performance, etc.",
+        "explanation": "Software quality attributes (non-functional requirements): measurable characteristics determining software excellence. Key attributes: (1) Reliability - software performs intended function consistently without failure. Measured by mean time between failures (MTBF). (2) Performance - response time, throughput, resource utilization. (3) Usability - ease of learning, use, user satisfaction. (4) Maintainability - ease of modifying, fixing, extending. (5) Portability - ability to run on different platforms. (6) Security - protection against unauthorized access, data integrity. (7) Scalability - performance maintained as load increases. (8) Availability - uptime percentage (99.9% uptime = high availability). (9) Testability - ease of testing, detectability of faults. (10) Efficiency - optimal resource usage (CPU, memory). Different from functional requirements (what system does), quality attributes define how well it does it. Conflicting attributes: security vs performance, reliability vs cost. Trade-offs necessary: high reliability expensive, perfect security impractical. Measuring quality: metrics like defect density (bugs/1000 lines), MTBF, response time. ISO 9126 standard defines quality model. Customer expectations: quality attributes more important to users than technical implementation details. Understanding quality attributes essential for meeting customer satisfaction and building successful software.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 3,
+        "question": "What is the Agile software process model?",
+        "options": [
+          "Linear sequential model with phases",
+          "Iterative model emphasizing flexibility and rapid delivery",
+          "One-phase big bang model",
+          "Model requiring extensive planning upfront"
+        ],
+        "correct_answer": "Iterative model emphasizing flexibility and rapid delivery",
+        "hint": "Focus on working software quickly, responding to change, iterations called sprints.",
+        "explanation": "Agile model: iterative, incremental approach emphasizing flexibility, rapid delivery, customer collaboration. Core principles (Agile Manifesto): individuals/interactions over processes, working software over documentation, customer collaboration over contracts, responding to change over plans. Key characteristics: (1) Iterative development - short cycles (sprints, 1-4 weeks), deliver working software frequently. (2) Incremental - build system in small, manageable chunks. (3) Customer involvement - continuous feedback, prioritization. (4) Adaptive - embrace changes even late in development. (5) Self-organizing teams - less hierarchical, more autonomy. (6) Continuous testing - test as you build, not post-development. Popular frameworks: Scrum (sprints, product backlog, daily standups), Kanban (continuous flow, work-in-progress limits), XP (pair programming, test-driven development). Advantages: faster time-to-market, early detection of problems, customer satisfaction, team morale, flexibility. Disadvantages: difficult planning costs upfront, requires experienced team, documentation often neglected, scalability challenges for large projects. Suitable for: changing requirements, rapid prototyping, startup environments, innovative projects. Not suitable for: fixed contracts, distributed teams, safety-critical systems, large stable projects. Metrics: velocity (story points completed per sprint), burndown charts (remaining work), cycle time. Modern standard: most organizations use Agile or hybrid approaches. Understanding Agile essential for contemporary software development.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 4,
+        "question": "What is the V-Model in software development?",
+        "options": [
+          "Linear model without feedback",
+          "Model with validation/verification at each development stage",
+          "Advanced iterative model",
+          "Model with multiple versions"
+        ],
+        "correct_answer": "Model with validation/verification at each development stage",
+        "hint": "V-shape reflects testing stages mirroring development stages.",
+        "explanation": "V-Model (Verification and Validation Model): extension of Waterfall with explicit testing phases. Structure (V-shape): left side (development down), right side (testing up), meeting at bottom (unit testing). Stages: Requirements → Design → Implementation → Unit Testing → Integration Testing → System Testing → Acceptance Testing → Deployment. Key aspect: each development stage has corresponding verification/validation stage. Requirements phase matches with Acceptance Testing, Design with System Testing, etc. Verification (did we build right?): checking against specifications. Validation (did we build the right thing?): checking against user needs. Advantages: (1) Clear testing phases. (2) Early testing planning. (3) Comprehensive defect detection. (4) Quality assured at each level. (5) Clear deliverables at each stage. Disadvantages: (1) Less flexible than Agile. (2) No working software until late. (3) Difficult handling requirement changes. (4) Lengthy development cycle. (5) Assumes stable requirements. Testing hierarchy: Unit → Integration → System → UAT. Unit testing: component level, developers test code. Integration testing: components together. System testing: entire system functionality. UAT: user acceptance. Suitable for: regulated industries, safety-critical systems, large projects with stable requirements. Popular in: automotive, aerospace, healthcare sectors. Modern approach: combine V-Model rigor with Agile flexibility. Understanding V-Model important for structured testing and quality assurance.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 5,
+        "question": "What is the Prototype Model in software development?",
+        "options": [
+          "Building final product in single phase",
+          "Creating incomplete version to understand requirements better",
+          "Testing model focusing on quality",
+          "Evolutionary development without planning"
+        ],
+        "correct_answer": "Creating incomplete version to understand requirements better",
+        "hint": "Build quick version to show customers and gather feedback.",
+        "explanation": "Prototype Model: creates working prototype to clarify requirements and design before full development. Prototyping process: (1) Requirements gathering - initial understanding. (2) Quick design - minimal planning. (3) Build prototype - rapid implementation, non-production quality. (4) Evaluate - show to users, gather feedback. (5) Refine - incorporate feedback, repeat. Two types: (1) Throwaway prototyping - prototype discarded, lessons learned inform production development. (2) Evolutionary prototyping - prototype evolved into final product. Advantages: (1) Early requirement clarification. (2) Risk reduction - identify issues before full development. (3) Improved user satisfaction - involved in design. (4) Reduced development time - less rework. (5) Better communication - visual reference. Disadvantages: (1) Resource intensive - multiple builds. (2) User confusion - prototype might become product. (3) Incomplete requirements - might miss functionality. (4) Quality concerns - prototype shortcuts replicated in final. (5) Scope creep - continuous refinement. Tools: RAD (Rapid Application Development) tools enable fast prototyping. Uses: UI/UX design, new technology exploration, uncertain requirements, proof-of-concept. Example: building prototype web interface to understand user workflow, then developing full application. Danger: prototype becomes product (technical debt). Best practice: explicitly plan throwaway vs evolutionary, clearly communicate expectations. Understanding prototyping valuable for requirement clarification and risk reduction.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 6,
+        "question": "What is the Iterative Model in software development?",
+        "options": [
+          "Single pass through development phases",
+          "Repeating development cycles with refinement each iteration",
+          "Model without planning",
+          "Testing-only development approach"
+        ],
+        "correct_answer": "Repeating development cycles with refinement each iteration",
+        "hint": "Multiple cycles of design-implementation-test, improving each time.",
+        "explanation": "Iterative Model: repeating development cycles (iterations), building product incrementally. Each iteration: design → implement → test → feedback → refine. Cycle duration: typically 1-4 weeks. Key differences from Waterfall: (1) Partial functionality each iteration. (2) Continuous feedback incorporation. (3) Risk identification early. (4) Parallel development possible. (5) Adaptive to change. Spiral Model variant: adds risk assessment to each iteration. Iterative process: Iteration 1 (basic features), Iteration 2 (more features), ... until complete. Advantages: (1) Early working software. (2) Risk reduction - problems identified quickly. (3) Better requirement understanding - refine over iterations. (4) Flexibility - adapt to changes. (5) Team feedback - learn from each iteration. Disadvantages: (1) Resource intensive - multiple builds. (2) Difficult scope management - feature creep. (3) Unclear end date - when to stop iterating. (4) Integration complexity - combining iterations. (5) Documentation challenges - changing product. Metrics: iteration velocity (progress per iteration), burndown (remaining work). Works well for: changing requirements, complex systems, learning projects, innovative software. Example: mobile app development (Iteration 1: core features, Iteration 2: performance, Iteration 3: UI polish). Planning: product backlog prioritizes features for each iteration. Contrast with Agile: Agile is specific iterative approach with defined framework. Understanding iterative development important for flexibility and continuous improvement.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 7,
+        "question": "What is the Big Bang Model in software development?",
+        "options": [
+          "Agile model emphasizing rapid delivery",
+          "Model where minimal planning, all development at once, sudden completion",
+          "Multiple phases waterfall approach",
+          "Iterative refinement model"
+        ],
+        "correct_answer": "Model where minimal planning, all development at once, sudden completion",
+        "hint": "Chaotic approach - code is written with minimal planning, suddenly all works or fails.",
+        "explanation": "Big Bang Model: minimal planning, resources allocated, developers build system with little structure or management. Process: initial vague requirements → intensive coding → suddenly system works (or fails). Characteristics: (1) Minimal requirements analysis. (2) No formal design phase. (3) Coding dominates timeline. (4) Testing happens late (or not at all). (5) Integration shock - components suddenly combined. (6) Unpredictable timeline. (7) No intermediate deliverables. Advantages: (1) Simple - no process overhead. (2) Fast initial development - coding immediately. (3) Suitable for small projects - one person. Disadvantages: (1) Unpredictable - timeline unknown. (2) High risk - might completely fail. (3) Quality issues - no planning/testing. (4) Difficult communication - unclear progress. (5) Rework extensive - late problem discovery. (6) Team confusion - no structure. When used: small throwaway projects, academic assignments, personal scripts. NOT suitable for: large systems, team projects, critical systems, complex requirements. Example: student writing quick utility program without planning. Contrast: Waterfall (planned phases), Agile (planned iterations), Big Bang (no plan). Testing shock: integration reveals problems late when expensive to fix. Communication nightmare: stakeholders unaware of progress until \"bang\". Modern practice: almost never used professionally (risky, unprofessional). Historical: used in early programming, recognized as problematic. Understanding Big Bang model important for appreciating why planning matters.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 8,
+        "question": "What are functional requirements?",
+        "options": [
+          "How well software works",
+          "Specific functionality system must provide",
+          "Performance characteristics",
+          "User interface appearance"
+        ],
+        "correct_answer": "Specific functionality system must provide",
+        "hint": "What the system does - features, functions, calculations, data processing.",
+        "explanation": "Functional requirements: specify what system does, specific features and functions. Examples: (1) System shall calculate monthly salary. (2) System shall generate invoice PDF. (3) User shall login with username/password. (4) System shall sort records by date. (5) System shall send email notification. Characteristics: (1) Specific - clearly defined functionality. (2) Testable - can verify it works. (3) Measurable - success criteria clear. (4) Written from user perspective. (5) Independent - one function not depend on another. Examples by domain: E-commerce (add to cart, checkout, payment), Banking (transfer funds, check balance), CRM (track customers, manage leads). Versus non-functional: Functional (what), non-functional (how well). Example contrast - Functional: \"System shall display customer list\". Non-functional: \"Customer list shall display in under 2 seconds\". Specification methods: use cases, user stories, detailed specification documents. Detail level: from high-level (\"user can order product\") to low-level (\"clicking order button calls OrderService.submitOrder()...\"). Common issues: (1) Incomplete - missing requirements. (2) Ambiguous - unclear interpretation. (3) Contradictory - conflicting requirements. (4) Infeasible - impossible to implement. Requirements management: track, trace, verify each requirement. Traceability: link requirements to design, code, tests. Understanding functional requirements crucial for system scope and test planning.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "easy",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 9,
+        "question": "What are non-functional requirements?",
+        "options": [
+          "Features system doesn't need",
+          "Quality attributes and constraints on system operation",
+          "User-facing functionality",
+          "Development team requirements"
+        ],
+        "correct_answer": "Quality attributes and constraints on system operation",
+        "hint": "How well, how fast, how secure - performance, reliability, security, usability.",
+        "explanation": "Non-functional requirements: constraints and quality attributes defining how well system performs. Categories: (1) Performance - response time, throughput. Example: \"System shall respond in under 2 seconds\". (2) Reliability - uptime, fault tolerance. Example: \"System shall have 99.9% availability\". (3) Security - authentication, encryption, access control. Example: \"All passwords shall be encrypted\". (4) Usability - learning curve, user satisfaction. Example: \"New user shall complete task in under 5 minutes\". (5) Maintainability - code structure, documentation. Example: \"Code shall follow naming conventions\". (6) Portability - platforms supported. Example: \"System shall run on Windows, Linux, macOS\". (7) Scalability - handle growing data/users. Example: \"System shall support 10,000 concurrent users\". (8) Compliance - legal, regulatory. Example: \"System shall comply with GDPR\". Specification: measurable constraints with acceptance criteria. Examples: \"Load time < 3 seconds\", \"Support 1 million records\", \"99.99% uptime SLA\". Versus functional: Functional (\"Generate report\"), non-functional (\"Report within 1 minute\"). Importance: users care about quality more than features. Trade-offs: improving one might worsen another (security vs performance). Testing: performance tests verify speed, load tests verify scalability, security tests verify protection. Design impact: non-functional requirements drive architecture (database choice, caching, distribution). Understanding non-functional requirements crucial for meeting quality expectations and system success.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 10,
+        "question": "What is requirement elicitation in software engineering?",
+        "options": [
+          "Writing requirements documents",
+          "Extracting and gathering requirements from stakeholders",
+          "Testing requirements",
+          "Organizing team meetings"
+        ],
+        "correct_answer": "Extracting and gathering requirements from stakeholders",
+        "hint": "Techniques to understand what stakeholders need - interviews, surveys, observation.",
+        "explanation": "Requirement elicitation: process of extracting, discovering, and gathering requirements from stakeholders. Techniques: (1) Interviews - direct conversation with stakeholders. One-on-one detailed discussion, group interviews for consensus. (2) Surveys/Questionnaires - reach many stakeholders, structured questions, quantifiable responses. (3) Observation - watch current processes, identify pain points. (4) Prototyping - show prototype, gather feedback. (5) Workshops - group sessions, collaborative requirements building. (6) Brainstorming - generate ideas, identify possibilities. (7) Document analysis - examine existing systems, processes. (8) Domain expert consultation - leverage specialist knowledge. Challenges: (1) Stakeholder availability - busy schedules. (2) Communication gap - understanding terminology. (3) Hidden requirements - stakeholders don't know what they need. (4) Conflicting needs - different stakeholders want different things. (5) Requirements change - new needs emerge. (6) Scope creep - endless requirement gathering. Process: (1) Identify stakeholders - who has interest. (2) Prepare - what to ask. (3) Conduct - interviews, surveys. (4) Document - record findings. (5) Analyze - understand implications. (6) Validate - confirm understanding. Tools: notebooks, recording, mind mapping, requirements management software. Successful elicitation: clear communication, listening skills, domain knowledge, patience. Common mistakes: assuming you understand, insufficient stakeholder involvement, not documenting well, ignoring non-functional requirements. Understanding requirement elicitation essential for capturing correct requirements and reducing rework.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 11,
+        "question": "What is the software requirements document (SRD)?",
+        "options": [
+          "Design specification",
+          "Comprehensive document defining what system shall do",
+          "Code documentation",
+          "Testing report"
+        ],
+        "correct_answer": "Comprehensive document defining what system shall do",
+        "hint": "Formal document listing all functional and non-functional requirements.",
+        "explanation": "Software Requirements Document (SRD): formal, comprehensive document specifying all functional and non-functional requirements. Also called: requirements specification, system requirements document (SRS). Contents: (1) Introduction - project overview, scope. (2) Functional requirements - detailed specifications. (3) Non-functional requirements - quality attributes. (4) Use cases/user stories - typical usage. (5) System interfaces - external system interactions. (6) Data requirements - data types, formats. (7) Design constraints - platform, technology. (8) Glossary - terminology definitions. (9) Appendices - diagrams, detailed requirements. Format: can be narrative document or structured (tabular), should be clear, unambiguous, complete. Writing guidelines: (1) Be specific - \"The system shall accept user input\" (bad), \"The system shall accept email address in format name@domain\" (good). (2) Avoid ambiguity - use mandatory keywords (shall, should, may). (3) Be complete - cover all scenarios. (4) Organize logically - structured format. (5) Use templates - standardized structure. (6) Include examples - clarify complex requirements. Management: version control, change tracking, traceability (requirement → design → code → test). Reviews: stakeholder reviews for accuracy, completeness, feasibility. Uses: (1) Contract baseline - agreement between parties. (2) Development guide - what to build. (3) Testing reference - what to verify. (4) Communication - clear expectations. (5) Change management - baseline for scope control. Quality metrics: completeness (all requirements present), consistency (no contradictions), clarity (unambiguous), verifiability (testable). Understanding SRD essential for successful project execution and quality assurance.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 12,
+        "question": "What is requirement validation?",
+        "options": [
+          "Checking spelling in requirements document",
+          "Ensuring requirements are correct, complete, and meet stakeholder needs",
+          "Testing implemented system",
+          "Organizing requirements by priority"
+        ],
+        "correct_answer": "Ensuring requirements are correct, complete, and meet stakeholder needs",
+        "hint": "Did we capture the right requirements? Are they feasible? Do they satisfy users?",
+        "explanation": "Requirement validation: checking that requirements are correct, complete, consistent, and achievable. Validation vs Verification: Validation (building right product - are requirements correct?), Verification (building product right - does it implement requirements?). Validation checks: (1) Correctness - requirements accurately reflect stakeholder needs. (2) Completeness - all necessary requirements present, no gaps. (3) Consistency - no contradictions between requirements. (4) Clarity - unambiguous, understandable. (5) Feasibility - technically achievable with available resources. (6) Testability - can verify requirement is met. (7) Realism - reasonable costs, timeline. Techniques: (1) Review - formal review with stakeholders. (2) Walkthrough - present requirements, gather feedback. (3) Inspection - detailed systematic examination. (4) Prototype review - show prototype against requirements. (5) Checklist - standard questions. (6) Simulation - trace through use cases. (7) Prototyping - build, demonstrate, validate. Process: (1) Prepare - organize requirements. (2) Review - check for issues. (3) Present - show stakeholders. (4) Gather feedback - identify problems. (5) Resolve - fix issues. (6) Approve - sign-off validation. Common issues: missing requirements, incorrect understanding, conflicting requirements, infeasible requirements, inconsistent terminology. Stakeholder involvement: critical for validation - only they confirm correctness. Late validation problems: discovering wrong requirements after development expensive. Early validation: saves rework, reduces risk. Sign-off: stakeholder approval (often formal document signature). Traceability: validation documented, requirements marked as validated. Understanding validation crucial for ensuring project develops correct system.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0801",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0801 - Software Process and Requirements"
+      },
+      {
+        "id": 13,
+        "question": "What is software design?",
+        "options": [
+          "Writing code for implementation",
+          "Planning how to build system satisfying requirements",
+          "Creating graphical mockups",
+          "Testing software"
+        ],
+        "correct_answer": "Planning how to build system satisfying requirements",
+        "hint": "Bridge between requirements and implementation - architecture, structure, detailed plans.",
+        "explanation": "Software design: planning and architecting solution satisfying requirements. Bridge: transforms requirements (what to build) into design (how to build). Levels: (1) Architectural design - overall system structure, major components, interaction. (2) Detailed design - individual components, algorithms, data structures. (3) UI/UX design - user interface layout, interaction. Design process: (1) Understand requirements. (2) Identify design constraints. (3) Propose solutions. (4) Evaluate options. (5) Select best approach. (6) Document design. (7) Review with stakeholders. Design approaches: (1) Top-down - start overall, refine details. (2) Bottom-up - build components, combine. (3) Structured - decompose into smaller parts. (4) Object-oriented - identify objects, relationships. (5) Modular - independent components. Design concepts: (1) Abstraction - hide complexity. (2) Decomposition - break into parts. (3) Encapsulation - bundle data/behavior. (4) Cohesion - related functionality together. (5) Coupling - minimize dependencies. (6) Modularity - independent modules. Design decisions: (1) Architecture - monolithic vs microservices. (2) Database - relational vs NoSQL. (3) Framework - technology stack. (4) Patterns - design patterns, architectural patterns. Design documentation: diagrams (UML), specification documents, design rationale. Trade-offs: simplicity vs functionality, performance vs maintainability, cost vs quality. Validation: design reviews, architectural analysis, prototyping. Understanding design crucial for building maintainable, scalable systems.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0802",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0802 - Software Design"
+      },
+      {
+        "id": 14,
+        "question": "What are design patterns in software engineering?",
+        "options": [
+          "Decorative design elements",
+          "Reusable solutions to common design problems",
+          "Design documentation format",
+          "UI layout patterns"
+        ],
+        "correct_answer": "Reusable solutions to common design problems",
+        "hint": "Proven solutions used across projects - Singleton, Observer, Factory, etc.",
+        "explanation": "Design patterns: reusable solutions to recurring problems in software design. Provide templates, best practices, proven approaches. Benefits: (1) Reusability - solve similar problems faster. (2) Communication - shared vocabulary. (3) Quality - proven solutions tested. (4) Maintainability - familiar structure. Categories: (1) Creational - object creation (Singleton, Factory, Abstract Factory, Builder). (2) Structural - composition, relationships (Adapter, Decorator, Facade, Proxy). (3) Behavioral - communication, responsibility (Observer, Strategy, Template Method, State). Common patterns: (1) Singleton - single instance throughout application. Example: Logger, DatabaseConnection. (2) Factory - create objects without specifying exact classes. (3) Observer - notify multiple objects of state change. Example: event handlers. (4) Adapter - make incompatible interfaces compatible. (5) Decorator - add behavior dynamically. (6) Strategy - encapsulate interchangeable algorithms. (7) Template Method - define algorithm skeleton, subclasses fill details. Advantages: (1) Proven solutions - reduce bugs. (2) Code reusability. (3) Loose coupling. (4) Team communication. (5) Faster development. Disadvantages: (1) Complexity - might be overkill. (2) Learning curve - understand patterns. (3) Over-engineering - apply unnecessarily. (4) Rigidity - patterns can be restrictive. Gang of Four: Gamma et al. book defining 23 classic patterns. Architectural patterns: MVC, MVP, MVVM (design at system level). Anti-patterns: bad solutions repeated (opposite of patterns). Understanding patterns important for professional development and code quality.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0802",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0802 - Software Design"
+      },
+      {
+        "id": 15,
+        "question": "What are design heuristics?",
+        "options": [
+          "Exact mathematical formulas",
+          "Practical rules of thumb for good design",
+          "Testing procedures",
+          "Documentation standards"
+        ],
+        "correct_answer": "Practical rules of thumb for good design",
+        "hint": "Guidelines like high cohesion, low coupling, DRY principle.",
+        "explanation": "Design heuristics: practical guidelines and rules of thumb for achieving good design. Not strict rules, but proven principles. Key heuristics: (1) High cohesion - related functionality together. (2) Low coupling - minimize dependencies. (3) Abstraction - hide complexity. (4) Modularity - independent modules. (5) Encapsulation - data hiding. (6) DRY (Don't Repeat Yourself) - code reuse. (7) KISS (Keep It Simple) - simplicity. (8) SOLID principles - five design guidelines. (9) Separation of concerns - different responsibilities. (10) Interface segregation - specific interfaces. SOLID principles: (1) Single Responsibility - one reason to change. (2) Open/Closed - open extension, closed modification. (3) Liskov Substitution - derived classes substitutable. (4) Interface Segregation - specific interfaces. (5) Dependency Inversion - depend on abstractions. Cohesion levels: (1) Functional cohesion - best. (2) Sequential - data flow. (3) Communicational - shared data. (4) Temporal - executed together. Coupling types: (1) Data - share data. (2) Control - control flow. (3) External - external references. (4) Content - access internals. Applications: (1) Module decomposition. (2) Class design. (3) Function design. (4) Interface design. Examples: (1) High cohesion - UserService handles user operations. (2) Low coupling - modules don't depend on each other. (3) Abstraction - expose methods, hide implementation. (4) Modularity - separate database, business, UI layers. Benefits: (1) Maintainability - easier to modify. (2) Testability - can test independently. (3) Reusability - use in different contexts. (4) Clarity - understand purpose. Understanding heuristics essential for professional design decisions.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0802",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0802 - Software Design"
+      },
+      {
+        "id": 16,
+        "question": "What is architectural design in software systems?",
+        "options": [
+          "Designing database schema",
+          "Overall structure of system components and their interactions",
+          "User interface appearance",
+          "Code formatting standards"
+        ],
+        "correct_answer": "Overall structure of system components and their interactions",
+        "hint": "High-level design - major components, layers, communication patterns.",
+        "explanation": "Architectural design: high-level system structure, major components, their responsibilities, interactions. Sets foundation for detailed design. Architectural decisions: critical choices affecting entire system. Examples: (1) Monolithic vs Microservices - single vs distributed. (2) Layered vs Event-driven - layer isolation vs event flow. (3) Client-server vs Peer-to-peer. (4) Synchronous vs Asynchronous communication. (5) Relational vs NoSQL database. (6) Centralized vs Distributed caching. Architectural styles: (1) Layered (N-tier) - horizontal layers (presentation, business, data). (2) Microservices - independent services. (3) Event-driven - components react to events. (4) Client-server - central server, multiple clients. (5) Pipe-and-filter - data flows through stages. (6) Model-view-controller - separation of concerns. Architectural patterns: solutions to recurring architectural problems. Component design: identify major components, responsibilities, interfaces. Data flow: how data moves between components. Communication: synchronous (blocking), asynchronous (non-blocking). Documentation: architecture diagrams (boxes, arrows), specification documents, decisions rationale. Quality attributes driving architecture: (1) Performance - caching, distribution. (2) Scalability - horizontal/vertical scaling. (3) Reliability - replication, failover. (4) Maintainability - loose coupling, modularity. (5) Security - firewalls, encryption. (6) Usability - responsive UI. Trade-offs: simplicity vs scalability, performance vs maintainability, security vs performance. Evaluation: review against quality requirements, risk assessment. Example: E-commerce site might use layered architecture (presentation, business, data) with separate services (payment, inventory, shipping). Understanding architecture crucial for system success and evolution.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0802",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0802 - Software Design"
+      },
+      {
+        "id": 17,
+        "question": "What is modular decomposition in software design?",
+        "options": [
+          "Breaking system into independent modules for maintainability",
+          "Removing duplicate code",
+          "Testing individual modules",
+          "Sorting data into modules"
+        ],
+        "correct_answer": "Breaking system into independent modules for maintainability",
+        "hint": "Divide and conquer - break large system into smaller, manageable pieces.",
+        "explanation": "Modular decomposition: dividing system into independent, self-contained modules. Benefits: (1) Manageability - smaller pieces easier to understand. (2) Reusability - modules used in other projects. (3) Team development - parallel development. (4) Testing - test modules independently. (5) Maintenance - change one module without affecting others. (6) Evolution - replace modules. Decomposition strategies: (1) Functional decomposition - by functionality (search module, payment module). (2) Data decomposition - by data (user data, product data). (3) Layer decomposition - by layers (presentation, business, data). (4) Feature decomposition - by features (authentication, reports). (5) Hierarchical - main system, subsystems, components. Module characteristics: (1) High cohesion - related functionality. (2) Low coupling - independent. (3) Clear interface - well-defined inputs/outputs. (4) Single responsibility. (5) Testable - can test independently. Module types: (1) Library - reusable functions/classes. (2) Service - provides functionality via interface. (3) Controller - orchestrates others. (4) Model - data representation. (5) View - presentation. (6) Utility - helper functions. Examples: (1) Web application - Auth module, User module, Product module, Order module. (2) Desktop app - UI module, Business logic module, Data access module. (3) Game - Graphics module, Physics module, Input module, State module. API design: modules communicate via well-defined APIs, not internals. Dependency management: track module dependencies, avoid circular. Tool support: dependency tools, module visualization. Understanding decomposition essential for manageable, scalable systems.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0802",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0802 - Software Design"
+      },
+      {
+        "id": 18,
+        "question": "What is unit testing in software testing?",
+        "options": [
+          "Testing entire system functionality",
+          "Testing individual components/functions in isolation",
+          "User acceptance testing",
+          "Performance testing"
+        ],
+        "correct_answer": "Testing individual components/functions in isolation",
+        "hint": "Test smallest testable units - functions, methods, classes.",
+        "explanation": "Unit testing: testing smallest testable software components (functions, methods, classes) in isolation. Purpose: (1) Verify correctness - code does what intended. (2) Detect bugs early - cheaper to fix. (3) Enable refactoring - safely modify knowing tests verify. (4) Document behavior - tests show expected behavior. (5) Facilitate debugging - pinpoint failures. Characteristics: (1) Isolated - tests don't depend on other tests. (2) Fast - execute quickly. (3) Automated - run without manual intervention. (4) Repeatable - same result every run. (5) Self-checking - pass/fail clear. Tools: JUnit (Java), NUnit (.NET), pytest (Python), Mocha (JavaScript). Structure (Arrange-Act-Assert): (1) Arrange - set up test data. (2) Act - execute code. (3) Assert - verify result. Example: void testAddition() { assertEquals(4, add(2, 2)); }. Test coverage: percentage of code tested. Goal: high coverage (>80%). Mocking: simulate dependencies. Example: mock database, mock network. Assertions: verify expected results. Common: assertEquals, assertTrue, assertThrows. Benefits: (1) Confidence - know code works. (2) Quick feedback - failure detected immediately. (3) Regression prevention - catch unintended changes. (4) Quality - fewer bugs in production. (5) Cost - fixing early cheaper. Limitations: (1) Time consuming - write and maintain tests. (2) Incomplete - can't test all scenarios. (3) False confidence - might miss bugs. (4) Maintenance - update when code changes. Best practices: (1) One assertion per test. (2) Descriptive names. (3) Independent tests. (4) Arrange-act-assert structure. (5) Test edge cases. Understanding unit testing essential for quality code and bug prevention.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 19,
+        "question": "What is integration testing?",
+        "options": [
+          "Testing individual functions",
+          "Testing how components work together",
+          "Testing user interface",
+          "System deployment testing"
+        ],
+        "correct_answer": "Testing how components work together",
+        "hint": "Test interaction between units/modules - data flow, interfaces.",
+        "explanation": "Integration testing: testing how components/modules interact and work together. Focuses on: (1) Interface correctness - parameters, return values. (2) Data flow - correct data passing. (3) Interaction - components communicate properly. (4) Side effects - unexpected behavior. Scope: more than unit testing, less than system testing. Follows unit testing in sequence. Approaches: (1) Big Bang - integrate all at once. Disadvantage: hard to isolate problems. (2) Incremental - integrate progressively. Bottom-up (build from components up), Top-down (start from top level). Advantages: incrementally easier debugging. (3) Sandwich - combine bottom-up and top-down. Process: (1) Plan - integration order, test cases. (2) Setup - environment, test data. (3) Execute - run tests. (4) Verify - check results. (5) Report - document findings. Test cases: (1) API contracts - parameters, return values correct. (2) Data exchange - data correctly passed. (3) Error handling - handle component failures. (4) Concurrent access - multiple components accessing resources. (5) Performance - acceptable speed combined. Tools: API testing (Postman), test frameworks, mocking libraries. Example: test that UserService and Database components interact correctly (UserService calls Database correctly, receives data correctly). Database testing: verify queries, stored procedures, triggers. API testing: verify endpoints, parameters, responses. Stubs/mocks: simulate dependencies not yet built. Common issues: (1) Interface mismatches - parameters don't match. (2) Data format errors - incompatible formats. (3) Timing issues - race conditions. (4) Performance - acceptable separately, slow together. Understanding integration testing crucial for multi-component system reliability.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 20,
+        "question": "What is system testing?",
+        "options": [
+          "Testing individual modules",
+          "Testing complete integrated system against requirements",
+          "Testing code quality",
+          "Developer testing"
+        ],
+        "correct_answer": "Testing complete integrated system against requirements",
+        "hint": "End-to-end testing - entire system functioning as specified.",
+        "explanation": "System testing: testing complete, integrated system against functional and non-functional requirements. Scope: entire system from user perspective, all components integrated. Follows integration testing. Types: (1) Functional testing - verify all features work. (2) Performance testing - response time, throughput acceptable. (3) Load testing - handles expected load. (4) Stress testing - handles exceed load. (5) Usability testing - user-friendly. (6) Security testing - protected against threats. (7) Compatibility testing - works on supported platforms. (8) Recovery testing - recovers from failures. (9) Compliance testing - meets standards. Process: (1) Plan - define test scope, requirements. (2) Design - test cases, scenarios. (3) Setup - system, environment, data. (4) Execute - run test cases. (5) Report - document results, defects. Test environment: mirrors production as closely as possible. Test data: realistic data reflecting production. Regression testing: verify fixes don't break existing functionality. Scenarios: real-world use cases. Example: E-commerce system test - user registers, searches products, adds to cart, checks out, pays, receives confirmation. Each step verifies requirement met. Metrics: (1) Test case pass rate. (2) Defect severity/count. (3) Coverage - requirements tested. (4) Performance - response times. (5) Uptime - availability. Sign-off: system approved ready for deployment if tests pass. Challenges: (1) Complexity - many components. (2) Time - extensive testing. (3) Environment - hard to replicate production. (4) Regression - prevent new bugs. Understanding system testing crucial for release quality assurance.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 21,
+        "question": "What is acceptance testing (UAT)?",
+        "options": [
+          "Developer testing",
+          "Testing by end-users to verify system meets requirements",
+          "Code review process",
+          "Performance benchmarking"
+        ],
+        "correct_answer": "Testing by end-users to verify system meets requirements",
+        "hint": "User acceptance testing - users test real-world usage.",
+        "explanation": "Acceptance testing (UAT): final testing by end-users/stakeholders to verify system meets business requirements. Purpose: (1) Verify functionality meets needs. (2) User acceptance - comfortable using system. (3) Business value - delivers promised benefits. (4) Go/no-go decision - proceed to production. Types: (1) User acceptance testing - end-users test. (2) Operational acceptance testing - IT/operations test infrastructure. (3) Contract/regulatory acceptance - verify contractual requirements. (4) Alpha/beta testing - limited user groups test. Process: (1) Plan - UAT objectives, participants. (2) Setup - realistic environment, data. (3) Test - users execute test cases, real scenarios. (4) Feedback - users provide feedback. (5) Resolve - address issues, fixes. (6) Sign-off - formal approval. Test cases: (1) Business scenarios - real use cases. (2) Data scenarios - typical, edge cases. (3) Workflow - entire processes. (4) Integration - different departments. (5) Performance - acceptable speed. Participants: (1) Business users - domain knowledge. (2) Subject matter experts - business process. (3) IT/Operations - technical concerns. (4) Project manager - schedule, scope. Differ from system testing: (1) System testing (IT/QA) - compliance with specs. (2) Acceptance testing (Business) - meets business needs. Example: HR system UAT - employees test hiring process, payroll, benefits. Success criteria: (1) All test cases pass. (2) Acceptable defect count. (3) User satisfaction. (4) Performance acceptable. (5) No showstoppers. Approval: formal sign-off, business stakeholder approval. Understanding UAT essential for ensuring business value and user satisfaction.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 22,
+        "question": "What are use cases in software development?",
+        "options": [
+          "Test case documentation",
+          "Descriptions of system interactions from user perspective",
+          "UI layout designs",
+          "System architecture diagrams"
+        ],
+        "correct_answer": "Descriptions of system interactions from user perspective",
+        "hint": "How users interact with system - user-centric scenarios, happy path, exceptions.",
+        "explanation": "Use cases: descriptions of interactions between actor (user/system) and system from user perspective. Benefits: (1) Capture requirements - functional requirements in user language. (2) Communication - business stakeholders understand. (3) Test basis - basis for test case design. (4) Design input - how to design user interface. (5) Documentation - user perspective reference. Components: (1) Actor - user/external system. (2) Precondition - initial state. (3) Main flow - happy path steps. (4) Alternative flows - variations. (5) Postcondition - final state. Example: Use case \"Withdraw money\" from ATM. Actor: Customer. Precondition: Card inserted, PIN verified. Main flow: (1) Enter amount. (2) Verify sufficient balance. (3) Dispense cash. (4) Print receipt. Postcondition: Cash dispensed, balance updated. Formats: (1) Brief - 1-2 paragraphs. (2) Expanded - step-by-step detailed. (3) Fully dressed - includes everything, more formal. Template: (1) Name - verb-noun. (2) Actors. (3) Preconditions. (4) Main success scenario. (5) Alternative scenarios. (6) Postconditions. Use case diagram: visual representation, actors, use cases, relationships. Benefits documentation: narrative, understandable, business language. Test case derivation: use case steps → test cases. Example: ATM use case generates test cases for withdrawal, balance check, insufficient funds. Organizing: user goal (high-level), system interaction (detailed). Common mistakes: (1) Too many steps - break into smaller use cases. (2) Too abstract - insufficient detail. (3) Implementation details - focus on interaction. (4) Missing alternatives - handle exceptions. Understanding use cases crucial for requirement capture and testing.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0804",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0804 - Object-Oriented Analysis"
+      },
+      {
+        "id": 23,
+        "question": "What is the Unified Modeling Language (UML)?",
+        "options": [
+          "Programming language",
+          "Standard notation for software modeling and design",
+          "Testing framework",
+          "Database schema language"
+        ],
+        "correct_answer": "Standard notation for software modeling and design",
+        "hint": "Visual language for designing systems - diagrams, standardized notation.",
+        "explanation": "UML (Unified Modeling Language): standardized visual notation for modeling software systems. Purpose: (1) Communication - shared understanding. (2) Analysis - analyze requirements. (3) Design - document design. (4) Implementation - guide coding. (5) Documentation - system reference. Diagram types: (1) Structural - static structure. (1a) Class diagram - classes, relationships. (1b) Component diagram - components, dependencies. (1c) Deployment diagram - hardware, deployment. (2) Behavioral - dynamic behavior. (2a) Use case diagram - actors, use cases. (2b) Sequence diagram - interaction sequence. (2c) Collaboration diagram - object interactions. (2d) State diagram - state transitions. (2e) Activity diagram - workflow. Key concepts: (1) Class - attributes, methods. (2) Relationships - association, inheritance, dependency. (3) Multiplicity - number of instances. (4) Visibility - public (+), private (-), protected (#). (5) Stereotypes - extensions. Standards: UML 2.5 current standard, widely adopted. Tools: ArchiMate, Visual Paradigm, Lucidchart, draw.io, Enterprise Architect. Benefits: (1) Clear communication - visual understanding. (2) Standards - everyone speaks same language. (3) Code generation - tools generate code from UML. (4) Reverse engineering - extract UML from code. (5) Documentation - design documentation. Class diagram example: Student class with attributes (name, id) and methods (enroll, withdraw). Associations: Student enrolls in Course (one-to-many). Inheritance: CourseTeacher inherits from Person. Advantages: (1) Standardized - widely understood. (2) Tool support - many tools. (3) Complete - covers all aspects. Disadvantages: (1) Learning curve - complex notation. (2) Overhead - significant diagrams for small projects. (3) Maintenance - keep diagrams current. Understanding UML essential for professional software modeling and communication.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0804",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0804 - Object-Oriented Analysis"
+      },
+      {
+        "id": 24,
+        "question": "What is a class diagram in UML?",
+        "options": [
+          "Describes use case flow",
+          "Shows classes, attributes, methods, and relationships",
+          "Represents deployment architecture",
+          "Describes system state transitions"
+        ],
+        "correct_answer": "Shows classes, attributes, methods, and relationships",
+        "hint": "Static structure diagram - classes and their organization.",
+        "explanation": "Class diagram: UML diagram showing classes, attributes, methods, and relationships among classes. Represents static structure. Components: (1) Class box - name, attributes, methods. (2) Attributes - properties, data members. Format: visibility name: type = default. (3) Methods - operations, member functions. Format: visibility name(params): returnType. (4) Visibility - + (public), - (private), # (protected). Relationships: (1) Association - objects related. Line connects classes, multiplicity (1, *, 1..*). (2) Inheritance - \"is-a\" relationship. Arrow from derived to base. (3) Dependency - one class depends on another. Dashed arrow. (4) Composition - part-of relationship. Filled diamond. (5) Aggregation - has-a relationship. Empty diamond. Example: Student class with attributes (name, id, email) and methods (enroll(), withdraw()). Course class with attributes (name, code) and methods (addStudent(), removeStudent()). Association: Student enrolls in Course (multiplicity: Student 1..* to Course 1..*). Inheritance: GraduateStudent and UndergraduateStudent inherit from Student (triangle arrows). Attributes: int age, string name (private), double gpa (public). Methods: void enroll(Course c), boolean isEligible(). Multiplicity symbols: 1 (exactly one), * (zero or more), 0..1 (optional), 1..* (one or more). Abstract class: name italicized, shown with <<abstract>>. Interface: shown with <<interface>> stereotype. Instance names: underlined when showing specific instances. Uses: (1) System design - blueprint. (2) Code generation - tools generate code. (3) Communication - discuss design. (4) Documentation - reference. Creation: draw classes, add attributes/methods, add relationships. Tools support: most UML tools. Understanding class diagrams essential for OO design communication.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0805",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0805 - Object-Oriented Design"
+      },
+      {
+        "id": 25,
+        "question": "What is object-oriented development cycle?",
+        "options": [
+          "Database schema development",
+          "Iterative process of analysis, design, implementation for OO systems",
+          "Testing methodology",
+          "Code compilation steps"
+        ],
+        "correct_answer": "Iterative process of analysis, design, implementation for OO systems",
+        "hint": "Phases from requirements to deployment - analyze, design, code, test.",
+        "explanation": "OO Development Cycle: iterative process for building OO systems. Phases: (1) Requirements analysis - identify use cases, user requirements. (2) OO Analysis - model system objects, relationships. (3) OO Design - architectural design, class design. (4) Implementation - code classes, methods. (5) Testing - unit, integration, system tests. (6) Deployment - release to production. (7) Maintenance - support, updates. Characteristics: (1) Iterative - repeat phases, refine each iteration. (2) Incremental - build functionality gradually. (3) User-centric - focus on user needs. (4) Object-focused - identify objects, responsibilities. Phases detailed: Analysis phase: (1) Identify actors and use cases. (2) Define requirements. (3) Model system objects. (4) Show relationships, associations. (5) Behavior representation. Design phase: (1) Transform analysis into design. (2) Architectural decisions. (3) Class design - attributes, methods. (4) Relationship design - inheritance, composition. (5) Design patterns application. Implementation phase: (1) Write classes. (2) Implement methods. (3) Handle exceptions. (4) Initialize objects. Testing phase: (1) Unit tests - individual classes. (2) Integration tests - class interactions. (3) System tests - complete functionality. (4) Acceptance tests - user verification. Advantages: (1) Clear methodology - structured approach. (2) Maintainability - OO principles. (3) Reusability - objects, classes. (4) Scalability - modular structure. (5) Flexibility - change objects independently. Iterations: repeat cycle for refinement, improvements, additional features. Agile alignment: cycles short (sprints), frequent feedback. Example: Banking system development - identify Customer, Account objects, relationships, then design classes, implement, test. Understanding OO development cycle essential for structured system building.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0804",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0804 - Object-Oriented Analysis"
+      },
+      {
+        "id": 26,
+        "question": "What is a sequence diagram?",
+        "options": [
+          "Shows class structure",
+          "Shows interaction sequence between objects over time",
+          "Represents state changes",
+          "Displays deployment architecture"
+        ],
+        "correct_answer": "Shows interaction sequence between objects over time",
+        "hint": "Timeline diagram - objects top, messages down showing interaction sequence.",
+        "explanation": "Sequence diagram: UML diagram showing interaction sequence between objects/actors over time. Shows message passing, method calls. Components: (1) Actor/Object - at top, rectangle with name. (2) Lifeline - dashed line down from actor/object. (3) Messages - arrows between lifelines showing communication. (4) Activation boxes - rectangle on lifeline showing active period. Example: User login sequence. (1) User enters credentials. (2) LoginController receives request. (3) AuthService validates credentials. (4) Database queries user. (5) Database returns user. (6) AuthService verifies password. (7) Returns token. (8) LoginController displays success. Message types: (1) Synchronous - solid arrow, waits for response. (2) Asynchronous - open arrow, doesn't wait. (3) Return - dashed arrow back. (4) Self-call - arrow to own lifeline. Numbering: messages numbered (1, 2, 3...) showing order. Activation: thick rectangle on lifeline during message handling. Fragments: optional (conditions), loop (repetition), alt (alternatives). Timing: horizontal position shows time, top earlier. Benefits: (1) Understand interaction - see message flow. (2) Design communication - how objects interact. (3) Test basis - test interaction. (4) Documentation - reference behavior. Uses: (1) System behavior design. (2) Detailed design. (3) Communication protocol. (4) Use case realization. Example: E-commerce checkout. (1) Customer clicks checkout. (2) OrderService creates order. (3) PaymentService processes payment. (4) InventoryService reserves items. (5) NotificationService sends confirmation. Tools: ArchiMate, UML tools generate automatically. Understanding sequence diagrams essential for interaction design and communication protocols.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0805",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0805 - Object-Oriented Design"
+      },
+      {
+        "id": 27,
+        "question": "What is a collaboration diagram in UML?",
+        "options": [
+          "Shows use case relationships",
+          "Shows object interactions with focus on relationships",
+          "Represents component dependencies",
+          "Displays system deployment"
+        ],
+        "correct_answer": "Shows object interactions with focus on relationships",
+        "hint": "Similar to sequence diagram but emphasizes relationships, numbers show order.",
+        "explanation": "Collaboration diagram: UML diagram showing object interactions emphasizing relationships and links. Similar to sequence diagrams but different view. Components: (1) Objects - rectangles with name. (2) Links - lines connecting objects (relationships). (3) Messages - numbered arrows showing communication order. Representation: spatial arrangement shows relationships, numbering shows sequence. Example: Library system. (1) Customer object. (2) Library object. (3) Book object. Link between Customer and Library (customer interacts with library). Link between Library and Book (library manages books). Messages: 1: request_book, 2: search, 3: return_book (numbered in order). Advantages over sequence: (1) Emphasize relationships - which objects interact. (2) Compact - focus on important interactions. (3) Spatial organization - object placement meaningful. Disadvantages: (1) Time less clear - must read numbering. (2) Less intuitive - relationships less obvious. (3) Complex for large systems - can become cluttered. Message types: (1) Synchronous - arrow, waits. (2) Asynchronous - open arrow. (3) Return - dashed. (4) Self-call - to self. Sequence shown by numbers: 1, 2, 3... or 1, 1.1, 1.2, 2... for nested. Example: Student enrollment. Student → Registrar (1: enroll). Registrar → Course (2: add_student). Course → Student (3: confirm). Uses: (1) Class interaction design. (2) Understanding relationships. (3) Protocol design. (4) System behavior. Creation: identify objects, draw links (relationships), add numbered messages. Understanding collaboration diagrams important for interaction design emphasis on relationships.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0805",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0805 - Object-Oriented Design"
+      },
+      {
+        "id": 28,
+        "question": "What is mapping design to code in OO implementation?",
+        "options": [
+          "Translating UML diagrams directly into code",
+          "Converting design models to executable code following OO principles",
+          "Database schema mapping",
+          "API endpoint definition"
+        ],
+        "correct_answer": "Converting design models to executable code following OO principles",
+        "hint": "Design classes become actual classes, associations become member variables.",
+        "explanation": "Mapping design to code: transforming OO design (class diagrams, sequence diagrams) into executable code. Process: (1) Class diagram → class definitions. (2) Attributes → member variables. (3) Methods → function implementations. (4) Relationships → reference/pointer members. (5) Sequence diagrams → method implementations. Class mapping: Design class \"Student\" with attributes (name: string, id: int) and methods (enroll(), withdraw()) maps to: class Student { private string name; private int id; public void enroll() { } public void withdraw() { } }. Attribute types: design type → code type. Associations: design association → reference. One-to-many association: Student enrolls in multiple Courses → vector<Course*> courses member. Inheritance: design inheritance → class inheritance. abstract class in design → abstract class in code. Interface → interface/pure virtual class. Method signatures: design method signature → code method. Parameters, return types from design. Implementation details: design provides skeleton, implementation adds logic. Example collaboration diagram → method calls sequence. Visibility: design visibility (public/private) → code access specifiers. Constants: design constants → const in code. Collections: design \"many\" → array/vector/list. Pointers/references: design associations → pointers/references. Lazy initialization: design might show object creation → code implements pattern. Design by contract: pre/postconditions → assertions/validation. Code generation: tools generate skeleton from design, developer implements methods. Manual approach: follow design structure, implement methods. Advantages design → code: (1) Consistency - design reflected. (2) Traceability - requirements → design → code. (3) Maintainability - design visible. (4) Quality - follows design principles. Understanding mapping crucial for code reflecting design intent.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0806",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0806 - OO Design Implementation"
+      },
+      {
+        "id": 29,
+        "question": "What is visibility in OO design?",
+        "options": [
+          "How clearly you can see objects",
+          "Determining what methods/attributes are accessible to other classes",
+          "Visibility on screen",
+          "Scope of variables"
+        ],
+        "correct_answer": "Determining what methods/attributes are accessible to other classes",
+        "hint": "public, private, protected - who can access from outside class.",
+        "explanation": "Visibility (access control): determining which class members accessible from outside class. Levels: (1) Public (+) - accessible everywhere. (2) Private (-) - accessible only within class. (3) Protected (#) - accessible within class and derived classes. (4) Package/Internal - accessible within package/assembly. Benefits: (1) Encapsulation - hide implementation. (2) Control - prevent misuse. (3) Security - protect sensitive data. (4) Flexibility - change internals without affecting external. Design decisions: (1) Public methods - intended interface. (2) Private attributes - internal state. (3) Protected - for inheritance. (4) Accessors - getter/setter methods. Example class: class BankAccount { private double balance; private string accountNumber; public void deposit(double amount) { } public double getBalance() { } }. Balance private (protect from external modification), deposit/getBalance public (intended interface). Protected example: class Person { protected string ssn; }; class Employee : public Person { can access ssn }; external code cannot. Design principle: minimize public interface, hide internals. Class members visibility: attributes usually private, methods usually public. Accessors: private data accessible via public getter/setter methods. Controlled modification: setter methods validate before changing. Abstract data type: encapsulate implementation, expose interface. API design: public methods form API, rest private. Benefit: internal changes don't affect callers. Danger: too much private restricts flexibility, too much public exposes internals. Design consideration: balance between protection and flexibility. Implementation: corresponds to public/private/protected keywords in code. Understanding visibility essential for proper encapsulation and API design.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0805",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0805 - Object-Oriented Design"
+      },
+      {
+        "id": 30,
+        "question": "What is creating class definitions from design diagrams?",
+        "options": [
+          "Drawing UML diagrams",
+          "Implementing classes based on design specifications",
+          "Database table creation",
+          "UI component design"
+        ],
+        "correct_answer": "Implementing classes based on design specifications",
+        "hint": "Design class box → actual class code with attributes and methods.",
+        "explanation": "Creating class definitions: implementing actual classes from design class diagrams. Process: (1) Identify class from diagram. (2) Extract attributes (with types, defaults). (3) Extract methods (with signatures). (4) Add relationships (member variables). (5) Implement methods. (6) Add constructor, destructor. Class diagram to code: Design shows class \"Product\" with attributes (name: string, price: double, quantity: int) and methods (getPrice(), updateQuantity()). Code implementation: class Product { private: string name; double price; int quantity; public: Product(string n, double p, int q); string getName() const; double getPrice() const; void updateQuantity(int newQty); }. Constructor: initialize attributes. Destructor: cleanup if needed. Methods: implement behavior. Validation: add parameter validation, error handling. Default values: if design specifies default, code implements. Associations: other class references added as members. Example: Order contains multiple Items → vector<Item> items member. Inheritance: diagram shows with arrow → code shows class inheritance. Interface implementation: diagram shows interface → code implements virtual methods. Constants: design constants → code const members. Static members: shared across instances. Getter/setter: access private attributes safely. Method implementation: design method skeleton, implement business logic. Documentation: code comments match design documentation. Iterative refinement: design might need adjustment during implementation (code generation feedback). Tools: reverse engineering extracts design from code, forward engineering generates code from design. Example E-commerce: Product class, Order class, Customer class from design to code. Understanding this mapping crucial for design-to-code consistency.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0806",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0806 - OO Design Implementation"
+      },
+      {
+        "id": 31,
+        "question": "What is creating methods from collaboration diagrams?",
+        "options": [
+          "Designing class structure",
+          "Implementing method bodies based on interaction sequences",
+          "Creating database queries",
+          "Designing user interface"
+        ],
+        "correct_answer": "Implementing method bodies based on interaction sequences",
+        "hint": "Collaboration diagram shows message sequence → implement that sequence in methods.",
+        "explanation": "Creating methods from collaboration diagrams: implementing method logic based on interaction sequences shown. Process: (1) Identify message sequence. (2) Determine which class implements method. (3) Implement calls to other objects in sequence. (4) Handle parameters, return values. Example: Collaboration diagram for checkout. (1) Order receives checkout message. (2) Order calls PaymentService.process(). (3) Order calls InventoryService.reserve(). (4) Order sends confirmation. Code implementation: void Order::checkout() { PaymentService payment; if(payment.process(totalAmount)) { InventoryService inventory; if(inventory.reserve(items)) { sendConfirmation(); } } }. Message sequence → method calls sequence. Parameters: diagram shows message parameters → method parameters. Return handling: diagram shows return → code captures return value. Conditionals: diagram conditional flow → code if statements. Loops: diagram loops → code for loops. Error handling: diagram doesn't show, code implements. Timing: sequence order → call order. Objects: diagram objects → code object references/instances. Dependencies: diagram links → code needs references/pointers to other objects. Activation order: which methods called in which order. Asynchronous: diagram async messages → code might use callbacks/threads. Object creation: diagram might show object creation → code implements construction. Method calls: diagram messages → code method calls. Delegation: diagram shows one object asking another → code delegates. Example: Authentication sequence - (1) LoginController calls AuthService.authenticate(). (2) AuthService calls Database.getUser(). (3) Validates credentials. (4) Returns token. Method bodies follow interaction flow. Testing: interaction tests verify message sequence. Understanding this crucial for implementing correct interaction patterns.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0806",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0806 - OO Design Implementation"
+      },
+      {
+        "id": 32,
+        "question": "What is exception handling in OO implementation?",
+        "options": [
+          "Ignoring errors in code",
+          "Managing error conditions and exceptional situations in code",
+          "Throwing away problematic code",
+          "Type conversion errors"
+        ],
+        "correct_answer": "Managing error conditions and exceptional situations in code",
+        "hint": "try-catch blocks, throwing exceptions for error handling.",
+        "explanation": "Exception handling: managing error conditions and exceptional situations in OO code. Purpose: (1) Graceful error handling - not crash. (2) Error communication - inform caller. (3) Resource cleanup - ensure cleanup happens. (4) Control flow - different paths. Exception types: (1) Checked exceptions - compile-time (Java), must handle. (2) Unchecked exceptions - runtime, optional handling. Standard exceptions: runtime_error, invalid_argument, out_of_range, logic_error, etc. Throwing: throw std::runtime_error(\"Error message\"); signals error condition. Catching: try { risky_code(); } catch(exception& e) { handle_error; }. Multiple catch: different exception types handled differently. Example: File operations. try { File f(\"data.txt\"); data = f.read(); } catch(FileNotFound& e) { cout << \"File not found\"; } catch(PermissionDenied& e) { cout << \"No permission\"; } catch(exception& e) { cout << \"General error\"; }. Cleanup: destructors called automatically (RAII pattern), ensuring cleanup. Custom exceptions: class custom_error : public exception { }. Advantages: (1) Clear error handling. (2) Separation - error logic separate from normal. (3) Propagation - errors propagate up. (4) Cleanup - automatic cleanup. Disadvantages: (1) Overhead - exceptions slow. (2) Complex control flow - harder follow. (3) Performance - exception handling cost. Best practices: (1) Throw specific exceptions. (2) Catch specific exceptions. (3) Don't use exceptions for normal flow. (4) Clean up resources properly. (5) Document what exceptions thrown. Design perspective: specify exceptions in design (which methods throw what). Implementation: match design, throw appropriate exceptions. Testing: test error paths, verify correct exceptions thrown. Understanding exception handling crucial for robust error management.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0806",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0806 - OO Design Implementation"
+      },
+      {
+        "id": 33,
+        "question": "What is software quality assurance (SQA)?",
+        "options": [
+          "Testing software only",
+          "Comprehensive activities ensuring software meets quality standards",
+          "Code review process",
+          "Performance optimization"
+        ],
+        "correct_answer": "Comprehensive activities ensuring software meets quality standards",
+        "hint": "Broader than testing - planning, processes, reviews, metrics.",
+        "explanation": "Software Quality Assurance (SQA): comprehensive approach ensuring software meets quality standards and requirements. Broader than testing. Activities: (1) SQA planning - define quality standards, processes. (2) Process definition - how to develop software. (3) Code reviews - peer examination. (4) Formal technical reviews - structured reviews. (5) Testing - unit, integration, system. (6) Metrics - measure quality. (7) Traceability - requirements → code → test. (8) Configuration management - version control, change management. (9) Defect tracking - record, analyze defects. (10) Corrective actions - improve based on findings. SQA vs Testing: SQA (process, prevention), Testing (verification, detection). SQA encompasses testing but broader. Planning: (1) Quality objectives - what acceptable? (2) Metrics - how measure? (3) Process - how ensure? (4) Roles - who responsible? (5) Tools - what tools needed? Standards: ISO 9001 (quality management), ISO/IEC 27001 (security), CMMI (capability maturity). Formal reviews: (1) Walkthrough - informal presentation. (2) Inspection - formal systematic examination. (3) Audit - compliance verification. Metrics: (1) Defect density - defects per size. (2) Reliability - mean time between failures. (3) Code coverage - percentage tested. (4) Customer satisfaction. (5) On-time delivery. Defect management: (1) Report - document defect. (2) Classify - severity, priority. (3) Assign - to developer. (4) Fix - resolve issue. (5) Verify - confirm fix. (6) Close - mark resolved. Example: E-commerce system SQA. Define quality (uptime 99.9%, defect density <1/1000). Planning (reviews weekly, testing comprehensive). Metrics (track defects, measure reliability). Benefits: (1) Quality assurance - prevent issues. (2) Cost reduction - fix early. (3) Customer satisfaction. (4) Team coordination. Understanding SQA essential for building quality software.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 34,
+        "question": "What is configuration management in software engineering?",
+        "options": [
+          "System configuration settings",
+          "Managing software versions, changes, and releases",
+          "Build configuration",
+          "Database configuration"
+        ],
+        "correct_answer": "Managing software versions, changes, and releases",
+        "hint": "Version control, change tracking, release management - history and changes.",
+        "explanation": "Configuration management: managing software versions, changes, releases, and configurations. Purpose: (1) Track versions - what changed when. (2) Manage changes - control modifications. (3) Release management - deliver versions. (4) Traceability - relate changes to requirements. Activities: (1) Configuration identification - identify items to manage. (2) Version control - manage versions. (3) Change management - control changes. (4) Release management - manage releases. (5) Status tracking - track status. (6) Audits - verify compliance. Version control: maintaining multiple versions. Repository stores versions, history. Systems: Git, SVN, Mercurial. Features: (1) Versioning - track versions. (2) Branching - parallel development. (3) Merging - combine branches. (4) History - see changes over time. (5) Rollback - revert changes. Change management: (1) Request change - document need. (2) Review - evaluate impact. (3) Approve - management approval. (4) Implement - make changes. (5) Verify - confirm implementation. (6) Communicate - notify stakeholders. Release management: (1) Plan release - decide version, date. (2) Build - compile, package. (3) Test - system testing. (4) Deploy - move to production. (5) Support - production support. Configuration items: source code, documentation, test cases, build scripts, etc. Baseline: approved, fixed set of items. Changes tracked against baseline. Tools: Git (version control), Jenkins (CI/CD), Jira (change tracking). Benefits: (1) Traceability - what changed, why. (2) Collaboration - team coordination. (3) Quality - prevent bad changes. (4) Compliance - regulatory requirements. (5) Recovery - restore previous versions. Example: bugfix workflow. Create branch, fix bug, test, merge, release new version. Understanding configuration management essential for team coordination and quality.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0803",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0803 - Software Testing and Quality"
+      },
+      {
+        "id": 35,
+        "question": "What are design patterns in context of OO design?",
+        "options": [
+          "Code formatting standards",
+          "Proven reusable solutions to common OO design problems",
+          "Design document templates",
+          "UI pattern library"
+        ],
+        "correct_answer": "Proven reusable solutions to common OO design problems",
+        "hint": "Singleton, Factory, Observer, Strategy - reusable design solutions.",
+        "explanation": "Design patterns in OO: reusable, proven solutions to recurring design problems. Provide templates, best practices. Creational patterns (object creation): (1) Singleton - ensure single instance. Example: Logger, Database connection. (2) Factory - create objects without specifying exact classes. Example: create different types of documents. (3) Abstract Factory - create family of related objects. (4) Builder - construct complex objects step-by-step. (5) Prototype - create by copying existing object. Structural patterns (composition, relationships): (1) Adapter - make incompatible interfaces compatible. (2) Decorator - add behavior dynamically. (3) Facade - simplified interface to complex subsystem. (4) Proxy - placeholder/surrogate for another object. (5) Bridge - decouple abstraction from implementation. (6) Composite - treat individual/group uniformly. Behavioral patterns (communication, responsibility): (1) Observer - notify multiple objects of state change. (2) Strategy - encapsulate interchangeable algorithms. (3) Template Method - define algorithm skeleton, subclasses fill details. (4) State - encapsulate state-dependent behavior. (5) Command - encapsulate requests. (6) Iterator - access elements sequentially. (7) Mediator - centralized communication. Example Singleton: class Logger { static Logger* instance; Logger() { } public: static Logger* getInstance() { if(!instance) instance = new Logger(); return instance; } }. Benefits: (1) Proven - tested, reliable. (2) Communication - shared vocabulary. (3) Reusability - use across projects. (4) Quality - following best practices. Application: identify problem, apply pattern. Architectural patterns (system-level): MVC, MVVM, Repository, Service Locator. Anti-patterns: common bad solutions (opposite of patterns). Understanding patterns essential for professional OO design.",
+        "chapter": "Chapter 8: Software Engineering - ACtE0805",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0805 - Object-Oriented Design"
+      }
+    ]
+  }
+]

@@ -1,0 +1,691 @@
+[
+  {
+    "chapter": "Chapter 5: Computer Networks and Network Security",
+    "chapter_code": "CH5",
+    "total_questions": 75,
+    "set": "Comprehensive Network and Security Questions",
+    "question_type": "Mixed Questions (1-2 marks each)",
+    "questions": [
+      {
+        "id": 1,
+        "question": "What is the primary function of the OSI model in computer networks?",
+        "options": [
+          "To provide a standardized framework for network communication",
+          "To increase network bandwidth",
+          "To replace TCP/IP protocol",
+          "To eliminate network latency"
+        ],
+        "correct_answer": "To provide a standardized framework for network communication",
+        "hint": "OSI stands for Open Systems Interconnection. Consider what framework means in networking context.",
+        "explanation": "The OSI model provides a standardized, conceptual framework for understanding how different networking protocols work together. It divides network communication into seven distinct layers: Physical, Data Link, Network, Transport, Session, Presentation, and Application. Each layer has specific responsibilities and interfaces with adjacent layers. This layered approach allows different vendors to create compatible networking equipment and software, as long as they conform to the OSI specifications at each layer. The OSI model is fundamental to understanding network architecture because it helps troubleshoot network problems by isolating which layer the issue occurs in. For example, if you can't access a website, the OSI model helps determine whether the problem is physical (Layer 1), with protocols (Layer 3), or with your application (Layer 7).",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "easy",
+        "marks": 1,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 2,
+        "question": "How many layers are present in the TCP/IP model and what is their fundamental difference from OSI?",
+        "options": [
+          "5 layers; TCP/IP is simpler and more practical",
+          "7 layers; identical to OSI model",
+          "4 layers; TCP/IP combines multiple OSI layers",
+          "6 layers; TCP/IP is more comprehensive"
+        ],
+        "correct_answer": "5 layers; TCP/IP is simpler and more practical",
+        "hint": "Think about the practical implementation of networking versus theoretical frameworks.",
+        "explanation": "The TCP/IP model has 5 layers: Application, Transport, Internet, Link, and Physical. Unlike the OSI model's seven layers, TCP/IP combines several layers: the Session and Presentation functions are handled by the Application layer, and the Data Link and Physical layers are combined into the Link layer. The TCP/IP model is more practical because it directly reflects how the Internet actually operates and is based on protocols that were already in use (TCP, IP, Ethernet). While OSI is a theoretical framework designed before many modern protocols existed, TCP/IP was developed from existing working protocols. The Application layer in TCP/IP includes protocols like HTTP, SMTP, FTP, and DNS, which correspond to OSI's Session, Presentation, and Application layers. The Internet layer handles routing and logical addressing (IP), corresponding to OSI's Network layer. The Transport layer manages end-to-end communication (TCP/UDP), matching OSI's Transport layer. This makes TCP/IP more aligned with real-world implementation.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 3,
+        "question": "What is the fundamental role of a network protocol?",
+        "options": [
+          "To increase bandwidth by compression",
+          "To define rules and standards for communication between devices",
+          "To encrypt all network traffic",
+          "To eliminate packet loss"
+        ],
+        "correct_answer": "To define rules and standards for communication between devices",
+        "hint": "Consider what 'protocol' means in everyday language - it's a set of rules.",
+        "explanation": "A network protocol is essentially a set of rules and standards that govern how data is transmitted, received, and processed over a network. Protocols define the format of data packets, the order of communication, error handling procedures, and how devices should respond to various situations. Without protocols, devices from different manufacturers couldn't communicate because they wouldn't understand each other's data format or timing. For example, TCP defines how data should be sent reliably with acknowledgments and retransmissions, while IP defines how to address and route packets. HTTP defines how web browsers should request web pages and how servers should respond. UDP defines a simpler, faster approach without guarantees. SMTP defines how email should be transmitted. Protocols operate at different OSI layers: physical layer protocols define electrical signals, data link protocols define frame structure, network protocols define addressing, and application protocols define how specific services work. Standardization of protocols is crucial because it allows devices, operating systems, and applications from different vendors to interoperate seamlessly.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "easy",
+        "marks": 1,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 4,
+        "question": "What distinguishes a Hub from a Switch in network communication?",
+        "options": [
+          "Hub has more ports than Switch",
+          "Hub broadcasts to all ports; Switch forwards to specific port based on MAC address",
+          "Switch uses OSI Layer 3; Hub uses Layer 2",
+          "Hub is faster than Switch"
+        ],
+        "correct_answer": "Hub broadcasts to all ports; Switch forwards to specific port based on MAC address",
+        "hint": "Think about how each device handles incoming data frames.",
+        "explanation": "A Hub is a Layer 1 (Physical layer) device that acts as a central connection point but has no intelligence. When a hub receives data on one port, it simply broadcasts that data to all other ports. This creates several problems: increased network congestion (collisions), reduced bandwidth efficiency, and security concerns because all devices receive all traffic. Hubs are rarely used in modern networks. A Switch is a Layer 2 (Data Link layer) device that is intelligent - it learns and maintains a MAC address table. When a switch receives a frame with a destination MAC address, it looks up that address in its table and forwards the frame only to the specific port connected to that device. If the MAC address is unknown, the switch floods the frame to all ports except the incoming port. This intelligent forwarding dramatically improves network efficiency and security by reducing unnecessary traffic and preventing collision domains. A switch essentially learns which MAC addresses are attached to which ports through source MAC address learning. Modern switches also support features like VLAN (Virtual LAN), port security, and rate limiting. This is why switches have become the standard in modern networks instead of hubs, despite being more expensive initially.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 5,
+        "question": "What is the primary function of a Router in network architecture?",
+        "options": [
+          "To broadcast data to all connected devices",
+          "To forward data between networks based on IP addresses",
+          "To increase network bandwidth",
+          "To encrypt all network traffic"
+        ],
+        "correct_answer": "To forward data between networks based on IP addresses",
+        "hint": "Routers work at the Network layer (Layer 3) and use logical addresses.",
+        "explanation": "A Router is a Layer 3 (Network layer) device that operates at the logical address level (IP addresses) rather than physical addresses (MAC addresses). The primary function of a router is to forward data packets between different networks. When a router receives a packet, it examines the destination IP address and consults its routing table to determine the best path to forward the packet. If the destination is on a directly connected network, it forwards the packet directly; if not, it forwards the packet to another router (the next hop) that is closer to the destination. Routers maintain routing tables that contain information about known networks and the paths to reach them. These tables can be populated manually (static routing) or automatically via routing protocols like RIP, OSPF, or BGP. Routers are essential for creating large networks and the Internet itself - without routers, all devices would need to be on the same network. Routers also provide other important functions: they act as the demarcation point between networks (internal and external), they can filter traffic based on security policies (acting as firewalls), they can translate addresses (NAT - Network Address Translation), and they manage Quality of Service (QoS) parameters. The routing function requires routers to make intelligent decisions based on network topology, making them more complex and expensive than switches, but necessary for inter-network communication.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 6,
+        "question": "Compare twisted pair, coaxial, and fiber optic transmission media. Which offers the highest bandwidth?",
+        "options": [
+          "Twisted pair offers highest bandwidth",
+          "Coaxial cable offers highest bandwidth",
+          "Fiber optic offers highest bandwidth",
+          "All three offer equal bandwidth"
+        ],
+        "correct_answer": "Fiber optic offers highest bandwidth",
+        "hint": "Consider the physical properties and data transmission speeds of each medium.",
+        "explanation": "Transmission media are the physical channels through which data travels in networks. Twisted pair cable consists of pairs of insulated copper wires twisted together, which helps reduce electromagnetic interference. It's inexpensive, easy to install, and supports distances up to 100 meters at standard speeds. Twisted pair comes in two varieties: UTP (Unshielded Twisted Pair) and STP (Shielded Twisted Pair). Modern twisted pair (Category 5e, 6, 6a) supports speeds from 100 Mbps to 10 Gbps. Coaxial cable has a central copper conductor surrounded by insulation, a conductive shield, and an outer jacket. It offers better shielding from interference and supports longer distances than twisted pair (up to 500 meters for Ethernet). Coaxial is commonly used in cable television and was historically used in Ethernet networks (10BASE5, 10BASE2). Fiber optic cable uses light signals transmitted through thin glass or plastic fibers. It offers exceptional advantages: extremely high bandwidth (terabits per second), immunity to electromagnetic interference, very long transmission distances (tens of kilometers), higher security (difficult to tap), and lower attenuation (signal loss). Fiber optic is the preferred choice for backbone networks, long-distance communications, and modern high-speed networks. The main disadvantage of fiber is higher cost for installation and equipment. In summary: Fiber optic > Coaxial > Twisted pair in terms of bandwidth and distance capabilities.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0501"
+      },
+      {
+        "id": 7,
+        "question": "What are the primary services provided by the Data Link layer?",
+        "options": [
+          "Routing and addressing",
+          "Framing, MAC addressing, and error detection",
+          "Application protocol support",
+          "TCP/UDP multiplexing"
+        ],
+        "correct_answer": "Framing, MAC addressing, and error detection",
+        "hint": "Data Link layer is Layer 2 in OSI model. What does 'link' suggest?",
+        "explanation": "The Data Link layer (Layer 2) is responsible for reliable communication between adjacent nodes on a network. Its primary services include: (1) Framing - breaking the data stream into manageable frames with headers and trailers, allowing the receiver to identify frame boundaries and extract data. Frames typically contain a start delimiter, source MAC address, destination MAC address, type field, payload data, and error checking information. (2) MAC addressing - using 48-bit Media Access Control addresses (burned into network interface cards) to identify devices on the local network segment. MAC addresses consist of a 24-bit vendor ID and a 24-bit device ID. (3) Error detection - detecting corrupted frames using CRC (Cyclic Redundancy Check) or checksums. If corruption is detected, the frame is typically discarded. (4) Physical addressing - mapping logical (IP) addresses to physical (MAC) addresses through protocols like ARP (Address Resolution Protocol). (5) Media access control - managing access to the physical medium through protocols like CSMA/CD (Ethernet) or token passing (Token Ring), determining when devices can transmit. (6) Link management - establishing and terminating connections between adjacent devices. The Data Link layer operates within a single network segment or LAN and doesn't provide end-to-end communication across multiple networks - that's the job of the Network layer.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 8,
+        "question": "Explain the difference between Error Detection and Error Correction in data transmission.",
+        "options": [
+          "Detection identifies errors; Correction identifies and fixes them",
+          "Correction is faster than Detection",
+          "Detection uses parity; Correction uses Hamming codes only",
+          "No practical difference exists"
+        ],
+        "correct_answer": "Detection identifies errors; Correction identifies and fixes them",
+        "hint": "Consider what happens after an error is found.",
+        "explanation": "Error Detection and Error Correction are related but distinct concepts in data transmission. Error Detection involves identifying when an error has occurred in transmitted data but does not attempt to fix it. Common error detection methods include parity checking (simple parity bit checks if number of 1s is odd or even), checksum (adding up all bytes), and CRC (Cyclic Redundancy Check - polynomial-based calculation that's more robust). When an error is detected, the typical response is to discard the corrupted frame and request retransmission (used in TCP). Error detection is simple, fast, and requires minimal overhead. Error Correction goes further - it not only detects errors but also determines which bit(s) are incorrect and fixes them without requiring retransmission. Hamming codes are a classic example, using multiple parity bits positioned at powers of 2, allowing single-bit error correction. Forward Error Correction (FEC) adds redundant information that allows reconstruction of corrupted data. Error correction requires more overhead but is valuable in scenarios where retransmission is impossible or impractical (like satellite communications or real-time streaming). In modern networks, error detection with retransmission is often preferred for local area networks (where retransmission is fast), while error correction is used for long-distance or wireless communications. TCP uses error detection (checksums) and relies on UDP or lower layers for actual validation, while sophisticated wireless protocols use FEC.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 9,
+        "question": "What is the purpose of Flow Control in data transmission?",
+        "options": [
+          "To prevent overwriting of buffers by matching sender and receiver speeds",
+          "To encrypt data during transmission",
+          "To increase bandwidth utilization",
+          "To eliminate retransmissions"
+        ],
+        "correct_answer": "To prevent overwriting of buffers by matching sender and receiver speeds",
+        "hint": "Consider the mismatch in speeds between sender and receiver.",
+        "explanation": "Flow Control is a critical mechanism that manages the rate at which data is transmitted to prevent buffer overflow at the receiver. When a sender transmits data faster than a receiver can process and store it, the receiver's buffer (temporary storage) can become full, causing data loss. Flow Control techniques prevent this situation. Two main approaches exist: (1) Stop-and-Wait - the sender transmits one frame, then waits for an acknowledgment before sending the next frame. This is simple but inefficient because the sender is idle waiting. (2) Sliding Window - the sender can transmit multiple frames before waiting for acknowledgments, using a 'window' of outstanding unacknowledged frames. The window size is negotiated based on receiver's buffer capacity. Common window sizes are 1 (same as Stop-and-Wait), 127, 2047, or 65535. The receiver indicates how much buffer space it has available in its acknowledgment messages. Examples: In HDLC (High-level Data Link Control), the sliding window protocol is implemented. In TCP, the receiver window size is communicated in the TCP header, allowing the sender to transmit up to that many bytes before requiring an acknowledgment. Xon/Xoff is a simple software-based flow control. Flow Control is essential for reliable, efficient data transmission because it ensures no data is lost due to buffer limitations while maintaining good throughput.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 10,
+        "question": "What is CSMA/CD and where is it used?",
+        "options": [
+          "It's a Data Link protocol used in Ethernet to manage media access and detect collisions",
+          "It's a routing protocol for finding network paths",
+          "It's an encryption method for secure transmission",
+          "It's a protocol for managing IP addresses"
+        ],
+        "correct_answer": "It's a Data Link protocol used in Ethernet to manage media access and detect collisions",
+        "hint": "CSMA/CD stands for Carrier Sense Multiple Access with Collision Detection.",
+        "explanation": "CSMA/CD is a Media Access Control (MAC) protocol used in traditional Ethernet networks (IEEE 802.3). It operates at the Data Link layer and determines how multiple devices share a common transmission medium. The protocol works as follows: (1) Carrier Sense - before transmitting, a device listens to the medium (carrier) to check if another device is transmitting. If the medium is idle (no carrier signal detected), the device can proceed to transmit. If busy, it waits. (2) Multiple Access - since multiple devices may listen simultaneously, more than one device might detect an idle medium and start transmitting at nearly the same time. (3) Collision Detection - when a device transmits, it simultaneously listens for signals from other devices. If the transmitted signal gets corrupted (collision is detected through signal strength or anomalies), the device stops transmitting immediately. (4) Backoff and Retry - after detecting a collision, the device waits a random backoff period (to avoid synchronized retransmissions), then retries. The backoff period increases exponentially with retry attempts (exponential backoff algorithm). CSMA/CD is used in legacy 10 Mbps and 100 Mbps Ethernet on shared media (hubs). In modern switched Ethernet, collisions are largely eliminated because switches create dedicated point-to-point links, so CSMA/CD is less relevant. Weaknesses include poor scalability - as network load increases, collisions increase, causing throughput to degrade significantly.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 11,
+        "question": "Explain the Address Resolution Protocol (ARP) and its significance in networks.",
+        "options": [
+          "ARP maps IP addresses to MAC addresses for local delivery",
+          "ARP encrypts network traffic",
+          "ARP manages routing between networks",
+          "ARP controls bandwidth allocation"
+        ],
+        "correct_answer": "ARP maps IP addresses to MAC addresses for local delivery",
+        "hint": "Consider what happens when you know someone's IP but need their MAC address.",
+        "explanation": "The Address Resolution Protocol (ARP) is essential for communication on local area networks. It solves a fundamental problem: devices on the same network segment know each other's IP addresses but need to know MAC addresses to transmit frames. ARP works as follows: When a device needs to communicate with another device whose IP address it knows, it first checks its ARP cache (local memory of IP-to-MAC mappings). If not found, it broadcasts an ARP request message on the local network asking 'Who has this IP address?' (the message is broadcast to MAC address FF:FF:FF:FF:FF:FF). The device with that IP address receives the broadcast and responds with an ARP reply containing its MAC address. The requesting device learns this mapping and caches it for future use, reducing need for repeated ARP requests. ARP cache timeout is typically 15 minutes - entries are removed to handle address changes. ARP is essential because Ethernet frames must contain MAC addresses for delivery on the local segment, but higher-layer applications work with IP addresses. Without ARP, devices couldn't determine which MAC address corresponds to a destination IP on the same network. ARP operates at Layer 2/3 boundary. Security concerns with ARP include ARP spoofing/poisoning - an attacker sends false ARP replies claiming to have a different device's IP address, causing traffic to be redirected to the attacker. ARP also has limitations: it only works on the local network segment; for inter-network communication, routing protocols handle address resolution.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 12,
+        "question": "What is Ethernet (IEEE 802.3) and its basic characteristics?",
+        "options": [
+          "A Layer 2 standard defining framing, MAC addressing, and media access",
+          "A Layer 3 routing protocol",
+          "An application layer protocol for web browsing",
+          "A security protocol for encryption"
+        ],
+        "correct_answer": "A Layer 2 standard defining framing, MAC addressing, and media access",
+        "hint": "Ethernet is the most common local area network technology. What layer defines frame format?",
+        "explanation": "Ethernet (IEEE 802.3) is the dominant Local Area Network (LAN) technology, operating at the Data Link layer. It defines standards for physical transmission, frame format, media access, and addressing. Key characteristics: (1) Frame Format - Ethernet frames contain: 7-byte preamble (synchronization), 1-byte start delimiter, 6-byte destination MAC, 6-byte source MAC, 2-byte type/length field, 46-1500 bytes of payload, and 4-byte CRC for error detection. (2) MAC Addressing - uses 48-bit (6-byte) MAC addresses in format XX:XX:XX:XX:XX:XX (hexadecimal), where first 3 bytes identify the manufacturer and last 3 bytes identify the device. (3) Media Access - uses CSMA/CD (in legacy versions) or full-duplex switched connections (modern networks). (4) Speed Standards - original 10BASE2/10BASE5 (10 Mbps over coax), 10BASE-T (10 Mbps over twisted pair), Fast Ethernet (100BASE-TX at 100 Mbps), Gigabit Ethernet (1000BASE-T at 1 Gbps), 10 Gigabit Ethernet (10GBASE-T at 10 Gbps). (5) Cable Length - varies by standard but typically 100 meters for twisted pair. (6) Maximum Frame Size - 1500 bytes payload (1518 with header/trailer), called MTU (Maximum Transmission Unit). Jumbo frames up to 9000 bytes are supported by some equipment. Ethernet's success comes from simplicity, reliability, affordability, widespread support, and continuous evolution to higher speeds. It's the standard for local networks today.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 13,
+        "question": "Compare Token Ring (IEEE 802.5) with Ethernet. What was the main advantage of Token Ring?",
+        "options": [
+          "Token Ring was deterministic - guaranteed access time, unlike Ethernet's probabilistic CSMA/CD",
+          "Token Ring was cheaper than Ethernet",
+          "Token Ring offered higher bandwidth",
+          "Token Ring required no maintenance"
+        ],
+        "correct_answer": "Token Ring was deterministic - guaranteed access time, unlike Ethernet's probabilistic CSMA/CD",
+        "hint": "Token Ring used a token-passing mechanism. How does that differ from CSMA/CD?",
+        "explanation": "Token Ring (IEEE 802.5) was an alternative to Ethernet, particularly popular in corporate networks. Unlike Ethernet's CSMA/CD approach where devices contend for medium access (causing collisions), Token Ring uses token passing: devices are arranged in a logical ring, and a special frame called a 'token' circulates around the ring. Only the device holding the token can transmit data. This created several important differences: (1) Deterministic access - every device gets a guaranteed turn to transmit (fairness), and maximum access time is predictable. This was crucial for real-time applications. (2) No collisions - since only one device transmits at a time, collisions cannot occur. (3) Tokens - when a device captures the token, it transmits data, then releases the token for the next device. If data is successfully transmitted, an acknowledgment is required before releasing the token. (4) Ring topology - devices must be connected in a ring, with tokens circulating. (5) Speeds - typically 4 Mbps or 16 Mbps, later extended to 100 Mbps. (6) Fault tolerance - loss of the token (due to device failure) requires a token monitor to generate new tokens. Despite these advantages, Token Ring became obsolete because: Ethernet improved with switching technology, making collisions less relevant; Ethernet became cheaper; Ethernet offered faster speeds; hybrid networks (Ethernet and Token Ring) created management complexity. Token Ring is now rarely encountered except in legacy systems. However, the token-passing concept influenced later technologies like FDDI (Fiber Distributed Data Interface).",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 14,
+        "question": "What is PPP (Point-to-Point Protocol) and where is it commonly used?",
+        "options": [
+          "A protocol for direct connection between two devices, commonly used in dial-up, VPNs, and WAN links",
+          "A protocol for local network broadcasting",
+          "A routing protocol for the Internet",
+          "A protocol for managing MAC addresses"
+        ],
+        "correct_answer": "A protocol for direct connection between two devices, commonly used in dial-up, VPNs, and WAN links",
+        "hint": "Point-to-point suggests a direct connection. Where would that be used?",
+        "explanation": "PPP (Point-to-Point Protocol) is a Layer 2 protocol designed for direct, serial communication between two devices. It establishes reliable communication links between pairs of devices over various media (serial cables, phone lines, cellular connections, etc.). Key features: (1) Framing - PPP defines frame structure with start flag (01111110), address field (broadcast 11111111), control field (11000011 for numbered information), protocol field (identifies payload type like IP, IPX, or AppleTalk), payload, and FCS (Frame Check Sequence). (2) Link Control Protocol (LCP) - negotiates connection parameters like frame size, authentication method, and compression. (3) Network Control Protocols (NCPs) - configure network layer parameters (IP address negotiation, for example IPCP for IP Control Protocol). (4) Authentication - PPP can use PAP (Password Authentication Protocol) or CHAP (Challenge Handshake Authentication Protocol) for security. (5) Compression - optional data or header compression to improve throughput. Applications include: (1) Dial-up Internet - when modems connected computers to ISPs, PPP was the standard protocol. (2) Virtual Private Networks (VPNs) - PPP is used in PPTP (Point-to-Point Tunneling Protocol) to create secure connections. (3) Leased lines - traditional WAN links between offices used PPP. (4) Mobile networks - cellular data connections often use PPP-like mechanisms. Although superseded by Ethernet for many uses, PPP remains important for WAN and remote access scenarios.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0502"
+      },
+      {
+        "id": 15,
+        "question": "What does classful addressing mean in IP networks, and what are the main classes?",
+        "options": [
+          "IP addresses divided into Classes A-E with fixed network/host portions",
+          "A method to encrypt IP addresses",
+          "A protocol for managing DHCP",
+          "A system for routing between networks"
+        ],
+        "correct_answer": "IP addresses divided into Classes A-E with fixed network/host portions",
+        "hint": "Classful addressing was the original IP addressing scheme. Think about different organization sizes.",
+        "explanation": "Classful addressing was the original IPv4 addressing scheme that divided the address space into classes for different organization sizes. IP addresses are 32-bit values, typically written in dotted decimal notation (e.g., 192.168.1.1). Classes: (1) Class A - First bit is 0. Range: 1.0.0.0 to 126.0.0.0. Structure: 8 bits for network, 24 bits for hosts. Supports 126 networks with 16.7 million hosts each. Used for very large organizations (first octet: 1-126). (2) Class B - First two bits are 10. Range: 128.0.0.0 to 191.255.0.0. Structure: 16 bits for network, 16 bits for hosts. Supports 16,384 networks with 65,536 hosts each. Used for medium-sized organizations (first octet: 128-191). (3) Class C - First three bits are 110. Range: 192.0.0.0 to 223.255.255.0. Structure: 24 bits for network, 8 bits for hosts. Supports 2.1 million networks with 256 hosts each. Used for small organizations (first octet: 192-223). (4) Class D - First four bits are 1110. Range: 224.0.0.0 to 239.255.255.255. Reserved for multicast addresses. (5) Class E - First four bits are 1111. Range: 240.0.0.0 to 255.255.255.255. Reserved for experimental use. Special addresses: 0.0.0.0 (this network), 255.255.255.255 (broadcast), 127.x.x.x (loopback for testing). Issues with classful addressing: (1) Inflexible - organizations received fixed sizes regardless of actual need, wasting addresses. (2) Rapid address exhaustion - the Internet ran out of available Class A and B addresses. This led to Classless Inter-Domain Routing (CIDR), which uses variable-length prefix notation (e.g., 192.168.1.0/24) for more efficient address allocation.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 16,
+        "question": "Explain subnetting and its benefits in network design.",
+        "options": [
+          "Dividing a network into smaller subnets for efficient address allocation and management",
+          "Encrypting network traffic using subnet masks",
+          "A method to increase bandwidth between networks",
+          "A routing protocol for the Internet"
+        ],
+        "correct_answer": "Dividing a network into smaller subnets for efficient address allocation and management",
+        "hint": "Subnetting divides a network address space. What advantages does that provide?",
+        "explanation": "Subnetting is the process of dividing a large network address space into smaller, manageable subnets using subnet masks. A subnet mask (e.g., 255.255.255.0) is a 32-bit number that identifies which portion of an IP address represents the network and which represents the host. Benefits of subnetting: (1) Efficient address allocation - instead of assigning a large block requiring millions of addresses, organizations can allocate exactly what they need, reducing waste. (2) Improved security - subnets can be isolated or placed behind firewalls, containing broadcast traffic and limiting exposure. (3) Reduced broadcast traffic - broadcast domain is limited to a subnet; broadcasts don't cross subnet boundaries (routers don't forward broadcasts). (4) Better performance - smaller broadcast domains mean less unnecessary traffic. (5) Organizational structure - subnets can align with physical locations (each floor of a building), departments, or logical functions. (6) Scalability - organizations can grow and reorganize networks more easily. Example: A Class C address 192.168.1.0/24 (mask 255.255.255.0) provides 256 addresses (0-255), where .0 is network and .255 is broadcast, leaving 254 usable addresses. By subnetting with /25 mask (255.255.255.128), we create two subnets: 192.168.1.0-127 and 192.168.1.128-255, each with 126 usable addresses. With /26 mask, we get four subnets with 62 usable addresses each. The subnet mask in CIDR notation (Classless Inter-Domain Routing) shows the number of network bits: /24 means first 24 bits are network, /25 means first 25 bits are network, etc. Subnetting calculations require understanding binary conversion and bit manipulation.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 17,
+        "question": "What is the difference between RIP, OSPF, and BGP routing protocols?",
+        "options": [
+          "RIP is distance-vector (simple, old); OSPF is link-state (moderate); BGP is path-vector (for interdomain routing)",
+          "All three are identical protocols with different names",
+          "BGP is the fastest protocol",
+          "RIP uses hop count like the others"
+        ],
+        "correct_answer": "RIP is distance-vector (simple, old); OSPF is link-state (moderate); BGP is path-vector (for interdomain routing)",
+        "hint": "These are routing protocols operating at different scales. Consider what metric each uses.",
+        "explanation": "These three protocols operate at different scopes and use different algorithms: (1) RIP (Routing Information Protocol) - Distance-Vector routing protocol. Uses hop count as metric (how many routers between source and destination). Simple but has limitations: maximum hop count is 15, limiting network size; slow convergence when networks change; high bandwidth usage for frequent updates. RIPv1 uses classful addressing; RIPv2 supports CIDR. Used in small networks or as backup, but largely obsolete. (2) OSPF (Open Shortest Path First) - Link-State routing protocol. Each router maintains complete topology map (knows about every router and link in the network). Uses Dijkstra's algorithm to calculate shortest paths based on link costs (bandwidth, delay, etc.). Advantages: supports large networks, fast convergence, efficient updates (only changes propagated), uses less bandwidth than RIP. Divides large networks into areas for scalability. Used in mid-to-large enterprise networks. (3) BGP (Border Gateway Protocol) - Path-Vector routing protocol used for interdomain (AS - Autonomous System) routing on the Internet. Instead of hop count or link costs, BGP considers the full path (sequence of ASes) to each destination, allowing for policy-based routing decisions. BGP is complex but necessary for Internet routing where policy (commercial agreements between providers) matters. These protocols operate differently: RIP sends entire routing table periodically (10-30 seconds); OSPF sends updates only when topology changes; BGP maintains long-lived connections and exchanges full routing tables at startup, then only sends changes. Understanding which protocol to use is crucial for network design.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 18,
+        "question": "Explain the concept of unicast and multicast routing.",
+        "options": [
+          "Unicast sends to one destination; multicast sends to multiple selected recipients",
+          "Unicast is faster than multicast",
+          "Both are identical processes",
+          "Multicast is only for local networks"
+        ],
+        "correct_answer": "Unicast sends to one destination; multicast sends to multiple selected recipients",
+        "hint": "Consider the difference in delivery models and the use cases.",
+        "explanation": "Unicast and multicast are two fundamental routing paradigms for different communication scenarios: (1) Unicast Routing - standard point-to-point communication where one sender transmits data to one specific destination. Routers forward packets to the destination IP address. This is what traditional routing protocols (RIP, OSPF, BGP) handle. Every data transmission requires individual copies for each recipient - if one sender wants to reach 100 recipients, 100 separate unicast flows are needed, consuming bandwidth and processing resources. Used for: web browsing, email, file transfer, TCP connections, most traditional applications. Advantage: simple, reliable, works everywhere. Disadvantage: inefficient for one-to-many communication. (2) Multicast Routing - one sender transmits data once, and the network delivers copies only to recipients who have joined the multicast group. Multicast addresses (Class D: 224.0.0.0 to 239.255.255.255) identify groups rather than individual hosts. Routing protocols like DVMRP (Distance Vector Multicast Routing Protocol) and PIM (Protocol Independent Multicast) handle multicast routing. Routers use group membership information (learned via IGMP - Internet Group Management Protocol) to forward multicast traffic only along necessary branches of the network tree. Advantages: efficient bandwidth use (single copy sent, replicated only at branch points), reduced server load, ideal for one-to-many applications. Used for: video/audio streaming, live events, software distribution, collaborative applications, real-time data feeds. Challenges: multicast routing is more complex, requires support from all routers on path, multicast addresses have limited scope (TTL controls spread), no built-in congestion control, less widely deployed on the Internet than unicast. Most Internet applications still use unicast despite its inefficiency for one-to-many scenarios.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 19,
+        "question": "What is IPv6 and what are its main advantages over IPv4?",
+        "options": [
+          "IPv6 provides larger address space (128-bit), simplified header, IPsec support, and auto-configuration",
+          "IPv6 is faster than IPv4",
+          "IPv6 uses different routing protocols",
+          "IPv6 is only for small networks"
+        ],
+        "correct_answer": "IPv6 provides larger address space (128-bit), simplified header, IPsec support, and auto-configuration",
+        "hint": "IPv6 was designed to overcome IPv4's limitations. What's the biggest limitation of IPv4?",
+        "explanation": "IPv6 is the next-generation Internet Protocol designed to replace IPv4 and overcome its fundamental limitations. Key advantages: (1) Address Space - IPv6 uses 128-bit addresses (written in hexadecimal with colons, e.g., 2001:0db8:85a3:0000:0000:8a2e:0370:7334) compared to IPv4's 32-bit. This provides 2^128 addresses (approximately 3.4 × 10^38) compared to IPv4's 2^32 (4.3 billion), effectively solving address exhaustion. (2) Simplified Header - IPv6 header is fixed 40 bytes (IPv4 minimum 20 bytes, often more with options) with fewer fields, improving routing efficiency. Optional headers are handled via extension headers, keeping base header clean. (3) Built-in IPsec - IPv6 has security in the protocol design, though IPsec is optional. (4) Auto-configuration - devices can auto-generate IP addresses using link-local addresses (fe80::/10) without DHCP, improving network bootstrap. (5) Multicast by design - IPv6 removes broadcast (one-to-all), replacing it with multicast, reducing unnecessary traffic. (6) Quality of Service - Flow label field enables better QoS handling. (7) Neighbor Discovery Protocol (NDP) - replaces ARP with a more efficient protocol. Disadvantages: IPv6 adoption has been slow because IPv4 works well enough, NAT has prolonged IPv4's life, IPv6-only networks are rare, security concerns during transition, applications need updating. The transition from IPv4 to IPv6 uses various techniques: dual-stack (devices run both), tunneling (IPv6 packets inside IPv4), translation (converting between versions). Despite advantages, IPv4 and IPv6 will likely coexist for decades.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0503"
+      },
+      {
+        "id": 20,
+        "question": "Explain the Transport layer services and the difference between TCP and UDP.",
+        "options": [
+          "TCP provides reliable, connection-oriented service; UDP provides unreliable, connectionless service",
+          "TCP is always faster than UDP",
+          "UDP provides guaranteed delivery",
+          "Both operate at the same reliability level"
+        ],
+        "correct_answer": "TCP provides reliable, connection-oriented service; UDP provides unreliable, connectionless service",
+        "hint": "These are the two main Transport layer protocols with very different characteristics.",
+        "explanation": "The Transport layer (Layer 4) provides end-to-end communication services between applications. Key services include: reliability, flow control, multiplexing (allowing multiple applications to use the network simultaneously), and ordered delivery. TCP (Transmission Control Protocol) characteristics: (1) Connection-oriented - establishes connection before data transfer via three-way handshake (SYN, SYN-ACK, ACK), then transfers data, then closes connection with four-way handshake. (2) Reliable delivery - guarantees all data arrives in order without duplication using sequence numbers and acknowledgments. (3) Flow control - manages data flow speed using TCP window size. (4) Error checking - detects corrupted segments using checksums; corrupted segments are retransmitted. (5) Congestion control - adjusts transmission rate based on network congestion using algorithms like AIMD (Additive Increase, Multiplicative Decrease). (6) Overhead - header 20+ bytes; connection setup overhead. Used for applications requiring reliability: web (HTTP), email (SMTP, POP3), file transfer (FTP), secure shell (SSH). UDP (User Datagram Protocol) characteristics: (1) Connectionless - no connection setup; sends datagrams directly to destination. (2) Unreliable - no guarantees about delivery, order, or duplication. No acknowledgments required. (3) Low overhead - header only 8 bytes; no connection setup. (4) Speed - faster than TCP because no acknowledgment delays. (5) Broadcast/multicast support - can send to multiple recipients. Used for applications tolerating loss but requiring speed: video/audio streaming, online games, VoIP, DNS queries, SNMP monitoring. Choosing between TCP and UDP depends on application requirements: use TCP when every packet matters (email, banking), use UDP when speed is more important than perfection (video calls). Some applications like QUIC try to combine reliability with UDP's speed.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0504"
+      },
+      {
+        "id": 21,
+        "question": "What are ports and sockets, and how do they enable multiplexing?",
+        "options": [
+          "Ports identify processes/services; sockets are endpoints enabling multiple applications to use network simultaneously",
+          "Ports and sockets are the same thing",
+          "Ports only work for TCP",
+          "Sockets are only for servers"
+        ],
+        "correct_answer": "Ports identify processes/services; sockets are endpoints enabling multiple applications to use network simultaneously",
+        "hint": "Multiplexing means multiple applications sharing one network interface. How is that achieved?",
+        "explanation": "Ports and sockets are fundamental to multiplexing in the Transport layer: (1) Ports - 16-bit numbers (0-65535) that identify processes or services on a host. Ports allow a single host to run multiple network applications simultaneously, each receiving their data. Port ranges: Well-known ports (0-1023) reserved for standard services (HTTP=80, HTTPS=443, SMTP=25, FTP=21, SSH=22, DNS=53, etc.). Registered ports (1024-49151) for applications. Dynamic/private ports (49152-65535) for temporary use. Each application listening for incoming connections binds to a specific port. (2) Sockets - endpoints of a network connection, defined by a tuple of (IP address, port, protocol). A socket uniquely identifies an endpoint. A TCP/UDP connection consists of two sockets (one at source, one at destination). Example: (192.168.1.100, 8080, TCP) and (8.8.8.8, 53, UDP). (3) Multiplexing - the Transport layer examines destination port in arriving packets and forwards data to the correct application. This allows one host with one IP address to support dozens or hundreds of applications simultaneously. The kernel/OS maintains port-to-process mappings: when a packet arrives for port 443, the OS knows to deliver it to the web server application, not email or other services. Demultiplexing is the reverse: when an application sends data, the Transport layer adds the source port (process identifier) and destination port (service identifier), ensuring responses return to the correct process. Socket programming in languages like C/C++/Python/Java uses socket APIs to create, bind, listen, connect, send, and receive data on sockets.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0504"
+      },
+      {
+        "id": 22,
+        "question": "Explain connection establishment and release in TCP.",
+        "options": [
+          "Establishment uses three-way handshake (SYN, SYN-ACK, ACK); release uses four-way handshake with FIN flags",
+          "Connection is instantaneous",
+          "No handshake is needed",
+          "TCP has only three flags"
+        ],
+        "correct_answer": "Establishment uses three-way handshake (SYN, SYN-ACK, ACK); release uses four-way handshake with FIN flags",
+        "hint": "TCP is connection-oriented. These handshakes ensure proper connection management.",
+        "explanation": "TCP connection management involves carefully orchestrated handshakes to establish and release connections reliably: (1) Connection Establishment (Three-Way Handshake): Step 1 - SYN: Client sends TCP segment with SYN flag set, initial sequence number (ISN), and may include other options like maximum segment size. This indicates desire to establish connection. Step 2 - SYN-ACK: Server receives SYN, sends back segment with SYN and ACK flags set. ACK acknowledges client's sequence number, SYN includes server's ISN. Step 3 - ACK: Client sends ACK confirming server's sequence number. At this point, connection is established. Both sides have agreed on initial sequence numbers and are ready to exchange data. (2) Connection Release (Four-Way Handshake): Step 1 - FIN: One side (typically client) sends TCP segment with FIN flag, indicating no more data to send. Step 2 - ACK: Other side acknowledges FIN. This side can still send data (half-close state). Step 3 - FIN: Server (or other side) sends its own FIN when finished sending. Step 4 - ACK: Client acknowledges server's FIN. Connection fully closed. Why so complex? The handshakes ensure: (1) Both sides are active and ready before data exchange. (2) Both sides agree on initial sequence numbers to prevent confusion with old packets. (3) Graceful shutdown with orderly termination. (4) If one side crashes, the other can detect via timeout. States: LISTEN, SYN_SENT, SYN_RECEIVED, ESTABLISHED, FIN_WAIT_1, FIN_WAIT_2, CLOSE_WAIT, LAST_ACK, TIME_WAIT, CLOSED. TIME_WAIT state lasts 2MSL (Maximum Segment Lifetime) to ensure delayed packets don't interfere with new connections using same port.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0504"
+      },
+      {
+        "id": 23,
+        "question": "What is congestion control in TCP and why is it necessary?",
+        "options": [
+          "Algorithms to manage transmission rate preventing network congestion and collapse",
+          "Encrypting network traffic",
+          "A method to increase bandwidth",
+          "A routing protocol"
+        ],
+        "correct_answer": "Algorithms to manage transmission rate preventing network congestion and collapse",
+        "hint": "Without congestion control, what would happen if many TCP connections started at once?",
+        "explanation": "Congestion control is critical for TCP and Internet stability. Without it, multiple simultaneous connections could overwhelm network links, causing packet loss, timeouts, and retransmissions, leading to network collapse (congestion collapse). TCP congestion control maintains stability while maximizing throughput. Key concepts: (1) Congestion window (cwnd) - sender's limit on amount of outstanding data (bytes not yet acknowledged). Cwnd starts small (typically 1 segment ≈ 1460 bytes), grows during data transmission, and shrinks during congestion. (2) Slow Start - when connection begins or after packet loss, cwnd starts at 1 segment and doubles each round trip time (RTT) until reaching ssthresh (slow start threshold), achieving exponential growth. (3) Congestion Avoidance - once cwnd reaches ssthresh, growth becomes linear (additive increase), adding one segment per RTT. (4) Packet Loss Detection: Timeout - if ack not received in time, assume congestion; ssthresh = cwnd/2, cwnd = 1, restart slow start. Fast Retransmit - receiver sends duplicate acks for out-of-order packets; sender retransmits missing packet without waiting for timeout. (5) Additive Increase, Multiplicative Decrease (AIMD) - increase rate gradually, decrease aggressively when congestion detected (sawtooth behavior). Modern algorithms: Tahoe (basic slow start/congestion avoidance), Reno (added fast recovery), NewReno (improved fast recovery), CUBIC (modern, suitable for high bandwidth links), BBR (rate-based instead of window-based). Congestion control is end-to-end responsibility of TCP endpoints, not the network. The network provides signals (packet loss, delay) that TCP interprets as congestion. Some networks also support ECN (Explicit Congestion Notification) where routers mark packets instead of dropping them.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0504"
+      },
+      {
+        "id": 24,
+        "question": "What is HTTP and HTTPS, and how does HTTPS provide security?",
+        "options": [
+          "HTTP is application protocol for web; HTTPS adds encryption via TLS/SSL",
+          "HTTPS is slower than HTTP",
+          "HTTPS only works with certain browsers",
+          "Both use identical methods"
+        ],
+        "correct_answer": "HTTP is application protocol for web; HTTPS adds encryption via TLS/SSL",
+        "hint": "The S in HTTPS stands for Secure. How is the security achieved?",
+        "explanation": "HTTP (HyperText Transfer Protocol) and HTTPS (HTTP Secure) are Application layer protocols for web communication: (1) HTTP - plaintext protocol where client (browser) sends requests to server, server sends back responses. Features: stateless (each request independent), request methods (GET for retrieval, POST for submission, PUT, DELETE, etc.), status codes (200 OK, 404 Not Found, 500 Server Error, etc.), headers for metadata, body for content. Insecure because all data travels in plaintext - passwords, personal information, session cookies are visible to anyone monitoring network. Port 80 by default. (2) HTTPS - same HTTP protocol but wrapped with TLS/SSL encryption. TLS 1.2 or 1.3 encrypts all data: Uses asymmetric cryptography (public-key) for initial handshake where client and server establish shared secret. Asymmetric encryption (like RSA) allows secure key exchange. Uses symmetric cryptography (like AES) for actual data encryption using the shared secret - symmetric is faster than asymmetric. Server presents certificate proving its identity (signed by trusted Certificate Authority). Provides three security services: (a) Confidentiality - encryption prevents eavesdropping. (b) Integrity - message authentication codes prevent tampering. (c) Authentication - certificates verify server identity (browser checks certificate validity, expiration, and issuer). Port 443 by default. (3) Certificate - issued by Certificate Authority (CA), contains server's public key, identity information, and CA's digital signature. Browser verifies certificate: is it from trusted CA? Has it expired? Does domain match? Browser maintains list of trusted root CAs. HTTPS overhead: initial handshake requires extra round trips; encryption/decryption uses CPU. But modern protocols and hardware acceleration make overhead negligible. HTTPS is now standard for any site handling sensitive data or authentication, and browsers warn when visiting unencrypted sites.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 25,
+        "question": "Explain FTP (File Transfer Protocol) and its limitations compared to modern alternatives.",
+        "options": [
+          "FTP transfers files using plaintext commands/data; insecure and uses two connections",
+          "FTP is the most secure file transfer method",
+          "FTP uses encryption by default",
+          "FTP operates at Network layer"
+        ],
+        "correct_answer": "FTP transfers files using plaintext commands/data; insecure and uses two connections",
+        "hint": "FTP is an old protocol. What are its problems in modern security-conscious environments?",
+        "explanation": "FTP (File Transfer Protocol) is one of the oldest Internet protocols for transferring files between computers. It operates at the Application layer and uses TCP connections. Characteristics: (1) Architecture - FTP uses two TCP connections: Control connection (port 21) for commands and responses, and Data connection (port 20 for active mode, or client's ephemeral port for passive mode) for file transfer. This dual-connection model is unusual and complicates firewall rules. (2) Commands - plaintext commands like USER, PASS, LIST, GET (RETR), PUT (STOR), DELETE, MKD, RMD. All commands and responses travel unencrypted. (3) Security Issues: Plaintext passwords and commands - credentials and commands visible to anyone monitoring traffic. Vulnerable to interception and man-in-the-middle attacks. No encryption. (4) Active vs. Passive mode - Active: server initiates data connection from port 20 to client's port. Passive: client initiates data connection to server's high-numbered port. Firewalls often block active mode. (5) Limitations: Insecure, single-threaded (transfers one file at a time), no resume capability in basic FTP, complex protocol with firewalls, slow for large files. Modern alternatives: (1) SFTP (SSH File Transfer Protocol) - file transfer over SSH (Secure Shell), encrypted, uses single connection, much more secure. (2) SCP (Secure Copy) - secure alternative to copying files. (3) HTTPS - many sites use web interfaces for file download/upload over secure HTTPS. (4) rsync - efficient for synchronizing directories, supports compression and partial transfers. (5) Nextcloud/IPFS - modern cloud-based file sharing. FTP is still used in legacy systems, but should be replaced with SFTP for new deployments. Many web hosts offer both FTP and SFTP for file management.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 26,
+        "question": "What is DNS (Domain Name System) and why is it essential for the Internet?",
+        "options": [
+          "DNS translates domain names to IP addresses, enabling user-friendly internet access",
+          "DNS encrypts network traffic",
+          "DNS manages IP addressing",
+          "DNS routes packets through networks"
+        ],
+        "correct_answer": "DNS translates domain names to IP addresses, enabling user-friendly internet access",
+        "hint": "When you type google.com, how does your browser know the IP address?",
+        "explanation": "DNS (Domain Name System) is the Internet's distributed database that translates human-readable domain names (like google.com) to machine-readable IP addresses (like 142.251.41.14). It's fundamental to Internet usability because remembering IP addresses is impractical. How DNS works: (1) Hierarchical structure - root nameservers, top-level domain (TLD) nameservers (.com, .org, .net, .uk, etc.), and authoritative nameservers for specific domains. (2) Query process: User's browser sends DNS query to recursive resolver (typically ISP's DNS server or public resolver like 8.8.8.8). Resolver contacts root nameserver, which directs to appropriate TLD server. Resolver contacts TLD server, which directs to authoritative nameserver for the domain. Authoritative nameserver returns IP address. (3) Caching - resolvers cache results for TTL (Time To Live) duration, typically 300-86400 seconds. Local caching on client computers prevents repeated queries. (4) Record types: A records map domain to IPv4, AAAA to IPv6, CNAME for aliases, MX for mail servers, TXT for text records, NS for nameservers, SOA for zone information. (5) DNS security issues: DNS is unencrypted (queries visible). DNS amplification attacks use DNS servers for DDoS. DNS poisoning (cache poisoning) redirects traffic to attacker's site. DNSSEC adds cryptographic signatures to prevent poisoning. DoH (DNS over HTTPS) and DoT (DNS over TLS) encrypt DNS queries for privacy. (6) Distributed nature - no single point of failure, load distributed across millions of nameservers. (7) Caching reduces load on authoritative servers. Without DNS, the Internet would be unusable - no one would memorize IP addresses for thousands of sites. Internationalizing domain names (IDN) allows non-ASCII characters. DNS infrastructure is so critical that disruptions affect entire regions.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 27,
+        "question": "What are P2P (Peer-to-Peer) applications and how do they differ from client-server models?",
+        "options": [
+          "P2P treats all nodes as peers with equal roles; client-server has centralized servers",
+          "P2P is always faster",
+          "P2P uses different protocols",
+          "P2P requires authentication"
+        ],
+        "correct_answer": "P2P treats all nodes as peers with equal roles; client-server has centralized servers",
+        "hint": "Consider the distribution of functionality in each model.",
+        "explanation": "P2P and client-server are fundamental architectural models for network applications: (1) Client-Server model: Centralized architecture with dedicated servers providing services (HTTP, SMTP, DNS) and clients requesting services. Advantages: Centralized control, easier to secure, easier to manage, single point of truth for data. Disadvantages: Server is bottleneck, single point of failure, scaling requires powerful servers. Examples: Web servers, email servers, databases. (2) P2P model: Decentralized architecture where each node (peer) can act as both client and server. Each peer participates in providing and consuming services. Advantages: Scalable (adding more peers increases capacity), resilient (no single point of failure, continues working if some peers fail), efficient (resources distributed across peers), democratic (no central authority). Disadvantages: Complex to maintain consistency, harder to secure, difficult to manage, peers may be unreliable or malicious, finding content requires discovery mechanisms. Examples: BitTorrent (file sharing), Skype, Bitcoin, IPFS. (3) Hybrid models: Many systems use both approaches. P2P with discovery server (Skype uses central server to establish initial connection, then P2P for calls). Torrent sites use central servers to list files, but P2P for downloading. (4) P2P challenges: NAT traversal (peers behind firewalls/routers), bandwidth asymmetry (download faster than upload), peer reliability (peers can disconnect), search/discovery (finding desired content), security/privacy. Different P2P protocols: DHT (Distributed Hash Table) like Kademlia for decentralized lookup, gossip protocols for information propagation, proof-of-work for distributed consensus (blockchain). P2P is increasingly important for: cryptocurrency (Bitcoin), decentralized storage (IPFS), content distribution (torrents), VoIP (Skype), applications demanding resilience and censorship resistance.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 28,
+        "question": "What is Socket Programming and what APIs are typically used?",
+        "options": [
+          "Programming model for network communication using socket objects with APIs like Berkeley sockets",
+          "A method to encrypt data",
+          "A routing algorithm",
+          "Only applicable to servers"
+        ],
+        "correct_answer": "Programming model for network communication using socket objects with APIs like Berkeley sockets",
+        "hint": "Sockets are endpoints of network communication. How are they created and used programmatically?",
+        "explanation": "Socket programming is the process of writing applications that communicate over networks using socket APIs. A socket is an endpoint of network communication - applications create sockets, bind them to addresses/ports, and send/receive data through them. APIs: (1) Berkeley sockets - original API developed in BSD Unix, now standard across Unix/Linux/Windows. Key functions: socket() creates socket, bind() associates socket with address/port, listen() marks socket as accepting connections (server), accept() accepts incoming connection, connect() initiates connection (client), send()/recv() exchange data on TCP, sendto()/recvfrom() for UDP, close() terminates socket. (2) Windows Sockets (Winsock) - Microsoft's implementation of Berkeley sockets for Windows, mostly compatible. (3) Modern language libraries: C/C++ use raw Berkeley sockets or wrapper libraries. Python sockets module provides high-level interface. Java provides Socket and ServerSocket classes. C# TcpClient, TcpListener. Go net package. (4) Socket families: AF_INET (IPv4), AF_INET6 (IPv6), AF_LOCAL/AF_UNIX (local interprocess communication). (5) Socket types: SOCK_STREAM (TCP, reliable ordered delivery), SOCK_DGRAM (UDP, unreliable). Example TCP server: socket() -> bind() -> listen() -> accept() in loop for each client -> send()/recv() -> close(). Example TCP client: socket() -> connect() -> send()/recv() -> close(). Socket programming allows building custom applications (not just HTTP, SMTP, etc.) communicating over networks. Most modern frameworks abstract socket details (web frameworks handle HTTP), but understanding sockets is important for systems programming, games, real-time applications, embedded systems. Asynchronous socket programming with multiplexing (select(), poll(), epoll()) handles multiple concurrent connections efficiently.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 29,
+        "question": "What is the concept of an Application Server and how does it differ from web servers?",
+        "options": [
+          "Application servers execute business logic; web servers serve static content",
+          "They are identical",
+          "Application servers are faster",
+          "Web servers execute more complex logic"
+        ],
+        "correct_answer": "Application servers execute business logic; web servers serve static content",
+        "hint": "Consider what processing is needed for different types of requests.",
+        "explanation": "Web servers and application servers have different roles in web application architecture: (1) Web servers (Apache, Nginx, IIS): Primarily serve static content (HTML, CSS, JavaScript, images, documents). Handle HTTP/HTTPS requests, process GET/POST, manage connections, serve files from disk. Lightweight, fast, efficient for static content. Limited processing - can run scripts (CGI, PHP) but not ideal for complex business logic. (2) Application servers (Tomcat, JBoss, Websphere, Node.js, Django, Flask): Execute dynamic application code (Java, Python, C#, Node.js, etc.), manage database connections, business logic, session management, transactions, security. Heavier, more resource-intensive than web servers. Can access databases, perform computations, generate dynamic responses. (3) Typical architecture: Client requests web server (port 80/443). Web server serves static files directly or forwards dynamic requests to application server (port 8080 or other). Application server executes code, returns response to web server, which forwards to client. This separation provides: Load balancing (multiple application servers behind one web server), security isolation, performance optimization (fast web server for static content). (4) Modern frameworks: Some frameworks (Node.js, Django) bundle web and application functionality. Frameworks increasingly handle both roles, simplifying deployment. (5) Examples: Classic setup: Apache web server + Tomcat application server for Java. WordPress: Apache/Nginx + PHP application server. Node.js: single process handles both web and application. (6) Responsibilities: Web server: connection management, static file serving, SSL termination, caching, load balancing. Application server: session management, transaction handling, database pooling, business logic execution, dynamic content generation. Understanding this distinction helps in designing scalable, maintainable architectures.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 30,
+        "question": "What are traffic analyzer tools (MRTG, PRTG, SNMP, Packet Tracer, Wireshark) used for?",
+        "options": [
+          "Monitoring, analyzing, and visualizing network traffic for troubleshooting and performance optimization",
+          "Encrypting network traffic",
+          "Increasing bandwidth",
+          "Replacing routers"
+        ],
+        "correct_answer": "Monitoring, analyzing, and visualizing network traffic for troubleshooting and performance optimization",
+        "hint": "These tools help understand what's happening on your network. What might you monitor?",
+        "explanation": "Traffic analyzers are essential network management tools: (1) SNMP (Simple Network Management Protocol) - framework for collecting information from network devices. Devices report metrics (CPU, memory, bandwidth, errors) to SNMP server. Managers query devices via SNMP requests. SNMP traps are unsolicited notifications from devices. Enables centralized monitoring of entire network infrastructure. Collects MIBs (Management Information Bases) - standardized sets of metrics. (2) MRTG (Multi Router Traffic Grapher) - monitoring tool specifically for traffic on network links. Uses SNMP to collect interface statistics (bytes in/out). Creates graphs showing traffic trends over time. Lightweight, designed for 24/7 monitoring. Visualizes link utilization, helping identify congestion. (3) PRTG (Paessler Router Traffic Grapher) - commercial successor to MRTG with more features. Monitors bandwidth, CPU, memory, disk, applications, websites. Creates detailed reports and alerts. Web-based interface for easy access. Supports notifications when thresholds exceeded. (4) Wireshark - packet sniffer and analyzer. Captures live traffic on network interfaces and displays packet-by-packet details. Shows all protocol layers: Ethernet frames, IP headers, TCP/UDP segments, application data. Incredibly detailed for troubleshooting. Can filter by protocol, IP address, port, etc. Can follow TCP streams. Analyzes captured .pcap files. Shows issues like retransmissions, out-of-order packets, protocol violations. (5) Packet Tracer - Cisco's network simulation tool for learning and testing network designs. Simulates routers, switches, hosts, links. Configure devices, simulate traffic, observe behavior. Great for studying network concepts and practicing configuration. (6) Uses: Troubleshooting (identify bottlenecks, packet loss, connection failures), capacity planning (understand current usage and predict future), security monitoring (detect unusual traffic patterns, intrusions), performance optimization (identify inefficient routing, congestion), SLA verification (confirm promised service levels). Modern networks often combine tools: SNMP for high-level monitoring, Wireshark for detailed packet analysis, PRTG/MRTG for trending. These tools are invaluable for network administrators.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0505"
+      },
+      {
+        "id": 31,
+        "question": "What are the main types of Computer Security threats and attacks?",
+        "options": [
+          "Malware, social engineering, network attacks (DoS, MITM), eavesdropping, injection attacks",
+          "Only viruses threaten security",
+          "Security threats are theoretical",
+          "All attacks require physical access"
+        ],
+        "correct_answer": "Malware, social engineering, network attacks (DoS, MITM), eavesdropping, injection attacks",
+        "hint": "Consider different ways attackers compromise systems.",
+        "explanation": "Computer security threats are diverse and evolving. Major types: (1) Malware (malicious software): Viruses - self-replicating, require user action, infect files. Worms - self-replicating, spread without user action, exploit vulnerabilities. Trojans - appear legitimate, hide malicious payload. Ransomware - encrypts files, demands payment for decryption. Spyware/Adware - monitor/display unwanted content. Rootkits - hide malicious code from detection. (2) Social engineering - manipulating people into disclosing information or compromising security: Phishing - fake emails/websites mimicking legitimate services. Spear phishing - targeted phishing with personalized information. Pretexting - creating fictional scenarios to extract information. Baiting - leaving infected USB drives in public places. Tailgating - unauthorized physical access following legitimate users. (3) Network attacks: DoS (Denial of Service) - overwhelming target with traffic/requests making it unavailable. DDoS - distributed DoS from multiple sources. MITM (Man-in-the-Middle) - intercepting communication between parties. Eavesdropping - listening to unencrypted communications. DNS poisoning - redirecting to malicious sites. (4) Injection attacks: SQL injection - inserting malicious SQL in input fields. XSS (Cross-Site Scripting) - injecting scripts into web pages. Command injection - executing arbitrary commands. (5) Weak passwords/authentication - password cracking, brute force attacks, credential reuse. (6) Unpatched vulnerabilities - attackers exploit known but unfixed security holes. (7) Insecure configurations - default passwords, unnecessary services enabled. (8) Insider threats - employees or contractors with malicious intent. (9) Advanced threats: Zero-day exploits - attacks using unknown vulnerabilities. APT (Advanced Persistent Threat) - sophisticated, targeted attacks. Botnets - networks of compromised computers. Defending requires: Updates/patches, strong authentication, encryption, firewalls, IDS/IPS, security awareness training, backups.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 32,
+        "question": "Explain the basic principles of cryptography and symmetric vs. asymmetric encryption.",
+        "options": [
+          "Cryptography ensures confidentiality; symmetric uses same key for both parties; asymmetric uses public-private key pair",
+          "All encryption uses the same method",
+          "Cryptography only protects emails",
+          "Asymmetric is always faster"
+        ],
+        "correct_answer": "Cryptography ensures confidentiality; symmetric uses same key for both parties; asymmetric uses public-private key pair",
+        "hint": "Consider how keys are shared and used differently.",
+        "explanation": "Cryptography is the science of encoding information to prevent unauthorized access. Principles: (1) Confidentiality - preventing eavesdropping, ensuring only intended recipients read messages. (2) Integrity - detecting tampering, ensuring messages haven't been altered. (3) Authentication - verifying sender identity. (4) Non-repudiation - sender cannot deny sending message. Symmetric encryption: Uses single shared secret key for both encryption (plaintext + key -> ciphertext) and decryption (ciphertext + key -> plaintext). Examples: DES (56-bit, obsolete), AES (128/192/256-bit, modern standard), RC4, Blowfish. Advantages: Fast, suitable for bulk data encryption, small ciphertext. Disadvantages: Key must be securely shared with all parties, scaling to many parties is difficult, challenge is secure key distribution - how do parties exchange the key over untrusted networks? Used for: Encrypting files, database encryption, VPN tunnels, bulk communication. Asymmetric encryption: Uses public-private key pair. Public key encrypts, private key decrypts (or vice versa). Private key is kept secret, public key is shared openly. Examples: RSA, ECC (Elliptic Curve Cryptography), DSA. Advantages: Solves key distribution problem - no need to share secret keys. Enables digital signatures. Easy to scale to many parties. Disadvantages: Slower than symmetric (cryptographic overhead), larger ciphertext. Used for: Key exchange, digital signatures, authentication, small data encryption. Hybrid approach (used in practice): Asymmetric encryption for secure key exchange (sender encrypts symmetric key with recipient's public key), then symmetric encryption for actual data (much faster). TLS uses this approach. Strength depends on key size: RSA 2048-bit ≈ AES 112-bit security. Modern cryptography requires: Strong algorithms (AES, RSA-2048+), proper key management, random key generation, regular updates as computing power increases. Cryptographic protocols like TLS/SSL, IPsec, PGP, Kerberos combine these concepts.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 33,
+        "question": "Explain RSA algorithm and its role in public-key cryptography.",
+        "options": [
+          "RSA uses prime factorization difficulty for encryption/decryption with public-private key pair",
+          "RSA uses symmetric keys",
+          "RSA is only for signatures",
+          "RSA is obsolete"
+        ],
+        "correct_answer": "RSA uses prime factorization difficulty for encryption/decryption with public-private key pair",
+        "hint": "RSA security relies on the mathematical difficulty of factoring large numbers.",
+        "explanation": "RSA (Rivest-Shamir-Adleman) is the most widely used public-key cryptography algorithm. How RSA works: (1) Key generation: Choose two large prime numbers p and q (each 1024+ bits). Compute n = p × q (this is the modulus, 2048+ bits for security). Compute φ(n) = (p-1) × (q-1) (Euler's totient function). Choose public exponent e (commonly 65537) where gcd(e, φ(n)) = 1. Compute private exponent d such that (e × d) mod φ(n) = 1. Public key is (e, n), private key is (d, n). (2) Encryption: To send message M to someone with public key (e, n): C = M^e mod n (C is ciphertext). (3) Decryption: Recipient with private key (d, n) computes: M = C^d mod n. (4) Security: Relies on fact that factoring n back into p and q is computationally hard with current algorithms. If attacker could factor n, they could compute d from e and n, compromising private key. Security grows with key size: 2048-bit is current minimum recommendation. 4096-bit for long-term security. (5) Digital signatures: RSA can also sign messages: Sender signs with private key (S = M^d mod n), receiver verifies with public key (M = S^e mod n). (6) Hybrid use: RSA is slow for large data, so used for encrypting small symmetric keys. Symmetric key then encrypts bulk data. (7) Attacks: Padding attacks exploit patterns. Modern RSA uses PKCS#1 v2.0 (OAEP) padding to prevent these. (8) Key management: Public key can be freely distributed. Private key must be protected (stored securely, never transmitted). Certificate authorities (CAs) verify and sign public keys. (9) Limitations: Slow compared to symmetric, key generation is computationally intensive. RSA remains cornerstone of public-key infrastructure (PKI), though elliptic curve cryptography (ECC) offers equivalent security with smaller keys.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 34,
+        "question": "What are Digital Signatures and how do they ensure authentication and non-repudiation?",
+        "options": [
+          "Digital signatures use private key to create verifiable proof of authorship, preventing repudiation",
+          "Digital signatures encrypt messages",
+          "Digital signatures are only for legal documents",
+          "Digital signatures don't provide authentication"
+        ],
+        "correct_answer": "Digital signatures use private key to create verifiable proof of authorship, preventing repudiation",
+        "hint": "How can a recipient prove that only the sender could have created a message?",
+        "explanation": "Digital signatures are cryptographic mechanisms providing authentication, integrity, and non-repudiation. How they work: (1) Signing process: Sender creates hash of message (fingerprint that changes if message altered). Hash is encrypted with sender's private key - this is the signature. Message and signature are sent to recipient. (2) Verification process: Recipient decrypts signature using sender's public key, recovering the hash. Recipient creates hash of received message. If hashes match, signature is valid - message came from holder of private key and wasn't altered. (3) Why it works: Only holder of private key can create valid signatures. Public key decryption is verification - if signature was created with private key, public key decryption works. Hash function properties: small change in message produces completely different hash (prevents modification). (4) Authentication - verifies sender's identity because only sender has private key. Recipient trusts sender's public key was genuinely the sender's (via certificate from trusted CA). (5) Non-repudiation - sender cannot deny creating signature because only they have private key. In legal context, digital signature proves message definitely came from claimed sender. (6) Integrity - hash verification detects any tampering. Even one bit change causes hash mismatch. (7) Algorithms: RSA (public-key operation), DSA (Digital Signature Algorithm), ECDSA (Elliptic Curve DSA). (8) Hash functions: MD5 (obsolete), SHA-1 (weak), SHA-256 (secure), SHA-3. (9) Certificates: Public keys are distributed via digital certificates - documents signed by trusted CAs attesting to key ownership. Certificate includes identity (name, email, organization), public key, CA signature, validity period. (10) Applications: Email (S/MIME, PGP), code signing (software distribution), document signing (PDFs), software updates, cryptocurrencies (blockchain). Digital signatures are essential for trust in digital communications and are legally recognized in many jurisdictions.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 35,
+        "question": "Explain how PGP (Pretty Good Privacy) secures email communications.",
+        "options": [
+          "PGP encrypts/signs emails using combination of symmetric and asymmetric cryptography",
+          "PGP is only for government agencies",
+          "PGP uses only symmetric encryption",
+          "PGP encrypts transmission only, not content"
+        ],
+        "correct_answer": "PGP encrypts/signs emails using combination of symmetric and asymmetric cryptography",
+        "hint": "PGP is a complete email security solution. How does it use different encryption types?",
+        "explanation": "PGP (Pretty Good Privacy) is a comprehensive email security system providing encryption and authentication for email messages. It uses a hybrid approach combining strengths of different cryptographic techniques: (1) Email encryption process: Sender creates symmetric session key (random key for one-time use). Content is encrypted with session key using symmetric encryption (fast, suitable for bulk data). Session key is encrypted with recipient's public key using asymmetric encryption. Both encrypted content and encrypted session key are sent. Recipient decrypts session key with their private key, then uses it to decrypt content. (2) Email signing process: Sender creates hash of message, encrypts hash with sender's private key (creates signature), sends message with signature. Recipient decrypts signature with sender's public key, creates hash of received message, compares hashes to verify authenticity. (3) Key management: Uses web of trust instead of centralized CAs. Users sign each other's keys, creating trust relationships. Key server networks allow public key distribution. (4) Features: Encryption - confidentiality of email content. Digital signatures - authentication and non-repudiation of sender. Compression - data compressed before encryption for efficiency. Armor - converts binary data to ASCII text for email compatibility. (5) File format: Message is divided into encrypted blocks. Each block contains encrypted symmetric key and encrypted content. Recipients use private key to decrypt symmetric key, then decrypt content. (6) Versions: PGP (commercial/proprietary), GPG (GNU Privacy Guard - open source implementation of OpenPGP standard). (7) Usage: Encrypts entire email body, filename (if attaching files), but not email headers (to, from, subject are visible - limitation of email system, not PGP). (8) Challenges: Key management complexity (users must manage private keys, obtain public keys), low adoption (most people don't use PGP), integration with email clients varies. (9) Limitations: Only secures email content, not metadata. Vulnerable if private key is compromised. Requires trust relationships for key verification. (10) Modern alternatives: S/MIME uses certificate-based approach (similar but relies on CAs). TLS secures email transmission (not content). End-to-end encrypted email services (ProtonMail, Tutanota). PGP remains important for high-security communications despite adoption challenges.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 36,
+        "question": "Explain SSL/TLS (Secure Sockets Layer/Transport Layer Security) and its role in securing TCP connections.",
+        "options": [
+          "SSL/TLS encrypts TCP connections using certificates, providing confidentiality and server authentication",
+          "SSL/TLS only works with HTTP",
+          "SSL/TLS prevents packet loss",
+          "SSL/TLS is only for government communications"
+        ],
+        "correct_answer": "SSL/TLS encrypts TCP connections using certificates, providing confidentiality and server authentication",
+        "hint": "TLS sits between application and transport layers, securing the connection.",
+        "explanation": "SSL (Secure Sockets Layer) and its successor TLS (Transport Layer Security) are cryptographic protocols that secure communication over TCP connections. TLS operates between Application and Transport layers. How it works: (1) Handshake process (occurs before data transfer): Client sends ClientHello with TLS version, supported cipher suites, random number. Server responds with ServerHello selecting cipher suite, random number, sends certificate containing public key. Client verifies certificate (valid, not expired, trusted issuer, domain matches). Both compute shared secret using key exchange algorithm (typically Diffie-Hellman): Client generates secret, encrypts with server's public key, sends. Server decrypts with private key. Both derive encryption/authentication keys from shared secret and their random numbers. Key derivation ensures keys are fresh for each session. Client/server exchange Finished messages confirming handshake success. (2) Data transfer: All subsequent data encrypted with negotiated cipher (AES-GCM, ChaCha20-Poly1305, etc.). Symmetric encryption is fast, provides confidentiality. MAC (Message Authentication Code) detects tampering. (3) Certificates: Server sends certificate proving identity. Certificate contains public key, subject name, issuer (CA) name, validity dates, and CA's digital signature. Client verifies: Is certificate signed by trusted CA? Has it expired? Does domain match request? This prevents MITM attacks - attacker cannot use own certificate without creating forgery (unless they compromise CA). (4) Cipher suites: Combination of algorithms for key exchange, encryption, and integrity. Example: TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 uses ECDHE for key exchange, RSA for authentication, AES-256-GCM for encryption/integrity. (5) Versions: SSL 2.0 (deprecated), SSL 3.0 (deprecated), TLS 1.0 (deprecated), TLS 1.1 (deprecated), TLS 1.2 (widely used), TLS 1.3 (modern, faster). TLS 1.3 removed unnecessary complexity, reduced handshake from 2 round trips to 1, added 0-RTT capability. (6) Uses: HTTPS (HTTP over TLS, port 443), email (IMAPS, POP3S), VPN (OpenVPN, IPSec), messaging apps, payment systems, APIs. (7) Benefits: Confidentiality - encryption prevents eavesdropping. Authentication - certificates verify server identity. Integrity - MACs detect tampering. Forward secrecy - past sessions remain secure even if private key compromised (with perfect forward secrecy like ECDHE). (8) Limitations: Certificate infrastructure complexity, CA trust issues, performance overhead (mitigation with hardware acceleration, session resumption). (9) Modern considerations: Certificate transparency (logs verify CAs issue proper certificates), OCSP (Online Certificate Status Protocol) checks revocation, pinning (verify specific certificates/keys). TLS is essential for Internet security - most web traffic is HTTPS.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 37,
+        "question": "What is IPsec (Internet Protocol Security) and how does it protect network layer communications?",
+        "options": [
+          "IPsec encrypts and authenticates IP packets, providing VPN and network-level security",
+          "IPsec only works with IPv6",
+          "IPsec prevents routing attacks only",
+          "IPsec is slower than TLS"
+        ],
+        "correct_answer": "IPsec encrypts and authenticates IP packets, providing VPN and network-level security",
+        "hint": "IPsec operates at the Network layer (Layer 3), securing IP packets themselves.",
+        "explanation": "IPsec (Internet Protocol Security) is a suite of protocols providing encryption and authentication at the Network layer (Layer 3). Unlike TLS (which protects individual connections), IPsec protects all traffic between two endpoints. Components: (1) AH (Authentication Header) - provides authentication and integrity checking. Receiver computes hash of packet, compares with sender's hash to verify packet not tampered. Does not encrypt. (2) ESP (Encapsulating Security Payload) - provides encryption and optional authentication. Encrypts payload (and optionally header), adds authentication. More comprehensive protection than AH. Typically preferred over AH alone. (3) IKE (Internet Key Exchange) - negotiates and establishes security associations (SAs) - agreements on encryption algorithm, keys, and authentication method. IKEv1 and IKEv2 available. (4) Modes: Transport mode - encrypts/authenticates only payload, leaving headers intact. Tunnel mode - encapsulates entire IP packet inside new IP packet. Tunnel mode is used for VPNs. (5) SA (Security Association) - unidirectional security policy between two endpoints specifying: encryption algorithm (DES, 3DES, AES), authentication algorithm (HMAC-MD5, HMAC-SHA), key material, SA lifetime. Both direction require separate SAs (inbound and outbound). (6) VPN use: Organizations use IPsec to create secure tunnels between offices over Internet. Branch office router establishes IPsec tunnel with headquarters router. All traffic between offices encrypted/authenticated through tunnel. Transparent to applications. (7) Benefits: Network-layer protection - protects all traffic (all applications, all protocols) automatically. Firewall-friendly - can be deployed without application changes. Transparent to applications. Suitable for site-to-site VPNs. (8) Deployment: Gateway-to-gateway (office-to-office), host-to-gateway (remote user to office), host-to-host (between computers). (9) Limitations: Complex configuration, key management overhead, performance impact due to encryption, not suitable for selective per-connection protection (operates at packet level, not connection level like TLS). (10) Comparison with TLS: TLS is application-level (protects specific connections), simpler deployment, per-application. IPsec is network-level (protects all traffic), more comprehensive, transparent. Both have roles: TLS for APIs/web/email/applications, IPsec for VPNs/network security. Modern VPNs increasingly use protocols like WireGuard (simpler, faster) instead of IPsec.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 38,
+        "question": "What is VPN (Virtual Private Network) and what security benefits does it provide?",
+        "options": [
+          "VPN creates encrypted tunnel over public network, ensuring confidentiality and making location appear different",
+          "VPN guarantees immunity from all attacks",
+          "VPN only works on local networks",
+          "VPN encrypts passwords only"
+        ],
+        "correct_answer": "VPN creates encrypted tunnel over public network, ensuring confidentiality and making location appear different",
+        "hint": "VPN creates a virtual private network. What benefits come from tunneling over public networks?",
+        "explanation": "VPN (Virtual Private Network) is technology creating secure, encrypted connection through untrusted networks (typically the Internet). Types: (1) Site-to-site VPN - connects entire office networks. Remote office router connects to headquarters router via VPN tunnel. All traffic between offices goes through encrypted tunnel. Transparent to users. Uses: Connecting branch offices, disaster recovery, cloud backup. Typically based on IPsec or MPLS. (2) Remote access VPN - allows individual users to securely connect to office network from anywhere. User runs VPN client, authenticates, receives IP address on office network. All traffic routed through encrypted tunnel to office. Uses: Telecommuting, traveling employees, contractors accessing corporate network. (3) VPN protocols: IPsec (network layer), L2TP (layer 2), PPTP (older, weak security), OpenVPN (open source, flexible), WireGuard (modern, simple, fast), IKEv2 (good for mobile). Benefits: (1) Confidentiality - encryption prevents eavesdropping on public networks. Traffic appears encrypted to ISPs, networks, snoopers. (2) Authentication - VPN authenticates users/devices before granting access. (3) Integrity - ensures traffic not modified in transit. (4) Privacy - ISP cannot see what websites you visit (destination appears as VPN server). IP address appears as VPN server's, not true location. (5) Security on public WiFi - protects traffic on untrusted networks like airport WiFi. (6) Bypassing geographic restrictions - appearing from different location enables access to geo-blocked content. Issues/misconceptions: (1) VPN does not provide complete anonymity - VPN provider can log traffic, knows your true identity from payment. (2) VPN does not protect against malware - software still gets infected. (3) VPN does not speed up Internet - typically adds latency due to tunneling. (4) VPN does not make you completely anonymous - websites can still track you via cookies, browser fingerprinting. (5) Trust matters - VPN provider has access to all traffic; choose trustworthy provider with no-log policy. Uses: Privacy protection (hiding from ISP/government), accessing corporate resources remotely, bypassing censorship (with caution - many countries restrict VPNs), security on public WiFi. Concerns: VPN is critical for privacy but should be combined with other security practices (strong passwords, 2FA, anti-malware).",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 39,
+        "question": "Explain WEP (Wired Equivalent Privacy) and why it was replaced.",
+        "options": [
+          "WEP is insecure wireless encryption standard; flawed IV handling and key size enabled practical attacks",
+          "WEP is still secure",
+          "WEP prevented all wireless attacks",
+          "WEP worked differently at network layer"
+        ],
+        "correct_answer": "WEP is insecure wireless encryption standard; flawed IV handling and key size enabled practical attacks",
+        "hint": "WEP was designed for wireless LANs but had serious security flaws. What were they?",
+        "explanation": "WEP (Wired Equivalent Privacy) was the original security standard for IEEE 802.11 wireless networks, intended to provide equivalent security to wired networks. Unfortunately, it had critical cryptographic flaws: (1) Architecture: Uses 40-bit or 104-bit (weak), RC4 stream cipher, 24-bit initialization vector (IV). Key + IV passed to RC4 to generate keystream, which XORs with plaintext to create ciphertext. Receiver uses same key + IV to decrypt. (2) IV weaknesses: (a) IV space too small - with 24-bit IV, only 2^24 = 16 million possible IVs. In typical network, IVs repeat within hours, allowing IV collisions. (b) IV chosen predictably - many implementations increment IV sequentially. (c) IV transmitted unencrypted in packet header. (3) Cryptographic attacks: (a) IV collision allows attacker to detect pattern: if same IV used with same key, XOR of two ciphertexts reveals information about plaintexts. (b) RC4 biases - keystream not perfectly random; statistical biases enable plaintext recovery. (c) FMS attack - Fluhrer, Mantin, and Shamir discovered practical method to recover key. (d) Klein's attack - more efficient key recovery. (4) Key recovery: Attacker captures traffic, collects ciphertexts with duplicate IVs, uses biases in RC4 keystream to recover key. Modern attacks recover 104-bit key in minutes from modest traffic. (5) Authentication weakness: CRC-32 used for integrity check is not cryptographically secure - attacker can flip bits and adjust checksum without detection. (6) Replacement: WPA (Wi-Fi Protected Access) improved security but retained some RC4. WPA2 (IEEE 802.11i) replaced WEP with CCMP (Counter Mode with CBC-MAC using AES), much stronger. WPA3 adds further improvements. (7) Lesson: WEP shows importance of cryptographic rigor. Design by non-experts, weak algorithms, poor IV handling created systematic failure. Security through obscurity (not publishing algorithm) delayed discovery. All WEP networks compromised. Modern wireless still encounters WEP on legacy equipment - should avoid. WEP networks provide false sense of security.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      },
+      {
+        "id": 40,
+        "question": "What is a Firewall and what filtering techniques does it use?",
+        "options": [
+          "Firewall controls traffic between networks using packet filtering, stateful inspection, or proxy methods",
+          "Firewalls prevent all network attacks",
+          "Firewalls only work at physical layer",
+          "Firewalls eliminate need for other security"
+        ],
+        "correct_answer": "Firewall controls traffic between networks using packet filtering, stateful inspection, or proxy methods",
+        "hint": "Firewalls are the first line of defense at network boundary. How do they decide what traffic to allow?",
+        "explanation": "Firewall is a network security device controlling incoming/outgoing traffic based on security policies. Types: (1) Packet-filtering firewalls - examines individual packets, makes allow/deny decision based on rules. Rules check: source IP, destination IP, protocol (TCP/UDP), source port, destination port, packet flags. Stateless - each packet examined independently without considering previous packets or connection context. Advantages: simple, fast, low overhead. Disadvantages: cannot detect advanced attacks, vulnerable to IP spoofing, rules can be complex and conflicting. Example rule: 'Allow TCP port 80 (HTTP) from any source to 192.168.1.100'. (2) Stateful firewalls - tracks connection state (established, listening, closing). Remembers outgoing connections and automatically allows return traffic. Examines packet in context of previous packets. Much more intelligent: blocks unsolicited inbound traffic automatically, prevents certain DoS attacks, enables better rule design. Example: allowing return traffic from server to client without explicit rule because outgoing request was allowed. (3) Proxy firewalls - applications connect through proxy instead of directly. Proxy makes request on behalf of client, receives response, forwards to client. Acts as intermediary for all traffic. Deep inspection possible (can examine application layer). Types: web proxy (HTTP/HTTPS), SOCKS proxy (general-purpose), circuit-level proxy. Example: organization's employees access Internet through proxy; proxy monitors content, enforces policies, caches responses. (4) Next-Generation Firewalls (NGFW) - combine packet filtering, stateful inspection, proxy functions plus: DPI (Deep Packet Inspection) - examines payload for malware/intrusions. Application-aware - understands application protocols (Facebook, YouTube, etc.), enables policy enforcement at application level. IDS/IPS capabilities - detects/prevents intrusions. (5) Rules and policies: Default-deny (block everything except explicitly allowed) vs. default-allow (allow everything except explicitly blocked). Default-deny is more secure but more work to maintain. Rules processed in order; first matching rule applies. Rules should be minimal - only allow necessary traffic. (6) Rule examples: 'Allow TCP port 443 (HTTPS) from 0.0.0.0/0 (anywhere) to 192.168.1.100 (web server)' - allows external HTTPS access. 'Allow TCP port 22 (SSH) from 10.0.0.0/8 (internal) to 192.168.1.50 (admin server)' - allows internal SSH access. 'Deny TCP port 445 (SMB) from anywhere to anywhere' - blocks Windows file sharing from external networks. (7) Limitations: Firewalls cannot protect against threats originating inside network. Cannot stop encrypted malware/exploits. Cannot detect application logic flaws. Encrypted traffic appears opaque. (8) Placement: Perimeter firewalls protect network boundary (external-internal). Host-based firewalls on individual computers. Both layers recommended (defense in depth). Types of access control: ACLs (Access Control Lists) - traditional rules on routers. Stateful inspection - connection tracking. Proxy inspection - application layer. Modern firewalls combine all approaches.",
+        "chapter": "Chapter 5: Computer Networks and Network Security",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "ACtE0506"
+      }
+    ]
+  }
+]

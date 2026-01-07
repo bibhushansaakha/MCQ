@@ -1,0 +1,659 @@
+[
+  {
+    "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+    "chapter_code": "AExE01",
+    "total_questions": 100,
+    "set": "Complete Electrical & Electronics Revision MCQs",
+    "question_type": "MCQ with Detailed Explanations",
+    "questions": [
+      {
+        "id": 1,
+        "question": "State Ohm's law and explain its limitations.",
+        "options": [
+          "V = I × R, applies to all materials under all conditions",
+          "V = I × R, applies only to linear, ohmic materials at constant temperature",
+          "I = V × R, applies to all circuits",
+          "R = V / I, applies regardless of temperature changes"
+        ],
+        "correct_answer": "V = I × R, applies only to linear, ohmic materials at constant temperature",
+        "hint": "Ohm's law has specific conditions. Consider what happens with semiconductors and varying temperatures.",
+        "explanation": "Ohm's law states V = I × R (voltage equals current times resistance). However, it only applies to ohmic materials where resistance remains constant with applied voltage and temperature. Limitations include: (1) Non-ohmic materials like semiconductors don't follow linear V-I relationship; (2) At very high voltages, even ohmic materials may deviate; (3) Temperature changes affect resistance; (4) High-frequency effects create skin effect in conductors; (5) Superconductors violate this law entirely. In semiconductors, the relationship is exponential due to thermal voltage effects. Understanding these limitations is crucial for circuit design, especially in non-linear circuit analysis.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 2,
+        "question": "What is the fundamental difference between electric voltage and electric current?",
+        "options": [
+          "Voltage is flow of electrons, current is potential difference",
+          "Voltage is potential difference (energy per unit charge), current is flow of electrons (charge per unit time)",
+          "Both are the same concept with different names",
+          "Voltage measures resistance, current measures power"
+        ],
+        "correct_answer": "Voltage is potential difference (energy per unit charge), current is flow of electrons (charge per unit time)",
+        "hint": "Voltage is related to energy/potential, current is related to charge flow.",
+        "explanation": "Voltage (V, measured in Volts) represents the potential difference or energy per unit charge between two points. It's the driving force that causes charge movement. Mathematically, V = W/Q where W is energy and Q is charge. Current (I, measured in Amperes) is the rate of charge flow, mathematically I = Q/t where Q is charge and t is time. Key differences: (1) Voltage can exist without current (open circuit); (2) Current requires a complete path; (3) Voltage is a potential, current is actual flow; (4) Voltage is measured between two points, current through a component; (5) In AC circuits, they can be out of phase. An analogy: voltage is like water pressure, current is like water flow rate. Both are essential for understanding circuit behavior.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 3,
+        "question": "Define electrical power and energy. How are they related?",
+        "options": [
+          "Power = Energy, both measured in Joules",
+          "Power is rate of energy transfer (energy per unit time); Energy is total work done. P = E/t",
+          "Energy is faster than power",
+          "Power and energy are unrelated quantities"
+        ],
+        "correct_answer": "Power is rate of energy transfer (energy per unit time); Energy is total work done. P = E/t",
+        "hint": "Think about the relationship between distance (energy) and speed (power).",
+        "explanation": "Power (P, measured in Watts) is the rate at which energy is transferred, transformed, or consumed. Energy (E, measured in Joules) is the total amount of work done. Relationship: P = E/t or E = P×t. Electrical power is calculated as P = VI = I²R = V²/R. Key concepts: (1) Power is instantaneous, energy is cumulative; (2) A device rated 100W consuming power for 10 hours uses 1000Wh = 3.6MJ of energy; (3) Reactive power (VAR) doesn't consume energy but affects efficiency; (4) Real power (Watts) actually does useful work; (5) Power factor determines how much of apparent power becomes real power. In household electricity bills, you pay for energy (kWh), not instantaneous power. This distinction is crucial for understanding device efficiency and energy conservation.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 4,
+        "question": "Explain the difference between conducting and insulating materials in terms of electron mobility and valence electrons.",
+        "options": [
+          "Conductors have immobilized electrons; insulators have free electrons",
+          "Conductors have loosely bound valence electrons with high mobility; insulators have tightly bound electrons with very low mobility",
+          "Both have the same electron structure",
+          "The difference depends only on temperature"
+        ],
+        "correct_answer": "Conductors have loosely bound valence electrons with high mobility; insulators have tightly bound electrons with very low mobility",
+        "hint": "Consider the outermost electron shell and how easily electrons can move.",
+        "explanation": "The fundamental difference between conductors and insulators lies in their atomic structure and electron behavior: Conductors (Cu, Al, etc.): (1) Have loosely bound valence electrons (typically 1-3 in outermost shell); (2) Electrons can move freely through the material, creating free electron sea; (3) Very low resistivity (10^-8 Ω·m); (4) High conductivity; (5) At room temperature, sufficient thermal energy makes electrons mobile. Insulators (rubber, glass, ceramic): (1) Have tightly bound valence electrons (typically 5-8 in outermost shell); (2) Require huge energy to free electrons; (3) Very high resistivity (10^15+ Ω·m); (4) Almost no conductivity; (5) Electrons remain bound to atoms. Semiconductors (Si, Ge): (1) Intermediate properties with 4 valence electrons; (2) Conductivity can be controlled by doping; (3) Temperature significantly affects conductivity. This atomic structure difference explains why copper is an excellent conductor while rubber is a good insulator.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 5,
+        "question": "For two resistors R₁ = 10Ω and R₂ = 20Ω connected in series with a 30V source, calculate the total current.",
+        "options": [
+          "1A",
+          "2A",
+          "1.5A",
+          "3A"
+        ],
+        "correct_answer": "1A",
+        "hint": "In series: R_total = R₁ + R₂, then use I = V/R",
+        "explanation": "In series circuits, resistances add directly: R_total = R₁ + R₂ = 10Ω + 20Ω = 30Ω. Using Ohm's law: I = V/R = 30V/30Ω = 1A. This same current flows through both resistors. Voltage distribution: V₁ = IR₁ = 1A × 10Ω = 10V; V₂ = IR₂ = 1A × 20Ω = 20V. Total voltage: 10V + 20V = 30V ✓. Key series circuit properties: (1) Same current through all components; (2) Voltages add up to source voltage; (3) Total resistance equals sum of individual resistances; (4) If one component fails (open circuit), entire circuit stops; (5) Series resistors act as voltage dividers. This is fundamental for understanding voltage regulation and measurement in circuits.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts - Series Circuits",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 6,
+        "question": "Two resistors R₁ = 6Ω and R₂ = 3Ω are connected in parallel to a 12V source. Calculate the equivalent resistance and total current.",
+        "options": [
+          "R_eq = 9Ω, I = 1.33A",
+          "R_eq = 2Ω, I = 6A",
+          "R_eq = 4.5Ω, I = 2.67A",
+          "R_eq = 1.5Ω, I = 8A"
+        ],
+        "correct_answer": "R_eq = 2Ω, I = 6A",
+        "hint": "For parallel: 1/R_eq = 1/R₁ + 1/R₂. Check your arithmetic carefully.",
+        "explanation": "For parallel resistors: 1/R_eq = 1/R₁ + 1/R₂ = 1/6 + 1/3 = 1/6 + 2/6 = 3/6 = 1/2. Therefore R_eq = 2Ω. Total current: I = V/R_eq = 12V/2Ω = 6A. Branch currents: I₁ = V/R₁ = 12V/6Ω = 2A; I₂ = V/R₂ = 12V/3Ω = 4A. Total: 2A + 4A = 6A ✓. Key parallel circuit properties: (1) Voltage across all branches is same; (2) Currents split among branches proportionally to conductance; (3) Equivalent resistance is always less than smallest resistor; (4) If one branch opens, others continue working; (5) Adding more parallel resistors decreases total resistance. Practical applications: household circuits use parallel for independent device operation.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "easy",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts - Parallel Circuits",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 7,
+        "question": "Explain the star-delta (Y-Δ) conversion and when it's used in circuit analysis.",
+        "options": [
+          "Converts 3-phase voltage to single phase; used for power distribution only",
+          "Converts three-resistor network from star (Y) to delta (Δ) configuration; used to simplify circuit analysis when dealing with 3-resistor networks",
+          "Converts linear circuits to non-linear; used in amplifier design",
+          "Converts AC to DC; used in rectification"
+        ],
+        "correct_answer": "Converts three-resistor network from star (Y) to delta (Δ) configuration; used to simplify circuit analysis when dealing with 3-resistor networks",
+        "hint": "Think about network topology and circuit simplification.",
+        "explanation": "Star-delta conversion transforms between two equivalent 3-terminal network topologies: Star (Y) configuration: Three resistors meet at central point. Delta (Δ) configuration: Three resistors form closed triangle. Conversion formulas: Y to Δ: R_A = (R₁R₂ + R₂R₃ + R₃R₁)/R₃; R_B = (R₁R₂ + R₂R₃ + R₃R₁)/R₁; R_C = (R₁R₂ + R₂R₃ + R₃R₁)/R₂. Δ to Y: R₁ = (R_A × R_B)/(R_A + R_B + R_C); R₂ = (R_B × R_C)/(R_A + R_B + R_C); R₃ = (R_C × R_A)/(R_A + R_B + R_C). Uses: (1) Three-phase power systems; (2) Bridge circuits analysis; (3) Network simplification when standard series-parallel reduction fails; (4) Complex resistance calculations. When a circuit has resistors in neither pure series nor pure parallel arrangement, Y-Δ conversion often allows simplification. This is essential for analyzing balanced three-phase circuits and complex networks.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts - Y-Δ Conversion",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 8,
+        "question": "State Kirchhoff's Current Law (KCL) and explain its physical significance.",
+        "options": [
+          "Sum of currents entering a node exceeds current leaving",
+          "Sum of voltages around a loop equals zero",
+          "Sum of currents entering a node equals sum leaving; based on charge conservation",
+          "Current is constant throughout a circuit"
+        ],
+        "correct_answer": "Sum of currents entering a node equals sum leaving; based on charge conservation",
+        "hint": "Think about conservation of charge at a junction point.",
+        "explanation": "Kirchhoff's Current Law (KCL) states: The algebraic sum of currents at any node is zero, or equivalently, sum of currents entering = sum of currents leaving. Mathematically: ΣI_in = ΣI_out or ΣI_total = 0 (considering current direction). Physical significance: Based on law of charge conservation - charge cannot accumulate at a node; any charge entering must leave. Derivation: Electric charge is conserved; no charge can be created or destroyed at a node; therefore, rate of charge entering must equal rate leaving. Applications: (1) Multi-branch circuit analysis; (2) Node voltage method for circuit analysis; (3) Determining unknown currents in networks; (4) Verifying circuit measurements. Example: If three branches meet at a node with I₁=2A entering, I₂=1A entering, then I₃=3A must leave. KCL is one of two Kirchhoff laws and is fundamental to nodal analysis, one of the most powerful circuit analysis techniques.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts - Kirchhoff's Laws",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 9,
+        "question": "State Kirchhoff's Voltage Law (KVL) and derive it from Faraday's law.",
+        "options": [
+          "Sum of voltage rises in a loop equals sum of voltage drops",
+          "Sum of all voltages around a closed loop equals zero; derived from energy conservation and Faraday's electromagnetic induction law",
+          "Voltage is constant in parallel circuits",
+          "Voltage drop equals resistance squared"
+        ],
+        "correct_answer": "Sum of all voltages around a closed loop equals zero; derived from energy conservation and Faraday's electromagnetic induction law",
+        "hint": "Consider energy as you traverse a closed loop. What must be conserved?",
+        "explanation": "Kirchhoff's Voltage Law (KVL) states: The algebraic sum of all voltages (both rises and drops) around any closed loop is zero. Mathematically: ΣV = 0 (around a closed path). Derivation from Faraday's law: Faraday's law states ∮E·dl = -dΦ/dt (line integral of electric field around closed path = negative rate of magnetic flux change). In circuits without changing magnetic flux (quasi-static approximation), dΦ/dt ≈ 0, giving ∮E·dl = 0, which is KVL. Physical significance: Based on energy conservation - energy supplied by sources must equal energy consumed by resistances in any loop. As you traverse a loop, voltage rises (+) and drops (-) must algebraically sum to zero. Practical application: (1) Writing loop equations for circuit analysis; (2) Mesh current analysis; (3) Finding unknown voltages; (4) Verifying measurements around loops. Example: In a loop with 10V source, and resistors dropping 3V and 7V: +10 - 3 - 7 = 0 ✓. KVL is essential for circuit analysis and understanding power distribution.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts - Kirchhoff's Laws",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 10,
+        "question": "What is the difference between linear and non-linear circuits?",
+        "options": [
+          "Linear circuits use only resistors; non-linear use capacitors",
+          "Linear circuits have output proportional to input; non-linear have exponential or logarithmic relationships",
+          "Linear circuits have constant parameters; non-linear circuits are always unstable",
+          "There is no practical difference"
+        ],
+        "correct_answer": "Linear circuits have output proportional to input; non-linear have exponential or logarithmic relationships",
+        "hint": "Consider whether doubling the input doubles the output.",
+        "explanation": "Linear circuits: Components follow linear relationships (V=IR, I proportional to V). Output is directly proportional to input. Properties: (1) Superposition applies - response to multiple inputs equals sum of individual responses; (2) Homogeneity - scaling input scales output equally; (3) Easier to analyze mathematically; (4) Examples: resistor circuits, linear op-amp circuits. Non-linear circuits: Components don't follow linear V-I relationships. Examples: (1) Diodes - exponential V-I: I = I_s(e^(V/V_T) - 1); (2) Transistors - complex relationships; (3) Inductors with saturation; (4) Circuits with switching. Analysis methods: Linear circuits use Kirchhoff's laws, superposition, Thévenin/Norton theorems. Non-linear circuits require: (1) Graphical methods; (2) Numerical solutions; (3) Load line analysis; (4) Piecewise linear approximations. Practical importance: Understanding circuit linearity determines applicable analysis techniques. Audio amplifiers ideally should be linear; power converters often use non-linear components intentionally.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 11,
+        "question": "Define bilateral and unilateral circuits. Give examples of each.",
+        "options": [
+          "Bilateral conducts both directions; unilateral conducts one direction. Diode is bilateral.",
+          "Bilateral: current flow in both directions gives same results; Unilateral: current flow differs with direction. Diode is unilateral, resistor is bilateral.",
+          "Both conduct equally in all directions",
+          "Bilateral uses two sources; unilateral uses one"
+        ],
+        "correct_answer": "Bilateral: current flow in both directions gives same results; Unilateral: current flow differs with direction. Diode is unilateral, resistor is bilateral.",
+        "hint": "Think about whether direction of current matters for the component behavior.",
+        "explanation": "Bilateral circuits: Networks where interchanging input and output terminals produces identical results regardless of current direction. The network behavior is symmetric with respect to direction. Examples: (1) Pure resistor networks - reversing source direction reverses current direction proportionally; (2) Passive RLC circuits without diodes; (3) Linear circuits with only passive components. Key characteristic: Response is independent of which terminal is source and which is load. Unilateral circuits: Networks where current direction matters; swapping terminals gives different results. Examples: (1) Circuits containing diodes - conduct one way, block reverse; (2) Transistor circuits - inherently directional; (3) Vacuum tube circuits; (4) Circuits with rectifiers or any non-linear elements. Practical implications: (1) Bilateral circuits allow flexible power transfer; (2) Unilateral circuits provide rectification and power flow control; (3) Analysis methods differ: Bilateral uses superposition freely; Unilateral requires careful consideration of operating conditions. Understanding this distinction is crucial when designing circuits where current direction control is important, such as in power systems and signal processing.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 12,
+        "question": "Distinguish between active and passive circuits with examples.",
+        "options": [
+          "Active circuits have current; passive have only voltage",
+          "Active circuits contain energy sources (voltage/current supplies) or amplifying elements; passive contain only R, L, C without sources",
+          "Active circuits are AC; passive circuits are DC",
+          "No difference between them"
+        ],
+        "correct_answer": "Active circuits contain energy sources (voltage/current supplies) or amplifying elements; passive contain only R, L, C without sources",
+        "hint": "Consider whether the circuit can amplify signals or provide energy.",
+        "explanation": "Active circuits: Contain one or more energy sources or amplifying elements. Energy sources: (1) Independent voltage/current sources - ideal or practical (with internal resistance); (2) Dependent (controlled) sources - output depends on other circuit variables. Amplifying elements: (1) Transistors - BJT, FET; (2) Op-amps; (3) Vacuum tubes. Properties: (1) Can amplify signals and provide power; (2) Can have negative resistance regions (unstable unless stabilized); (3) Require power supply; (4) Enable oscillation and active filtering. Examples: (1) Battery-powered circuits; (2) Audio amplifiers; (3) Microcontroller circuits; (4) Active filters. Passive circuits: Contain only passive elements R, L, C with no independent sources. Properties: (1) Cannot amplify (output power ≤ input power); (2) Stable for any load (dissipative or energy-storing); (3) Require external excitation; (4) Energy is dissipated (in R) or exchanged (in L, C); (5) Output always less than input. Examples: (1) RC filters; (2) LC resonant circuits; (3) Transformer circuits; (4) Transmission lines. Analysis: Active circuits need source equations; passive can use impedance methods. This distinction is fundamental in circuit design - passive circuits provide stability, active circuits provide gain and control.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 Basic Concepts",
+        "source": "AExE01 Revision Set 1"
+      },
+      {
+        "id": 13,
+        "question": "Explain the Superposition Theorem and its limitations.",
+        "options": [
+          "Applies to all circuits with any number of sources",
+          "States that for linear networks, response to multiple sources equals algebraic sum of individual responses; limited to linear circuits",
+          "Used only for finding currents, not voltages",
+          "Applies to non-linear circuits as well"
+        ],
+        "correct_answer": "States that for linear networks, response to multiple sources equals algebraic sum of individual responses; limited to linear circuits",
+        "hint": "When does the sum of parts equal the whole?",
+        "explanation": "Superposition Theorem: For linear networks with multiple independent sources, the response (voltage/current) at any element is the algebraic sum of responses caused by each independent source acting alone (others deactivated). Application procedure: (1) Deactivate all sources except one (voltage sources → short circuit; current sources → open circuit); (2) Calculate response due to remaining source; (3) Repeat for each source; (4) Algebraically sum all responses. Advantages: (1) Simplifies complex multi-source analysis; (2) Each calculation involves simpler circuit; (3) Useful for understanding source contribution; (4) Can solve using any method (nodal, loop, Thévenin). Limitations: (1) Only applies to linear circuits - output proportional to input; (2) Cannot be used for power calculations directly (P = VI is non-linear); (3) Doesn't apply to circuits with non-linear elements (diodes, transistors); (4) For dependent sources, must handle carefully - they remain active. Example: Circuit with 10V and 5V sources: V_total ≠ V_10V source - V_5V source; instead calculate each separately and add. Practical note: When calculating power using superposition, must first find currents/voltages, then compute power - you can't superpose power directly. This theorem is essential for understanding complex circuits and for Thévenin/Norton analysis.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.2 Network Theorems",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 14,
+        "question": "State Thévenin's Theorem and explain how to find Thévenin equivalent of a circuit.",
+        "options": [
+          "Any circuit can be replaced by ideal voltage source; found by short-circuiting all sources",
+          "Any linear two-terminal circuit can be replaced by equivalent voltage source V_Th in series with resistance R_Th",
+          "Applicable only to AC circuits",
+          "Found by open-circuiting load terminals"
+        ],
+        "correct_answer": "Any linear two-terminal circuit can be replaced by equivalent voltage source V_Th in series with resistance R_Th",
+        "hint": "Think about open-circuit voltage and short-circuit current.",
+        "explanation": "Thévenin's Theorem: Any linear two-terminal circuit can be replaced by an equivalent circuit consisting of: (1) Independent voltage source V_Th (Thévenin voltage); (2) Series resistance R_Th (Thévenin resistance). Finding Thévenin equivalent: Method 1 - Using open circuit voltage and short circuit current: V_Th = V_oc (open circuit voltage across terminals); R_Th = V_Th / I_sc (where I_sc is short circuit current with terminals shorted). Method 2 - Finding V_Th and R_Th separately: V_Th = voltage across open-circuited terminals with load removed; R_Th = equivalent resistance seen from load terminals with all independent sources deactivated (voltage sources → short, current sources → open). Advantages: (1) Simplifies analysis when load changes; (2) Quick for finding maximum power transfer condition; (3) Useful for load analysis; (4) Can be found experimentally. Relationship to Norton: Norton equivalent has current source I_N = V_Th/R_Th with parallel resistance R_N = R_Th. Practical applications: (1) Battery equivalent circuit; (2) Finding power delivery to load; (3) Circuit simplification for specific analysis. Example: For simple circuit with 10V source and 5Ω resistor → Thévenin equivalent is 10V in series with 5Ω to represent entire circuit to external load. This theorem is crucial for understanding circuit behavior and is widely used in practice.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.2 Network Theorems",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 15,
+        "question": "What is Norton's Theorem and how does it relate to Thévenin's Theorem?",
+        "options": [
+          "Uses current source instead of voltage source; equivalent to Thévenin with I_N = V_Th/R_Th and R_N = R_Th",
+          "Applies only to AC circuits",
+          "Less useful than Thévenin's theorem",
+          "Cannot be converted to Thévenin"
+        ],
+        "correct_answer": "Uses current source instead of voltage source; equivalent to Thévenin with I_N = V_Th/R_Th and R_N = R_Th",
+        "hint": "Consider a current source in parallel with a resistor versus voltage source in series.",
+        "explanation": "Norton's Theorem: Any linear two-terminal circuit can be replaced by an equivalent circuit consisting of: (1) Independent current source I_N (Norton current); (2) Parallel resistance R_N (Norton resistance). Finding Norton equivalent: (1) I_N = I_sc (short circuit current at terminals); (2) R_N = open circuit voltage / short circuit current = V_oc / I_sc. Alternative method: (1) Deactivate all sources; (2) Find resistance seen from terminals = R_N; (3) Find short circuit current = I_N. Relationship to Thévenin: Norton and Thévenin are equivalent representations. Conversion: I_N = V_Th / R_Th; R_N = R_Th; V_Th = I_N × R_N. When to use: (1) Norton better when analysis involves current paths; (2) Thévenin better for voltage analysis; (3) Often use one to verify the other. Practical note: Finding I_sc can be easier in some circuits than finding V_oc. Experimental determination: (1) Measure open circuit voltage = V_oc; (2) Measure short circuit current = I_sc; (3) Calculate R_N = V_oc/I_sc and I_N = I_sc. This theorem provides an alternative perspective on circuit analysis and is particularly useful in certain circuit configurations, especially when dealing with current-driven loads.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.2 Network Theorems",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 16,
+        "question": "State Maximum Power Transfer Theorem and find the condition for maximum power delivery.",
+        "options": [
+          "Maximum power when load resistance equals source resistance; P_max = V_s²/(4R_s)",
+          "Power is always maximum regardless of load resistance",
+          "Maximum power when load is zero ohms",
+          "Applies only to AC circuits"
+        ],
+        "correct_answer": "Maximum power when load resistance equals source resistance; P_max = V_s²/(4R_s)",
+        "hint": "Consider power dissipated in load: P = I²R_L = (V_Th/(R_Th + R_L))² × R_L",
+        "explanation": "Maximum Power Transfer Theorem: A load receives maximum power from a source when the load resistance equals the source (Thévenin) resistance: R_L = R_Th. Maximum power: P_max = V_Th² / (4R_Th). Proof: Power to load P = V_Th² × R_L / (R_Th + R_L)². To find maximum, differentiate with respect to R_L and set to zero: dP/dR_L = V_Th² × [(R_Th + R_L)² - R_L × 2(R_Th + R_L)] / (R_Th + R_L)⁴ = 0. This gives (R_Th + R_L) = 2R_L, so R_Th = R_L. Efficiency consideration: When R_L = R_Th, power delivered to load equals power lost in source resistance (50% efficiency). In practice, matching source to load for maximum power vs maximum efficiency depends on application: (1) Maximum power - small signal circuits, antenna matching; (2) Maximum efficiency - power supplies (want R_L >> R_Th for efficiency near 100%). Impedance matching in AC circuits: R_L = R_s and X_L = -X_s (conjugate matching). Applications: (1) Audio amplifier matching; (2) Antenna impedance matching; (3) Power amplifier design; (4) Load optimization. This theorem is essential for understanding power delivery and impedance matching in circuits.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.2 Network Theorems",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 17,
+        "question": "In an R-L circuit with a DC source, what happens to current immediately after switch closure and at steady state?",
+        "options": [
+          "Current is maximum immediately, decreases to zero at steady state",
+          "Current is zero immediately, increases to maximum at steady state",
+          "Current is constant",
+          "Current oscillates"
+        ],
+        "correct_answer": "Current is zero immediately, increases to maximum at steady state",
+        "hint": "Consider inductor's reaction to sudden voltage change: V_L = L(di/dt)",
+        "explanation": "In an R-L circuit with DC source: At t=0+ (immediately after switch closure): (1) Inductor opposes current change; (2) V_L = V_s (all voltage appears across inductance); (3) di/dt = V_s/L (maximum rate of change); (4) i(0+) = 0 (current cannot change instantaneously through inductor). At steady state (t→∞): (1) Inductor becomes short circuit (di/dt = 0 requires V_L = 0); (2) All voltage appears across resistance; (3) i(∞) = V_s/R (maximum steady-state current). Transient response: Current grows exponentially i(t) = (V_s/R)(1 - e^(-t/τ)) where τ = L/R is time constant. Time constant significance: (1) At t = τ, current reaches 63.2% of final value; (2) At t = 5τ, current reaches 99.3% of final value; (3) Smaller τ means faster response. Energy considerations: (1) Inductor stores energy W = ½LI² at steady state; (2) Energy source provides this energy during transient; (3) Some energy dissipated in resistance as heat. Practical applications: (1) Motor starting transients; (2) Relay operation timing; (3) Power supply design; (4) Understanding electromagnetic transients. This behavior is fundamental to understanding inductive circuit dynamics and is critical in power system analysis.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 R-L Circuits",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 18,
+        "question": "Analyze an R-C circuit response to a step DC voltage. Describe voltage across capacitor and charging current.",
+        "options": [
+          "Capacitor voltage instant jumps to source; current gradually decreases",
+          "Capacitor voltage gradually increases exponentially; current exponentially decreases",
+          "Capacitor voltage constant; current constant",
+          "Capacitor charges instantly with constant current"
+        ],
+        "correct_answer": "Capacitor voltage gradually increases exponentially; current exponentially decreases",
+        "hint": "Current through capacitor: i = C(dv/dt). What happens as capacitor charges?",
+        "explanation": "In an R-C charging circuit: At t=0+ (immediately after switch closure): (1) Capacitor acts as short circuit (V_C = 0); (2) All voltage appears across resistor; (3) Initial current i(0) = V_s/R (maximum); (4) V_C(0) = 0. Transient response: Capacitor voltage: V_C(t) = V_s(1 - e^(-t/τ)) where τ = RC. Charging current: i(t) = (V_s/R)e^(-t/τ). At steady state (t→∞): (1) Capacitor acts as open circuit; (2) V_C(∞) = V_s (voltage across capacitor equals source); (3) i(∞) = 0 (no current flows). Energy analysis: (1) Energy stored in capacitor: W_C = ½CV_s²; (2) Energy supplied by source: W_source = CV_s²; (3) Energy dissipated in resistor: W_R = ½CV_s²; (4) Efficiency = 50% (half wasted in resistance). Time constant (τ = RC): (1) At t = τ, capacitor charges to 63.2% of final value; (2) At t = 5τ, capacitor 99.3% charged (practical steady state). Discharging: When source disconnects, capacitor discharges through resistance: V_C(t) = V_s × e^(-t/τ). Applications: (1) Timing circuits; (2) Filtering; (3) Signal coupling/decoupling; (4) Flash charging. Understanding RC transients is essential for circuit design and signal processing.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.1 R-C Circuits",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 19,
+        "question": "What is resonance in an R-L-C circuit? Explain the resonant frequency formula and Q factor.",
+        "options": [
+          "Resonance when impedance is minimum; f₀ = 1/(2π√LC); Q = ωL/R",
+          "Resonance when inductance equals capacitance; happens at any frequency",
+          "Resonance when voltage is maximum; Q is always 1",
+          "Resonance has no practical significance"
+        ],
+        "correct_answer": "Resonance when impedance is minimum; f₀ = 1/(2π√LC); Q = ωL/R",
+        "hint": "When do inductive and capacitive reactances cancel?",
+        "explanation": "Resonance in R-L-C circuits occurs when inductive and capacitive reactances are equal and opposite: X_L = X_C → ωL = 1/(ωC) → ω₀ = 1/√(LC). Resonant frequency: f₀ = 1/(2π√LC). At resonance: (1) Impedance is minimum: Z = R (purely resistive); (2) Current is maximum: I = V_s/R; (3) Phase angle is zero: φ = 0 (voltage and current in phase); (4) Maximum power transfer to circuit; (5) Voltage/current dependent on Q factor. Q factor (Quality Factor): Q = ωL/R = 1/(ωRC) = (1/R)√(L/C). Significance: (1) Q = 1/damping ratio; (2) High Q means sharp resonance peak and long settling time; (3) Low Q means broad response and quick settling; (4) Q = f₀/(f_high - f_low) where bandwidth = f_high - f_low. Bandwidth: BW = f₀/Q = R/(2πL). At resonance, voltage across capacitor and inductor can be Q times the source voltage (voltage magnification). Practical considerations: (1) Series resonance used in RF tuning, impedance matching; (2) Parallel resonance used in frequency selection, oscillators; (3) High Q circuits very sensitive to frequency changes; (4) Low Q circuits broader frequency response. Applications: (1) AM/FM radio tuning; (2) Wireless power transfer; (3) Power factor correction; (4) Oscillator design. Understanding resonance is critical for AC circuit analysis and RF design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.2 R-L-C Circuits and Resonance",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 20,
+        "question": "Explain active power, reactive power, and apparent power in AC circuits. What is power factor?",
+        "options": [
+          "All three are same; power factor is always 1",
+          "Active power (P, Watts) - real power doing work; Reactive power (Q, VAR) - power oscillating between source and reactive components; Apparent power (S, VA) = √(P² + Q²); PF = P/S = cos(φ)",
+          "Only active power matters in AC circuits",
+          "Reactive power consumes energy"
+        ],
+        "correct_answer": "Active power (P, Watts) - real power doing work; Reactive power (Q, VAR) - power oscillating between source and reactive components; Apparent power (S, VA) = √(P² + Q²); PF = P/S = cos(φ)",
+        "hint": "Think about power that does useful work versus power that oscillates.",
+        "explanation": "In AC circuits with phase angle φ between voltage and current: Active Power (Real Power, P): (1) P = VI cos(φ) = I²R (Watts); (2) Actually dissipated as heat in resistance; (3) Does useful work; (4) Measured by wattmeter; (5) Always positive. Reactive Power (Q): (1) Q = VI sin(φ) = I²X (VAR - Volt-Ampere Reactive); (2) Power oscillating between energy source and reactive components (L, C); (3) Not converted to heat; (4) Positive for inductive load (lags), negative for capacitive (leads); (5) Measured by VAR meter. Apparent Power (S): (1) S = VI (VA - Volt-Ampere); (2) Geometric sum: S² = P² + Q²; (3) Represents total power capacity needed; (4) Larger than actual useful power if PF < 1. Power Factor (PF): (1) PF = cos(φ) = P/S; (2) Ranges from 0 to 1; (3) Measures efficiency of power transfer; (4) Leading (capacitive) or lagging (inductive); (5) Ideal = 1 (purely resistive, φ = 0°). Power Triangle: Geometric representation showing relationship between P, Q, S. Applications: (1) Power billing uses real power (kWh); (2) Utility charges penalty for low PF; (3) Motor loads typically have PF ≈ 0.7-0.9 (inductive); (4) Power factor correction uses capacitors; (5) Transformer sizing based on apparent power. Practical impact: Device rated 1000VA with PF=0.8 delivers only 800W of useful power. Understanding these concepts is essential for power system design and optimization.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.3 AC Circuits - Power Analysis",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 21,
+        "question": "Explain how alternating voltages and currents are generated. What are their equations and waveforms?",
+        "options": [
+          "Generated by rotating coil in magnetic field; v(t) = V_m sin(ωt + φ); sinusoidal waveform",
+          "Generated by batteries; triangular waveform",
+          "Generated by capacitors; square waveform",
+          "AC generation not practical"
+        ],
+        "correct_answer": "Generated by rotating coil in magnetic field; v(t) = V_m sin(ωt + φ); sinusoidal waveform",
+        "hint": "Consider electromagnetic induction and how induced voltage changes with coil rotation.",
+        "explanation": "AC Generation: Faraday's law of electromagnetic induction: induced EMF = -dΦ/dt. When coil rotates in uniform magnetic field: (1) Magnetic flux through coil: Φ = BA cos(θ) = BA cos(ωt); (2) Induced EMF: ε = -dΦ/dt = BA·ω·sin(ωt) = E_m sin(ωt). Standard equations: Voltage: v(t) = V_m sin(ωt + φ) where V_m = peak/maximum voltage. Current: i(t) = I_m sin(ωt + φ) where I_m = peak/maximum current. ω = 2πf = angular frequency (rad/s). f = frequency (Hz). T = 1/f = period (seconds). φ = phase angle (radians). Waveform characteristics: (1) Sinusoidal - most common in power systems; (2) Symmetric about time axis; (3) Periodic with period T; (4) Repeats every 2π radians. Relationship between values: Peak value: V_m; RMS (effective) value: V_rms = V_m/√2 ≈ 0.707V_m; Average value (half-cycle): V_avg = 2V_m/π ≈ 0.637V_m. Why sinusoidal? (1) Naturally generated by rotating machinery; (2) Mathematically convenient; (3) Efficient transmission; (4) Easy to transform using transformers. AC in power systems: (1) 50/60 Hz standard frequencies; (2) 110V, 220V, 230V common voltage standards; (3) Allows efficient power transmission over long distances; (4) Can be transformed easily. Understanding AC generation is fundamental to power engineering and electrical systems.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.3 AC Fundamentals",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 22,
+        "question": "Define RMS, peak, and average values of AC waveform. Why is RMS value important?",
+        "options": [
+          "Peak = maximum instantaneous value; RMS = 0.707 × peak; Average = 0.637 × peak; RMS important for power calculations",
+          "All three values are equal",
+          "RMS has no practical use",
+          "Average value is always used in practice"
+        ],
+        "correct_answer": "Peak = maximum instantaneous value; RMS = 0.707 × peak; Average = 0.637 × peak; RMS important for power calculations",
+        "hint": "RMS stands for Root Mean Square. Think about heat dissipation.",
+        "explanation": "For sinusoidal v(t) = V_m sin(ωt): Peak (Maximum) Value: V_m - the maximum instantaneous voltage magnitude. RMS (Root Mean Square) Value: V_rms = V_m/√2 ≈ 0.707V_m. Calculation: V_rms = √(1/T ∫[0 to T] v²(t) dt). For sinusoid: V_rms = V_m/√2. Average Value: V_avg = 2V_m/π ≈ 0.637V_m (for half-period). For full period: V_avg = 0 (areas above and below cancel). Why RMS is important: (1) RMS value represents equivalent DC voltage that delivers same power to resistive load; (2) Power calculations use RMS: P = V_rms × I_rms × cos(φ); (3) Ratings on AC devices (like 230V supply) are RMS values; (4) Relates to heat dissipation: Heat ∝ I²R, and I_rms² is what matters. Practical example: 230V AC supply means 230V_rms (≈ 325V peak). A light bulb rated 100W at 230V actually operates at 100W with RMS current and voltage. Confusion prevention: When we say "wall outlet is 230V," we mean 230V_rms, not peak. Peak would be 230√2 ≈ 325V. Form Factor: (1) Form Factor = Peak/RMS = √2 for sinusoid; (2) Different for non-sinusoidal waveforms; (3) Used to characterize waveform shapes. Measurement: Voltmeters and ammeters typically display RMS values by default. Understanding these relationships is critical for correct power analysis and device rating interpretation.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "medium",
+        "marks": 2,
+        "topic": "1.3 AC Fundamentals",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 23,
+        "question": "Explain three-phase AC systems. What are advantages over single-phase systems?",
+        "options": [
+          "Three separate single-phase supplies; same advantages",
+          "Three AC voltages phase-shifted 120° apart; more efficient power delivery, continuous power flow, smaller conductors, higher power per unit mass",
+          "Simple addition of three single-phase systems",
+          "Three-phase is obsolete technology"
+        ],
+        "correct_answer": "Three AC voltages phase-shifted 120° apart; more efficient power delivery, continuous power flow, smaller conductors, higher power per unit mass",
+        "hint": "Think about how three sinusoids could be arranged to never simultaneously equal zero.",
+        "explanation": "Three-phase system: Consists of three sinusoidal AC voltages, each phase-shifted 120° from others. Voltage equations: V_a = V_m sin(ωt); V_b = V_m sin(ωt - 120°); V_c = V_m sin(ωt - 240°) or V_m sin(ωt + 120°). Line voltage (between phase conductors): V_L = √3 × V_ph (phase voltage); e.g., 3-phase 230V means V_ph = 230V, V_L ≈ 400V between lines. Advantages over single-phase: (1) Constant power flow - instantaneous power never drops to zero (single-phase has sinusoidal power fluctuation); (2) More efficient - uses smaller conductors for same power (single-phase requires larger wire gauge); (3) Better motor performance - three-phase motors self-start and run smoothly; (4) Higher power density - delivers 1.732 times power of single-phase at same voltage with three wires; (5) Smaller transformer size; (6) Reduced harmonic distortion potential. Power in 3-phase: P = √3 × V_L × I_L × cos(φ). Configurations: (1) Wye (Y) - neutral point available, voltage lower by factor of √3; (2) Delta (Δ) - no neutral, three wires only. Waveform characteristics: (1) Voltages always 120° apart; (2) Sum of three phase voltages is always zero: V_a + V_b + V_c = 0; (3) This property crucial for 3-phase motor design. Industrial applications: (1) Large motors and machinery; (2) Power distribution systems; (3) Industrial facilities; (4) Provides more reliable power delivery. Household systems: Most homes single-phase, but some areas offer 3-phase for heavier loads. Understanding 3-phase systems is essential for industrial electrical engineering.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 2,
+        "topic": "1.3 Three-Phase Systems",
+        "source": "AExE01 Revision Set 2"
+      },
+      {
+        "id": 24,
+        "question": "Explain the structure and operation of a semiconductor diode. What is the depletion region?",
+        "options": [
+          "Made of single material; conducts equally both directions",
+          "P-N junction of two semiconductor materials; at junction, built-in electric field creates depletion region preventing current flow at low voltage",
+          "Same as resistor but with different name",
+          "Purely electronic component with no physical structure"
+        ],
+        "correct_answer": "P-N junction of two semiconductor materials; at junction, built-in electric field creates depletion region preventing current flow at low voltage",
+        "hint": "Think about diffusion of charges and resulting electric field at junction.",
+        "explanation": "Semiconductor Diode Structure: P-type region: (1) Doped with acceptor impurities (Boron, Aluminum); (2) Majority carriers: holes (positive); (3) Minority carriers: electrons. N-type region: (1) Doped with donor impurities (Phosphorus, Arsenic); (2) Majority carriers: electrons (negative); (3) Minority carriers: holes. At P-N Junction: When P and N regions contact, charges diffuse across junction: (1) Electrons from N diffuse to P region; (2) Holes from P diffuse to N region; (3) This creates charge separation. Depletion Region: (1) Near junction, depletion of mobile charge carriers occurs; (2) Immobile ions remain: positive donor ions on N side, negative acceptor ions on P side; (3) These ions create built-in electric field E_0; (4) This field opposes further diffusion, creating equilibrium. Built-in Potential: V_0 ≈ (KT/q) ln(N_a × N_d / n_i²); at room temperature ≈ 0.6-0.7V for Si, ≈ 0.2-0.3V for Ge. Forward Bias: (1) Apply positive voltage to P-side (anode); (2) This reduces built-in field; (3) When applied voltage exceeds V_0, exponential current flows; (4) Forward current equation: I = I_s(e^(V/V_T) - 1); (5) V_T = thermal voltage ≈ 26mV at 25°C. Reverse Bias: (1) Apply negative voltage to P-side; (2) Increases depletion region width; (3) Very small reverse saturation current I_s ≈ nanoamps; (4) Current limited by junction leakage and temperature. Breakdown: (1) At high reverse voltage, impact ionization occurs; (2) Zener breakdown (~5V for Zener diodes); (3) Avalanche breakdown (higher voltages). Applications: (1) Rectification - converts AC to DC; (2) Logic gates; (3) Voltage regulation (Zener); (4) Switching. Understanding diode physics is fundamental to electronics.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.4 Semiconductor Devices",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 25,
+        "question": "Explain BJT (Bipolar Junction Transistor) structure, the three terminals, and basic biasing configurations.",
+        "options": [
+          "Two junctions, three terminals: Base, Collector, Emitter; can be NPN or PNP; three biasing configurations: Common Emitter, Common Base, Common Collector",
+          "Four-terminal device with no specific configurations",
+          "Unidirectional device like diode",
+          "No practical differences between configurations"
+        ],
+        "correct_answer": "Two junctions, three terminals: Base, Collector, Emitter; can be NPN or PNP; three biasing configurations: Common Emitter, Common Base, Common Collector",
+        "hint": "BJT has two diodes back-to-back. Think about how base-emitter and base-collector junctions control current.",
+        "explanation": "BJT Structure: Two back-to-back P-N junctions: NPN type: Emitter (N) - Base (P) - Collector (N). PNP type: Emitter (P) - Base (N) - Collector (P). Three Terminals: (1) Emitter: heavily doped, injects majority carriers into base; (2) Base: lightly doped, thin region (typically 100-500nm); (3) Collector: collects carriers from base. Operation (NPN): (1) Forward bias BE junction, reverse bias BC junction; (2) Electrons injected from E into B; (3) Most diffuse to C (due to field), some recombine in B; (4) Collector current I_C ≈ β × I_B (β ≈ 100-300); (5) I_E = I_C + I_B. Three Biasing Configurations: Common Emitter (CE): (1) Base is input, Collector is output, Emitter common to both; (2) Voltage gain high; (3) Current gain = β; (4) 180° phase inversion; (5) Most widely used configuration; (6) Input impedance moderate (≈kΩ). Common Base (CB): (1) Emitter is input, Collector is output, Base common; (2) Voltage gain high; (3) Current gain ≈ 1 (actually α, where β = α/(1-α)); (4) No phase inversion; (5) Very low input impedance; (6) High frequency capability. Common Collector (CC): (1) Base is input, Emitter is output, Collector common; (2) Voltage gain ≈ 1 (voltage follower); (3) High input impedance; (4) Low output impedance; (5) Useful as buffer/impedance transformer. Temperature Effects: (1) β increases with temperature (unreliable for precise biasing); (2) V_BE decreases ~2mV per °C; (3) Leakage current I_CO increases. Transistor Action: (1) Cutoff: I_B = 0, I_C ≈ 0 (OFF state); (2) Active: small I_B produces larger I_C proportionally; (3) Saturation: I_C reaches maximum, transistor fully ON. Applications: (1) Amplification - linear circuits; (2) Switching - digital logic, power control. Understanding BJT operation is crucial for analog and digital circuit design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.4 Semiconductor Devices - BJT",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 26,
+        "question": "Explain the small-signal and large-signal models of BJT. When is each model appropriate?",
+        "options": [
+          "Small-signal: assumes constant parameters; Large-signal: accounts for non-linearities; use small-signal for small variations around Q-point",
+          "Both models are identical",
+          "Small-signal only for DC, large-signal only for AC",
+          "Models have no practical difference"
+        ],
+        "correct_answer": "Small-signal: assumes constant parameters; Large-signal: accounts for non-linearities; use small-signal for small variations around Q-point",
+        "hint": "Consider when transistor characteristics vary significantly versus when they're relatively stable.",
+        "explanation": "Small-Signal Model (AC Model): Assumptions: (1) Operation around fixed quiescent point (Q-point); (2) Signal amplitude much smaller than bias; (3) Parameters treated as constant; (4) Nonlinearities neglected. Small-signal parameters: (1) r_e = dynamic emitter resistance ≈ 26mV/I_E at 25°C; (2) g_m = transconductance = I_C/V_T ≈ I_C/26mV; (3) r_b = base resistance; (4) r_o = output resistance; (5) β (gain) treated as constant. Equivalent circuit: (1) Replaces voltage source by short; (2) Current source by open; (3) Uses hybrid-π or T-equivalent model; (4) Impedances represented by resistances and capacitances. Use cases: (1) AC amplifier gain analysis; (2) Frequency response; (3) Signal coupling; (4) Oscillator design; (5) Small audio/RF signals. Large-Signal Model (DC Model): Assumptions: (1) No small-signal assumption; (2) Accounts for nonlinear V-I relationships; (3) Parameters vary with operating point; (4) Used for transistor switching and saturation analysis. Characteristics: (1) Uses measured or simulated I_C-V_CE curves; (2) Accounts for early effect (finite output resistance); (3) Includes saturation region; (4) Non-ideal effects included. Use cases: (1) Biasing point calculation; (2) Power amplifier design; (3) Switching circuits; (4) Logic gates; (5) Large signal distortion analysis. Important distinctions: (1) Small-signal model: linear, easier analysis; (2) Large-signal model: nonlinear, more accurate for large swings; (3) Typical signal: bias large-signal, analyze AC small-signal; (4) Transition point: signal amplitude becomes comparable to V_T (thermal voltage). Temperature considerations: (1) Small-signal: parameters vary but often acceptable for analysis; (2) Large-signal: must account for temperature effects on curves. Practical approach: Design using large-signal DC biasing, then use small-signal AC analysis for gain/frequency response. Understanding both models is essential for complete transistor circuit design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.4 Semiconductor Devices - BJT Models",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 27,
+        "question": "Explain MOSFET structure, operation principle, and advantages over BJT.",
+        "options": [
+          "Metal-Oxide-Semiconductor with Gate, Drain, Source; voltage-controlled current source; offers high input impedance and low power consumption",
+          "Same as BJT with different name",
+          "Uses mechanical switching",
+          "No significant differences from BJT"
+        ],
+        "correct_answer": "Metal-Oxide-Semiconductor with Gate, Drain, Source; voltage-controlled current source; offers high input impedance and low power consumption",
+        "hint": "Think about how voltage on gate creates channel for current flow.",
+        "explanation": "MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor) Structure: Gate: Metal electrode insulated from semiconductor by SiO₂ layer (oxide). Source and Drain: Heavily doped regions in semiconductor. Channel: Thin layer between source and drain. Two main types: N-channel: (1) Channel formed in P-substrate; (2) Electrons conduct current; (3) Negative voltage on gate depletes; positive voltage inverts to N-channel. P-channel: (1) Channel formed in N-substrate; (2) Holes conduct current; (3) Opposite voltage polarity. Depletion/Enhancement modes depending on implementation. Operation (N-channel Enhancement Mode): (1) V_GS < V_T (threshold): No channel, I_D ≈ 0 (cutoff); (2) V_T < V_GS < V_GS + V_DS: Linear region, acts like variable resistor; (3) V_GS > V_T and V_DS > V_GS - V_T: Saturation, I_D ≈ constant. Drain current (saturation): I_D = (W/2L)μC_ox(V_GS - V_T)² where W/L is aspect ratio, μ is mobility, C_ox is oxide capacitance. Advantages over BJT: (1) Voltage-controlled (gate controls, not current); (2) Very high input impedance (10¹² Ω typical, vs kΩ for BJT); (3) Low input current (picoamps vs microamps); (4) Lower power consumption; (5) Faster switching speeds; (6) Better temperature stability; (7) Simpler manufacturing; (8) Can be made smaller (more on chip); (9) No base current needed. CMOS Technology: (1) Complementary MOS - uses N-channel and P-channel together; (2) Extremely low static power consumption; (3) Logic families based on CMOS; (4) Modern digital circuits entirely CMOS. Applications: (1) Digital circuits - all modern logic; (2) Power switches - MOSFETs handle high power; (3) Amplifiers - CMOS ICs; (4) Analog switches; (5) RF circuits. Practical characteristics: (1) Gate oxide breakdown at high voltage (typically 20-50V); (2) Susceptible to electrostatic discharge (ESD); (3) Body effect - substrate bias affects V_T; (4) Channel length modulation - finite output resistance. Understanding MOSFET operation is essential for modern digital and analog electronics design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.4 Semiconductor Devices - MOSFET",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 28,
+        "question": "What is CMOS technology? Explain its advantages and applications.",
+        "options": [
+          "Complementary MOS using both N-channel and P-channel transistors; extremely low static power; forms basis of all modern digital logic",
+          "Single transistor technology with high power consumption",
+          "Obsolete technology",
+          "Used only in analog circuits"
+        ],
+        "correct_answer": "Complementary MOS using both N-channel and P-channel transistors; extremely low static power; forms basis of all modern digital logic",
+        "hint": "Consider complementary devices pulling high and low. When do they conduct simultaneously?",
+        "explanation": "CMOS (Complementary MOS) Technology: Structure: Every logic gate consists of complementary pair - NMOS pull-down network and PMOS pull-up network. These are never simultaneously conducting. Basic CMOS Inverter: (1) PMOS on top connected to V_DD; (2) NMOS on bottom connected to ground; (3) Input drives both gates; (4) When input high: NMOS on, PMOS off, output pulled low; (5) When input low: PMOS on, NMOS off, output pulled high. Power characteristics: (1) Static (at rest) power: essentially zero - only leakage current (picoamps); (2) Dynamic power: I_DD × V_DD only during transitions; (3) P_dyn = f × C_load × V_DD²; (4) No direct path from V_DD to ground (except briefly during transition). Advantages: (1) Extremely low power consumption at low frequencies; (2) High noise immunity; (3) Good output drive capability (symmetric rise/fall times); (4) Rail-to-rail output swing; (5) Scalable - works at many voltages (3.3V, 2.5V, 1.8V, etc.); (6) High integration density; (7) Excellent fan-out; (8) Simple to implement logic gates. Disadvantages: (1) Slower than NMOS at equivalent power; (2) Substrate bias effects; (3) Body effect; (4) Parasitic capacitances; (5) ESD sensitivity (though improved by modern designs). Logic gates: AND, OR, NOR, NAND all easily implemented with CMOS. Performance: (1) Propagation delay: ~100ps per stage (1μm technology); (2) Can be optimized by W/L ratio tuning; (3) Higher V_DD increases speed but power quadratically. Speed optimization: (1) Increase transistor width; (2) Requires more gate capacitance but reduces delay; (3) Trade-off between speed, power, and area. Applications: (1) All modern microprocessors; (2) Memory (DRAM, Flash, SRAM); (3) Digital signal processors; (4) Application-specific ICs; (5) System-on-Chip (SoC); (6) Power-critical portable devices. Power reduction techniques: (1) Dynamic voltage and frequency scaling; (2) Multiple supply voltages; (3) Power gating; (4) Clock gating. Understanding CMOS is absolutely essential for modern electronics and computer architecture.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.4 Semiconductor Devices - CMOS",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 29,
+        "question": "Explain how oscillators work based on positive feedback and required conditions for oscillation.",
+        "options": [
+          "Use negative feedback; any frequency works",
+          "Use positive feedback with loop gain > 1 and phase shift = 0° (or 360°); occurs at specific resonant frequency",
+          "Require external input signal",
+          "Based on energy dissipation"
+        ],
+        "correct_answer": "Use positive feedback with loop gain > 1 and phase shift = 0° (or 360°); occurs at specific resonant frequency",
+        "hint": "What conditions must be met for output to sustain without input?",
+        "explanation": "Oscillator Principles: Oscillators convert DC power into AC signal without external input signal. Basic requirements: (1) Active element (transistor, op-amp) providing gain; (2) Feedback network determining frequency; (3) Sufficient loop gain to sustain oscillations; (4) Correct phase relationship. Barkhausen Criterion for Oscillation: Loop gain A_v × β = 1 (magnitude condition); phase shift around loop = 0° or 360° (phase condition). Where: A_v = amplifier voltage gain; β = feedback factor. In practice: (1) Loop gain must exceed 1 for oscillation to start; (2) Amplitude increases until non-linearities limit growth; (3) Stabilizes when effective gain reduces to exactly 1. Positive feedback: (1) Output fed back in phase with input; (2) Reinforces signal; (3) Causes exponential growth if gain > 1; (4) Different from negative feedback (used in amplifiers for stability). Types of oscillators: RC oscillators: (1) Phase-shift oscillators (using RC networks providing 180° shift); (2) Wien bridge (frequency: f = 1/(2πRC)); (3) Twin-T oscillators. LC oscillators: (1) Colpitts oscillator (capacitive divider feedback); (2) Hartley oscillator (inductive divider feedback); (3) Frequency: f₀ = 1/(2π√(LC)). Crystal oscillators: (1) Use piezoelectric quartz resonator; (2) Extremely stable; (3) Very high Q (very narrow bandwidth); (4) Frequency tolerance: typically ±20ppm. Amplitude stabilization: (1) Automatic Gain Control (AGC); (2) Non-linear amplifier saturation; (3) Temperature-dependent resistance; (4) Diode limiters. Frequency stability factors: (1) Component tolerances; (2) Temperature effects; (3) Supply voltage variations; (4) Load changes; (5) Radiation effects. Quality factor Q: (1) High Q oscillators more stable; (2) Q = frequency / bandwidth; (3) Crystal oscillators have Q > 10,000; (4) LC oscillators Q = 10-100 typically. Applications: (1) Signal generators - testing and measurement; (2) Clock oscillators - microprocessors, digital systems; (3) RF oscillators - radio transmitters; (4) Timing oscillators - timers and counters. Start-up conditions: (1) Loop gain initially > 1 to initiate oscillation; (2) Non-linear elements limit amplitude growth; (3) Temperature compensation may be needed; (4) Some designs need start-up pulse. Understanding oscillators is fundamental to RF design, clock distribution, and signal generation.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.5 Oscillators",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 30,
+        "question": "Compare RC, LC, and Crystal oscillators. Explain their frequency stability characteristics.",
+        "options": [
+          "All have equal stability",
+          "RC least stable, LC better, Crystal most stable; RC tuning simple but drifts; LC circuits require component matching; Crystals provide extreme stability",
+          "Crystal oscillators not suitable for practical applications",
+          "Frequency stability doesn't matter"
+        ],
+        "correct_answer": "RC least stable, LC better, Crystal most stable; RC tuning simple but drifts; LC circuits require component matching; Crystals provide extreme stability",
+        "hint": "Consider what factors affect frequency in each type: resistor/capacitor tolerance vs crystal resonance.",
+        "explanation": "RC Oscillators: Mechanism: (1) RC networks provide phase shift; (2) Phase-shift type: 3 RC stages provide 60° each → 180° total; (3) Wien bridge: RC divider network; (4) Frequency depends on R and C values. Frequency equation (phase-shift): f = 1/(2π RC√6) or f = 1/(6πRC). Frequency equation (Wien bridge): f = 1/(2πRC). Stability characteristics: (1) Frequency depends on R and C tolerances (1-5% typical); (2) Temperature coefficient of R and C cause frequency drift; (3) Frequency stability typically ±5-10% over temperature; (4) Supply voltage variations affect frequency; (5) Load impedance affects frequency. Advantages: (1) Simple circuit design; (2) Low cost; (3) Wide frequency range easily tuned; (4) Suitable for audio frequencies; (5) Can use potentiometer for frequency adjustment. Disadvantages: (1) Poor frequency stability; (2) Components need matching; (3) Temperature sensitive; (4) Large drift with age (capacitors especially). LC Oscillators: Mechanism: (1) LC tank circuit resonates at f₀ = 1/(2π√(LC)); (2) Feedback from tapped inductors or capacitors; (3) Colpitts (capacitive tap), Hartley (inductive tap). Frequency equation: f₀ = 1/(2π√(LC)). Stability characteristics: (1) Frequency depends on L and C values (better matched typically than RC); (2) Capacitors and inductors have better temperature stability than resistors; (3) Frequency stability ±1% possible with good design; (4) Q factor important - higher Q means narrower bandwidth and better stability; (5) Typical Q = 20-100 in practical circuits. Advantages: (1) Better frequency stability than RC; (2) Narrower bandwidth (selectivity); (3) Lower noise; (4) Suitable for RF applications; (5) Can achieve oscillation at high frequencies. Disadvantages: (1) More complex circuits; (2) Component matching critical; (3) Inductor costs higher; (4) Inductor losses increase noise; (5) Temperature compensation may be needed. Crystal Oscillators: Mechanism: (1) Piezoelectric quartz crystal resonates mechanically; (2) Crystal acts as extremely high Q resonator; (3) Equivalent circuit: series RLC with very low R and high Q; (4) Frequency determined by crystal cut and physical dimensions. Frequency stability characteristics: (1) Extremely stable - typically ±20ppm to ±100ppm over full temperature range; (2) Often ±10ppm for high-quality crystals; (3) Aging about 3-5ppm per year; (4) Q factor exceeds 10,000 (vs 100 for LC); (5) Temperature compensation reduces drift to ±1ppm possible; (6) Crystal frequency virtually independent of supply voltage. Advantages: (1) Excellent long-term stability; (2) Very low phase noise; (3) Inherently pure frequency (minimal harmonics); (4) Industrial standard for precise timing; (5) Available at almost any frequency. Disadvantages: (1) More expensive than LC; (2) Fixed frequency (not easily tunable); (3) Pulling range limited (slight frequency adjustment possible by capacitor loading); (4) Temperature compensation circuitry may be needed. Comparison table: RC: Simple but unstable; LC: Better, moderate complexity; Crystal: Best stability, most expensive. Selection criteria: (1) RC oscillators: non-critical audio/function generators; (2) LC oscillators: RF/high-frequency applications with moderate stability; (3) Crystal oscillators: precise timing, digital systems, frequency references. Modern approach: (1) Often use crystal oscillator with PLL (Phase-Locked Loop) for frequency multiplication/division; (2) Provides stability of crystal with flexibility of programmable frequency. Understanding these oscillator types is essential for clock distribution, timing systems, and RF design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.5 Oscillators - Comparison",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 31,
+        "question": "Explain waveform generators and how they produce different signal shapes (sine, square, triangle, sawtooth).",
+        "options": [
+          "Generate only sine waves",
+          "Use integrators and comparators to convert one waveform to another; square wave from Schmitt trigger, triangle from integrator, sawtooth from ramp generator",
+          "Impossible to generate different waveforms",
+          "All waveforms identical"
+        ],
+        "correct_answer": "Use integrators and comparators to convert one waveform to another; square wave from Schmitt trigger, triangle from integrator, sawtooth from ramp generator",
+        "hint": "Consider mathematical operations: integration of square gives triangle, integration of triangle gives sine.",
+        "explanation": "Waveform Generation Principles: Fundamental relationship: integration of square wave produces triangle; further integration produces sine; differentiation reverses process. Basic building blocks: (1) Schmitt trigger - generates square waves; (2) Integrator (op-amp with capacitive feedback) - converts square to triangle; (3) Precision rectifier - selects portions of waveform; (4) Comparator - detects voltage thresholds. Square Wave Generation: (1) Astable multivibrator with two transistors; (2) Or Schmitt trigger with RC charging; (3) Frequency: f = 1/(1.44RC) for 555 timer; (4) Duty cycle: controlled by resistor network. Triangle Wave Generation: (1) Integrate square wave using op-amp integrator; (2) Circuit: op-amp with capacitor in feedback and square wave input; (3) Slope rate (dV/dt) determined by input current and capacitance: dV/dt = I/C; (4) Frequency matches input square wave; (5) Amplitude controlled by capacitor value and charging current. Sawtooth Wave Generation: (1) Uses capacitor charging/discharging at controlled rate; (2) Ramp circuit: constant current charges capacitor linearly; (3) When voltage reaches threshold, capacitor discharged rapidly; (4) Produces linear rising edge, sharp falling edge. Sine Wave Generation from Digital: (1) Use lookup table and digital-to-analog converter (DAC); (2) Numerically Controlled Oscillator (NCO) - phase accumulator feeds lookup table; (3) DDS (Direct Digital Synthesis) - modern method for precise sine generation; (4) Resolution determines purity. Function Generator Circuit: (1) Comparator with reference produces square wave; (2) Integrator converts square to triangle; (3) Sine converter circuit (diode function approximator) converts triangle to approximate sine; (4) Switching between triangle and sine possible. 555 Timer as Function Generator: (1) Astable mode produces frequency f = 1/(1.44R₁R₂C); (2) Two output states control different discharge paths; (3) Can generate square and triangle with circuit modification. Switched Capacitor Oscillators: (1) Use digital clock and switched capacitors; (2) Capacitor charging time controlled by clock; (3) Produce precise waveforms independent of component values; (4) Used in integrated circuits. Waveform distortion correction: (1) Non-linear diode networks approximate trigonometric curves; (2) More sophisticated: use function generators with diode shaping networks; (3) Modern ICs have built-in waveform shaping. Applications: (1) Function generators - testing/measurement; (2) Signal processing - modulation, demodulation; (3) Music synthesis - saw/square for rich harmonics; (4) Test equipment; (5) Arbitrary waveform generators using DACs. Quality metrics: (1) Frequency accuracy - crystal reference essential; (2) Amplitude stability - regulated supply, temperature compensation; (3) Harmonic content - purity of output; (4) Rise/fall time - affecting bandwidth. Understanding waveform generation is important for signal processing, test equipment, and analog electronics design.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.5 Waveform Generators",
+        "source": "AExE01 Revision Set 3"
+      },
+      {
+        "id": 32,
+        "question": "Explain the classification of amplifier output stages (Class A, B, AB).",
+        "options": [
+          "All classes identical in operation",
+          "Class A: transistor conducts full cycle (360°), lowest efficiency (25%); Class B: two transistors alternate (180° each), high efficiency (78%); Class AB: combination, reduces crossover distortion",
+          "Classification based on frequency",
+          "Classification based on input impedance"
+        ],
+        "correct_answer": "Class A: transistor conducts full cycle (360°), lowest efficiency (25%); Class B: two transistors alternate (180° each), high efficiency (78%); Class AB: combination, reduces crossover distortion",
+        "hint": "Think about how long during the input cycle does the transistor conduct current.",
+        "explanation": "Amplifier output stage classification is based on conduction angle - the portion of input cycle during which transistor conducts. Class A Output Stage: Conduction angle: 360° (conducts entire cycle). Biasing: Quiescent point set in middle of load line (V_CE = V_CC/2, I_C = I_max/2). Characteristics: (1) Single transistor conducts always; (2) Continuous collector current; (3) Linear amplification with minimal distortion; (4) Heat dissipated even with no signal; (5) Power dissipation = (V_CC × I_CC)/2 at quiescence. Efficiency: η = P_out / P_in = 25% maximum (π/4 for sinusoidal output). Advantages: (1) Excellent linearity; (2) Low distortion; (3) Good frequency response; (4) Simple circuit design. Disadvantages: (1) Very low efficiency; (2) Generates excessive heat; (3) Requires large heatsinks; (4) High power supply current; (5) Not suitable for high power applications. Applications: (1) Small-signal low-power amplifiers; (2) High-fidelity audio (some designs); (3) Preamplifiers; (4) RF small-signal amplifiers. Class B Output Stage: Conduction angle: 180° (each transistor conducts half cycle). Push-pull configuration: (1) Two transistors (NPN/PNP pair); (2) Each conducts during opposite half of input; (3) NPN conducts positive, PNP conducts negative. Biasing: V_BE = 0 (no DC quiescent current). Characteristics: (1) Alternating transistor action; (2) Minimal heat dissipation at idle; (3) Turns on only for its half cycle; (4) Sharp distortion where one transistor stops and other starts (crossover distortion). Efficiency: η = 78.5% (π/4 ≈ 0.785 approximately). Advantages: (1) Very high efficiency; (2) Low standby power; (3) Suitable for high power applications; (4) Small heatsinks needed. Disadvantages: (1) Crossover distortion at zero-crossing; (2) Complex biasing required; (3) Requires matched transistor pairs; (4) More complex than Class A. Applications: (1) High-power audio amplifiers; (2) Power supplies; (3) Motor drivers; (4) RF power amplifiers. Class AB Output Stage: Conduction angle: Between 180° and 360° (typically 200-280°). Biasing: Quiescent current set above zero (typically 1-5% of peak current). Characteristics: (1) Hybrid of Class A and B; (2) Both transistors conduct during crossover region; (3) Each conducts >50% of cycle; (4) Reduced crossover distortion compared to B; (5) Moderate power dissipation. Efficiency: η ≈ 60-75% (between A and B). Advantages: (1) Reduced crossover distortion vs Class B; (2) Better linearity than Class B; (3) Good efficiency; (4) Practical compromise. Disadvantages: (1) More complex biasing than A or B; (2) Requires temperature compensation; (3) Moderate efficiency compared to B. Biasing Class AB: (1) Use series or parallel connection to set small quiescent current; (2) Voltage divider or current source biasing; (3) Temperature compensation important - quiescent current must track with temperature. Applications: (1) Most practical audio amplifiers (op-amp outputs, power amps); (2) Common in commercial equipment; (3) Automotive audio; (4) Consumer electronics. Crossover Distortion: Occurs in Class B at zero crossing when one transistor stops, other hasn't fully taken over. Manifests as: (1) Flat spot in output waveform; (2) Higher harmonics; (3) Audible distortion in audio. Eliminated by: (1) Class AB biasing; (2) Feedback circuits; (3) Slightly higher biasing in Class B. Efficiency comparison: Class A: 25% max; Class AB: 60-75%; Class B: 78% max. Practical consideration: Class B not practical without bias - creates extreme distortion. Class AB provides practical balance between efficiency and linearity. Understanding these output stage classes is essential for amplifier design and power delivery applications.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.6 Amplifiers - Output Stages",
+        "source": "AExE01 Revision Set 4"
+      },
+      {
+        "id": 33,
+        "question": "Explain biasing of Class AB output stages and why temperature compensation is critical.",
+        "options": [
+          "No special biasing needed for Class AB",
+          "Small quiescent current (1-5% peak) set using voltage divider or current source; temperature compensation essential because V_BE decreases with temperature, increasing quiescent current",
+          "Class AB cannot be biased properly",
+          "Temperature has no effect on bias"
+        ],
+        "correct_answer": "Small quiescent current (1-5% peak) set using voltage divider or current source; temperature compensation essential because V_BE decreases with temperature, increasing quiescent current",
+        "hint": "Consider how V_BE changes with temperature and how this affects bias point.",
+        "explanation": "Class AB Biasing Requirements: Objective: Set small quiescent current in both transistors simultaneously to eliminate crossover distortion while keeping heat reasonable. Target quiescent current: typically 1-5% of maximum output current. Biasing Methods: Voltage Divider Method: (1) Two resistors divide V_CC to set base voltage; (2) Resistors chosen so both transistor bases see appropriate DC voltage; (3) One base at ~0.7V, other at ~-0.7V (for opposite polarity pair); (4) Results in small base current for both transistors; (5) Simpler but less stable. Current Source Biasing: (1) Uses precision current source to set quiescent current; (2) More stable and accurate; (3) Often uses diode string or current mirror; (4) Provides better temperature compensation; (5) More complex circuit. Diode Bias Circuit: (1) Two diodes in series with resistor set bias voltage; (2) Diode voltage divider: V_be_total = 0.6V + 0.6V = 1.2V (for two diodes); (3) Diodes conduct same current as transistor bases; (4) Natural temperature compensation through matching. Temperature Effects on V_BE: V_BE decreases with increasing temperature: (1) Temperature coefficient: approximately -2mV/°C; (2) At 0°C: V_BE ≈ 0.75V; (3) At 100°C: V_BE ≈ 0.55V; (4) Change ΔV_BE ≈ -200mV for 100°C change. Problem without compensation: (1) As temperature rises, V_BE decreases; (2) Same bias voltage results in higher base current; (3) Higher I_B means higher collector current; (4) Quiescent current increases uncontrollably; (5) Transistor can enter saturation; (6) Excessive heat generation; (7) Thermal runaway possible (heating increases I_C, which increases heat, increasing T, decreasing V_BE further). Temperature Compensation Techniques: Diode compensation: (1) Diode in bias network tracks V_BE change; (2) As transistor V_BE decreases with temperature, diode provides proportional decrease in bias voltage; (3) Quiescent current remains nearly constant; (4) Diodes thermally coupled (same substrate) to transistor. Resistive temperature sensing: (1) Use thermistor in bias network; (2) Negative temperature coefficient (NTC) thermistor increases resistance as temperature rises; (3) Reduces base current, offsetting temperature-induced V_BE change. Current source compensation: (1) Current source output also temperature-dependent; (2) Properly designed, changes in same direction as V_BE; (3) Compensation proportional to current changes. Active compensation: (1) Electronic circuit monitors temperature; (2) Adjusts bias voltage dynamically; (3) More complex but best compensation. Practical design example: Base bias voltage set to 1.2V (sum of two 0.6V transistors' V_BE at 25°C). Use two silicon diodes in series matching transistor type: (1) Diodes thermally bonded to output transistors; (2) As T increases, both V_BE and diode voltage drop together; (3) Relative change cancels out; (4) Quiescent current stays stable. Heatsinking consideration: (1) Place bias diodes physically near power transistors; (2) Use thermal coupling compound; (3) Heat conducted to bias diodes quickly; (4) Compensation response matches heat rise in transistors. Stability analysis: (1) Stability factor S = (R_B × S_ico) / (0.1 × I_C); (2) S > 10 desired for stability; (3) Proper bias network achieves this. Verification: (1) Measure quiescent collector current at different temperatures; (2) Should remain stable within ±10% from 0°C to 100°C; (3) Check for thermal runaway conditions. Circuit design practice: (1) Always include bias compensation in Class AB designs; (2) Use matched pairs of diodes and transistors; (3) Thermal design must account for bias stability; (4) Add current limiting resistors in bases for safety. Understanding Class AB biasing is critical for designing reliable power amplifiers and preventing thermal failure.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.6 Amplifiers - Class AB Biasing",
+        "source": "AExE01 Revision Set 4"
+      },
+      {
+        "id": 34,
+        "question": "Explain push-pull amplifier configuration in Class B and advantages over single-ended.",
+        "options": [
+          "Single transistor with two outputs",
+          "Two transistors alternately conducting (one pushes up, one pulls down); eliminates even harmonics, doubles output power, reduces transformer core loss",
+          "No difference from single-ended",
+          "Less efficient than single-ended"
+        ],
+        "correct_answer": "Two transistors alternately conducting (one pushes up, one pulls down); eliminates even harmonics, doubles output power, reduces transformer core loss",
+        "hint": "One transistor supplies current to load, other provides return path to ground.",
+        "explanation": "Push-Pull Amplifier Configuration: Basic structure: Two complementary transistors (NPN/PNP pair) alternately conduct into same load. Complementary pair: NPN transistor (npn) - conducts during positive half-cycle, pulls output toward V_CC (or positive rail). PNP transistor (pnp) - conducts during negative half-cycle, pulls output toward ground (or negative rail). Load connection: (1) Both collectors/drains connected together at output; (2) Load (speaker) connected between output point and V_CC/2 (for split supply); (3) Or transformer with center tap to split supply rails. Timing coordination: (1) When input goes positive: NPN conducts, PNP off; (2) When input goes negative: PNP conducts, NPN off; (3) Switching designed to avoid shoot-through (both conducting simultaneously). Advantages over single-ended: (1) Power output doubled - both transistors contribute (vs one in single-ended); (2) Even harmonics eliminated - symmetric operation produces only odd harmonics; (3) Transformer core uses both directions of B-H curve - reduces core size; (4) DC current in output transformer cancels - no core saturation; (5) More efficient use of supply current; (6) Better impedance matching to load; (7) Reduced 2nd, 4th, 6th... harmonics. Power relationships: Single-ended: P_out = V_cc × I_c / 2. Push-pull: P_out = 2 × (V_cc × I_c / 2) = V_cc × I_c. For same peak current: push-pull delivers twice the power. Transformer-coupled push-pull: Center-tapped transformer in output: (1) Primary center tap at V_cc/2 (split supply); (2) Top transistor pulls up, increasing primary current; (3) Bottom transistor pulls down, decreasing primary current; (4) Both contribute to flux in same direction; (5) Transformer reflection: secondary sees full voltage swing; (6) Step-down ratio for impedance matching. Output impedance: Lower than single-ended for same transistor size: (1) Both transistors contribute to driving current; (2) Effective output impedance = r_o/2 (in small signal); (3) Better load matching. Distortion characteristics: (1) Total harmonic distortion (THD) lower due to harmonic cancellation; (2) Crossover distortion specific issue for Class B push-pull; (3) Class AB push-pull minimal crossover distortion. Efficiency maximum: 78.5% (π/4) for Class B push-pull with peak sine output. Practical design considerations: (1) Transistor matching critical - pair must have similar characteristics; (2) Bias temperature compensation essential; (3) Shoot-through protection circuits may be needed; (4) Driver stage must provide sufficient current; (5) Feedback often used to reduce distortion. Totem-pole configuration: Variant without transformer: (1) Direct coupling to single supply; (2) One transistor connects to V_CC, other to ground; (3) Used in logic gates, audio IC amplifiers; (4) Eliminates output transformer. Disadvantages: (1) Requires transformer or complementary pair; (2) More complex than single-ended; (3) Requires careful design to prevent shoot-through; (4) Temperature compensation necessary; (5) Output impedance imbalance possible. Applications: (1) Audio power amplifiers - most common output stage; (2) RF power amplifiers; (3) Motor drivers; (4) DC-DC converter switching stages; (5) Digital output drivers (CMOS totem-pole). Modern IC amplifiers: Most use some form of push-pull configuration internally, often with multiple stages for better performance. Understanding push-pull configuration is essential for power amplifier design and audio applications.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.6 Amplifiers - Push-Pull Stages",
+        "source": "AExE01 Revision Set 4"
+      },
+      {
+        "id": 35,
+        "question": "What are tuned amplifiers? Explain their frequency-selective operation and applications.",
+        "options": [
+          "Same as regular amplifiers",
+          "Use LC tank circuits in collector/drain to select specific frequency; provide high gain at resonant frequency, rejecting other frequencies; used in RF applications",
+          "Based on resistive load only",
+          "Cannot be frequency-selective"
+        ],
+        "correct_answer": "Use LC tank circuits in collector/drain to select specific frequency; provide high gain at resonant frequency, rejecting other frequencies; used in RF applications",
+        "hint": "Consider what happens when LC resonance occurs in the load network.",
+        "explanation": "Tuned Amplifiers (Narrowband Amplifiers): Definition: Amplifiers with frequency-selective load networks (LC circuits) providing high gain at specific resonant frequency while rejecting others. Basic circuit: (1) Input: coupled through blocking capacitor or transformer; (2) Transistor biased in active region; (3) Load: LC resonant tank circuit instead of fixed resistor; (4) Output: tapped from tank or coupled through transformer. Operation at resonance: At resonant frequency f₀ = 1/(2π√(LC)): (1) Inductive and capacitive reactances cancel; (2) Tank impedance is maximum (purely resistive = R_p); (3) Maximum voltage gain occurs; (4) Gain = g_m × R_p where R_p is tank resistance; (5) Phase shift 0°. Operation off resonance: (1) Tank impedance decreases (becomes reactive); (2) Gain drops significantly; (3) Phase shift develops; (4) Frequency away from f₀ progressively rejected. Bandwidth and Q factor: (1) Bandwidth BW = f₀ / Q; (2) High Q gives narrow bandwidth (selective); (3) Q = f₀ / BW = 2πf₀L / R = 1/(2πf₀RC); (4) Practical Q values: 10-100 for LC oscillators; (5) Coupling factor determines bandwidth. Types of tuned amplifiers: Single tuned: (1) Only output tank tuned; (2) Simpler, single resonance peak; (3) Moderate selectivity. Double tuned: (1) Both input and output tanks tuned; (2) Better selectivity; (3) Steeper roll-off outside passband; (4) More complex. Stagger tuning: (1) Cascade multiple stages with slightly offset frequencies; (2) Flatter passband than single frequency; (3) Wider bandwidth with steep edges. Bandwidth control: (1) Coupling between stages affects bandwidth; (2) Tight coupling - wider bandwidth, multiple peaks; (3) Loose coupling - narrower bandwidth, single peak. Gain at resonance: Voltage gain: A_v = -g_m × Z_L where Z_L is tank impedance at resonance. Z_L_max = L / (RC) (quality factor relation). Peak gain increases with Q. Frequency response curve: (1) Peak at f₀; (2) Gain drops symmetrically (in dB) on either side; (3) Cutoff points at -3dB (0.707 peak gain); (4) Steepness determined by Q; (5) Roll-off rate -20dB/decade per pole for single tuned. Practical considerations: (1) Component tolerances affect resonant frequency; (2) Temperature changes shift frequency; (3) Load resistance affects Q and bandwidth; (4) Input coupling affects input impedance; (5) Parasitic capacitances affect high-frequency response. Compensation techniques: (1) Variable capacitor (varicap) for frequency tuning; (2) Temperature-compensating capacitors; (3) Automatic frequency control (AFC) circuits. Applications: (1) RF amplifiers - select desired station frequency; (2) IF (Intermediate Frequency) amplifiers in radios - fixed frequency, high selectivity; (3) Filters with gain; (4) Oscillators (regenerative); (5) Wireless power transmission; (6) Nuclear magnetic resonance (NMR) receivers. Advantages: (1) High gain at resonant frequency; (2) Excellent noise figure (less noise from out-of-band signals); (3) Strong rejection of unwanted frequencies; (4) Smaller power consumption than broadband equivalents; (5) Improved signal-to-noise ratio. Disadvantages: (1) Fixed or narrowly adjustable frequency; (2) Complex design and tuning; (3) Component matching critical; (4) Temperature sensitivity; (5) Stability concerns at high frequencies. Modern applications: (1) Still used in RF/RF circuitry; (2) Superheterodyne receivers use tuned IF stages; (3) Wireless sensor networks often use tuned circuits; (4) Magnetic resonance imaging (MRI) uses resonant circuits for signal detection. Understanding tuned amplifiers is essential for RF design and selective amplification applications.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.6 Amplifiers - Tuned Amplifiers",
+        "source": "AExE01 Revision Set 4"
+      },
+      {
+        "id": 36,
+        "question": "Explain operational amplifier (op-amp) basics: what is it, ideal characteristics, and fundamental limitations.",
+        "options": [
+          "Op-amp is a device with no application",
+          "High-gain voltage amplifier with two inputs (inverting and non-inverting) and one output; ideal has infinite gain, infinite input impedance, zero output impedance; actual has finite gain, finite impedance",
+          "Op-amp is power amplifier",
+          "No practical differences between ideal and actual"
+        ],
+        "correct_answer": "High-gain voltage amplifier with two inputs (inverting and non-inverting) and one output; ideal has infinite gain, infinite input impedance, zero output impedance; actual has finite gain, finite impedance",
+        "hint": "Consider a voltage comparator with extreme gain that uses feedback for control.",
+        "explanation": "Operational Amplifier Fundamentals: Definition: An integrated circuit (IC) incorporating multiple transistors, resistors, capacitors designed as a high-gain differential voltage amplifier. Internal structure: (1) Differential input stage - compares inverting and non-inverting inputs; (2) Voltage gain stage - amplifies small differential voltage; (3) Output stage - provides current drive capability; (4) Typically includes frequency compensation. Symbol and Terminals: Two inputs: (1) Non-inverting input (+) - positive input; (2) Inverting input (-) - negative input. Two power supply terminals: V_CC+ and V_CC- (or V_DD and V_SS). One output: V_out. Input terminals have high impedance, output low impedance (when working properly). Ideal Op-Amp Characteristics: (1) Infinite open-loop gain (A_ol = ∞); (2) Infinite input impedance (Z_in = ∞); (3) Zero output impedance (Z_out = 0); (4) Infinite bandwidth (BW = ∞); (5) Zero bias current (I_b = 0); (6) Zero offset voltage (V_os = 0); (7) Infinite Common Mode Rejection Ratio (CMRR = ∞); (8) Perfect frequency response. Practical Op-Amp Characteristics (typical values): Open-loop gain: 100,000 to 1,000,000 (80-120 dB). Input impedance: 10^6 to 10^12 Ω (2 MΩ for 741, 10¹² for JFET input). Output impedance: 50-200 Ω. Bandwidth (gain-bandwidth product): 0.5-100 MHz depending on type. Input offset voltage: 1-10 mV (reduced to μV with compensation). Bias current: 20-500 nA (reduced to pA with JFET input). CMRR: 80-100 dB. Slew rate: 0.5-100 V/μs (speed of output voltage change). Fundamental limitations: (1) Finite gain - requires feedback for consistent behavior; (2) Frequency dependent - gain rolls off at high frequency; (3) Bandwidth limited - gain-bandwidth product constant; (4) Offset voltage - output non-zero with zero input; (5) Bias currents - input currents flow; (6) Slew rate limiting - output cannot change faster than slew rate; (7) Power supply dependent - cannot produce beyond supply rails; (8) Temperature dependent - all parameters change with temperature. Linear Region (open-loop): V_out = A_ol × (V_+ - V_-). When input difference exceeds ~V_sat/A_ol (≈ μV), output saturates at ±V_sat (typically ±12V to ±15V). Saturation: (1) Output limited by power supply; (2) Cannot amplify further; (3) Acts as comparator in saturation. Negative Feedback Application: (1) Feedback stabilizes gain; (2) Closed-loop gain = -R_f/R_in for inverting amplifier; (3) Independent of open-loop gain (as long as open-loop gain >> closed-loop); (4) Fundamental principle of op-amp circuit design. Virtual Short Concept: With negative feedback: V_+ ≈ V_- (virtual short); (1) No actual connection; (2) Feedback adjusts output until inputs are nearly equal; (3) Allows simple analysis - assume equal input voltages. Input impedance with feedback: (1) Input impedance increases with feedback; (2) Z_in(cl) = Z_in(ol) × (1 + loop gain); (3) Inverting amplifier: input impedance ≈ R_in (determined by resistor). Common Op-Amp ICs: (1) 741 - general purpose, low cost, moderate performance; (2) LM358 - two-channel version, single supply capable; (3) TL072 - low noise, audio quality; (4) OPA2134 - audio grade, excellent specs; (5) LT1057 - precision, low offset. Op-Amp Circuits: (1) Inverting amplifier - gain -R_f/R_in; (2) Non-inverting amplifier - gain 1 + R_f/R_in; (3) Comparator - no feedback, output saturates; (4) Integrator - capacitor feedback; (5) Differentiator - capacitor input; (6) Instrumentation amplifier - three op-amp circuit. Practical design considerations: (1) Always use feedback with op-amps for linear operation; (2) Stability analysis important - may oscillate without compensation; (3) Power supply bypassing critical; (4) Component tolerances affect accuracy; (5) Input impedance affects source; (6) Output impedance may affect load. Understanding operational amplifiers is absolutely fundamental to analog circuit design and electronics engineering.",
+        "chapter": "Chapter 1: Basic Electrical and Electronics Engineering (AExE01)",
+        "difficulty": "difficult",
+        "marks": 3,
+        "topic": "1.6 Amplifiers - Op-Amps",
+        "source": "AExE01 Revision Set 4"
+      }
+    ]
+  }
+]

@@ -1,0 +1,283 @@
+[
+  {
+    "chapter": "Chapter 10: Project Planning, Design and Implementation",
+    "chapter_code": "CH10",
+    "total_questions": 63,
+    "set": "Extended Project Planning Questions (Questions 23-85)",
+    "question_type": "Mixed Questions (1-2 marks each)",
+    "questions": [
+      {
+        "id": 23,
+        "question": "What is a Gantt Chart and how is it used in project scheduling?",
+        "options": [
+          "Gantt chart is timeline visualization showing activities, durations, and dependencies; used for communicating schedule to stakeholders",
+          "Gantt chart is same as CPM network diagram",
+          "Gantt chart cannot show dependencies",
+          "Gantt chart is obsolete technology"
+        ],
+        "correct_answer": "Gantt chart is timeline visualization showing activities, durations, and dependencies; used for communicating schedule to stakeholders",
+        "hint": "What would be an easy way to show project activities over time on a simple chart?",
+        "explanation": "Gantt chart (named after Henry Gantt) is horizontal bar chart showing project activities across timeline. Excellent for schedule communication and management: (1) Gantt structure: Vertical axis lists project activities/tasks. Horizontal axis shows time (days, weeks, months). Each activity shown as horizontal bar spanning duration. Bar length represents activity duration. Bar position shows start/finish dates. (2) Advantages: Visually intuitive - easy to understand timeline. Good for communicating schedule to non-technical stakeholders. Shows overall project duration easily. Identifies parallel activities. Shows milestones/deadlines. (3) Disadvantages: Doesn't show activity relationships clearly (dependencies). Does not identify critical path directly (must analyze). Many activities make chart cluttered. Doesn't easily show resource usage. (4) Dependency notation: Finish-to-Start (FS) - activity ends before next starts (most common). Start-to-Start (SS) - activity must start before next starts. Finish-to-Finish (FF) - activity must finish before next finishes. Start-to-Finish (SF) - rare. Modern charts show arrows indicating dependencies. (5) Milestones: Important events marked as diamonds (no duration). Project kickoff, design complete, construction start, testing complete, project closure. Milestones help mark progress. (6) Critical path visibility: While not explicit in Gantt, critical activities often shown in red (or distinct color). Non-critical in blue. Float shown as slack line extending beyond activity bar. (7) Progress tracking: Actual progress compared to plan. Earned Value line shows planned completion. Actual progress bar shows real progress. Variance visible immediately (bar ahead of or behind plan). Supports schedule control. (8) Comparison with CPM: Gantt shows timeline, easier to understand. CPM shows relationships mathematically, identifies critical path. Often used together: CPM for analysis, Gantt for communication. (9) Resource allocation: Enhanced Gantt charts show resource names/allocation under activities. Helps identify resource conflicts (same person assigned to concurrent tasks). (10) Modern tools: Microsoft Project, Asana, Monday.com, GanttProject. Automatic updating from duration/dependency changes. Integration with other project management data. Shared views for stakeholder communication. Gantt chart remains most popular schedule visualization tool due to intuitive nature.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "easy",
+        "marks": 1,
+        "source": "AALL1003"
+      },
+      {
+        "id": 24,
+        "question": "What is a Work Breakdown Structure (WBS) and why is it fundamental to project planning?",
+        "options": [
+          "WBS is hierarchical decomposition of project into manageable work packages; enables comprehensive scope definition and responsibility assignment",
+          "WBS is same as Gantt chart",
+          "WBS only applies to large projects",
+          "WBS doesn't include resources"
+        ],
+        "correct_answer": "WBS is hierarchical decomposition of project into manageable work packages; enables comprehensive scope definition and responsibility assignment",
+        "hint": "How would you break down a complex project like building a shopping mall into manageable pieces?",
+        "explanation": "Work Breakdown Structure (WBS) is hierarchical decomposition of entire project scope into progressively smaller work packages. Fundamental to project planning, cost estimation, and resource allocation: (1) WBS concept: Project divided into phases or major areas. Each phase subdivided into activities. Activities subdivided into tasks. Tasks subdivided into work packages (smallest unit). Each level represents increasing detail. (2) Structure levels: Level 1: Total project. Level 2: Major phases (Design, Construction, Testing). Level 3: Sub-phases or components (Design includes Architectural, Structural, MEP). Level 4: Activities (Structural design includes foundations, columns, beams). Level 5+: Work packages (detailed specific work). (3) Example - Building Construction: Level 1: Shopping Mall Building. Level 2: Site prep, Foundation, Superstructure, MEP, Interior, Landscaping. Level 3: Superstructure includes concrete, steel, roofing. Level 4: Concrete includes ground floor slab, columns, beams. Level 5: Column includes design, drawing, procurement, fabrication, erection. (4) Benefits: Ensures nothing forgotten (comprehensive scope). Clear responsibility assignment (each package owned by someone). Basis for cost estimation (estimate each package). Schedule development (duration each package). Risk identification (risks at package level). Resource planning (resource per package). (5) Planning: WBS created early in planning phase. Involves project team and stakeholders. Iterative refinement as project becomes clearer. WBS baseline locked for change control. (6) Coding: Each WBS element assigned code for tracking (1.1.2.3 format). Code used in accounting systems, scheduling. Enables roll-up reporting (sum detailed costs to project total). (7) Dictionary: WBS dictionary documents each element. Scope description. Responsible person. Budget. Schedule. Acceptance criteria. Links to other work. (8) Integration: WBS connected to schedule (each package scheduled). Connected to budget (each package costed). Connected to organization (team structure aligned to WBS). (9) Common mistakes: Incomplete decomposition (forgetting pieces). Over-decomposition (too much detail). Misaligned organization (WBS doesn't match reporting structure). Changing WBS mid-project (disrupts tracking). (10) Evolution: Initially conceptual WBS (basic phases). Refined WBS as planning progresses (detailed work packages). Final detailed WBS basis for execution. WBS is foundational document - everything else (schedule, budget, organization, risk) flows from WBS. Poor WBS leads to gaps, missed scope, misaligned plans.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 25,
+        "question": "What is Earned Value Management (EVM) and how does it help project control?",
+        "options": [
+          "EVM integrates schedule and cost data showing actual progress vs. plan; identifies schedule and budget variances early",
+          "EVM is same as cash flow management",
+          "EVM cannot predict project completion",
+          "EVM only applies to cost control"
+        ],
+        "correct_answer": "EVM integrates schedule and cost data showing actual progress vs. plan; identifies schedule and budget variances early",
+        "hint": "If activity 1 should be complete but isn't, and you spent more money than planned, how do you measure that?",
+        "explanation": "Earned Value Management (EVM) is integrated project management technique providing objective assessment of project performance combining schedule and cost data: (1) EVM terminology: PV (Planned Value) - budget for work scheduled by date. EV (Earned Value) - budget for work actually completed. AC (Actual Cost) - actual spending to date. BAC (Budget at Completion) - total project budget. (2) Example: Project budget Rs. 100,000, scheduled over 10 months. By month 5, planned to spend Rs. 50,000 (PV). But only completed 45% of work (EV = Rs. 45,000). Actually spent Rs. 55,000 (AC). (3) Schedule variance: SV = EV - PV. If SV positive, ahead of schedule. If negative, behind schedule. In example: SV = 45,000 - 50,000 = -5,000 (Rs. 5,000 behind schedule). Equivalent to budget would be, if on schedule, Rs. 5,000 less would be spent. (4) Cost variance: CV = EV - AC. If positive, under budget. If negative, over budget. In example: CV = 45,000 - 55,000 = -10,000 (Rs. 10,000 over budget). Spent Rs. 10,000 more than value of work completed. (5) Indexes: Schedule Performance Index (SPI) = EV/PV. If < 1.0, behind schedule. Cost Performance Index (CPI) = EV/AC. If < 1.0, over budget. In example: SPI = 45,000/50,000 = 0.9 (90% of schedule progress). CPI = 45,000/55,000 = 0.82 (only earned Rs. 0.82 per rupee spent). (6) Forecasting: EAC (Estimate at Completion) = BAC / CPI. If CPI continues, total cost Rs. 100,000 / 0.82 = Rs. 122,000 (Rs. 22,000 over budget). ETC (Estimate to Complete) = EAC - AC. Remaining work estimated Rs. 122,000 - 55,000 = Rs. 67,000. (7) Schedule forecast: If SPI continues, project extends. Time to complete = Original Duration / SPI. If 10-month project, 10/0.9 = 11.1 months. Project delayed 1.1 months at current rate. (8) Advantages: Combines schedule and cost (holistic view). Objective metrics (not opinions). Early variance detection (problems identified quickly). Enables forecasting (predict final outcome). Supports corrective actions (where to focus). (9) Implementation: Requires defined scope (WBS). Established baseline (schedule and budget). Actual progress tracking (% complete, costs). Regular measurement (weekly, monthly). Variance analysis and corrective action. (10) Terminology variations: Budget per activity sometimes called BAC. Work completed called Earned Value. Planned value sometimes called budgeted cost of work scheduled. Despite terminology, concept consistent: measuring real progress against plan, identifying problems early.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 26,
+        "question": "What is project monitoring and what key metrics should be tracked?",
+        "options": [
+          "Project monitoring tracks actual performance against plan; key metrics: schedule, budget, quality, scope, risks",
+          "Monitoring means avoiding changes",
+          "All metrics equally important",
+          "Monitoring only applies to large projects"
+        ],
+        "correct_answer": "Project monitoring tracks actual performance against plan; key metrics: schedule, budget, quality, scope, risks",
+        "hint": "Once project is executing, how do you know if it's going well or poorly?",
+        "explanation": "Project monitoring is continuous tracking of actual project performance against baseline plan. Enables early detection of problems and timely corrective action: (1) Monitoring vs. control: Monitoring = data collection and analysis (what is status?). Control = corrective actions (what to do about deviations?). Both required: monitor to detect problems, control to fix them. (2) Schedule metrics: % Complete (physical progress percentage). Actual start/finish dates vs. planned. Critical path status (any delays? any new critical path?). Schedule variance (EV - PV). Milestone achievement (on time?). (3) Cost metrics: Actual spending vs. planned. Variances (budget and cost). Burn rate (spending rate per period). Forecasted final cost (EAC). Cost performance index. Resource spending by category. (4) Quality metrics: Defect count (issues found). Rework percentage (work done twice). Quality issues (severity, type). Compliance with standards. Test pass rates. Customer satisfaction feedback. (5) Scope metrics: Scope creep (unplanned additions). Change requests (by type, impact). Scope completion % (vs. defined scope). Unplanned work additions. Scope baseline adherence. (6) Risk metrics: Identified risks (active count). Risk incidents (risks materialized). New risks (discovered during execution). Risk response effectiveness. Contingency reserve depletion. (7) Resource metrics: Actual hours vs. planned. Resource allocation (utilization %). Turnover (people leaving). Productivity (output per hour). Skill gaps. Resource conflicts. (8) Performance reporting: Weekly status (schedule %, key issues, forecast). Monthly report (EV metrics, variance analysis, risk status). Milestone reports (major deliverable reviews). Executive summary (RAG status: Red/Amber/Green). (9) Data sources: Team progress reports (% complete, issues). Timesheets (actual hours). Budget submissions (actual spending). Quality inspections (defects found). Stakeholder feedback. Risk reviews. (10) Frequency: Daily standups (15 minutes, quick status). Weekly reports (detailed status). Monthly reviews (performance analysis). Quarterly reviews (strategic alignment). Contingency on project size/complexity. Real-time dashboards increasingly common. Effective monitoring enables rapid problem detection and response, preventing minor issues becoming major problems.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 27,
+        "question": "What is project communication management and why is it critical for success?",
+        "options": [
+          "Communication management ensures timely information flow to stakeholders; critical for alignment, risk management, and stakeholder satisfaction",
+          "Communication is only for updates",
+          "Different stakeholders need identical information",
+          "Good projects don't need much communication"
+        ],
+        "correct_answer": "Communication management ensures timely information flow to stakeholders; critical for alignment, risk management, and stakeholder satisfaction",
+        "hint": "If a key stakeholder doesn't know about a major problem until it's too late, what happens?",
+        "explanation": "Project communication management ensures information flows appropriately to stakeholders. Often overlooked but critical for project success: (1) Stakeholders: Different information needs. Executives want high-level status, budget, risks. Team wants detailed instructions, decisions, support. Clients want progress, quality, timeline. Vendors need specifications, schedules. (2) Communication plan: Documents what information, to whom, when, how. Who is responsible. Format (meeting, email, report). Frequency (daily, weekly, monthly). (3) Types of communications: Status updates (what's the current state?). Change notifications (what's changing?). Risk alerts (what problems emerging?). Quality reports (how's quality?). Cost reports (how's budget?). Issue escalations (problems needing resolution). (4) Methods: Meetings (synchronous, interactive). Reports (asynchronous, documented). Dashboards (real-time, accessible). Email (individual messages). Instant messaging (quick updates). Town halls (large group updates). (5) Meetings: Kickoff (project orientation). Weekly standups (quick status). Status reviews (detailed analysis). Steering committee (executive oversight). Retrospectives (lessons learned). One-on-ones (individual issues). (6) Reports: Status report (overall project health). Variance report (comparing actual to plan). Risk report (emerging risks). Quality report (defects, issues). Financial report (budget status). Milestone report (major achievement). (7) Challenges: Information overload (too much communication, important buried). Under-communication (people don't know status). Miscommunication (message misunderstood). Wrong audience (irrelevant recipients). Poor timing (too late for decision). (8) Distributed teams: Complicates communication (time zones, languages). More structure needed (written more important than verbal). Tool selection important (email vs. chat vs. video). Asynchronous communication harder. (9) Communication matrix: Lists stakeholder groups and their information needs. Shows frequency, format, responsible party. Ensures nothing forgotten. (10) Escalation: Clear escalation procedure for issues. Who to escalate to. When to escalate (urgency criteria). How (email, meeting, etc.). Prevents issues festering or decisions delayed. Effective communication prevents misalignment, catches problems early, maintains stakeholder confidence.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 28,
+        "question": "What is stakeholder management and what strategies improve engagement?",
+        "options": [
+          "Stakeholder management identifies stakeholder interests and influences them; strategies: regular communication, involvement, transparency, address concerns",
+          "Stakeholders are only project sponsors",
+          "All stakeholders have equal influence",
+          "Stakeholder management is HR responsibility"
+        ],
+        "correct_answer": "Stakeholder management identifies stakeholder interests and influences them; strategies: regular communication, involvement, transparency, address concerns",
+        "hint": "Who has interest in project success? How do you keep them supportive?",
+        "explanation": "Stakeholder management identifies people affected by/affecting project and maintains their support. Critical for project success and organizational acceptance: (1) Stakeholder identification: Project sponsor (funds, authority). Project manager (owns delivery). Team (executes work). Clients/users (benefits). Operators (maintains deliverable). Regulators (oversees compliance). Affected communities (impacted by project). Competitors (may oppose). (2) Stakeholder analysis: Interest - how much they care? Power - how much influence? Assess each stakeholder: High power, high interest - actively manage (keys). High power, low interest - monitor, keep satisfied. Low power, high interest - keep informed, address concerns. Low power, low interest - monitor minimally. (3) Engagement strategies: High power, high interest: Involve in decisions, provide detailed information, address concerns immediately, regular communication. High power, low interest: Keep satisfied, show project importance, minimal detail. Low power, high interest: Keep informed, provide information, address concerns. Low power, low interest: Monitor only. (4) Engagement techniques: Regular communication (updates, newsletters). Involvement (committees, reviews, decisions). Transparency (honest, open). Responsiveness (address concerns quickly). Recognition (acknowledge contributions). (5) Resistance management: Identify resisters (why resistant?). Understand concerns (legitimate?). Address concerns (resolve or explain). Involvement (include in planning). Communication (keep updated). Early engagement (before decisions made). (6) Executive sponsorship: Identify executive sponsor early. Meet regularly. Keep informed and engaged. Sponsor removes obstacles. Sponsor supports against opposition. (7) User engagement: Users often overlooked - key stakeholder. Involve in requirements, design, testing. Address concerns about change. Train on new systems. (8) Documentation: Stakeholder register (all identified). Engagement plan (strategy for each). Communication log (what shared, when). Issue log (problems raised, resolution). (9) Dealing with conflict: Stakeholders sometimes disagree (cost vs. schedule vs. quality). Project manager balances interests. Clear decision criteria (why chosen?). Document trade-offs. (10) Virtual teams: Harder to engage (less face-to-face). More intentional communication. Technology enables (video calls, virtual meetings). Build relationships consciously. Proactive stakeholder management prevents opposition, increases support, improves project outcomes. Reactive approach leads to resistance, delays, rework.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 29,
+        "question": "What is quality management in projects and what are the key quality processes?",
+        "options": [
+          "Quality management ensures project meets standards; processes: planning (specifications), assurance (monitoring), control (fixing issues)",
+          "Quality means no defects",
+          "Quality is only for manufacturing",
+          "Quality control is just inspection"
+        ],
+        "correct_answer": "Quality management ensures project meets standards; processes: planning (specifications), assurance (monitoring), control (fixing issues)",
+        "hint": "How do you ensure deliverables meet customer expectations and standards?",
+        "explanation": "Quality management ensures project produces deliverables meeting specifications and customer expectations. Three key processes: planning, assurance, control: (1) Quality planning: Define quality standards (what does good look like?). Establish acceptance criteria (objective measures). Plan quality processes (how will quality be ensured?). Define test strategy (what will be tested?). Quality metrics (how measured?). (2) Quality acceptance criteria: Explicit, objective. Example: Code must achieve 80% test coverage. Building must meet seismic standard. Concrete strength 25 MPa. Reduces subjective judgment. (3) Quality assurance (QA): Continuous monitoring of processes. Audits (are we following procedures?). Reviews (design review, document review). Testing/verification (does it work?). Proactive - finds issues before they compound. (4) Quality control (QC): Inspection of deliverables. Testing (functional, performance, safety). Acceptance testing (meets specs?). Defect identification and logging. Reactive - finds actual issues. (5) Test types: Unit testing (individual components). Integration testing (components together). System testing (overall system). Acceptance testing (meets requirements?). Regression testing (changes don't break existing). Performance testing (speed, capacity). (6) Defect management: Defect found → log (ID, severity, description). Prioritize (critical fix immediately, minor fix later). Assign (to developer). Fix and retest. Close when resolved. (7) Root cause analysis: When defect found, determine why. Not just fix symptom, fix cause. Prevents recurrence. Example: If calculation wrong, is issue logic? Data? Requirements? (8) Quality standards: ISO standards (ISO 9000, 14000). Industry standards (software, construction, etc.). Company standards (policies, procedures). Regulatory standards (safety, environmental). (9) Quality metrics: Defect density (defects per line of code, per page, etc.). Defect resolution time (how quick to fix?). Test coverage (% of code tested). Acceptance rate (% passing acceptance criteria). (10) Cost of quality: Prevention cost (planning, training, QA). Appraisal cost (testing, inspection). Failure cost (rework, warranty). Prevention cheaper than failure costs. Quality management investment saves money by preventing defects.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 30,
+        "question": "What is project procurement management and what are the key procurement activities?",
+        "options": [
+          "Procurement acquires goods/services; activities: planning (needs), selection (suppliers), management (contracts), closure",
+          "Procurement is only purchasing",
+          "All procurements follow same process",
+          "Procurement decisions don't affect project"
+        ],
+        "correct_answer": "Procurement acquires goods/services; activities: planning (needs), selection (suppliers), management (contracts), closure",
+        "hint": "If you need to buy major equipment or hire contractors, what process ensures good value and quality?",
+        "explanation": "Project procurement management acquires goods and services from external sources. Critical for delivering complex projects requiring external resources: (1) Procurement planning: Identify what to procure (make vs. buy decision). Determine quantity and timing. Establish budget. Define requirements/specifications. Identify potential suppliers. Determine procurement approach. (2) Supplier selection: Issue RFQ/RFP (Request for Quote/Proposal). Evaluate proposals (price, quality, delivery, capability). Select supplier (based on criteria). Negotiate contract terms. Award contract. (3) Supplier management: Monitor supplier performance (quality, schedule, cost). Coordinate delivery (timing, quantity). Manage changes. Resolve issues. Process payments. (4) Contract types by payment: Fixed-price (supplier bears cost risk). Cost-plus (buyer pays costs + margin). Time & materials (hourly + materials). Unit price (cost per item). (5) Contract types by risk: Turnkey (supplier responsible for complete delivery). Cost-reimbursable (share cost overruns). Incentive (bonuses for performance). Warranty (supplier responsible after delivery). (6) Procurement documents: Statement of Work (detailed requirements). Specifications (technical details). Quality standards (acceptance criteria). Schedule (delivery dates). Pricing format. Terms and conditions. (7) Evaluation criteria: Price (cost competitiveness). Quality (capability, experience, certifications). Delivery time (can they meet schedule?). Financial stability (will they stay in business?). References (track record?). Safety record. Local content (government requirement). (8) Vendor management: Communicate requirements clearly. Monitor performance regularly. Maintain good relationship. Address issues promptly. Provide feedback. (9) Supply chain risk: Single-source (sole supplier, high risk). Multi-source (backup suppliers). Geographic concentration (all from one region). Lead time risk (long delivery). Obsolescence (technology changes). Mitigation: Diversification, early ordering, inventory, contracts. (10) Cost management: Procurement often largest cost element. Competitive bidding reduces costs. Volume discounts. Long-term partnerships. Value engineering (function at lower cost). Late procurement increases cost (expedited delivery). Early procurement increases storage cost. Optimal timing balances. Procurement management critical for project cost, schedule, and quality.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1004"
+      },
+      {
+        "id": 31,
+        "question": "What is project team development and how can project managers build effective teams?",
+        "options": [
+          "Team development builds cohesive team through stages (forming, storming, norming, performing); managers enable through clarity, support, recognition",
+          "Good teams form automatically",
+          "All team members perform equally",
+          "Team development is HR responsibility only"
+        ],
+        "correct_answer": "Team development builds cohesive team through stages (forming, storming, norming, performing); managers enable through clarity, support, recognition",
+        "hint": "When you put people together for a project, do they work effectively immediately?",
+        "explanation": "Project team development is continuous process of building cohesive, high-performing team. Project managers facilitate development through clear leadership and support: (1) Forming stage: Team assembled, initial orientation. People uncertain of roles, unsure of each other. Manager's role: Clarify project vision, establish roles/responsibilities, set expectations, build initial relationships. Activities: Kickoff meeting, team building, establishing norms. (2) Storming stage: Differences emerge, conflict increases. People compete for status, challenge authority. Frustrations surface. Manager's role: Address conflicts directly, maintain focus on goals, establish clear decision processes. Activities: Conflict resolution, clarification of roles, team agreements. (3) Norming stage: Team stabilizes, norms established. Trust increases, collaboration improves. People know expectations. Manager's role: Reinforce positive behaviors, maintain momentum, empower decision-making. Activities: Celebrate successes, acknowledge contributions, delegate appropriately. (4) Performing stage: Team highly effective, self-organizing. Clear purpose, commitment, collaboration. Manager's role: Remove obstacles, provide resources, support growth. Team operates with minimal oversight. (5) Motivation factors: Clear purpose (understanding why important). Autonomy (control over work). Competence (ability to do work). Recognition (acknowledgement of effort). Advancement (growth opportunities). Fair compensation. Work-life balance. (6) Communication: Clear, frequent, transparent. Open to questions. Honest about challenges. Two-way (listen to team). Address concerns promptly. (7) Trust building: Be reliable (follow through on commitments). Be fair (consistent treatment). Be respectful (listen, value opinions). Show competence (know your role). Admit mistakes (don't hide problems). (8) Recognition and rewards: Formal (bonus, promotion). Informal (thank you, praise). Public (team meeting). Private (one-on-one). Tie to performance (reward desired behaviors). (9) Conflict resolution: Address promptly (don't let fester). Listen to all perspectives. Separate people from problem. Focus on interests, not positions. Find win-win solutions. Document agreements. (10) Development opportunities: Training (enhance skills). Mentoring (learn from experience). Stretch assignments (grow capabilities). Career pathing (future opportunities). Knowledge sharing (team learns together). Research shows investment in team development pays off through improved productivity, retention, and quality. Neglecting team development leads to conflicts, turnover, and poor performance.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1003"
+      },
+      {
+        "id": 32,
+        "question": "What is environmental responsibility in engineering projects?",
+        "options": [
+          "Environmental responsibility minimizes negative impacts through sustainable design, waste management, and lifecycle thinking",
+          "Environment not relevant to engineering",
+          "Environmental compliance enough",
+          "Environmental responsibility increases costs"
+        ],
+        "correct_answer": "Environmental responsibility minimizes negative impacts through sustainable design, waste management, and lifecycle thinking",
+        "hint": "How do engineering decisions affect natural environment and future generations?",
+        "explanation": "Environmental responsibility is ethical obligation of engineers to minimize environmental harm and promote sustainability. Increasingly important and legally required: (1) Environmental impacts: Air pollution (emissions, dust). Water pollution (discharge, runoff). Waste (solid, hazardous). Noise. Vibration. Land use/habitat disruption. Climate change (carbon footprint). (2) Prevention hierarchy: Eliminate (don't cause). Reduce (minimize). Mitigate (limit impacts). Compensate (offset unavoidable). (3) Sustainable design: Efficient use of resources (material, water, energy). Renewable energy (solar, wind). Recycled/recyclable materials. Lifecycle thinking (whole life cost and impact). (4) Lifecycle assessment: Measure environmental impact of product/system entire life. Extraction → Manufacturing → Transport → Use → Disposal. Identify highest-impact phases. Focus improvements there. (5) Waste management: Prevent waste generation (design for minimal waste). Reuse materials (salvage, recycle). Proper disposal (hazardous handled correctly). Landfill last resort. (6) Pollution prevention: Use safer chemicals (less toxic). Improve efficiency (less emission per output). Capture emissions (filters, scrubbers). Monitor compliance. (7) Energy efficiency: Design efficient systems (fewer losses). Use renewable energy (reduce carbon). Lifecycle energy cost. (8) Climate change: Carbon footprint of projects. Reduction through efficiency, renewable. Carbon offsets (planting trees, renewable credits). Climate adaptation (design for changing climate). (9) Water conservation: Efficient use (recycling, reduced flow). Rainwater capture. Wastewater treatment/reuse. Environmental flow protection (rivers). (10) Biodiversity: Minimize habitat disruption. Restoration (replant, rebuild). Corridors for wildlife. Cumulative impact (consider all projects). Environmental responsibility increasingly mainstream business practice, not just ethics. Companies reducing environmental impact gain competitive advantage (cost savings, brand, regulatory compliance). Engineers designing without environmental consideration increasingly untenable.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1005"
+      },
+      {
+        "id": 33,
+        "question": "What is systemic view of line drawing and what information does it convey?",
+        "options": [
+          "Line drawing uses standard line types to represent different features; solid for visible, dashed for hidden, centerline for symmetry",
+          "All lines in drawings identical",
+          "Line type doesn't matter",
+          "Line drawings only used for furniture"
+        ],
+        "correct_answer": "Line drawing uses standard line types to represent different features; solid for visible, dashed for hidden, centerline for symmetry",
+        "hint": "How do you show the difference between visible edges and hidden interior features?",
+        "explanation": "Line drawings use standardized line types conveying specific information, enabling consistent interpretation: (1) Line types: Solid (thick) - outline, visible edges. Solid (thin) - normal lines, dimensions, construction. Dashed - hidden features, edges behind other surfaces. Dotted or dashed-dotted (centerline) - symmetry axis. Thick dashed - alternate position, previous version. (2) Visible outline: Darkest, thickest lines showing external profile. What observer would see. (3) Hidden lines: Dashed lines showing features behind visible surfaces. Example: Hole through opposite side not directly visible. (4) Centerline: Light dashed-dotted line showing axis of symmetry. Marks center point for circular features. Indicates circular objects. (5) Construction lines: Very light lines showing measurement/reference. Not part of final drawing. Used during drafting. (6) Dimension lines: Thin lines with arrows showing what dimension measures. Parallel to measured edge. Small gaps from actual feature. (7) Extension lines: Thin lines extending from feature to dimension line. Small offset from edge. Show what dimension applies to. (8) Examples: Solid rectangle outline shows visible rectangular shape. Dashed line inside shows hole through. Centerline through circle shows circular symmetry. Dimension line with arrows and text shows specific measurement. (9) Interpretation: Solid lines show basic shape. Hidden lines reveal internal structure. Centerlines show symmetry points. Together communicate complete 3D form. (10) Consistency: Standard line types enable anyone trained in drawing conventions to interpret correctly. Non-standard lines create ambiguity. CAD software enforces standard line types (prevents mistakes). Proper line usage is essential for clear, unambiguous engineering drawings.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "easy",
+        "marks": 1,
+        "source": "AALL1001"
+      },
+      {
+        "id": 34,
+        "question": "What are dimensions in engineering drawings and what rules govern their placement?",
+        "options": [
+          "Dimensions are measurements shown with value, units, and positioned outside outline, grouped logically, never repeated",
+          "Dimensions can be placed anywhere",
+          "Dimensions are optional in detail drawings",
+          "Multiple dimensions for same measurement acceptable"
+        ],
+        "correct_answer": "Dimensions are measurements shown with value, units, and positioned outside outline, grouped logically, never repeated",
+        "hint": "If dimensions placed on outline, can they be read clearly? What if same dimension shown twice?",
+        "explanation": "Dimensions communicate exact object sizes enabling manufacturing to specifications. Proper placement and rules prevent ambiguity and errors: (1) Dimension components: Value (numeric size with units). Line (thin line with arrows showing extent). Leader line (line connecting dimension to feature). (2) Placement rules: Outside outline - dimension placed beyond outline for clarity. Grouped logically - related dimensions grouped together (e.g., all height dimensions aligned). Progressive placement - dimensions spaced from object outward. Avoid repetition - same feature dimensioned once. (3) Leader line style: Arrows at ends indicate extent. For circular features, line points to center. For linear, line parallel to feature. (4) Unit specification: Drawing title indicates units (mm, inches). If multiple units, clearly marked. Prevents confusion (1 inch ≠ 1 mm). (5) Dimensioning approaches: From baseline (all measured from one edge). Chain (each dimension from previous). Combination (baseline for critical, chain for others). (6) Tolerance specification: Tight tolerance (±0.1 mm) for critical features. Loose tolerance (±5 mm) for non-critical. Tolerance affects manufacturing cost (tighter = more expensive). (7) Datum surfaces: Reference surfaces for measurements. Flat surface used as datum. Other features measured from datum. Consistency reduces errors. (8) Dimension placement sequence: First overall size, then major components, then details. Helps manufacturer understand scaling. (9) Angular dimensions: Angle shown with arc between lines. Value in degrees. Placement similar to linear (outside outline). (10) Radii and diameters: Radius with R prefix (R10 for 10mm radius). Diameter with Ø symbol (Ø20 for 20mm diameter). Centerline shows where measured. Proper dimensioning is essential - poor dimensioning leads to manufacturing errors, non-conformance, rework, or product failure.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1001"
+      },
+      {
+        "id": 35,
+        "question": "What is tolerance in engineering drawings and why is it important?",
+        "options": [
+          "Tolerance is allowable variation in dimensions; important because perfect dimensions impossible, and tolerance cost increases with tightness",
+          "Tolerance means ignoring specifications",
+          "All features require same tolerance",
+          "Tolerance doesn't affect manufacturing cost"
+        ],
+        "correct_answer": "Tolerance is allowable variation in dimensions; important because perfect dimensions impossible, and tolerance cost increases with tightness",
+        "hint": "Can you manufacture something to exactly 10.0mm? How close is close enough?",
+        "explanation": "Tolerance is allowable variation from specified dimension. Critical for balancing cost and functionality: (1) Tolerance concept: Nominal dimension (desired size): 10.0 mm. Tolerance (allowable variation): ±0.1 mm. Acceptable range: 9.9 - 10.1 mm. Anything outside range rejected. (2) Bilateral tolerance: Equal variation both directions (±0.1). Easier interpretation. (3) Unilateral tolerance: Variation in one direction (+0.2, -0 or +0, -0.1). Used when asymmetric requirement. (4) Tolerance grades: Close tolerance (±0.01 mm) - difficult, expensive. Moderate tolerance (±0.1 mm) - standard machining. Loose tolerance (±1 mm) - rough processes. Grade selected based on fit requirement. (5) Cost relationship: Tight tolerance increases manufacturing cost (slower speeds, more careful setup, more inspection). Loose tolerance reduces cost (faster production, less precision needed). Engineering balance: tight where necessary, loose elsewhere. (6) Functional requirement determines tolerance: Bearing hole requires tight tolerance (must fit smoothly). Attachment point can be loose (appearance only). Dimension specifier determines appropriate tolerance. (7) GD&T (Geometric Dimensioning & Tolerancing): More sophisticated than simple tolerance. Controls shape, orientation, location. Example: Hole diameter ±0.1 with position tolerance ±0.05 (hole in right place, right size). (8) Stack-up: Multiple tolerances accumulate. If 10 parts each ±0.1, total variation could be ±1.0. Designers monitor cumulative tolerance. (9) Tolerance notes: Applied to drawing. Standard tolerances for general dimensions. Special tolerances for critical. ISO tolerance grades standardized (IT01 - IT16, with definitions). (10) Manufacturing implications: Loose tolerance allows multiple manufacturing processes (casting, molding, cutting, etc.). Tight tolerance limits to precision processes (CNC machining, precision casting). Designer specifies only necessary tolerance (avoids over-specifying cost). Proper tolerance balance achieves functionality at reasonable cost.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1001"
+      },
+      {
+        "id": 36,
+        "question": "What is Payback Period method in engineering economics and what are its advantages/limitations?",
+        "options": [
+          "Payback Period calculates time for investment to recover cost; advantage is simplicity, limitation ignores cash flows after recovery",
+          "Payback Period is same as NPV",
+          "Payback Period accounts for time value of money",
+          "Payback Period best decision criterion"
+        ],
+        "correct_answer": "Payback Period calculates time for investment to recover cost; advantage is simplicity, limitation ignores cash flows after recovery",
+        "hint": "If you invest Rs. 100,000 getting Rs. 30,000 return yearly, when do you recover the investment?",
+        "explanation": "Payback Period is time required for cumulative cash flows to equal initial investment. Simple but limited analysis tool: (1) Calculation: Investment: Rs. 100,000. Annual return: Rs. 30,000. Payback Period = 100,000 / 30,000 = 3.33 years. (2) Discounted Payback Period: Accounts for time value of money. Discounts cash flows before calculation. More accurate but more complex. Example: Rs. 30,000 Year 1 discounted = 30,000/1.10 = 27,273. Repeat for each year until cumulative discounted = investment. (3) Advantages: Simple to understand and calculate. Useful for quick screening (quick payback = likely profitable). Risk consideration implicit (shorter payback = less risk). Emphasis on liquidity (how quickly recover cash). (4) Limitations: Ignores cash flows after payback (project may continue earning). Ignores time value of money (simple method). Arbitrary decision criterion (3 years or 5 years? No basis). Bias toward short-term projects (ignores long-term value). Example: Project A payback 2 years, then stops. Project B payback 3 years, then huge returns for 10 years. Payback period favors A. NPV probably favors B. (5) Comparison with NPV: NPV considers all cash flows, payback ignores after recovery. NPV accounts for time value, simple payback doesn't. NPV provides decision rule (accept if positive), payback doesn't. (6) Use cases: Payback period useful for quick screening (eliminate obviously bad projects). Supplementary to NPV (use both). Capital constraint where liquidity important (need cash back quickly). High uncertainty (payback focus reduces risk). (7) Decision rule: If Payback Period < hurdle period (e.g., 3 years), accept. But should supplement with other metrics. (8) Industry norms: Manufacturing often 2-3 years. Infrastructure 5-10 years. R&D projects 5+ years. (9) Context: If capital available and project has positive NPV, payback period secondary. If capital scarce and need quick return, payback more important. (10) Conclusion: Payback Period useful simple metric but insufficient as sole decision criterion. Use with NPV, IRR for comprehensive analysis.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1002"
+      },
+      {
+        "id": 37,
+        "question": "What is financial impact analysis in project context?",
+        "options": [
+          "Financial analysis evaluates project costs/benefits in monetary terms; includes revenue, cost reduction, intangible benefits monetized",
+          "Financial analysis only for profit-making projects",
+          "Non-financial benefits ignored",
+          "Financial analysis is project manager's responsibility"
+        ],
+        "correct_answer": "Financial analysis evaluates project costs/benefits in monetary terms; includes revenue, cost reduction, intangible benefits monetized",
+        "hint": "How do you demonstrate project justification financially?",
+        "explanation": "Financial impact analysis quantifies project value in monetary terms, essential for investment justification and decision-making: (1) Cost categories: Capital costs (equipment, construction, development). Operating costs (labor, materials, maintenance). Implementation costs (training, transition). Total cost of ownership over project life. (2) Benefit categories: Revenue increase (higher sales). Cost reduction (lower operating cost). Efficiency gain (higher output, same cost). Quality improvement (fewer defects, higher value). Safety improvement (lower accident costs). Compliance (avoid fines). (3) Example manufacturing: Equipment investment: Rs. 10 million. Annual labor savings: Rs. 2 million. Maintenance cost: Rs. 200,000/year. Quality improvement reduces scrap by Rs. 500,000/year. Total annual benefit: Rs. 2.3 million. (4) Benefit-Cost Ratio: Sum of benefits / Sum of costs. Ratio > 1 indicates project worthwhile. Ratio 2:1 means benefits double costs. Useful for comparing projects. (5) Return on Investment (ROI): (Benefits - Costs) / Costs × 100%. Shows percentage return. ROI 30% means earn 30% on investment. Useful for comparing to other investments (stock market returns, etc.). (6) Intangible benefits: Customer satisfaction improvement. Brand value enhancement. Employee morale. Flexibility (ability to respond to market changes). Risk reduction. Difficult to monetize but important. If possible, estimate monetary value. (7) Tangible vs. intangible: Tangible costs/benefits measurable (revenue, costs). Intangible harder to measure (brand, morale). Financial analysis emphasizes tangible but should include intangible qualitatively. (8) Scenario analysis: Best case (optimistic benefits, minimum costs). Most likely (realistic estimates). Worst case (pessimistic benefits, maximum costs). Shows range of outcomes and risk. (9) Sensitivity analysis: Vary key assumptions (price, volume, cost). See how project value changes. Identify critical assumptions. Example: NPV sensitive to price (1% change = 5% NPV change) = high risk. (10) Long-term value: Projects creating long-term value may show negative early years. Discounting brings future value to present. Some projects (R&D, infrastructure) require long-term view. Financial analysis critical for project approval and portfolio management.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1002"
+      },
+      {
+        "id": 38,
+        "question": "What is project portfolio management and how does it improve resource allocation?",
+        "options": [
+          "Portfolio management evaluates multiple projects together; improves allocation by balancing strategic fit, risk, return, resource constraints",
+          "Portfolio management is same as project management",
+          "Projects managed independently",
+          "Portfolio management only for IT"
+        ],
+        "correct_answer": "Portfolio management evaluates multiple projects together; improves allocation by balancing strategic fit, risk, return, resource constraints",
+        "hint": "If you have 10 good projects but resources for only 3, how do you choose?",
+        "explanation": "Project portfolio management evaluates and prioritizes projects collectively ensuring optimal resource allocation aligned with strategy: (1) Portfolio perspective: Individual projects evaluated independently, may miss opportunities. Portfolio management considers interactions: Resource conflicts (same person on two projects). Revenue interdependencies (revenue from A enables investment in B). Technology dependencies (technology from A enables B). (2) Portfolio criteria: Strategic alignment (supports organizational strategy). Financial value (NPV, ROI, payback). Risk (technical, financial, organizational). Resources required (people, equipment, budget). Timeline. Stakeholder impact. (3) Strategic alignment: Does project support organizational vision? Does it enable strategy execution? Projects not aligned risk wasting resources. Portfolio management filters to strategically aligned only. (4) Risk balancing: Portfolio should balance risk levels. All high-risk = potential total failure. All low-risk = missed opportunities. Balanced portfolio: some sure bets (cost reduction), some opportunities (growth). (5) Resource constraints: Organization has limited budget, people, equipment. Portfolio management optimizes: not overcommitting (no resource overload). Maximizing value (choosing highest value projects). Balancing demand (not all in one quarter). (6) Valuation methods: NPV (highest value projects). Strategic score (alignment + value). Risk-adjusted return (higher risk requires higher return). Benefit-cost ratio. Scoring model (weighted criteria). (7) Trade-off analysis: Examples: Project A high value, high risk. Project B moderate value, low risk. Portfolio includes both (opportunity + security). Strategic project low return but necessary (competitive response). Must include it despite low financial value. (8) Dynamic management: Portfolio reviewed regularly. Projects added, removed, reprioritized. Market changes, strategy shifts. Portfolio adjusted accordingly. (9) Governance: Portfolio steering committee (senior executives). Reviews all projects. Makes prioritization decisions. Resolves conflicts. Allocates resources. (10) Tools: Portfolio management software. Project scoring models. Resource planning. Financial analysis. Dashboard showing portfolio status. Portfolio management is increasingly important as organizations manage more projects with limited resources. Disciplines resource allocation and strategic execution.",
+        "chapter": "Chapter 10: Project Planning, Design and Implementation",
+        "difficulty": "medium",
+        "marks": 2,
+        "source": "AALL1004"
+      }
+    ]
+  }
+]
