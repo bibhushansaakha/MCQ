@@ -32,6 +32,36 @@ export default function ReviewPage() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
 
+  // Keyboard navigation
+  useEffect(() => {
+    const handleKeyPress = (e: KeyboardEvent) => {
+      if (loading || !questions.length) return;
+
+      // Arrow keys for navigation
+      if (e.key === 'ArrowLeft' && currentQuestionIndex > 0) {
+        setCurrentQuestionIndex(prev => prev - 1);
+      } else if (e.key === 'ArrowRight' && currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(prev => prev + 1);
+      }
+      // Number keys (1-9) to jump to question
+      else if (e.key >= '1' && e.key <= '9') {
+        const num = parseInt(e.key);
+        if (num <= questions.length) {
+          setCurrentQuestionIndex(num - 1);
+        }
+      }
+      // Home/End keys
+      else if (e.key === 'Home') {
+        setCurrentQuestionIndex(0);
+      } else if (e.key === 'End') {
+        setCurrentQuestionIndex(questions.length - 1);
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyPress);
+    return () => window.removeEventListener('keydown', handleKeyPress);
+  }, [currentQuestionIndex, questions.length, loading]);
+
   useEffect(() => {
     async function loadReviewData() {
       try {
@@ -46,11 +76,14 @@ export default function ReviewPage() {
         
         setSession(sessionData);
 
-        // Load questions based on exam mode
-        const loadedQuestions: (Question | QuestionWithChapter)[] = [];
+        // Use stored questions if available (for exam modes), otherwise load them
+        let loadedQuestions: (Question | QuestionWithChapter)[] = [];
 
-        // Load questions based on the session type
-        {
+        if (sessionData.questions && sessionData.questions.length > 0) {
+          // Use stored questions (exact questions from exam)
+          loadedQuestions = sessionData.questions;
+        } else {
+          // Fallback: Load questions based on the session type
           if (
             sessionData.examMode === "quick-test" ||
             sessionData.examMode === "full-test"
@@ -176,7 +209,7 @@ export default function ReviewPage() {
               </span>
             )}
           </h1>
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             <div>
               <p className="text-sm text-gray-500 dark:text-gray-500">
                 Total Questions
@@ -199,6 +232,14 @@ export default function ReviewPage() {
               </p>
               <p className="text-2xl font-semibold text-red-600 dark:text-red-400">
                 {session.attempts.filter((a) => !a.correct).length}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-500 dark:text-gray-500">
+                Not Attempted
+              </p>
+              <p className="text-2xl font-semibold text-gray-500 dark:text-gray-400">
+                {Math.max(0, questions.length - session.attempts.length)}
               </p>
             </div>
             <div>
@@ -253,6 +294,9 @@ export default function ReviewPage() {
             </button>
             <span className="text-sm font-medium text-foreground min-w-[140px] text-center">
               Question {currentQuestionIndex + 1} of {questions.length}
+              <span className="block text-xs text-gray-500 dark:text-gray-500 mt-0.5">
+                Use ← → arrows or 1-9 keys
+              </span>
             </span>
             <button
               onClick={() =>
@@ -371,14 +415,17 @@ export default function ReviewPage() {
           <div className="space-y-3 mb-6">
             {currentQuestion.options.map((option, index) => {
               const isCorrectOption = option === correctAnswer;
-              const isSelected =
-                attempt && !isCorrect && option !== correctAnswer; // Show as selected if incorrect (we can't know exact selection without storing it)
+              const isSelected = attempt?.selectedOption === option; // Use stored selected option
 
               return (
                 <div
                   key={index}
-                  className={`p-4 rounded-lg transition-colors border border-gray-200/40 dark:border-gray-700/30 bg-transparent ${
-                    isCorrectOption ? "" : isSelected && attempt ? "" : ""
+                  className={`p-4 rounded-lg transition-colors border ${
+                    isCorrectOption
+                      ? "border-green-500 dark:border-green-400 bg-green-50/30 dark:bg-green-950/20"
+                      : isSelected
+                      ? "border-red-500 dark:border-red-400 bg-red-50/30 dark:bg-red-950/20"
+                      : "border-gray-200/40 dark:border-gray-700/30 bg-transparent"
                   }`}
                 >
                   <div className="flex items-start gap-3">
@@ -386,7 +433,7 @@ export default function ReviewPage() {
                       className={`font-semibold text-sm ${
                         isCorrectOption
                           ? "text-green-600 dark:text-green-400"
-                          : isSelected && attempt
+                          : isSelected
                           ? "text-red-600 dark:text-red-400"
                           : "text-foreground"
                       }`}
@@ -397,7 +444,7 @@ export default function ReviewPage() {
                       className={`flex-1 ${
                         isCorrectOption
                           ? "text-green-600 dark:text-green-400 font-medium"
-                          : isSelected && attempt
+                          : isSelected
                           ? "text-red-600 dark:text-red-400"
                           : "text-foreground"
                       }`}
@@ -420,6 +467,24 @@ export default function ReviewPage() {
                           />
                         </svg>
                         <span className="text-xs font-semibold">Correct</span>
+                      </div>
+                    )}
+                    {isSelected && !isCorrectOption && (
+                      <div className="flex items-center gap-1 text-red-600 dark:text-red-400">
+                        <svg
+                          className="w-3.5 h-3.5"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={1.5}
+                            d="M6 18L18 6M6 6l12 12"
+                          />
+                        </svg>
+                        <span className="text-xs font-semibold">Your Answer</span>
                       </div>
                     )}
                   </div>

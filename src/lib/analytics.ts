@@ -1,8 +1,8 @@
-import { SessionData, QuestionAttempt, OverallStats, ChapterStats, AnalyticsData, ExamMode } from './types';
+import { SessionData, QuestionAttempt, OverallStats, ChapterStats, AnalyticsData, ExamMode, Question, QuestionWithChapter } from './types';
 
 const STORAGE_KEY = 'mcq_sessions';
 
-export async function startSession(topic: string, examMode?: ExamMode): Promise<string> {
+export async function startSession(topic: string, examMode?: ExamMode, questions?: (Question | QuestionWithChapter)[]): Promise<string> {
   const sessionId = `session_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
   const startTime = Date.now();
   
@@ -18,12 +18,23 @@ export async function startSession(topic: string, examMode?: ExamMode): Promise<
     hintsUsed: 0,
     totalTime: 0,
     examMode: examMode,
+    questions: questions, // Store questions for exam modes
   };
   const sessions = getAllSessionsSync();
   sessions.push(session);
   saveSessions(sessions);
   
   return sessionId;
+}
+
+export async function updateSessionQuestions(sessionId: string, questions: (Question | QuestionWithChapter)[]): Promise<void> {
+  const sessions = getAllSessionsSync();
+  const session = sessions.find(s => s.sessionId === sessionId);
+  
+  if (session) {
+    session.questions = questions;
+    saveSessions(sessions);
+  }
 }
 
 export async function recordAttempt(sessionId: string, attempt: QuestionAttempt): Promise<void> {

@@ -192,7 +192,7 @@ export default function ExamQuizPage() {
 
         // Start session only if we don't already have one
         if (!sessionId) {
-          const newSessionId = await startSession("all-chapters", mode);
+          const newSessionId = await startSession("all-chapters", mode, loadedQuestions);
           if (!isMounted) return;
 
           setSessionId(newSessionId);
@@ -204,6 +204,10 @@ export default function ExamQuizPage() {
           });
           setQuestionStartTimes(startTimes);
           setHasUnsavedChanges(true);
+        } else {
+          // Update questions if session already exists
+          const { updateSessionQuestions } = await import('@/lib/analytics');
+          await updateSessionQuestions(sessionId, loadedQuestions);
         }
       } catch (error) {
         console.error("Error initializing exam:", error);
@@ -256,6 +260,7 @@ export default function ExamQuizPage() {
         hintUsed: false,
         explanationViewed: false,
         timestamp: Date.now(),
+        selectedOption: option, // Store selected option
       }).catch((err) => console.error("Error recording attempt:", err));
     }
     // Don't auto-advance - let user navigate manually

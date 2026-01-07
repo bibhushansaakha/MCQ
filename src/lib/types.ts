@@ -58,6 +58,7 @@ export interface QuestionAttempt {
   hintUsed: boolean;
   explanationViewed: boolean;
   timestamp: number;
+  selectedOption?: string; // Store the selected option for review
 }
 
 export type ExamMode = 'chapterwise' | 'quick-test' | 'full-test';
@@ -74,6 +75,7 @@ export interface SessionData {
   hintsUsed: number;
   totalTime: number;
   examMode?: ExamMode;
+  questions?: (Question | QuestionWithChapter)[]; // Store exact questions for exam modes
 }
 
 export interface OverallStats {
