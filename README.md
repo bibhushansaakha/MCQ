@@ -75,6 +75,25 @@ npm run dev
 
 8. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
+## Deployment
+
+### Vercel Deployment
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Add environment variable in Vercel:
+   - Go to Project Settings → Environment Variables
+   - Add `DATABASE_URL` with value: `file:./prisma/dev.db`
+   - Apply to all environments (Production, Preview, Development)
+4. Deploy!
+
+The build process will:
+- Generate Prisma client during build
+- Create the database on first run
+- Import questions from JSON files (you may need to run `npm run migrate-data` manually or set up a build hook)
+
+**Note**: For production deployments, consider using a hosted database (PostgreSQL) instead of SQLite for better performance and reliability.
+
 ## Project Structure
 
 ```
