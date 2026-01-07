@@ -48,7 +48,11 @@ cp .env.example .env
 
 The `.env` file should contain:
 ```env
-DATABASE_URL="file:./prisma/dev.db"
+# For local development with PostgreSQL
+DATABASE_URL="postgresql://user:password@localhost:5432/mcq_db"
+
+# Or use your Vercel Prisma Postgres connection string for testing
+# DATABASE_URL="postgres://..."
 ```
 
 4. Generate Prisma client:
@@ -81,10 +85,10 @@ npm run dev
 
 1. Push your code to GitHub
 2. Import your repository in Vercel
-3. Add environment variable in Vercel:
-   - Go to Project Settings → Environment Variables
-   - Add `DATABASE_URL` with value: `file:./prisma/dev.db`
-   - Apply to all environments (Production, Preview, Development)
+3. **Database is already configured!** 
+   - Vercel Prisma Postgres automatically sets `DATABASE_URL`
+   - No need to manually add environment variables
+   - The connection string is automatically available
 4. Deploy!
 
 5. **Initialize the database** (IMPORTANT):
@@ -132,7 +136,7 @@ MCQ/
 
 ## Database Setup
 
-The application uses SQLite with Prisma ORM. The database is created automatically when you run `npm run migrate-data`.
+The application uses PostgreSQL (Vercel Prisma Postgres) with Prisma ORM. The database is persistent and works perfectly with Vercel's serverless architecture.
 
 ### Adding New Questions
 

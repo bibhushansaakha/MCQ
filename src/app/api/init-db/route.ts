@@ -9,10 +9,14 @@ export const dynamic = 'force-dynamic';
 async function ensureMigrations() {
   try {
     // Run migrations to ensure database schema is up to date
-    // This will create the database file if it doesn't exist
+    // For PostgreSQL, this will create tables if they don't exist
+    if (!process.env.DATABASE_URL) {
+      throw new Error('DATABASE_URL environment variable is not set');
+    }
+    
     execSync('npx prisma migrate deploy', { 
       stdio: 'pipe',
-      env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || 'file:./prisma/dev.db' }
+      env: { ...process.env }
     });
     console.log('✓ Migrations applied successfully');
   } catch (error: any) {
@@ -21,11 +25,12 @@ async function ensureMigrations() {
       console.log('Migration deploy failed, trying schema push...');
       execSync('npx prisma db push --accept-data-loss', {
         stdio: 'pipe',
-        env: { ...process.env, DATABASE_URL: process.env.DATABASE_URL || 'file:./prisma/dev.db' }
+        env: { ...process.env }
       });
       console.log('✓ Schema pushed successfully');
     } catch (pushError) {
-      console.warn('Schema push also failed, database will be created on first use:', pushError);
+      console.warn('Schema push also failed:', pushError);
+      throw pushError;
     }
   }
 }
