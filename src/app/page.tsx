@@ -1,8 +1,18 @@
 import ModeSelector from '@/components/ModeSelector';
 import { loadTopicsServer } from '@/lib/questionUtils.server';
+import { Topic } from '@/lib/types';
+
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 export default async function Home() {
-  const topics = await loadTopicsServer();
+  let topics: Topic[] = [];
+  try {
+    topics = await loadTopicsServer();
+  } catch (error) {
+    console.error('Error loading topics:', error);
+    // Fallback to empty array if database is not available
+  }
 
   return (
     <main className="min-h-screen bg-background">
