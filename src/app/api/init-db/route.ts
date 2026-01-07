@@ -256,10 +256,7 @@ async function initializeDatabase() {
         throw countError;
       }
     }
-    if (topicCount > 0) {
-      return { initialized: false, message: 'Database already initialized', topicCount };
-    }
-
+    // Always initialize - upsert will handle duplicates
     console.log('Initializing database...');
 
     // Load topics.json
@@ -465,8 +462,35 @@ export async function GET() {
       throw error;
     }
     
+    // If database is empty, automatically initialize it
+    if (topicCount === 0) {
+      try {
+        console.log('Database is empty, auto-initializing...');
+        const result = await initializeDatabase();
+        // Re-check counts after initialization
+        topicCount = await prisma.topic.count();
+        questionCount = await prisma.question.count();
+        return NextResponse.json({
+          initialized: true,
+          message: 'Database auto-initialized successfully',
+          topicCount,
+          questionCount,
+          autoInitialized: true,
+        });
+      } catch (initError: any) {
+        return NextResponse.json({
+          initialized: false,
+          error: 'Auto-initialization failed',
+          details: initError.message,
+          topicCount: 0,
+          questionCount: 0,
+          action: 'Please try POST /api/init-db to initialize manually',
+        });
+      }
+    }
+    
     return NextResponse.json({
-      initialized: topicCount > 0,
+      initialized: true,
       topicCount,
       questionCount,
     });
