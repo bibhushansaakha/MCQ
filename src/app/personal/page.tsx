@@ -63,7 +63,7 @@ export default function PersonalPage() {
             <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
               55 questions that I remembered from the actual NEC exam I just took. The questions are accurate with correct answers, though the options may not be perfectly accurate.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={() => router.push("/quiz/learn/personal")}
                 className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
@@ -96,37 +96,6 @@ export default function PersonalPage() {
               </button>
 
               <button
-                onClick={() => handleModeSelect("personal-quick-test")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Quick Test
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">25 questions</span>{" "}
-                  in 30 minutes
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Personal exam questions
-                </p>
-              </button>
-
-              <button
                 onClick={() => handleModeSelect("personal-full-test")}
                 className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
               >
@@ -154,37 +123,6 @@ export default function PersonalPage() {
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500">
                   Complete personal exam simulation
-                </p>
-              </button>
-
-              <button
-                onClick={() => handleModeSelect("personal-random")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Random Practice
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">55 random questions</span>{" "}
-                  in 1 hour
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Random selection from personal questions
                 </p>
               </button>
             </div>
