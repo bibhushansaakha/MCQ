@@ -54,8 +54,9 @@ function useDarkMode() {
 
 export default function AnalyticsPage() {
   const [analytics, setAnalytics] = useState<AnalyticsData | null>(null);
-  const [activeSection, setActiveSection] = useState<'overview' | 'learn' | 'practice'>('overview');
+  const [activeSection, setActiveSection] = useState<'overview' | 'learn' | 'practice' | 'priority'>('overview');
   const [activePracticeMode, setActivePracticeMode] = useState<ExamMode | 'all'>('all');
+  const [activePriorityType, setActivePriorityType] = useState<'official' | 'past'>('official');
   const isDark = useDarkMode();
 
   useEffect(() => {
@@ -97,8 +98,30 @@ export default function AnalyticsPage() {
   const fullTestSessions = filterSessionsByExamMode(practiceSessions, 'full-test');
   const officialQuickTestSessions = filterSessionsByExamMode(practiceSessions, 'official-quick-test');
   const officialFullTestSessions = filterSessionsByExamMode(practiceSessions, 'official-full-test');
+  const officialRandomSessions = filterSessionsByExamMode(practiceSessions, 'official-random');
   const pastQuickTestSessions = filterSessionsByExamMode(practiceSessions, 'past-quick-test');
   const pastFullTestSessions = filterSessionsByExamMode(practiceSessions, 'past-full-test');
+  const pastRandomSessions = filterSessionsByExamMode(practiceSessions, 'past-random');
+  
+  // Filter priority sessions (official and past)
+  const officialLearnSessions = learnSessions.filter(s => s.topic === 'learn-official');
+  const pastLearnSessions = learnSessions.filter(s => s.topic === 'learn-past');
+  
+  // Combine all official sessions
+  const allOfficialSessions = [
+    ...officialLearnSessions,
+    ...officialQuickTestSessions,
+    ...officialFullTestSessions,
+    ...officialRandomSessions,
+  ];
+  
+  // Combine all past sessions
+  const allPastSessions = [
+    ...pastLearnSessions,
+    ...pastQuickTestSessions,
+    ...pastFullTestSessions,
+    ...pastRandomSessions,
+  ];
   
   // Calculate stats for each mode
   const overallStats = calculateStatsForSessions(sessions);
@@ -109,8 +132,15 @@ export default function AnalyticsPage() {
   const fullTestStats = calculateStatsForSessions(fullTestSessions);
   const officialQuickTestStats = calculateStatsForSessions(officialQuickTestSessions);
   const officialFullTestStats = calculateStatsForSessions(officialFullTestSessions);
+  const officialRandomStats = calculateStatsForSessions(officialRandomSessions);
+  const officialLearnStats = calculateStatsForSessions(officialLearnSessions);
+  const allOfficialStats = calculateStatsForSessions(allOfficialSessions);
+  
   const pastQuickTestStats = calculateStatsForSessions(pastQuickTestSessions);
   const pastFullTestStats = calculateStatsForSessions(pastFullTestSessions);
+  const pastRandomStats = calculateStatsForSessions(pastRandomSessions);
+  const pastLearnStats = calculateStatsForSessions(pastLearnSessions);
+  const allPastStats = calculateStatsForSessions(allPastSessions);
   
   // Calculate chapter stats
   const allChapterStats = calculateChapterStatsForSessions(sessions);
@@ -126,8 +156,15 @@ export default function AnalyticsPage() {
   const fullTestInsights = getModeSpecificInsights(fullTestSessions, 'practice', 'full-test');
   const officialQuickTestInsights = getModeSpecificInsights(officialQuickTestSessions, 'practice', 'official-quick-test');
   const officialFullTestInsights = getModeSpecificInsights(officialFullTestSessions, 'practice', 'official-full-test');
+  const officialRandomInsights = getModeSpecificInsights(officialRandomSessions, 'practice', 'official-random');
+  const officialLearnInsights = getModeSpecificInsights(officialLearnSessions, 'learn');
+  const allOfficialInsights = getPerformanceInsights(allOfficialSessions, {});
+  
   const pastQuickTestInsights = getModeSpecificInsights(pastQuickTestSessions, 'practice', 'past-quick-test');
   const pastFullTestInsights = getModeSpecificInsights(pastFullTestSessions, 'practice', 'past-full-test');
+  const pastRandomInsights = getModeSpecificInsights(pastRandomSessions, 'practice', 'past-random');
+  const pastLearnInsights = getModeSpecificInsights(pastLearnSessions, 'learn');
+  const allPastInsights = getPerformanceInsights(allPastSessions, {});
   
   // Get focus recommendations
   const focusRecommendations = getFocusRecommendations(allChapterStats);
@@ -232,6 +269,21 @@ export default function AnalyticsPage() {
             }`}
           >
             Practice Mode ({practiceSessions.length})
+          </button>
+          <button
+            onClick={() => setActiveSection('priority')}
+            className={`px-4 py-2 text-sm font-medium transition-colors ${
+              activeSection === 'priority'
+                ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+            }`}
+          >
+            <span className="flex items-center gap-2">
+              High Priority ({allOfficialSessions.length + allPastSessions.length})
+              <span className="px-1.5 py-0.5 text-xs font-semibold bg-[#ea580c] text-white rounded">
+                PRIORITY
+              </span>
+            </span>
           </button>
         </div>
 
@@ -820,6 +872,289 @@ export default function AnalyticsPage() {
               <div className="text-center py-12">
                 <p className="text-gray-500 dark:text-gray-400 mb-4">No practice mode data yet</p>
                 <Link href="/practice" className="text-[#ea580c] hover:underline">Start Practicing</Link>
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Priority Section */}
+        {activeSection === 'priority' && (
+          <div className="space-y-8">
+            {/* Priority Type Tabs */}
+            <div className="flex flex-wrap gap-2 border-b border-gray-100 dark:border-gray-800 pb-4">
+              <button
+                onClick={() => setActivePriorityType('official')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePriorityType === 'official'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Official Model Questions ({allOfficialSessions.length})
+              </button>
+              <button
+                onClick={() => setActivePriorityType('past')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePriorityType === 'past'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Past Questions ({allPastSessions.length})
+              </button>
+            </div>
+
+            {/* Official Model Questions Analytics */}
+            {activePriorityType === 'official' && (
+              <div className="space-y-8">
+                {/* Overall Official Stats */}
+                <section>
+                  <div className="flex items-center gap-2 mb-6">
+                    <h2 className="text-2xl font-semibold text-foreground">
+                      Official Model Questions Analytics
+                    </h2>
+                    <span className="px-2 py-1 text-xs font-semibold bg-[#ea580c] text-white rounded">
+                      PRIORITY
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    {renderStatsCard('Total Questions', allOfficialStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${allOfficialStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Total Time', formatTime(allOfficialStats.totalTime))}
+                    {renderStatsCard('Sessions', allOfficialSessions.length)}
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Correct Answers', allOfficialStats.totalCorrect, 'text-green-600 dark:text-green-500')}
+                    {renderStatsCard('Wrong Answers', allOfficialStats.totalWrong, 'text-red-600 dark:text-red-500')}
+                    {renderStatsCard('Avg Time/Question', formatTime(allOfficialStats.averageTimePerQuestion))}
+                    {renderStatsCard('Total Hints', allOfficialStats.totalHints)}
+                  </div>
+                </section>
+
+                {/* Official Insights */}
+                {allOfficialInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(allOfficialInsights)}
+                  </section>
+                )}
+
+                {/* Official Mode Breakdown */}
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Mode Breakdown</h2>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Learn Mode</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{officialLearnStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${officialLearnStats.accuracy >= 75 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {officialLearnStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{officialLearnSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Quick Test</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{officialQuickTestStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${officialQuickTestStats.accuracy >= 80 ? 'text-green-600' : officialQuickTestStats.accuracy >= 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                            {officialQuickTestStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{officialQuickTestSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Full Test</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{officialFullTestStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${officialFullTestStats.accuracy >= 70 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {officialFullTestStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{officialFullTestSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Random Practice</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{officialRandomStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${officialRandomStats.accuracy >= 75 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {officialRandomStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{officialRandomSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {allOfficialSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No official model questions data yet</p>
+                    <Link href="/priority" className="text-[#ea580c] hover:underline">Start Practicing Official Questions</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Past Questions Analytics */}
+            {activePriorityType === 'past' && (
+              <div className="space-y-8">
+                {/* Overall Past Stats */}
+                <section>
+                  <div className="flex items-center gap-2 mb-6">
+                    <h2 className="text-2xl font-semibold text-foreground">
+                      Past Questions Analytics
+                    </h2>
+                    <span className="px-2 py-1 text-xs font-semibold bg-[#ea580c] text-white rounded">
+                      PRIORITY
+                    </span>
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                    {renderStatsCard('Total Questions', allPastStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${allPastStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Total Time', formatTime(allPastStats.totalTime))}
+                    {renderStatsCard('Sessions', allPastSessions.length)}
+                  </div>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Correct Answers', allPastStats.totalCorrect, 'text-green-600 dark:text-green-500')}
+                    {renderStatsCard('Wrong Answers', allPastStats.totalWrong, 'text-red-600 dark:text-red-500')}
+                    {renderStatsCard('Avg Time/Question', formatTime(allPastStats.averageTimePerQuestion))}
+                    {renderStatsCard('Total Hints', allPastStats.totalHints)}
+                  </div>
+                </section>
+
+                {/* Past Insights */}
+                {allPastInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(allPastInsights)}
+                  </section>
+                )}
+
+                {/* Past Mode Breakdown */}
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Mode Breakdown</h2>
+                  <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Learn Mode</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{pastLearnStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${pastLearnStats.accuracy >= 75 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {pastLearnStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{pastLearnSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Quick Test</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{pastQuickTestStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${pastQuickTestStats.accuracy >= 80 ? 'text-green-600' : pastQuickTestStats.accuracy >= 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                            {pastQuickTestStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{pastQuickTestSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Full Test</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{pastFullTestStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${pastFullTestStats.accuracy >= 70 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {pastFullTestStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{pastFullTestSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <div className="p-6 rounded-lg border border-gray-100 dark:border-gray-800">
+                      <h3 className="text-lg font-semibold text-foreground mb-4">Random Practice</h3>
+                      <div className="space-y-2">
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Questions:</span>
+                          <span className="font-semibold">{pastRandomStats.totalQuestions}</span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Accuracy:</span>
+                          <span className={`font-semibold ${pastRandomStats.accuracy >= 75 ? 'text-green-600' : 'text-yellow-600'}`}>
+                            {pastRandomStats.accuracy.toFixed(1)}%
+                          </span>
+                        </div>
+                        <div className="flex justify-between text-sm">
+                          <span className="text-gray-700 dark:text-gray-400">Sessions:</span>
+                          <span className="font-semibold">{pastRandomSessions.length}</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </section>
+
+                {allPastSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No past questions data yet</p>
+                    <Link href="/priority" className="text-[#ea580c] hover:underline">Start Practicing Past Questions</Link>
+                  </div>
+                )}
               </div>
             )}
           </div>
