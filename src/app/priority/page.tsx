@@ -62,7 +62,7 @@ export default function PriorityPage() {
             <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
               Official model questions provided by NEC. These questions are from the same question paper broken down into parts.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={() => router.push("/quiz/learn/official")}
                 className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
@@ -91,37 +91,6 @@ export default function PriorityPage() {
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500">
                   One by one with explanations
-                </p>
-              </button>
-
-              <button
-                onClick={() => handleModeSelect("official-quick-test")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Quick Test
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">25 questions</span>{" "}
-                  in 30 minutes
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Official model questions
                 </p>
               </button>
 
@@ -155,37 +124,6 @@ export default function PriorityPage() {
                   Complete official model exam simulation
                 </p>
               </button>
-
-              <button
-                onClick={() => handleModeSelect("official-random")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Random Practice
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">50 random questions</span>{" "}
-                  in 1 hour
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Random selection from official questions
-                </p>
-              </button>
             </div>
           </div>
 
@@ -214,7 +152,7 @@ export default function PriorityPage() {
             <p className="text-sm text-gray-500 dark:text-gray-500 mb-6">
               Past questions from previous NEC exams. These questions are from the same collection broken down into parts.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <button
                 onClick={() => router.push("/quiz/learn/past")}
                 className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
@@ -247,37 +185,6 @@ export default function PriorityPage() {
               </button>
 
               <button
-                onClick={() => handleModeSelect("past-quick-test")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Quick Test
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">25 questions</span>{" "}
-                  in 30 minutes
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Past questions collection
-                </p>
-              </button>
-
-              <button
                 onClick={() => handleModeSelect("past-full-test")}
                 className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
               >
@@ -305,37 +212,6 @@ export default function PriorityPage() {
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-500">
                   Complete past questions exam simulation
-                </p>
-              </button>
-
-              <button
-                onClick={() => handleModeSelect("past-random")}
-                className="p-6 rounded-lg border-2 border-gray-200/40 dark:border-gray-700/30 hover:border-[#ea580c] hover:shadow-lg transition-all text-left group"
-              >
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-xl font-semibold text-foreground group-hover:text-[#ea580c] transition-colors">
-                    Random Practice
-                  </h3>
-                  <svg
-                    className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M9 5l7 7-7 7"
-                    />
-                  </svg>
-                </div>
-                <p className="text-sm text-gray-500 dark:text-gray-500 mb-2">
-                  <span className="font-medium text-foreground">50 random questions</span>{" "}
-                  in 1 hour
-                </p>
-                <p className="text-xs text-gray-500 dark:text-gray-500">
-                  Random selection from past questions
                 </p>
               </button>
             </div>

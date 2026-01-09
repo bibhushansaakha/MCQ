@@ -26,20 +26,20 @@ export default async function Home() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        {/* Personal Exam Questions - HIGHEST PRIORITY */}
-        <Link
-          href="/personal"
-          className="group mb-8 p-8 rounded-xl border-2 border-[#ea580c] bg-[#ea580c]/10 dark:bg-[#ea580c]/20 hover:bg-[#ea580c]/15 dark:hover:bg-[#ea580c]/25 transition-all hover:shadow-xl block relative overflow-hidden"
-        >
-          <div className="absolute top-0 right-0 bg-[#ea580c] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
-            HIGHEST PRIORITY
-          </div>
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-[#ea580c] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid md:grid-cols-2 gap-6">
+          {/* Personal Exam Questions - TOP LEFT - HIGHLIGHTED */}
+          <Link
+            href="/personal"
+            className="group p-6 rounded-xl border-2 border-[#ea580c] bg-[#ea580c]/10 dark:bg-[#ea580c]/20 hover:bg-[#ea580c]/15 dark:hover:bg-[#ea580c]/25 transition-all hover:shadow-xl relative overflow-hidden"
+          >
+            <div className="absolute top-0 right-0 bg-[#ea580c] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+              HIGHEST PRIORITY
+            </div>
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[#ea580c] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-5 h-5 text-white"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -52,59 +52,34 @@ export default async function Home() {
                   />
                 </svg>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
-                  Personal Exam Questions
-                </h2>
-                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  55 questions remembered from the actual NEC exam I just took
-                </p>
+              <h2 className="text-xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
+                Personal Exam Questions
+              </h2>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+              55 questions from the actual NEC exam I just took. Practice with Learn Mode or Full Test.
+            </p>
+            <div className="space-y-1.5 text-xs text-gray-500 dark:text-gray-500">
+              <div className="flex items-center gap-2">
+                <span className="text-[#ea580c]">•</span>
+                <span><strong>Learn Mode:</strong> Study all 55 questions with explanations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#ea580c]">•</span>
+                <span><strong>Full Test:</strong> Complete 55-question exam simulation</span>
               </div>
             </div>
-            <svg
-              className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-            These are the most important questions - directly from the actual NEC exam I just took. 
-            Practice these questions in all modes: quick test, full test, random practice, and learn mode.
-          </p>
-          <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-500">
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              <span className="font-medium">55 questions</span> from the actual exam experience
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              Quick test (25 questions), Full test (55 questions), and Random practice modes
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              Learn mode with detailed explanations for each question
-            </li>
-          </ul>
-        </Link>
+          </Link>
 
-        {/* High Priority Section */}
-        <Link
-          href="/priority"
-          className="group mb-8 p-8 rounded-xl border-2 border-[#ea580c] bg-[#ea580c]/5 dark:bg-[#ea580c]/10 hover:bg-[#ea580c]/10 dark:hover:bg-[#ea580c]/20 transition-all hover:shadow-lg block"
-        >
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-lg bg-[#ea580c] flex items-center justify-center group-hover:scale-110 transition-transform">
+          {/* High Priority Questions - TOP RIGHT */}
+          <Link
+            href="/priority"
+            className="group p-6 rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-[#ea580c] dark:hover:border-[#ea580c] transition-all hover:shadow-lg"
+          >
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[#ea580c]/10 dark:bg-[#ea580c]/20 flex items-center justify-center group-hover:bg-[#ea580c]/20 dark:group-hover:bg-[#ea580c]/30 transition-colors">
                 <svg
-                  className="w-6 h-6 text-white"
+                  className="w-5 h-5 text-[#ea580c]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -117,59 +92,34 @@ export default async function Home() {
                   />
                 </svg>
               </div>
-              <div>
-                <h2 className="text-2xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
-                  High Priority Questions
-                </h2>
-                <span className="text-xs font-semibold text-[#ea580c] bg-white dark:bg-gray-900 px-2 py-1 rounded">
-                  PRIORITY
-                </span>
+              <h2 className="text-xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
+                High Priority Questions
+              </h2>
+            </div>
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+              Official model questions and past questions from NEC. Essential for exam preparation.
+            </p>
+            <div className="space-y-1.5 text-xs text-gray-500 dark:text-gray-500">
+              <div className="flex items-center gap-2">
+                <span className="text-[#ea580c]">•</span>
+                <span><strong>Learn Mode:</strong> Study all questions with explanations</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className="text-[#ea580c]">•</span>
+                <span><strong>Full Test:</strong> Complete 100-question exam simulation</span>
               </div>
             </div>
-            <svg
-              className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M9 5l7 7-7 7"
-              />
-            </svg>
-          </div>
-          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
-            Practice with official model questions and past questions directly from NEC. 
-            These are essential for exam preparation.
-          </p>
-          <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-500">
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              Official model questions from NEC
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              Past questions from previous exams
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-[#ea580c]">•</span>
-              Quick test, full test, and random practice modes
-            </li>
-          </ul>
-        </Link>
+          </Link>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Learn with MCQ */}
+          {/* Learn with MCQ - BOTTOM LEFT */}
           <Link
             href="/learn"
-            className="group p-8 rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-[#ea580c] dark:hover:border-[#ea580c] transition-all hover:shadow-lg"
+            className="group p-6 rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-[#ea580c] dark:hover:border-[#ea580c] transition-all hover:shadow-lg"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-lg bg-[#ea580c]/10 dark:bg-[#ea580c]/20 flex items-center justify-center group-hover:bg-[#ea580c]/20 dark:group-hover:bg-[#ea580c]/30 transition-colors">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[#ea580c]/10 dark:bg-[#ea580c]/20 flex items-center justify-center group-hover:bg-[#ea580c]/20 dark:group-hover:bg-[#ea580c]/30 transition-colors">
                 <svg
-                  className="w-6 h-6 text-[#ea580c]"
+                  className="w-5 h-5 text-[#ea580c]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -182,53 +132,34 @@ export default async function Home() {
                   />
                 </svg>
               </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              <h2 className="text-xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
+                Learn with MCQ
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-[#ea580c] transition-colors">
-              Learn with MCQ
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              Study questions chapter by chapter with detailed explanations.
-              Perfect for learning concepts and understanding the reasoning
-              behind each answer.
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+              Study questions chapter by chapter. Perfect for learning concepts step by step.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-500 dark:text-gray-500">
-              <li className="flex items-center gap-2">
+            <div className="space-y-1.5 text-xs text-gray-500 dark:text-gray-500">
+              <div className="flex items-center gap-2">
                 <span className="text-[#ea580c]">•</span>
-                Questions shown in order
-              </li>
-              <li className="flex items-center gap-2">
+                <span>Questions shown in order by chapter</span>
+              </div>
+              <div className="flex items-center gap-2">
                 <span className="text-[#ea580c]">•</span>
-                Explanations always available
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-[#ea580c]">•</span>
-                Navigate between chapters easily
-              </li>
-            </ul>
+                <span>Detailed explanations for each answer</span>
+              </div>
+            </div>
           </Link>
 
-          {/* Practice Past Questions */}
+          {/* Practice Past Questions - BOTTOM RIGHT */}
           <Link
             href="/practice"
-            className="group p-8 rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-[#ea580c] dark:hover:border-[#ea580c] transition-all hover:shadow-lg"
+            className="group p-6 rounded-xl border-2 border-gray-200 dark:border-gray-800 hover:border-[#ea580c] dark:hover:border-[#ea580c] transition-all hover:shadow-lg"
           >
-            <div className="flex items-center justify-between mb-4">
-              <div className="w-12 h-12 rounded-lg bg-[#ea580c]/10 dark:bg-[#ea580c]/20 flex items-center justify-center group-hover:bg-[#ea580c]/20 dark:group-hover:bg-[#ea580c]/30 transition-colors">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="w-10 h-10 rounded-lg bg-[#ea580c]/10 dark:bg-[#ea580c]/20 flex items-center justify-center group-hover:bg-[#ea580c]/20 dark:group-hover:bg-[#ea580c]/30 transition-colors">
                 <svg
-                  className="w-6 h-6 text-[#ea580c]"
+                  className="w-5 h-5 text-[#ea580c]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -241,42 +172,23 @@ export default async function Home() {
                   />
                 </svg>
               </div>
-              <svg
-                className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
+              <h2 className="text-xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
+                Practice Past Questions
+              </h2>
             </div>
-            <h2 className="text-2xl font-bold text-foreground mb-3 group-hover:text-[#ea580c] transition-colors">
-              Practice Past Questions
-            </h2>
-            <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-              Test your knowledge with chapter-wise practice, quick tests, and
-              full-length exam simulations. Perfect for exam preparation and
-              self-assessment.
+            <p className="text-sm text-gray-600 dark:text-gray-400 mb-3 leading-relaxed">
+              Practice by chapter or take full-length tests. Test your knowledge and track progress.
             </p>
-            <ul className="mt-4 space-y-2 text-sm text-gray-500 dark:text-gray-500">
-              <li className="flex items-center gap-2">
+            <div className="space-y-1.5 text-xs text-gray-500 dark:text-gray-500">
+              <div className="flex items-center gap-2">
                 <span className="text-[#ea580c]">•</span>
-                Chapter-wise practice
-              </li>
-              <li className="flex items-center gap-2">
+                <span>Chapter-wise practice with hints</span>
+              </div>
+              <div className="flex items-center gap-2">
                 <span className="text-[#ea580c]">•</span>
-                Quick test (25 questions)
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-[#ea580c]">•</span>
-                Full test (100 questions)
-              </li>
-            </ul>
+                <span>Full test (100 questions in 2 hours)</span>
+              </div>
+            </div>
           </Link>
         </div>
       </div>
