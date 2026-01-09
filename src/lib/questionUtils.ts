@@ -48,6 +48,32 @@ export async function loadQuestionsFromAllChapters(count: number): Promise<Quest
   }
 }
 
+export async function loadOfficialModelQuestions(count: number): Promise<QuestionWithChapter[]> {
+  try {
+    const response = await fetch(`/api/questions/official?count=${count}`);
+    if (!response.ok) {
+      throw new Error('Failed to load official model questions');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error loading official model questions:', error);
+    throw error;
+  }
+}
+
+export async function loadPastQuestions(count: number): Promise<QuestionWithChapter[]> {
+  try {
+    const response = await fetch(`/api/questions/past?count=${count}`);
+    if (!response.ok) {
+      throw new Error('Failed to load past questions');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error loading past questions:', error);
+    throw error;
+  }
+}
+
 export async function loadTopics(): Promise<Topic[]> {
   try {
     const response = await fetch('/api/topics');

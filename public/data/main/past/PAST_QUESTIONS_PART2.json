@@ -1,0 +1,138 @@
+[
+  {
+    "id": 11,
+    "question": "What activation function is used in a Hopfield network?",
+    "options": [
+      "ReLU",
+      "Sigmoid",
+      "Softmax",
+      "Sign"
+    ],
+    "correct_answer": "Sign",
+    "hint": "Hopfield networks use binary outputs. What function produces binary results?",
+    "explanation": "The Sign activation function is used in Hopfield networks. Hopfield Network Characteristics: (1) Recurrent neural network, (2) Auto-associative memory, (3) Binary outputs (0 and 1, or -1 and +1), (4) Uses Sign function for binary classification. Sign Function: (1) Output = -1 if input < 0, (2) Output = +1 if input > 0, (3) Produces binary classification, (4) Threshold at zero. Why Sign for Hopfield: (1) Binary memory storage, (2) Convergence to stable states, (3) Implements attractors, (4) Pattern recognition capability. Hopfield Network Operation: (1) Update rule: If sum of weighted inputs > threshold, fire 1, (2) Energy function minimization, (3) Converges to stable patterns, (4) Used for pattern completion. Comparison with Other Functions: (1) ReLU - f(x) = max(0,x), continuous, (2) Sigmoid - f(x) = 1/(1+e^-x), smooth 0-1 output, (3) Softmax - Probabilistic multi-class output, (4) Sign - Binary discrete output. Network Properties: (1) Bidirectional connections (recurrent), (2) Symmetric weights, (3) Diagonal zeros (no self-connections), (4) Can store multiple patterns. Learning Process: (1) Hebb rule for weight learning, (2) Can memorize patterns, (3) Noise tolerance, (4) Limited storage capacity. Applications: (1) Pattern recognition, (2) Content-addressable memory, (3) Optimization problems, (4) Image restoration. Limitations: (1) Local minima (spurious patterns), (2) Limited storage capacity, (3) Slow convergence, (4) Binary restriction. This demonstrates activation function selection for specific network architectures.",
+    "chapter": "Neural Networks",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 12,
+    "question": "What stores data in a flip-flop (FF)?",
+    "options": [
+      "Output",
+      "Input",
+      "Memory",
+      "Data"
+    ],
+    "correct_answer": "Memory",
+    "hint": "Flip-flops are the basic memory element in digital electronics. They store bits of information.",
+    "explanation": "Memory stores data in a flip-flop. Flip-Flop Function: (1) Basic memory element in digital circuits, (2) Can store one bit of data (0 or 1), (3) Retains state until changed by input signal, (4) Fundamental building block of sequential logic. Memory Concept in Flip-Flops: (1) Bistable element - Two stable states, (2) State Q - Stores one bit, (3) State NOT Q - Complement, (4) Maintains state between clock pulses. How Memory Works: (1) Present input changes state, (2) New state becomes the stored value, (3) Retains this value until next input, (4) Output reflects stored state. Types of Flip-Flops: (1) SR (Set-Reset) - Two inputs, (2) JK - More versatile, (3) D (Data) - Captures input at clock edge, (4) T (Toggle) - Toggles on each pulse. Why Each Element: (1) Output - Reflects current state (data), (2) Input - Changes the state, (3) Memory - Stores the state, (4) Data - General term for stored information. Storage Mechanism: (1) Cross-coupled gates create bistability, (2) Two logic states stable (Q=1, Q'=0 or Q=0, Q'=1), (3) Circuit remains in state until forced to change. Applications: (1) Counters - Store count value, (2) Registers - Store multiple bits, (3) Shift registers - Store and move data, (4) State machines - Store current state. Electronic Implementation: (1) Using NAND gates (SR flip-flop), (2) Using transistors (more efficient), (3) Integrated circuits (SSI), (4) FPGA implementation. Timing: (1) Level-triggered - Responds to signal level, (2) Edge-triggered - Responds to transitions, (3) Clock control - Synchronous operation, (4) Setup/hold times - Timing constraints. This demonstrates understanding of sequential logic memory storage.",
+    "chapter": "Digital Electronics",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 13,
+    "question": "Learning using labelled data is called?",
+    "options": [
+      "Supervised learning",
+      "Unsupervised learning",
+      "Reinforcement learning",
+      "Semi-supervised learning"
+    ],
+    "correct_answer": "Supervised learning",
+    "hint": "When training data has correct answers (labels), which learning method uses this?",
+    "explanation": "Learning using labelled data is called Supervised learning. Supervised Learning Concept: (1) Training data has input-output pairs, (2) Model learns to map inputs to correct outputs, (3) Teacher provides correct answers (labels), (4) Goal - Minimize prediction error. Data Structure: (1) Input features (X) - Independent variables, (2) Output labels (Y) - Correct answers, (3) Training set - Data for learning, (4) Test set - Data for evaluation. Learning Process: (1) Present input-output pair, (2) Model predicts output, (3) Compare with actual output, (4) Adjust model to reduce error. Types of Supervised Learning: (1) Regression - Continuous output (house price), (2) Classification - Discrete output (spam/not spam), (3) Multi-class - Multiple categories (image labels), (4) Multi-label - Multiple outputs per input. Algorithms: (1) Decision Trees - Hierarchical decisions, (2) Support Vector Machines - Optimal boundary finding, (3) Neural Networks - Pattern learning, (4) Regression - Linear/polynomial fitting. Example: (1) Email filter - Labeled spam/not spam emails, (2) Image recognition - Labeled image categories, (3) Medical diagnosis - Labeled patient outcomes, (4) Stock prediction - Historical prices and trends. Advantages: (1) Generally more accurate, (2) Well-defined success metric, (3) Faster convergence, (4) Better generalization. Disadvantages: (1) Requires labeled data, (2) Expensive to obtain labels, (3) Limited to available labels, (4) Errors in labels propagate. vs Other Learning Types: (1) Unsupervised - No labels, find patterns, (2) Reinforcement - Agent learns through rewards, (3) Semi-supervised - Mix of labeled and unlabeled. Data Requirements: (1) Quality labels crucial, (2) Representative sampling needed, (3) Class balance important, (4) Label consistency required. This is the most common machine learning paradigm.",
+    "chapter": "Machine Learning",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 14,
+    "question": "Actions on the environment are done by?",
+    "options": [
+      "Sensor",
+      "Performance",
+      "Actuators",
+      "Controller"
+    ],
+    "correct_answer": "Actuators",
+    "hint": "Sensors detect changes. What makes changes happen in the environment?",
+    "explanation": "Actions on the environment are done by Actuators. AI Agent Architecture: (1) Agent - Perceives environment, takes actions, (2) Sensor - Perceives environment (input), (3) Actuator - Performs actions (output), (4) Controller - Decides what to do. Actuator Functions: (1) Mechanical movement - Motors, joints, (2) Environmental change - Heating, cooling, opening, (3) Output signals - Controlling other systems, (4) Physical interaction - Manipulating objects. Examples of Actuators: (1) Robot arm - Movement actuators, (2) Motor - Rotating or linear motion, (3) Valve - Controlling flow, (4) Speaker - Sound generation, (5) Light - Visual output. Sensor vs Actuator: (1) Sensor - Input device, (2) Actuator - Output device, (3) Together form agent interaction, (4) Feedback loop - Sensor→Control→Actuator. Control Loop: (1) Sense current state (Sensor), (2) Decide action (Controller), (3) Perform action (Actuator), (4) Observe result (Sensor), (5) Repeat. Performance Consideration: (1) Agent performance - How well objectives met, (2) Not an action mechanism, (3) Measure of success, (4) Evaluation metric. Types of Actuators: (1) Electric - Most common, fast, (2) Hydraulic - High power, (3) Pneumatic - Quick response, (4) Thermal - Heat generation. Robotics: (1) Actuators power robots, (2) Multiple actuators for complex tasks, (3) Coordination is key, (4) Precision and control important. Smart Systems: (1) Home automation - Lights, locks, thermostats, (2) Industrial control - Manufacturing equipment, (3) Autonomous vehicles - Steering, acceleration, braking, (4) Medical - Surgical robots. Real-world Applications: (1) Self-driving cars - Steering/braking actuators, (2) Drones - Motor actuators, (3) Smart homes - Light and door actuators, (4) Manufacturing - Robot arms. This demonstrates understanding of agent-environment interaction in AI systems.",
+    "chapter": "Artificial Intelligence",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 15,
+    "question": "The Nepal Electricity Corporation (NEC) can be closed by the Government of Nepal (GoN) if?",
+    "options": [
+      "BC < 0",
+      "BC > 1",
+      "BC = 0",
+      "CB < 0"
+    ],
+    "correct_answer": "BC > 1",
+    "hint": "BC is Benefit-Cost ratio. When is a project acceptable economically?",
+    "explanation": "Note: This question seems to have context issues. Based on project economics: The project is acceptable when BC > 1 (Benefit-Cost Ratio greater than 1). Benefit-Cost Analysis: (1) BC ratio = Total Benefits / Total Costs, (2) BC > 1 - Project acceptable (benefits exceed costs), (3) BC = 1 - Break-even point, (4) BC < 1 - Project not viable (costs exceed benefits). Project Evaluation: (1) If BC > 1 - Project generates value, (2) If BC < 1 - Project loses value, (3) Higher BC - Better investment, (4) Compare multiple projects by BC ratio. The Correct Answer (BC > 1): (1) Indicates project is economically viable, (2) Returns exceed investments, (3) Should proceed with project, (4) Common threshold in engineering economics. Why For Closure: (1) If BC < 1 consistently - Project unprofitable, (2) Closure decision when benefits < costs, (3) Long-term viability assessment, (4) Regulatory requirements may mandate closure. Calculation Example: (1) Benefits = $100, Costs = $80, (2) BC = 100/80 = 1.25 > 1, (3) Project viable, (4) Continue operations. Other Ratios: (1) NPV (Net Present Value) - Absolute dollar comparison, (2) IRR (Internal Rate of Return) - Percentage return, (3) Payback Period - Time to recover investment. Government Agency Context: (1) Public utilities must be economically viable, (2) Regulators monitor financial performance, (3) Closure if persistent losses, (4) Restructuring to improve BC ratio. Economic Viability: (1) Sustained operation requires BC > 1, (2) Falling BC ratio warns of troubles, (3) Intervention at BC approaching 1, (4) Restructuring before BC < 1. This demonstrates project evaluation and governance principles.",
+    "chapter": "Engineering Economics & Project Management",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 16,
+    "question": "The standard deviation is?",
+    "options": [
+      "Variance^0.5",
+      "Variance^2",
+      "Variance^0.5",
+      "Variance^0.25"
+    ],
+    "correct_answer": "Variance^0.5",
+    "hint": "Standard deviation measures spread of data. It's the square root of something fundamental.",
+    "explanation": "The standard deviation is the square root of variance, or Variance^0.5. Statistical Measures: (1) Variance - Average squared deviation from mean, (2) Standard Deviation - Square root of variance, (3) Both measure data spread, (4) Different units and scales. Mathematical Definition: (1) Variance σ² = Σ(xi - mean)² / n, (2) Standard Deviation σ = √Variance = √(σ²), (3) For sample: divide by (n-1) not n, (4) Result in same units as data. Why Square Root: (1) Variance uses squared deviations (quadratic units), (2) Square root brings back to original units, (3) Standard deviation more interpretable, (4) Standard for statistical reporting. Numerical Example: (1) Data: 2, 4, 6, 8, 10, (2) Mean = 6, (3) Deviations: -4, -2, 0, 2, 4, (4) Squared: 16, 4, 0, 4, 16, (5) Variance = 40/5 = 8, (6) Standard Deviation = √8 ≈ 2.83. Properties: (1) Always non-negative, (2) Same units as data, (3) Larger spread → larger standard deviation, (4) Can be compared across datasets. Uses: (1) Confidence intervals - ±1 SD ≈ 68% data, (2) Anomaly detection - Values > 3 SD are outliers, (3) Quality control - Process variation, (4) Finance - Risk measurement (volatility). Why Not Other Options: (1) Variance^2 - Would be variance squared, (2) Variance^0.25 - Fourth root, no statistical meaning, (3) Wrong formula doesn't match relationship. Normal Distribution: (1) 68% within ±1 SD, (2) 95% within ±2 SD, (3) 99.7% within ±3 SD, (4) SD defines distribution shape. This is fundamental statistical concept used widely.",
+    "chapter": "Statistics & Data Analysis",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 17,
+    "question": "Which diagram describes the vocabulary of a system?",
+    "options": [
+      "Object Diagram",
+      "Class Diagram",
+      "Interaction Diagram",
+      "Activity Diagram"
+    ],
+    "correct_answer": "Class Diagram",
+    "hint": "Vocabulary = types of things and their relationships. Which UML diagram shows this?",
+    "explanation": "Class Diagram describes the vocabulary of a system in UML (Unified Modeling Language). UML Diagram Types: (1) Class Diagram - Static structure, vocabulary, (2) Object Diagram - Instance snapshots, (3) Interaction Diagram - Message sequence, (4) Activity Diagram - Workflow, behavior. Class Diagram Purpose: (1) Defines vocabulary - Classes, attributes, methods, (2) Shows relationships - Inheritance, association, (3) Describes static structure, (4) Blueprint for implementation. What Class Diagram Shows: (1) Classes - Types of objects in system, (2) Attributes - Data members, (3) Methods - Operations/functions, (4) Relationships - How classes relate, (5) Multiplicity - How many instances. Example Components: (1) Box representing class, (2) Class name at top, (3) Attributes in middle section, (4) Methods in bottom section. Relationships Shown: (1) Inheritance (is-a) - Arrow with triangle, (2) Association - Line between classes, (3) Aggregation - Weak composition, (4) Composition - Strong containment, (5) Dependency - Dashed arrow. Why 'Vocabulary': (1) Defines system terminology, (2) Identifies object types, (3) Shows attribute types, (4) Explains relationships, (5) Communication tool between teams. Example: Student-Course System (1) Student class - name, ID, GPA, (2) Course class - code, title, credits, (3) Relationship: Student enrolls in Course. Other Diagrams: (1) Object Diagram - Shows specific instances at runtime, (2) Interaction Diagram - Shows communication between objects, (3) Activity Diagram - Shows workflow and actions. Notation Elements: (1) Visibility: + public, - private, # protected, (2) Multiplicity: 1, 0..1, *, 1..*. Practical Use: (1) Design phase - Plan system structure, (2) Documentation - System design record, (3) Communication - Stakeholder understanding, (4) Code generation - From diagrams to code. This demonstrates UML understanding for system design.",
+    "chapter": "Software Engineering & UML",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  },
+  {
+    "id": 18,
+    "question": "If a circle's circumference is to be translated to a new point, what should be translated?",
+    "options": [
+      "Centre",
+      "Centre with Radius",
+      "Outline Points",
+      "Radius"
+    ],
+    "correct_answer": "Centre",
+    "hint": "Translation moves objects uniformly. A circle is defined by its center and radius.",
+    "explanation": "To translate a circle to a new point, the Centre should be translated. Translation Concept: (1) Geometric transformation that moves objects, (2) All points move same distance and direction, (3) Preserves shape and size, (4) Defined by translation vector (Δx, Δy). Circle Definition: (1) A circle is defined by center (h, k) and radius r, (2) All points equidistant from center, (3) Equation: (x-h)² + (y-k)² = r². Why Only Centre Needs Translation: (1) Circle defined by two parameters: center and radius, (2) Radius unchanged in translation, (3) Only center position changes, (4) Radius remains the same distance from new center. Translation of Circle: (1) Old circle: center C1(h1, k1), radius r, (2) New circle: center C2(h2, k2), radius r, (3) All points move by vector (h2-h1, k2-k1), (4) Radius unchanged. Mathematical Representation: (1) New center = old center + translation vector, (2) C' = C + T = (h+Δx, k+Δy), (3) Radius r' = r (unchanged). Boundary Points Translation: (1) Outline points also translate by same vector, (2) But not necessary to specify - Center determines circle, (3) Once center translated, circle shape automatically moves. Why Not Other Options: (1) Centre with Radius - Radius stays same, not translated, (2) Outline Points - All move same, redundant to specify all, (3) Radius alone - Wouldn't move circle, changes size. Properties Preserved: (1) Shape - Circle remains circle, (2) Size - Radius unchanged, (3) Orientation - No rotation, (4) Distance - Between any two points same. Application: (1) Computer graphics - Moving shapes, (2) CAD systems - Relocating designs, (3) Animation - Moving objects, (4) Geometric proofs - Transformation properties. Multiple Translations: (1) Can apply multiple translations sequentially, (2) Net effect is sum of vectors, (3) Order doesn't matter (commutative), (4) Inverse translation reverses. This demonstrates transformation geometry principles.",
+    "chapter": "Computer Graphics & Geometry",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "Past Questions Collection"
+  }
+]

@@ -95,6 +95,10 @@ export default function AnalyticsPage() {
   const chapterwiseSessions = filterSessionsByExamMode(practiceSessions, 'chapterwise');
   const quickTestSessions = filterSessionsByExamMode(practiceSessions, 'quick-test');
   const fullTestSessions = filterSessionsByExamMode(practiceSessions, 'full-test');
+  const officialQuickTestSessions = filterSessionsByExamMode(practiceSessions, 'official-quick-test');
+  const officialFullTestSessions = filterSessionsByExamMode(practiceSessions, 'official-full-test');
+  const pastQuickTestSessions = filterSessionsByExamMode(practiceSessions, 'past-quick-test');
+  const pastFullTestSessions = filterSessionsByExamMode(practiceSessions, 'past-full-test');
   
   // Calculate stats for each mode
   const overallStats = calculateStatsForSessions(sessions);
@@ -103,6 +107,10 @@ export default function AnalyticsPage() {
   const chapterwiseStats = calculateStatsForSessions(chapterwiseSessions);
   const quickTestStats = calculateStatsForSessions(quickTestSessions);
   const fullTestStats = calculateStatsForSessions(fullTestSessions);
+  const officialQuickTestStats = calculateStatsForSessions(officialQuickTestSessions);
+  const officialFullTestStats = calculateStatsForSessions(officialFullTestSessions);
+  const pastQuickTestStats = calculateStatsForSessions(pastQuickTestSessions);
+  const pastFullTestStats = calculateStatsForSessions(pastFullTestSessions);
   
   // Calculate chapter stats
   const allChapterStats = calculateChapterStatsForSessions(sessions);
@@ -116,6 +124,10 @@ export default function AnalyticsPage() {
   const chapterwiseInsights = getModeSpecificInsights(chapterwiseSessions, 'practice', 'chapterwise');
   const quickTestInsights = getModeSpecificInsights(quickTestSessions, 'practice', 'quick-test');
   const fullTestInsights = getModeSpecificInsights(fullTestSessions, 'practice', 'full-test');
+  const officialQuickTestInsights = getModeSpecificInsights(officialQuickTestSessions, 'practice', 'official-quick-test');
+  const officialFullTestInsights = getModeSpecificInsights(officialFullTestSessions, 'practice', 'official-full-test');
+  const pastQuickTestInsights = getModeSpecificInsights(pastQuickTestSessions, 'practice', 'past-quick-test');
+  const pastFullTestInsights = getModeSpecificInsights(pastFullTestSessions, 'practice', 'past-full-test');
   
   // Get focus recommendations
   const focusRecommendations = getFocusRecommendations(allChapterStats);
@@ -437,6 +449,46 @@ export default function AnalyticsPage() {
               >
                 Full Test ({fullTestSessions.length})
               </button>
+              <button
+                onClick={() => setActivePracticeMode('official-quick-test')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePracticeMode === 'official-quick-test'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Official Quick ({officialQuickTestSessions.length})
+              </button>
+              <button
+                onClick={() => setActivePracticeMode('official-full-test')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePracticeMode === 'official-full-test'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Official Full ({officialFullTestSessions.length})
+              </button>
+              <button
+                onClick={() => setActivePracticeMode('past-quick-test')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePracticeMode === 'past-quick-test'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Past Quick ({pastQuickTestSessions.length})
+              </button>
+              <button
+                onClick={() => setActivePracticeMode('past-full-test')}
+                className={`px-4 py-2 text-sm font-medium transition-colors ${
+                  activePracticeMode === 'past-full-test'
+                    ? 'border-b-2 border-[#ea580c] text-[#ea580c]'
+                    : 'text-gray-500 dark:text-gray-400 hover:text-foreground'
+                }`}
+              >
+                Past Full ({pastFullTestSessions.length})
+              </button>
             </div>
 
             {/* All Practice Mode */}
@@ -651,6 +703,114 @@ export default function AnalyticsPage() {
                   <div className="text-center py-12">
                     <p className="text-gray-500 dark:text-gray-400 mb-4">No full test data yet</p>
                     <Link href="/practice" className="text-[#ea580c] hover:underline">Take a Full Test</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Official Quick Test Mode */}
+            {activePracticeMode === 'official-quick-test' && (
+              <div className="space-y-8">
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Official Quick Test Statistics</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Questions', officialQuickTestStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${officialQuickTestStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Avg Time', formatTime(officialQuickTestStats.averageTimePerQuestion || 0))}
+                    {renderStatsCard('Sessions', officialQuickTestSessions.length)}
+                  </div>
+                </section>
+                {officialQuickTestInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(officialQuickTestInsights)}
+                  </section>
+                )}
+                {officialQuickTestSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No official quick test data yet</p>
+                    <Link href="/practice" className="text-[#ea580c] hover:underline">Take an Official Quick Test</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Official Full Test Mode */}
+            {activePracticeMode === 'official-full-test' && (
+              <div className="space-y-8">
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Official Full Test Statistics</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Questions', officialFullTestStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${officialFullTestStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Avg Time', formatTime(officialFullTestStats.averageTimePerQuestion || 0))}
+                    {renderStatsCard('Sessions', officialFullTestSessions.length)}
+                  </div>
+                </section>
+                {officialFullTestInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(officialFullTestInsights)}
+                  </section>
+                )}
+                {officialFullTestSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No official full test data yet</p>
+                    <Link href="/practice" className="text-[#ea580c] hover:underline">Take an Official Full Test</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Past Quick Test Mode */}
+            {activePracticeMode === 'past-quick-test' && (
+              <div className="space-y-8">
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Past Quick Test Statistics</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Questions', pastQuickTestStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${pastQuickTestStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Avg Time', formatTime(pastQuickTestStats.averageTimePerQuestion || 0))}
+                    {renderStatsCard('Sessions', pastQuickTestSessions.length)}
+                  </div>
+                </section>
+                {pastQuickTestInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(pastQuickTestInsights)}
+                  </section>
+                )}
+                {pastQuickTestSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No past quick test data yet</p>
+                    <Link href="/practice" className="text-[#ea580c] hover:underline">Take a Past Quick Test</Link>
+                  </div>
+                )}
+              </div>
+            )}
+
+            {/* Past Full Test Mode */}
+            {activePracticeMode === 'past-full-test' && (
+              <div className="space-y-8">
+                <section>
+                  <h2 className="text-2xl font-semibold text-foreground mb-6">Past Full Test Statistics</h2>
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    {renderStatsCard('Questions', pastFullTestStats.totalQuestions)}
+                    {renderStatsCard('Accuracy', `${pastFullTestStats.accuracy.toFixed(1)}%`)}
+                    {renderStatsCard('Avg Time', formatTime(pastFullTestStats.averageTimePerQuestion || 0))}
+                    {renderStatsCard('Sessions', pastFullTestSessions.length)}
+                  </div>
+                </section>
+                {pastFullTestInsights.length > 0 && (
+                  <section>
+                    <h2 className="text-2xl font-semibold text-foreground mb-6">Insights</h2>
+                    {renderInsights(pastFullTestInsights)}
+                  </section>
+                )}
+                {pastFullTestSessions.length === 0 && (
+                  <div className="text-center py-12">
+                    <p className="text-gray-500 dark:text-gray-400 mb-4">No past full test data yet</p>
+                    <Link href="/practice" className="text-[#ea580c] hover:underline">Take a Past Full Test</Link>
                   </div>
                 )}
               </div>

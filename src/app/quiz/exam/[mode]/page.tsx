@@ -8,7 +8,7 @@ import {
   ExamMode,
   EXAM_CONFIG,
 } from "@/lib/types";
-import { loadQuestionsFromAllChapters } from "@/lib/questionUtils";
+import { loadQuestionsFromAllChapters, loadOfficialModelQuestions, loadPastQuestions } from "@/lib/questionUtils";
 import { startSession, recordAttempt, endSession } from "@/lib/analytics";
 import { useExamTimer } from "@/hooks/useExamTimer";
 import QuestionCard from "@/components/QuestionCard";
@@ -35,7 +35,10 @@ export default function ExamQuizPage() {
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
 
   const config =
-    mode === "quick-test" || mode === "full-test" ? EXAM_CONFIG[mode] : null;
+    mode === "quick-test" || mode === "full-test" || 
+    mode === "official-quick-test" || mode === "official-full-test" || mode === "official-random" ||
+    mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random"
+      ? EXAM_CONFIG[mode] : null;
   const currentQuestion = questions[currentQuestionIndex] || null;
   const selectedOption = selectedOptions.get(currentQuestionIndex) || null;
 
@@ -204,11 +207,21 @@ export default function ExamQuizPage() {
           }
         }
 
-        // If no retake session found, load new questions
+        // If no retake session found, load new questions based on mode
         if (loadedQuestions.length === 0) {
-          loadedQuestions = await loadQuestionsFromAllChapters(
-            examConfig.questionCount
-          );
+          if (mode === "official-quick-test" || mode === "official-full-test" || mode === "official-random") {
+            loadedQuestions = await loadOfficialModelQuestions(
+              examConfig.questionCount
+            );
+          } else if (mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random") {
+            loadedQuestions = await loadPastQuestions(
+              examConfig.questionCount
+            );
+          } else {
+            loadedQuestions = await loadQuestionsFromAllChapters(
+              examConfig.questionCount
+            );
+          }
         }
 
         if (!isMounted) return;
@@ -217,7 +230,9 @@ export default function ExamQuizPage() {
 
         // Start session only if we don't already have one
         if (!sessionId) {
-          const newSessionId = sessionToUse || await startSession("all-chapters", mode, loadedQuestions);
+          const topicName = mode.startsWith("official") ? "official-model-questions" :
+                           mode.startsWith("past") ? "past-questions" : "all-chapters";
+          const newSessionId = sessionToUse || await startSession(topicName, mode, loadedQuestions);
           if (!isMounted) return;
 
           setSessionId(newSessionId);
@@ -419,7 +434,14 @@ export default function ExamQuizPage() {
           <div className="flex justify-between items-center mb-2">
             <div className="flex items-center gap-4">
               <span className="text-sm font-semibold text-foreground">
-                {mode === "quick-test" ? "Quick Test" : "Full Test"}
+                {mode === "quick-test" ? "Quick Test" : 
+                 mode === "full-test" ? "Full Test" :
+                 mode === "official-quick-test" ? "Official Quick Test" :
+                 mode === "official-full-test" ? "Official Full Test" :
+                 mode === "official-random" ? "Official Random Practice" :
+                 mode === "past-quick-test" ? "Past Quick Test" :
+                 mode === "past-full-test" ? "Past Full Test" :
+                 mode === "past-random" ? "Past Random Practice" : "Exam"}
               </span>
               <span className="text-sm text-gray-500 dark:text-gray-500">
                 {answeredCount} / {questions.length} answered

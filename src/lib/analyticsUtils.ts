@@ -333,6 +333,38 @@ export function getModeSpecificInsights(
           priority: 'low',
         });
       }
+    } else if (examMode === 'official-quick-test' || examMode === 'official-full-test') {
+      if (stats.accuracy >= 75) {
+        insights.push({
+          type: 'strength',
+          title: 'Excellent Official Test Performance',
+          description: `You're performing well in official model questions with ${stats.accuracy.toFixed(1)}% accuracy. Keep it up!`,
+          priority: 'low',
+        });
+      } else if (stats.accuracy < 60) {
+        insights.push({
+          type: 'recommendation',
+          title: 'Focus on Official Questions',
+          description: `Official test accuracy is ${stats.accuracy.toFixed(1)}%. These are high-priority questions - review explanations carefully.`,
+          priority: 'high',
+        });
+      }
+    } else if (examMode === 'past-quick-test' || examMode === 'past-full-test') {
+      if (stats.accuracy >= 75) {
+        insights.push({
+          type: 'strength',
+          title: 'Strong Past Question Performance',
+          description: `You're performing well in past questions with ${stats.accuracy.toFixed(1)}% accuracy.`,
+          priority: 'low',
+        });
+      } else if (stats.accuracy < 60) {
+        insights.push({
+          type: 'recommendation',
+          title: 'Review Past Questions',
+          description: `Past question accuracy is ${stats.accuracy.toFixed(1)}%. These are important for exam preparation.`,
+          priority: 'high',
+        });
+      }
     }
   }
   

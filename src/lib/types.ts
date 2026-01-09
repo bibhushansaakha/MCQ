@@ -61,7 +61,7 @@ export interface QuestionAttempt {
   selectedOption?: string; // Store the selected option for review
 }
 
-export type ExamMode = 'chapterwise' | 'quick-test' | 'full-test';
+export type ExamMode = 'chapterwise' | 'quick-test' | 'full-test' | 'official-quick-test' | 'official-full-test' | 'official-random' | 'past-quick-test' | 'past-full-test' | 'past-random';
 
 export interface SessionData {
   sessionId: string;
@@ -117,6 +117,30 @@ export const EXAM_CONFIG = {
   'full-test': {
     questionCount: 100,
     timeLimit: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+  },
+  'official-quick-test': {
+    questionCount: 25,
+    timeLimit: 30 * 60 * 1000, // 30 minutes in milliseconds
+  },
+  'official-full-test': {
+    questionCount: 100,
+    timeLimit: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+  },
+  'past-quick-test': {
+    questionCount: 25,
+    timeLimit: 30 * 60 * 1000, // 30 minutes in milliseconds
+  },
+  'past-full-test': {
+    questionCount: 100,
+    timeLimit: 2 * 60 * 60 * 1000, // 2 hours in milliseconds
+  },
+  'official-random': {
+    questionCount: 50,
+    timeLimit: 60 * 60 * 1000, // 1 hour in milliseconds
+  },
+  'past-random': {
+    questionCount: 50,
+    timeLimit: 60 * 60 * 1000, // 1 hour in milliseconds
   },
 } as const;
 

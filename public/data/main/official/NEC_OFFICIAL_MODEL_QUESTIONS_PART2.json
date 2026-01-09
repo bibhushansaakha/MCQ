@@ -1,0 +1,271 @@
+[
+  {
+    "id": 34,
+    "question": "Which of the following clustering technique permits a convenient graphical display?",
+    "options": [
+      "Agglomerative clustering",
+      "Hierarchical clustering",
+      "Probabilistic model-based clustering",
+      "Partition-based clustering"
+    ],
+    "correct_answer": "Hierarchical clustering",
+    "hint": "Hierarchical clustering creates a tree-like structure called dendrogram, which is easy to visualize graphically.",
+    "explanation": "Hierarchical clustering permits convenient graphical display through dendrograms. A dendrogram is a tree-like diagram that shows the hierarchical clustering results clearly. Hierarchical clustering approaches: (1) Agglomerative (bottom-up) - Starts with individual points, merges closest pairs iteratively, (2) Divisive (top-down) - Starts with one cluster, recursively splits. Dendrogram visualization: (1) Horizontal axis - Data points or clusters, (2) Vertical axis - Distance/linkage criterion at which merging occurs, (3) Cutting horizontal line - Determines final number of clusters. Advantages of hierarchical clustering: (1) Produces dendrograms for visual analysis, (2) Reveals hierarchical relationships, (3) No need to specify cluster count beforehand, (4) Multiple granularity levels, (5) Can extract any number of clusters by cutting at different heights. Other clustering methods' visualization: (1) Partition-based (K-means) - Requires 2D/3D reduction for visualization, (2) Probabilistic (EM) - Requires separate visualization techniques, (3) Agglomerative - Same as hierarchical (generates dendrograms). Practical applications: (1) Gene expression analysis - Biological sample relationships, (2) Customer segmentation - Market analysis, (3) Species phylogeny - Evolutionary relationships. The dendrogram is one of the most intuitive visualizations in data analysis, making hierarchical clustering popular for exploratory data analysis.",
+    "chapter": "Chapter 6: Theory, Computation & Graphics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 35,
+    "question": "A straight line segment is translated by applying the transformation equation",
+    "options": ["P'P''", "Dx and Dy", "P''P'", "Cy"],
+    "correct_answer": "Dx and Dy",
+    "hint": "Translation moves objects without rotation or scaling. What parameters specify the displacement?",
+    "explanation": "A straight line segment is translated by applying translation parameters Dx (horizontal displacement) and Dy (vertical displacement). Translation transformation: (1) New point = Old point + (Dx, Dy), (2) Algebraically: P' = P + T = (x+Dx, y+Dy), (3) Matrix form: [x', y'] = [x, y] + [Dx, Dy]. Properties of translation: (1) Preserves line length and angles, (2) Preserves parallelism, (3) Does not change shape or orientation, (4) Moves all points by same amount. For a line segment with endpoints (x₁, y₁) and (x₂, y₂): (1) New endpoints: (x₁+Dx, y₁+Dy) and (x₂+Dx, y₂+Dy), (2) Length unchanged, (3) Direction unchanged. Translation parameters: (1) Dx - Horizontal shift (positive = right, negative = left), (2) Dy - Vertical shift (positive = up, negative = down). Applications: (1) Computer graphics - Moving objects on screen, (2) CAD systems - Repositioning drawings, (3) Animation - Moving objects over time, (4) Coordinate transformation. Combined transformations: (1) Translate then rotate - Different result than rotate then translate, (2) Multiple translations - Add displacement vectors. The notation P'P'' refers to homogeneous coordinates, and Cy is incorrect. Dx and Dy are the correct parameters for translation.",
+    "chapter": "Chapter 6: Theory, Computation & Graphics",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 36,
+    "question": "What does composite transformations means?",
+    "options": [
+      "Transformations that can be done in sequence",
+      "Transformations that cannot be done in sequence",
+      "Transformations that can be done simultaneously",
+      "Transformations that cannot be done simultaneously"
+    ],
+    "correct_answer": "Transformations that can be done in sequence",
+    "hint": "Composite means combining multiple operations. Can multiple transformations be applied one after another?",
+    "explanation": "Composite transformations refer to transformations that can be applied in sequence to produce combined effects. Concept: (1) Apply one transformation to produce intermediate result, (2) Apply another transformation to the intermediate result, (3) Final result is composite of all transformations. Example sequence: (1) Translate point P to origin (T₁), (2) Rotate around origin (R), (3) Translate back (T₂), (4) Final: P' = T₂(R(T₁(P))). Matrix representation: (1) Composite = M₃ × M₂ × M₁ × P, (2) Single composite matrix = product of individual matrices, (3) Can precompute composite matrix for efficiency. Important property: (1) Matrix multiplication is NOT commutative, (2) Order of transformations matters, (3) Translate-then-rotate ≠ Rotate-then-translate. Applications: (1) Complex object manipulations - Rotation about arbitrary point, (2) Animation sequences - Multiple transformations over time, (3) Hierarchical transformations - Parent-child object relationships, (4) Graphics pipelines - Standard rendering process. Standard composite for rotation about arbitrary point: (1) Translate to origin, (2) Rotate, (3) Translate back. Practical benefits: (1) Efficiency - Single matrix multiplication instead of multiple, (2) Simplicity - Expresses complex operations as sequence of simple ones, (3) Code clarity - Describes intentions step by step. This is fundamental to computer graphics and transformation theory.",
+    "chapter": "Chapter 6: Theory, Computation & Graphics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 37,
+    "question": "............................ level is where the model becomes compatible and executable code",
+    "options": [
+      "Abstract level",
+      "Application level",
+      "Implementation level",
+      "All of the above"
+    ],
+    "correct_answer": "Implementation level",
+    "hint": "Which level is where the model is actually realized as executable code?",
+    "explanation": "Implementation level is where the model becomes compatible and executable code. Design levels in software engineering: (1) Abstract level - Conceptual design, high-level specifications, independent of implementation details, (2) Application level - Business logic and workflows, domain-specific representations, (3) Implementation level - Concrete realization in actual programming language or hardware, executable code. At implementation level: (1) Abstract designs are translated into concrete code, (2) Platform-specific decisions are made, (3) Programming language is chosen, (4) Data structures and algorithms are implemented, (5) Code becomes compilable/interpretable and executable. Mapping process: (1) Abstract model → Implementation level design → Source code → Compiled/interpreted code, (2) Each step adds implementation details. Why implementation is different: (1) Language-specific - Java, C++, Python implementations differ, (2) Platform-specific - Different OS, architecture implementations, (3) Performance considerations - Optimizations at this level, (4) Constraints - Memory, processor, network limitations. Software development flow: (1) Requirements gathering → Abstract modeling, (2) System design → Abstract/application levels, (3) Detailed design → Implementation-ready specs, (4) Implementation → Executable code, (5) Testing and deployment. The term 'compatible' means compatible with target platform/language. The term 'executable' means can be run on target system. This is the critical transition from design to reality.",
+    "chapter": "Chapter 6: Theory, Computation & Graphics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 38,
+    "question": "What is the hash function used in the division method?",
+    "options": ["h(k) = k·m", "h(k) = k mod m", "h(k) = m·k", "h(k) = m mod k"],
+    "correct_answer": "h(k) = k mod m",
+    "hint": "Division method uses modulo operation to map keys to hash table positions.",
+    "explanation": "The division method hash function is: h(k) = k mod m, where k is the key and m is the hash table size. Division method characteristics: (1) Simple to implement - Just one modulo operation, (2) Fast computation - Direct calculation, (3) Widely used - Common in practice. How it works: (1) Divide key by table size (m), (2) Remainder is hash value, (3) Result is between 0 and m-1 (valid table indices). Example: (1) Table size m = 10, (2) Key k = 23, (3) h(23) = 23 mod 10 = 3, (4) Key stored at index 3. Choosing m (table size): (1) Avoid m as power of 2 - Poor distribution for binary keys, (2) Avoid m as power of 10 - Poor distribution for decimal keys, (3) Use prime number - Generally provides good distribution, (4) Example: m = 11, 13, 17, 19, 23 (primes) work well. Hash function quality: (1) Uniform distribution - Keys spread evenly across table, (2) Deterministic - Same key always produces same hash, (3) Fast computation - O(1) time. Load factor: (1) λ = n/m (n = number of keys, m = table size), (2) Affects collision frequency, (3) Typically keep λ < 0.75. Other hash methods: (1) Multiplication method - h(k) = ⌊m(kA mod 1)⌋, (2) Universal hashing - Multiple hash functions. Collision resolution: (1) Chaining - Store colliding keys in linked list, (2) Open addressing - Find another empty slot (linear probing, quadratic probing, double hashing). The division method is practical despite its simplicity.",
+    "chapter": "Chapter 7: Data Structures & OS",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 39,
+    "question": "Redundancy is reduced in a database table by using the ------------- form.",
+    "options": ["Abnormal", "Normal", "Special", "Exactly"],
+    "correct_answer": "Normal",
+    "hint": "Database normalization removes redundancy and improves data integrity through normal forms.",
+    "explanation": "Redundancy is reduced in database tables by using Normal form. Normalization is the process of organizing database design to reduce redundancy: (1) 1NF (First Normal Form) - Eliminate repeating groups, atomic values only, (2) 2NF (Second Normal Form) - Remove partial dependencies on composite keys, (3) 3NF (Third Normal Form) - Remove transitive dependencies, (4) BCNF (Boyce-Codd Normal Form) - Stricter than 3NF. Benefits of normalization: (1) Reduces data redundancy - Less storage space, (2) Improves data integrity - Eliminates anomalies, (3) Easier updates - No need to update multiple locations, (4) Prevents insert/update/delete anomalies. Normalization process: (1) Start with unnormalized data, (2) Apply rules progressively (1NF → 2NF → 3NF), (3) Each step removes certain types of dependencies. Example of denormalized vs normalized: Denormalized: (Student, Course, Grade, Professor), Normalized: Separate tables for Student, Course, Enrollment with foreign keys. Anomalies in denormalized data: (1) Insert anomaly - Cannot insert new course without student, (2) Update anomaly - Change one grade, must change in multiple places, (3) Delete anomaly - Deleting student removes course information. Trade-offs: (1) Normalization improves integrity but increases complexity, (2) Over-normalization (beyond 3NF) may hurt performance, (3) Denormalization may be necessary for specific queries. Most databases use 3NF as standard balance between normalization and performance.",
+    "chapter": "Chapter 7: Data Structures & OS",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 40,
+    "question": "It is advisable, to store the ---------before applying the actual transaction to the database.",
+    "options": ["Data", "Logs", "Receive", "Record"],
+    "correct_answer": "Logs",
+    "hint": "Recovery mechanisms require recording transaction information. What should be stored for backup/recovery?",
+    "explanation": "It is advisable to store Logs before applying the actual transaction to the database. Transaction logging (write-ahead logging): (1) Before any transaction is applied to database, (2) Write information about transaction to permanent log/storage, (3) Then apply transaction to database. Why logs are essential: (1) Recovery - If system crashes, use logs to recover state, (2) Atomicity - Ensure all-or-nothing transaction property, (3) Durability - Transactions persisted permanently. ACID properties related to logging: (1) Atomicity - All-or-nothing via commit/rollback (uses logs), (2) Consistency - Data relationships maintained (logs track changes), (3) Isolation - Concurrent transaction separation (logs track order), (4) Durability - Permanent once committed (logs backed up). Log contents: (1) Transaction ID - Identifies specific transaction, (2) Operation type - INSERT, UPDATE, DELETE, (3) Before-image - Original values, (4) After-image - New values, (5) Timestamp - When operation occurred. Logging strategies: (1) Write-ahead logging (WAL) - Log written before change to database, (2) Undo logging - Can rollback (undo) transactions, (3) Redo logging - Can recover (redo) transactions, (4) Undo-redo logging - Supports both. Recovery process: (1) Redo transactions in log if not completed, (2) Undo transactions if not committed, (3) Database restored to consistent state. Practical implementation: (1) Transaction log on separate disk - Survives disk failures, (2) Log shadowing - Duplicate copies, (3) Log archiving - Historical records for audit. This is critical for database reliability and is standard in all enterprise databases.",
+    "chapter": "Chapter 7: Data Structures & OS",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 41,
+    "question": "To enforce ............................... two functions are provided enter-critical and exit-critical, where each function takes as an argument the name of the resource that is the subject of competition.",
+    "options": [
+      "Mutual Exclusion",
+      "Synchronization",
+      "Deadlock",
+      "Starvation"
+    ],
+    "correct_answer": "Mutual Exclusion",
+    "hint": "Mutual exclusion prevents simultaneous access to shared resources. What do enter/exit critical sections enforce?",
+    "explanation": "To enforce Mutual Exclusion, two functions are provided: enter-critical and exit-critical. Mutual exclusion ensures only one process/thread accesses shared resource at a time. Critical section: (1) Code segment accessing shared resource, (2) Only one process can execute at a time, (3) Protected by locks/semaphores. Enter-critical function: (1) Called before accessing shared resource, (2) If resource free, allows entry and locks it, (3) If resource locked, process waits/blocks. Exit-critical function: (1) Called after using shared resource, (2) Unlocks the resource, (3) Allows waiting process to acquire resource. Example pseudocode: process1: enter-critical(resource); access shared resource; exit-critical(resource); Implementation mechanisms: (1) Semaphores - Counter-based synchronization, (2) Mutexes - Binary lock/unlock, (3) Monitors - Higher-level synchronization, (4) Spinlocks - Busy-wait locking. Problems without mutual exclusion: (1) Race condition - Unpredictable results from concurrent access, (2) Data corruption - Inconsistent state, (3) Lost updates - One process overwrites another's changes. Related concepts: (1) Synchronization - Coordinate multiple processes (broader term), (2) Deadlock - Mutual waiting (different problem), (3) Starvation - Process never gets resource (different problem). Practical importance: (1) Database transactions - Concurrent access control, (2) Operating systems - Process/thread management, (3) Embedded systems - Shared hardware resources, (4) Multithreading - Thread-safe code. Modern solutions: (1) Locks (explicit), (2) Atomic operations (implicit), (3) Message passing - Avoids shared resources.",
+    "chapter": "Chapter 7: Data Structures & OS",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 42,
+    "question": "If you wanted to require that a user enter an Administrator password to perform administrative tasks, what type of user account should you create for the user?",
+    "options": [
+      "Administrator User account",
+      "Standard User account",
+      "Power User account",
+      "Authenticated User account"
+    ],
+    "correct_answer": "Standard User account",
+    "hint": "Standard users require elevated privileges (password) for admin tasks. Admins have unrestricted access.",
+    "explanation": "You should create a Standard User account if you want to require that users enter an Administrator password to perform administrative tasks. User account types in Windows: (1) Administrator account - Full unrestricted system access, no prompt needed for admin tasks, (2) Standard account - Limited permissions, prompted for admin password (UAC prompt) to perform admin tasks, (3) Power User - Intermediate privileges (less common in modern Windows), (4) Guest account - Very limited, temporary access. Standard User account benefits: (1) Security - Limits unintended system changes, (2) Protection from malware - Restricted from modifying system files, (3) User privilege separation - Standard vs admin tasks, (4) Audit trail - Admin actions logged separately. UAC (User Account Control) mechanism: (1) Standard user attempts admin task, (2) UAC prompt appears requesting admin credentials, (3) Admin password entered, (4) Task elevated and executed. Security implications: (1) Administrator accounts - Only for actual administrators, (2) Standard accounts - Most users should use these, (3) Run with lowest necessary privileges - Security principle, (4) Separate daily work account from admin account - Best practice. Real-world usage: (1) Enterprise environments - Users in Standard group, (2) Personal computers - Should have standard account for daily use, admin account for maintenance. Administrative task examples: (1) Install/uninstall software, (2) Modify system settings, (3) Access protected files, (4) Manage other user accounts. This principle of least privilege is fundamental to system security.",
+    "chapter": "Chapter 7: Data Structures & OS",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 43,
+    "question": "The process to gather the software requirements from client, analyze and document them is known as.",
+    "options": [
+      "Feasibility Study",
+      "Requirement Gathering",
+      "Requirement Engineering",
+      "System Requirements Specification"
+    ],
+    "correct_answer": "Requirement Engineering",
+    "hint": "Requirements engineering encompasses the entire process of gathering, analyzing, and documenting requirements.",
+    "explanation": "Requirement Engineering is the process of gathering software requirements from client, analyzing them, and documenting them. Requirements engineering is a core phase in software development lifecycle: (1) Gathers requirements from stakeholders, (2) Analyzes requirements for feasibility, consistency, completeness, (3) Documents requirements formally, (4) Manages requirement changes. Activities in requirements engineering: (1) Elicitation - Gather requirements through interviews, questionnaires, observation, (2) Analysis - Organize, evaluate, prioritize requirements, (3) Documentation - Create formal specification documents, (4) Validation - Ensure requirements meet needs, (5) Management - Track and control requirement changes. Requirements types: (1) Functional requirements - What system does (features, calculations, actions), (2) Non-functional requirements - How system works (performance, reliability, security), (3) Constraints - Budget, technology, time. Related but different concepts: (1) Feasibility study - Preliminary evaluation if project is viable, (2) Requirement gathering - Part of requirements engineering, (3) System Requirements Specification (SRS) - Document produced by requirements engineering. Requirements engineering output: (1) SRS (Software Requirements Specification) document - Formal specification, (2) Use cases - User interactions, (3) Acceptance criteria - Success measures. Why requirements engineering matters: (1) Prevents scope creep - Clear documented boundaries, (2) Reduces costly changes later - Early identification of issues, (3) Improves quality - Clear expectations reduce defects, (4) Enables planning - Accurate estimation and scheduling. Modern approaches: (1) Waterfall - Formal requirements upfront, (2) Agile - Iterative requirements refinement, (3) Hybrid - Combine approaches. Poor requirements engineering leads to: (1) Project failure, (2) Cost overruns, (3) Unsatisfied clients, (4) Poor quality software.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 44,
+    "question": "What is reference architecture?",
+    "options": [
+      "It is a reference model mapped onto software components",
+      "It provides data flow with comments",
+      "It provides data flow with pieces",
+      "It is a reference model mapped onto software components data flow with comments"
+    ],
+    "correct_answer": "It is a reference model mapped onto software components",
+    "hint": "Reference architecture maps abstract models to concrete software components for implementation.",
+    "explanation": "Reference architecture is a reference model mapped onto software components. Architecture concepts: (1) Reference model - Abstract, conceptual model of system architecture independent of technology, (2) Reference architecture - Takes reference model and maps it to concrete software components, technologies, and frameworks, (3) System architecture - Specific implementation for particular system. Reference architecture bridge: (1) Provides guidance for actual system development, (2) Maps abstract concepts to implementation technologies, (3) Shows component interactions and relationships, (4) Serves as blueprint for development teams. Characteristics of reference architecture: (1) Technology-agnostic initially, but maps to specific technologies, (2) Component-based - Defines software components, (3) Pattern-based - Uses established patterns, (4) Guidance for implementation - Shows how to build actual systems. Benefits: (1) Consistency - Multiple systems follow same architecture, (2) Knowledge transfer - Teams understand common structure, (3) Best practices - Incorporates proven patterns, (4) Maintenance - Easier to maintain standardized architecture. Examples: (1) MVC architecture - Model-View-Controller reference architecture, (2) SOA - Service-oriented architecture reference, (3) Cloud reference architectures - AWS, Azure, GCP templates. Relationship to design: (1) Reference architecture guides detailed design, (2) Detailed design implements specific system, (3) Architecture shows component structure, (4) Design shows implementation details. Real-world usage: (1) Enterprise architecture - Organizational software strategy, (2) Product families - Multiple products sharing architecture, (3) Technology migration - Guide updating systems. Option D is technically describing the same thing more verbosely, but option A is the most concise correct answer.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 45,
+    "question": "Which of the following testing is sometime called as Acceptance testing?",
+    "options": [
+      "White-box testing",
+      "Grey box testing",
+      "Alpha testing",
+      "Beta testing"
+    ],
+    "correct_answer": "Beta testing",
+    "hint": "Beta testing is done by end users in real environment. Acceptance testing validates if system meets requirements.",
+    "explanation": "Beta testing is sometimes called Acceptance testing. Testing types and their purposes: (1) Alpha testing - Internal testing by development/QA team before release, closed environment, (2) Beta testing - Limited release to end users, real-world environment, gathers user feedback, sometimes called acceptance testing, (3) White-box testing - Tests internal code structure, requires code knowledge, (4) Grey box testing - Tests with some knowledge of internal structure. Why beta testing is acceptance testing: (1) End users validate if system meets their needs, (2) Tests in real-world conditions (not controlled lab), (3) Determines if system is acceptable for production, (4) User feedback on functionality, performance, usability. Alpha vs Beta: (1) Alpha - Controlled by development team, many defects acceptable, (2) Beta - Limited external users, fewer defects, closer to production quality. Acceptance criteria: (1) Functionality requirements met, (2) Performance acceptable, (3) Usability satisfactory, (4) No critical defects. Related testing: (1) User Acceptance Testing (UAT) - Formal acceptance testing, (2) System testing - Tests complete system before release, (3) Integration testing - Tests component interactions, (4) Unit testing - Tests individual units. Testing sequence: (1) Unit → Integration → System → UAT → Alpha → Beta → Release. Modern perspectives: (1) Continuous testing - Testing throughout development, (2) DevOps - Automated testing in pipeline, (3) Agile - Testing in sprints, (4) User involvement - Early and continuous feedback. Why acceptance testing matters: (1) Prevents wrong product release, (2) Catches real-world issues, (3) Validates business requirements, (4) Improves quality before general release.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 46,
+    "question": "What is the purpose of representing system behaviour in OOAD?",
+    "options": [
+      "To document system architecture and components",
+      "To identify potential risks and challenges",
+      "To understand and model the dynamic aspects of the system",
+      "To create user interfaces and interactions"
+    ],
+    "correct_answer": "To understand and model the dynamic aspects of the system",
+    "hint": "System behavior describes how the system acts over time. What does behavior representation model?",
+    "explanation": "The purpose of representing system behavior in OOAD (Object-Oriented Analysis and Design) is to understand and model the dynamic aspects of the system. System behavior vs structure: (1) Structure - What components exist (static view) - class diagrams, (2) Behavior - How components interact over time (dynamic view) - sequence diagrams, state diagrams. Behavior representation techniques in OOAD: (1) Sequence diagrams - Show object interactions in sequence, (2) State diagrams - Show state changes and transitions, (3) Activity diagrams - Show workflow and activities, (4) Collaboration diagrams - Show interactions in space. Why behavior is important: (1) Completes understanding beyond structure, (2) Reveals design issues - Interactions may show problems, (3) Enables verification - Can check if behavior meets requirements, (4) Guides implementation - Clear behavior helps coding, (5) Improves communication - Visualizes complex interactions. What behavior includes: (1) Object interactions - Message passing between objects, (2) State changes - How objects change state, (3) Event handling - Response to events, (4) Timing - Sequence and concurrency of operations. Related but different purposes: (1) Architecture/components documentation - Structural representation, (2) Risk identification - Different analysis, (3) UI/interaction creation - Different phase of design. Practical example: (1) E-commerce system structure - User, Order, Payment classes, (2) E-commerce behavior - User creates order, payment processed, order fulfilled (shows dynamics). Implementation impact: (1) Guides code structure - How methods call each other, (2) Identifies missing classes/methods - Revealed in behavior analysis, (3) Helps concurrency design - Multiple threads/processes. Modern development: (1) Agile uses simpler representations, (2) Still important for complex systems, (3) Automated tools generate from code.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 47,
+    "question": "In object-oriented design, what does visibility refer to?",
+    "options": [
+      "The physical appearance of an object",
+      "The accessibility of class members from other parts of the program",
+      "The process of creating instances of classes",
+      "The relationship between classes in a system"
+    ],
+    "correct_answer": "The accessibility of class members from other parts of the program",
+    "hint": "Visibility controls who can access class members. What determines this scope?",
+    "explanation": "In object-oriented design, visibility refers to the accessibility of class members (attributes and methods) from other parts of the program. Visibility levels: (1) Private - Accessible only within the class, (2) Protected - Accessible within class and derived classes, (3) Public - Accessible from anywhere, (4) Package/Internal - Accessible within same package (language-dependent). How visibility works: (1) Restricts access to class internals, (2) Enforces encapsulation - Hide implementation details, (3) Provides interface - Define what's public API, (4) Prevents misuse - Hide methods not meant for external use. Example: class BankAccount { private double balance; // Only accessible within class public void deposit(double amount) { // Accessible from anywhere balance += amount; } }; Why visibility matters: (1) Encapsulation - Hide internal state, (2) Maintainability - Can change internal implementation without affecting external code, (3) Security - Prevent unintended access/modification, (4) Interface clarity - Clear API for users of class. Different from: (1) Physical appearance - Refers to visual representation, not access, (2) Instance creation - Separate from visibility, (3) Relationships - Separate concept (inheritance, composition). Visibility hierarchy: (1) Most restrictive - Private (only class), (2) More permissive - Protected (class + subclasses), (3) Least restrictive - Public (everywhere). Best practices: (1) Make data members private, (2) Provide public getter/setter methods if needed, (3) Public for methods that form interface, (4) Protected for methods subclasses need. Visibility in UML diagrams: (1) Private: -, (2) Protected: #, (3) Public: +, (4) Package: ~. This is fundamental to object-oriented design quality.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 48,
+    "question": "How are relationships between classes represented when mapping design to code?",
+    "options": [
+      "Through inheritance and implementation of interfaces",
+      "Through the use of composition and aggregation",
+      "Through static method calls and global variables",
+      "Through conditional statements and loops"
+    ],
+    "correct_answer": "Through inheritance and implementation of interfaces",
+    "hint": "Design relationships (inheritance, implementation) map to code structures.",
+    "explanation": "Relationships between classes are represented when mapping design to code through inheritance and implementation of interfaces. How relationships map to code: (1) Inheritance (is-a relationship) - Subclass extends superclass using 'extends' keyword, (2) Implementation (implements relationship) - Class implements interface using 'implements' keyword, (3) Composition (has-a relationship) - One object contains another as member, (4) Aggregation (weak has-a) - Similar to composition but looser coupling. Code examples: (1) Inheritance: class Dog extends Animal { }, (2) Interface: class Car implements Vehicle { }, (3) Composition: class Car { private Engine engine; }, (4) Association: relationships between independent classes. UML to code mapping: (1) Generalization (inheritance arrow) → extends keyword, (2) Realization (dashed line) → implements keyword, (3) Composition (filled diamond) → strong member reference, (4) Aggregation (hollow diamond) → weak member reference. Why inheritance/interface for relationships: (1) Direct language support - Built-in mechanisms, (2) Type hierarchy - Enables polymorphism, (3) Contract definition - Interface specifies contract. Limitations of other options: (1) Static method calls - Don't represent persistent relationships, (2) Global variables - Poor design, creates coupling, (3) Conditionals/loops - Used in logic, not relationship representation. Relationship multiplicity: (1) One-to-one - Single reference, (2) One-to-many - Collection member, (3) Many-to-many - Complex collections. Best practices: (1) Prefer composition over inheritance - More flexible, (2) Design to interfaces - Enables substitution, (3) Minimize coupling - Reduces dependencies. Modern languages: (1) Java - extends, implements, composition, (2) C++ - inheritance, interfaces (abstract), composition, (3) Python - inheritance, duck typing. Note: While composition/aggregation are important, the question asks about mapping design (UML relationships) to code, where inheritance and interfaces are the direct language constructs.",
+    "chapter": "Chapter 8: Software Engineering",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 49,
+    "question": "In which type of environment, the next state of the environment is completely determined by the current state and the action taken by the agent?",
+    "options": [
+      "Observable environment",
+      "Deterministic environment",
+      "Episodic environment",
+      "Static environment"
+    ],
+    "correct_answer": "Deterministic environment",
+    "hint": "Deterministic means predictable - same action always produces same result. Non-deterministic is unpredictable.",
+    "explanation": "In a deterministic environment, the next state is completely determined by the current state and the action taken by the agent. Environment types in AI: (1) Deterministic - Next state fully determined by current state and action, (2) Stochastic/Non-deterministic - Action produces multiple possible outcomes with probabilities, (3) Observable - Agent perceives all relevant information, (4) Partially observable - Agent perceives only partial information. Deterministic environment characteristics: (1) Predictable - Same action always produces same result, (2) No randomness - No chance events affecting outcome, (3) Complete causality - Action directly causes specific outcome, (4) Reversible - Can always reverse to previous state (usually). Deterministic examples: (1) Chess - Move produces exact board state, (2) Tic-tac-toe - Same move always same result, (3) Scripted simulations - Predetermined outcomes, (4) Mathematical calculations - Deterministic formula. Non-deterministic examples: (1) Card games - Action outcome depends on random card draw, (2) Real world - Weather, traffic unpredictable, (3) Game with dice - Multiple outcomes possible. Combined characteristics: (1) Fully observable + Deterministic - Complete, predictable information, (2) Partially observable + Stochastic - Incomplete, unpredictable - most real-world, (3) Observable + Stochastic - Complete info but random outcomes. Related concepts: (1) Episodic - Task independent episodes vs sequential, (2) Static - Environment doesn't change while agent decides, (3) Discrete - Finite states vs continuous. Planning implications: (1) Deterministic - One valid plan works, (2) Stochastic - Need contingency plans, (3) Requires different algorithms - Search vs policy. Real-world AI: (1) Most real environments are stochastic, (2) Some specialized systems can be deterministic, (3) Hybrid approaches handle uncertainty. This distinction is important for algorithm selection.",
+    "chapter": "Chapter 9: AI & Neural Networks",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 50,
+    "question": "Which searching technique is guaranteed to find the optimal solution in a state space search problem, assuming no path costs?",
+    "options": [
+      "Depth-first search (DFS)",
+      "Breadth-first search (BFS)",
+      "Hill climbing",
+      "A* search"
+    ],
+    "correct_answer": "Breadth-first search (BFS)",
+    "hint": "BFS explores level by level. If no path costs, which finds the shortest path?",
+    "explanation": "Breadth-first search (BFS) is guaranteed to find the optimal solution in a state space search problem when there are no path costs. Why BFS is optimal without path costs: (1) Explores level by level, (2) Finds solution with minimum number of steps, (3) With equal cost (1) per step, minimum steps = minimum cost, (4) First solution found is optimal. BFS characteristics: (1) Complete - Always finds solution if exists, (2) Optimal - Finds best solution without path costs, (3) Systematic - Explores all possibilities at each depth, (4) Memory intensive - Stores all nodes at current level. Search algorithm comparison: (1) DFS - Not optimal, can go deep in wrong direction, (2) BFS - Optimal without path costs, (3) Uniform Cost Search - Optimal with path costs, (4) A* - Optimal with admissible heuristic, (5) Hill climbing - Local search, greedy, not optimal. When BFS is optimal: (1) Uniform step costs - Each step costs the same (1 unit), (2) Shortest path problem - Minimize number of steps, (3) Unweighted graph - All edges equal weight. Implementation: (1) Use queue (FIFO) for frontier, (2) Explore all neighbors at current level, (3) Move to next level when level exhausted. Time/space complexity: (1) Time: O(b^d) where b = branching factor, d = depth, (2) Space: O(b^d) - stores all frontier nodes. When not to use BFS: (1) With path costs - Use Uniform Cost Search, (2) With heuristic info - Use A*, (3) Very deep solutions - Memory problems, (4) When first solution acceptable - DFS faster (doesn't expand all). Real-world applications: (1) Shortest path in unweighted graphs, (2) Social networks - degrees of separation, (3) Puzzle solving - minimum moves, (4) Level-by-level exploration. This is fundamental to search algorithm theory.",
+    "chapter": "Chapter 9: AI & Neural Networks",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  }
+]

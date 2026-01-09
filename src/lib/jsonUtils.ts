@@ -8,6 +8,8 @@ import { Question, Topic } from './types';
 let topicsCache: Topic[] | null = null;
 let questionsCache: Map<string, Question[]> = new Map();
 let learnQuestionsCache: Map<string, Question[]> = new Map();
+let officialQuestionsCache: Question[] | null = null;
+let pastQuestionsCache: Question[] | null = null;
 
 /**
  * Read topics from topics.json
@@ -477,4 +479,187 @@ export async function getTopicStats(): Promise<Record<string, number>> {
   }
 
   return stats;
+}
+
+/**
+ * Load official model questions from main/official/ folder
+ * Combines all PART files into a single array
+ */
+export async function loadOfficialModelQuestions(): Promise<Question[]> {
+  // Check cache first
+  if (officialQuestionsCache) {
+    return officialQuestionsCache;
+  }
+
+  try {
+    const officialDir = join(process.cwd(), 'public', 'data', 'main', 'official');
+    const allQuestions: Question[] = [];
+    
+    // Load all PART files in order
+    const partFiles = [
+      'NEC_OFFICIAL_MODEL_QUESTIONS_PART1.json',
+      'NEC_OFFICIAL_MODEL_QUESTIONS_PART2.json',
+      'NEC_OFFICIAL_MODEL_QUESTIONS_PART3.json',
+      'NEC_OFFICIAL_MODEL_QUESTIONS_PART4.json',
+    ];
+
+    for (const fileName of partFiles) {
+      try {
+        const filePath = join(officialDir, fileName);
+        const content = await readFile(filePath, 'utf-8');
+        const data = JSON.parse(content);
+
+        // Handle array of questions format
+        const questions = Array.isArray(data) ? data : [];
+
+        for (const q of questions) {
+          // Skip if question is missing required fields
+          if (!q || (!q.question && !q.id && !q.question_number)) {
+            continue;
+          }
+
+          // Handle options - could be array or JSON string
+          let options: string[] = [];
+          if (Array.isArray(q.options)) {
+            options = q.options;
+          } else if (typeof q.options === 'string') {
+            try {
+              options = JSON.parse(q.options);
+            } catch {
+              options = [];
+            }
+          }
+
+          // Validate required fields
+          if (!q.question || options.length === 0 || !q.correct_answer) {
+            console.error(`Skipping question in ${fileName} due to missing required fields`);
+            continue;
+          }
+
+          const question: Question = {
+            question_number: q.id || q.question_number || q.questionNumber || 0,
+            id: q.id || q.question_number || q.questionNumber || undefined,
+            question: q.question.trim(),
+            options: options.map(opt => typeof opt === 'string' ? opt.trim() : String(opt)),
+            correct_answer: (q.correct_answer || q.correctAnswer || '').trim(),
+            hint: (q.hint || '').trim(),
+            explanation: (q.explanation || '').trim(),
+            chapter: (q.chapter || '').trim(),
+            difficulty: (q.difficulty === 'easy' || q.difficulty === 'difficult' || q.difficulty === 'medium') 
+              ? (q.difficulty === 'medium' ? undefined : q.difficulty) 
+              : undefined,
+            source: (q.source || 'NEC Official Model Questions').trim(),
+          };
+
+          allQuestions.push(question);
+        }
+      } catch (fileError: any) {
+        const errorMessage = fileError instanceof Error ? fileError.message : String(fileError);
+        console.error(`Error loading official model questions file ${fileName}:`, errorMessage);
+        // Continue with other files even if one fails
+      }
+    }
+
+    // Sort by id/question_number to maintain order
+    const sortedQuestions = allQuestions.sort((a, b) => 
+      (a.id || a.question_number || 0) - (b.id || b.question_number || 0)
+    );
+
+    officialQuestionsCache = sortedQuestions;
+    return sortedQuestions;
+  } catch (error) {
+    console.error('Error loading official model questions:', error);
+    return [];
+  }
+}
+
+/**
+ * Load past questions from main/past/ folder
+ * Combines all PART files into a single array
+ */
+export async function loadPastQuestions(): Promise<Question[]> {
+  // Check cache first
+  if (pastQuestionsCache) {
+    return pastQuestionsCache;
+  }
+
+  try {
+    const pastDir = join(process.cwd(), 'public', 'data', 'main', 'past');
+    const allQuestions: Question[] = [];
+    
+    // Load all PART files in order
+    const partFiles = [
+      'PAST_QUESTIONS_PART1.json',
+      'PAST_QUESTIONS_PART2.json',
+    ];
+
+    // Load all files
+    for (const fileName of partFiles) {
+      try {
+        const filePath = join(pastDir, fileName);
+        const content = await readFile(filePath, 'utf-8');
+        const data = JSON.parse(content);
+
+        // Handle array of questions format
+        const questions = Array.isArray(data) ? data : [];
+
+        for (const q of questions) {
+          // Skip if question is missing required fields
+          if (!q || (!q.question && !q.id && !q.question_number)) {
+            continue;
+          }
+
+          // Handle options - could be array or JSON string
+          let options: string[] = [];
+          if (Array.isArray(q.options)) {
+            options = q.options;
+          } else if (typeof q.options === 'string') {
+            try {
+              options = JSON.parse(q.options);
+            } catch {
+              options = [];
+            }
+          }
+
+          // Validate required fields
+          if (!q.question || options.length === 0 || !q.correct_answer) {
+            console.error(`Skipping question in ${fileName} due to missing required fields`);
+            continue;
+          }
+
+          const question: Question = {
+            question_number: q.id || q.question_number || q.questionNumber || 0,
+            id: q.id || q.question_number || q.questionNumber || undefined,
+            question: q.question.trim(),
+            options: options.map(opt => typeof opt === 'string' ? opt.trim() : String(opt)),
+            correct_answer: (q.correct_answer || q.correctAnswer || '').trim(),
+            hint: (q.hint || '').trim(),
+            explanation: (q.explanation || '').trim(),
+            chapter: (q.chapter || '').trim(),
+            difficulty: (q.difficulty === 'easy' || q.difficulty === 'difficult' || q.difficulty === 'medium') 
+              ? (q.difficulty === 'medium' ? undefined : q.difficulty) 
+              : undefined,
+            source: (q.source || 'NEC Past Questions').trim(),
+          };
+
+          allQuestions.push(question);
+        }
+      } catch (fileError: any) {
+        const errorMessage = fileError instanceof Error ? fileError.message : String(fileError);
+        console.error(`Error loading past questions file ${fileName}:`, errorMessage);
+        // Continue with other files even if one fails
+      }
+    }
+
+    // Sort by id/question_number to maintain order
+    const sortedQuestions = allQuestions.sort((a, b) => 
+      (a.id || a.question_number || 0) - (b.id || b.question_number || 0)
+    );
+
+    pastQuestionsCache = sortedQuestions;
+    return sortedQuestions;
+  } catch (error) {
+    console.error('Error loading past questions:', error);
+    return [];
+  }
 }

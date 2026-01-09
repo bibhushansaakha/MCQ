@@ -27,3 +27,4 @@ export default function Favicon() {
   return null; // This component doesn't render anything
 }
 
+

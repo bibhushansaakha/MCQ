@@ -13,6 +13,8 @@ import {
 import {
   loadQuestionsFromAllChapters,
   loadQuestions,
+  loadOfficialModelQuestions,
+  loadPastQuestions,
 } from "@/lib/questionUtils";
 import { formatTime, startSession } from "@/lib/analytics";
 import ThemeToggleWrapper from "@/components/ThemeToggleWrapper";
@@ -92,6 +94,28 @@ export default function ReviewPage() {
             // Load questions from all chapters
             const config = EXAM_CONFIG[sessionData.examMode];
             const fallbackQuestions = await loadQuestionsFromAllChapters(
+              config.questionCount
+            );
+            loadedQuestions.push(...fallbackQuestions);
+          } else if (
+            sessionData.examMode === "official-quick-test" ||
+            sessionData.examMode === "official-full-test" ||
+            sessionData.examMode === "official-random"
+          ) {
+            // Load official model questions
+            const config = EXAM_CONFIG[sessionData.examMode];
+            const fallbackQuestions = await loadOfficialModelQuestions(
+              config.questionCount
+            );
+            loadedQuestions.push(...fallbackQuestions);
+          } else if (
+            sessionData.examMode === "past-quick-test" ||
+            sessionData.examMode === "past-full-test" ||
+            sessionData.examMode === "past-random"
+          ) {
+            // Load past questions
+            const config = EXAM_CONFIG[sessionData.examMode];
+            const fallbackQuestions = await loadPastQuestions(
               config.questionCount
             );
             loadedQuestions.push(...fallbackQuestions);
@@ -206,12 +230,28 @@ export default function ReviewPage() {
                     ? "Quick Test"
                     : examMode === "full-test"
                     ? "Full Test"
+                    : examMode === "official-quick-test"
+                    ? "Official Quick Test"
+                    : examMode === "official-full-test"
+                    ? "Official Full Test"
+                    : examMode === "official-random"
+                    ? "Official Random Practice"
+                    : examMode === "past-quick-test"
+                    ? "Past Quick Test"
+                    : examMode === "past-full-test"
+                    ? "Past Full Test"
+                    : examMode === "past-random"
+                    ? "Past Random Practice"
                     : "Chapterwise"}
                   )
                 </span>
               )}
             </h1>
-            {examMode && (examMode === "quick-test" || examMode === "full-test") && (
+            {examMode && (
+              examMode === "quick-test" || examMode === "full-test" ||
+              examMode === "official-quick-test" || examMode === "official-full-test" || examMode === "official-random" ||
+              examMode === "past-quick-test" || examMode === "past-full-test" || examMode === "past-random"
+            ) && (
               <button
                 onClick={async () => {
                   if (!confirm('Are you sure you want to retake this exam? This will start a new session.')) {
@@ -219,8 +259,11 @@ export default function ReviewPage() {
                   }
                   setRetaking(true);
                   try {
+                    // Determine topic name based on mode
+                    const topicName = examMode.startsWith("official") ? "official-model-questions" :
+                                     examMode.startsWith("past") ? "past-questions" : "all-chapters";
                     // Start a completely new session with the same questions
-                    const newSessionId = await startSession("all-chapters", examMode, session.questions);
+                    const newSessionId = await startSession(topicName, examMode, session.questions);
                     // Store the sessionId temporarily so exam page can find it
                     if (typeof window !== 'undefined') {
                       sessionStorage.setItem('retakeSessionId', newSessionId);

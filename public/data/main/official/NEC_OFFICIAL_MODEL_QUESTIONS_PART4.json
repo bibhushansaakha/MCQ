@@ -1,0 +1,179 @@
+[
+  {
+    "id": 61,
+    "question": "Which of the following is a passive circuit element?",
+    "options": [
+      "Transistor",
+      "Diode",
+      "Resistor",
+      "Operational Amplifier"
+    ],
+    "correct_answer": "Resistor",
+    "hint": "Passive elements don't amplify or require power. Active elements amplify or require power supply.",
+    "explanation": "Resistor is a passive circuit element. Passive vs active elements: (1) Passive - Cannot amplify, don't require external power to operate, dissipate energy, (2) Active - Can amplify, require power supply, amplify signals. Passive elements: (1) Resistor - Opposes current, dissipates energy, (2) Capacitor - Stores energy in electric field, (3) Inductor - Stores energy in magnetic field, (4) Diode - One-way valve (passive most applications), (5) Transformer - Transfers energy between coils. Why resistors are passive: (1) Cannot amplify signals - Output power less than input, (2) Always dissipate energy - Converted to heat, (3) Don't require bias power - Operate without external source, (4) Linear element - Follows Ohm's law: V = IR. Active elements: (1) Transistor (BJT, FET) - Amplifies signals, requires bias, (2) Diode (in some circuits) - Can amplify, (3) Op-amp - Amplifies, requires power supply, (4) LED - Emits light, requires forward bias. Characteristics: (1) Passive - Two-terminal, bilateral, dissipative, (2) Active - Typically multi-terminal, require bias/power. Circuit implications: (1) Passive circuits - Energy diminishes over distance, (2) Active circuits - Can regenerate signals. Practical: (1) Filter circuits - Passive RC/RL filters, (2) Amplifier circuits - Need active elements, (3) Power conversion - Active for efficiency. This classification is fundamental to circuit design.",
+    "chapter": "Chapter 1: Electrical & Electronics",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 62,
+    "question": "Thevenin's equivalent voltage is",
+    "options": [
+      "The voltage across the open-circuited load terminals",
+      "The short-circuit current at the load terminals",
+      "The power across the load",
+      "The voltage across the entire network"
+    ],
+    "correct_answer": "The voltage across the open-circuited load terminals",
+    "hint": "Thevenin voltage is the open-circuit voltage seen looking back into the circuit.",
+    "explanation": "Thevenin's equivalent voltage is the voltage across the open-circuited load terminals. Thevenin's theorem: (1) Any linear two-terminal network can be replaced by equivalent voltage source and series resistance, (2) Vth = Thevenin voltage (open-circuit voltage), (3) Rth = Thevenin resistance. Finding Thevenin equivalent: (1) Remove load, (2) Calculate Vth = Voltage across load terminals (open circuit), (3) Calculate Rth = Resistance looking back (sources set to zero), (4) Redraw as Vth in series with Rth. Thevenin voltage determination: (1) Open-circuit condition - No load connected, (2) Find voltage at load terminals, (3) Using voltage divider, superposition, or circuit analysis. Example: (1) Remove load resistor, (2) Analyze circuit, (3) Measure voltage where load was connected, (4) This is Vth. Related concepts: (1) Norton equivalent - Current source version, (2) Thevenin resistance - Series resistance, (3) Source transformation - Convert between Thevenin/Norton. Why Thevenin matters: (1) Simplifies circuit analysis, (2) For different load values - Equivalent stays same, (3) Power transfer analysis, (4) Load effect prediction. Practical benefits: (1) Reduces complex circuits to simple equivalent, (2) Faster calculation, (3) Easy to understand load effect, (4) Standard tool in circuit analysis. Different from: (1) Short-circuit current - That's Norton equivalent, (2) Thevenin resistance - Different parameter, (3) Overall network voltage - Not the same as open-circuit load voltage. Applications: (1) Power supply design, (2) Impedance matching, (3) Maximum power transfer, (4) Circuit characterization. This is fundamental to circuit theory.",
+    "chapter": "Chapter 1: Electrical & Electronics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 63,
+    "question": "In Common Base configuration, the input and output terminals are",
+    "options": [
+      "Base and Collector",
+      "Emitter and Collector",
+      "Base and Emitter",
+      "Emitter and Base"
+    ],
+    "correct_answer": "Emitter and Collector",
+    "hint": "Common Base means Base is common (shared). What are input and output?",
+    "explanation": "In Common Base configuration, input is at Emitter and output is at Collector. BJT configurations: (1) Common Emitter - Input at base, output at collector, emitter common, (2) Common Base - Input at emitter, output at collector, base common, (3) Common Collector - Input at base, output at emitter, collector common. Common Base characteristics: (1) Low input impedance - Emitter junction forward biased, (2) High output impedance - Collector junction reverse biased, (3) High voltage gain - Large output impedance, (4) No phase inversion - Unlike CE, (5) Current gain < 1 - But voltage gain high. How it works: (1) Emitter is input - Emitter current IE, (2) Base keeps common potential, (3) Collector is output - Collector voltage VCE, (4) Base biased for stability. Current relationships: (1) IE = IC + IB (Kirchhoff), (2) IC ≈ IE (since IB tiny), (3) Current gain α = IC/IE ≈ 1 (almost unity). Voltage gain: (1) Av = Vout/Vin = α(RC/RE), (2) Can be high despite α < 1, (3) Due to high Rout/Rin ratio. Applications: (1) RF circuits - High frequency, (2) Low-noise amplifiers, (3) Oscillators, (4) Current buffers. Comparison: (1) CE - Voltage and current gain, (2) CB - Voltage gain only, (3) CC - Current and impedance buffering. Why CB less common: (1) Low input impedance - Hard to drive, (2) Needs more bias complexity, (3) CE more versatile. This is important for transistor circuit design.",
+    "chapter": "Chapter 1: Electrical & Electronics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 64,
+    "question": "The efficiency of a Class B push-pull amplifier is approximately",
+    "options": ["25%", "50%", "78.5%", "100%"],
+    "correct_answer": "78.5%",
+    "hint": "Class B is more efficient than Class A (25%), less than theoretical maximum.",
+    "explanation": "The efficiency of a Class B push-pull amplifier is approximately 78.5%. Class efficiency comparison: (1) Class A - Maximum 25% (sinusoidal), (2) Class B - Maximum 78.5% (π/4), (3) Class AB - Between A and B, (4) Class C - Can exceed 90% (but distorted). Class B characteristics: (1) Each transistor conducts 180° of cycle, (2) Push-pull - Complementary pair for full cycle, (3) Minimal quiescent current - Class A has continuous bias, (4) Output transformer couples load. Efficiency calculation: (1) Maximum efficiency = π/4 ≈ 0.785 = 78.5%, (2) This is theoretical maximum, (3) Practical slightly lower due to losses, (4) Distortion - Crossover distortion at zero crossing. Why higher efficiency: (1) Transistors off most of time, (2) Minimal power dissipation during conduction, (3) Push-pull shares the load, (4) Compared to Class A where transistor always conducts. Trade-offs: (1) Higher efficiency, (2) Crossover distortion - At zero crossing, (3) More complex design - Need complementary transistors, (4) Output transformer needed. Applications: (1) Audio amplifiers - Less heat generation, (2) Power amplifiers - Radio transmitters, (3) Where efficiency important - Battery powered. Improvements: (1) Class AB - Biased to reduce crossover distortion, (2) Feedback - Reduces distortion, (3) Bootstrapping - Improves linearity. Heat consideration: (1) Class A - Generates significant heat (75% wasted), (2) Class B - Much less heat (21.5% wasted), (3) Affects thermal design - Smaller heatsinks for B. This efficiency improvement makes Class B practical for power applications.",
+    "chapter": "Chapter 1: Electrical & Electronics",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 65,
+    "question": "How many NOR gates are needed to implement an AND gate?",
+    "options": ["1", "2", "3", "4"],
+    "correct_answer": "3",
+    "hint": "De Morgan's law: AND can be expressed using NOR gates.",
+    "explanation": "3 NOR gates are needed to implement an AND gate. De Morgan's laws: (1) A AND B = NOT(NOT A OR NOT B), (2) This means: AND = NOT(NOR(A, B)), (3) Requires NOT gates on inputs and one NOR gate. Implementation: (1) Apply NOT to A - Using NOR: (A NOR A) = NOT A, (2) Apply NOT to B - Using NOR: (B NOR B) = NOT B, (3) NOR the results - (NOT A) NOR (NOT B) = A AND B. Circuit: (1) NOR gate 1: A NOR A = NOT A (NOR of input with itself is NOT), (2) NOR gate 2: B NOR B = NOT B, (3) NOR gate 3: (NOT A) NOR (NOT B) = A AND B. Why it works: (1) NOR is universal gate - Can implement any function, (2) De Morgan allows AND from NOR, (3) Practical - Use available NOR gates. Truth table: (1) A=0, B=0: (1 NOR 1) = 0, (2) A=0, B=1: (1 NOR 0) = 0, (3) A=1, B=0: (0 NOR 1) = 0, (4) A=1, B=1: (0 NOR 0) = 1 (matches AND). Alternative: (1) NAND gates - Can also build AND (2 NANDs), (2) Depends on available gates. Universal gates: (1) NOR - Can build any logic function, (2) NAND - Also universal, (3) Reason - De Morgan and negation. Practical: (1) Older circuits used gate arrays, (2) Minimized gate count, (3) Modern - Use specialized AND gates. This demonstrates gate universality concept.",
+    "chapter": "Chapter 2: Digital Logic & Microprocessor",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 66,
+    "question": "During a DMA transfer, the CPU is",
+    "options": [
+      "Completely shut down",
+      "Actively involved in data transfer",
+      "Bypassed or put on hold",
+      "Reset"
+    ],
+    "correct_answer": "Bypassed or put on hold",
+    "hint": "DMA = Direct Memory Access. CPU is not involved in the transfer itself.",
+    "explanation": "During a DMA transfer, the CPU is bypassed or put on hold. DMA mechanism: (1) Direct Memory Access - Data transfers without CPU involvement, (2) DMA controller takes control of bus, (3) CPU released for other tasks, (4) Improves I/O performance. How DMA works: (1) I/O device signals DMA controller - Data ready, (2) DMA requests bus from CPU, (3) CPU grants bus and enters hold state, (4) DMA transfers data between device and memory, (5) DMA signals completion, (6) CPU resumes. CPU states during DMA: (1) Completely shut down - No (CPU still runs internal circuits), (2) Hold/Idle - Stopped executing instructions, (3) Bypassed - Not involved in data transfer, (4) Not reset - Reset would lose state. Why DMA needed: (1) CPU too slow for I/O - DMA faster, (2) CPU efficiency - Can do other work, (3) Data throughput - Direct path, (4) Interrupt overhead - Reduces interrupts. DMA modes: (1) Burst mode - DMA holds bus for full transfer, (2) Cycle stealing - One byte at a time, stealing CPU cycles, (3) Transparent - Transfer during CPU idle time. Bus arbitration: (1) CPU and DMA controller share bus, (2) DMA has priority - Often, (3) CPU waits - Held state, (4) Bus multiplexing. CPU availability: (1) Can execute from cache - If data cached, (2) Can execute from internal memory, (3) Usually significant impact - Bus is shared, (4) Performance trade-off. Practical: (1) Modern CPUs - Multiple buses, reduced contention, (2) Caches reduce bus traffic, (3) I/O controller sophistication increases. This is fundamental to I/O architecture.",
+    "chapter": "Chapter 2: Digital Logic & Microprocessor",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 67,
+    "question": "What is the range of an unsigned 8-bit binary number?",
+    "options": [
+      "-128 to 127",
+      "0 to 255",
+      "-255 to 255",
+      "-127 to 128"
+    ],
+    "correct_answer": "0 to 255",
+    "hint": "Unsigned means no negative numbers. 8 bits can represent 2^8 = 256 different values.",
+    "explanation": "The range of an unsigned 8-bit binary number is 0 to 255. 8-bit number range: (1) Unsigned - 0 to 255 (no negative), (2) Signed (two's complement) - -128 to 127, (3) Signed (one's complement) - -127 to 127. Why 0 to 255: (1) 8 bits can represent 2^8 = 256 different values, (2) Unsigned counts from 0 to 255, (3) 00000000 = 0 (minimum), (4) 11111111 = 255 (maximum). Calculation: (1) Each bit position represents power of 2, (2) Binary 11111111 = 128+64+32+16+8+4+2+1 = 255, (3) Total = 256 unique values (0-255). Signed vs unsigned: (1) Signed - Uses MSB as sign bit, (2) In two's complement: -128 to 127, (3) Total range same (256 values), but split around zero. Examples: (1) 0 = 00000000, (2) 1 = 00000001, (3) 255 = 11111111. Overflow: (1) Add 1 to 255 = 0 (wraps around), (2) Wraps modulo 256, (3) Important for arithmetic. Different sizes: (1) 4-bit unsigned: 0 to 15, (2) 16-bit unsigned: 0 to 65535, (3) 32-bit unsigned: 0 to 4,294,967,295. Programming: (1) unsigned char - 0 to 255 in C, (2) int - Signed usually, (3) Must specify unsigned - Different interpretation of bits. Practical: (1) Byte range fundamental, (2) Addresses, pixel values use this, (3) Data representation depends on interpretation. This is fundamental to digital systems.",
+    "chapter": "Chapter 2: Digital Logic & Microprocessor",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 68,
+    "question": "What is the purpose of the interrupt flag in microcontrollers?",
+    "options": [
+      "To indicate an interrupt request has occurred",
+      "To disable all interrupts",
+      "To reset the CPU",
+      "To increase CPU speed"
+    ],
+    "correct_answer": "To indicate an interrupt request has occurred",
+    "hint": "Interrupt flags signal that an interrupt has been requested or is pending.",
+    "explanation": "The purpose of the interrupt flag in microcontrollers is to indicate an interrupt request has occurred. Interrupt flags: (1) Set when interrupt event occurs, (2) Signal to CPU that interrupt pending, (3) Must be cleared after servicing, (4) Part of status register or interrupt register. How interrupt flag works: (1) Interrupt event occurs (external pin, timer, ADC), (2) Hardware sets corresponding flag, (3) CPU checks flags (if enabled), (4) CPU services interrupt, (5) ISR must clear flag (usually). Flag management: (1) Hardware sets - Automatic when event occurs, (2) Software clears - Done in ISR, (3) Must clear - If not, ISR called repeatedly. Interrupt enable vs flag: (1) Flag - Indicates interrupt occurred, (2) Enable - Controls whether CPU responds to flag, (3) Both needed - Flag set but CPU may not respond if disabled. Status register: (1) Contains multiple flags, (2) Interrupt flag - One of several, (3) Other flags - Zero flag, carry flag, etc., (4) Readable by software. Usage: (1) Check flag before servicing - Determine which interrupt, (2) In ISR - Identify which event triggered, (3) Priority - Multiple flags, handle by priority. Different from: (1) Disable all interrupts - Different mechanism (usually global enable), (2) Reset - Clears entire system state, (3) Speed increase - No relationship. Practical: (1) Single vs multiple flags - Depends on microcontroller, (2) Must manage carefully - Clear flags properly, (3) Polling alternative - Software can poll without flags. This is essential to interrupt handling.",
+    "chapter": "Chapter 2: Digital Logic & Microprocessor",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 69,
+    "question": "Which of the following is an example of indirect recursion?",
+    "options": [
+      "Function X calls itself directly",
+      "Function X calls function Y, which calls function X",
+      "Function X calls function X twice",
+      "Function X calls no other functions"
+    ],
+    "correct_answer": "Function X calls function Y, which calls function X",
+    "hint": "Indirect recursion involves cycle through intermediate functions, not direct self-call.",
+    "explanation": "An example of indirect recursion is function X calls function Y, which calls function X. Recursion types: (1) Direct - Function calls itself, (2) Indirect - Function calls another, which eventually calls original. Direct recursion: factorial(n) = n * factorial(n-1), function directly calls itself. Indirect recursion example: (1) Function A calls B, (2) Function B calls A, (3) Creates cycle A → B → A. Cycle length can vary: (1) Mutual recursion - A and B call each other (cycle 2), (2) Longer cycle - A → B → C → A (cycle 3), (3) Any length possible. How indirect recursion works: (1) A calls B with modified parameter, (2) B calls A with different parameter, (3) Base case must exist - Stop cycle, (4) Without base case - Infinite recursion. Example code pattern: function A(n) { if (n <= 0) return 0; return B(n-1); } function B(n) { if (n <= 0) return 0; return A(n-1); }. Detecting: (1) Direct - Obvious from function code, (2) Indirect - Requires tracing call chain, (3) Tools can detect - Call graph analysis. Stack behavior: (1) Each call adds stack frame, (2) Indirect recursion - Stack grows across functions, (3) Same recursion depth concern - Stack overflow risk, (4) Need base case - To unwind stack. Different from: (1) Direct recursion - Self-call, (2) Tail recursion - Last operation is recursive call, (3) Mutual recursion - Specific indirect case. Practical: (1) Less common than direct recursion, (2) Mutual recursion in parsing - A parses expression, B parses term, (3) State machines - Functions represent states. This demonstrates recursion complexity.",
+    "chapter": "Chapter 3: Programming Languages",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 70,
+    "question": "How is a friend function declared inside a class?",
+    "options": [
+      "By using the keyword friend before the function declaration",
+      "By defining the function inside the class without friend keyword",
+      "By declaring the function as public",
+      "By declaring the function as private"
+    ],
+    "correct_answer": "By using the keyword friend before the function declaration",
+    "hint": "The 'friend' keyword grants access to private/protected members.",
+    "explanation": "A friend function is declared inside a class by using the keyword 'friend' before the function declaration. Friend function concept: (1) Non-member function declared as friend inside class, (2) Has access to private/protected members, (3) NOT a member function - No this pointer, (4) Breaks encapsulation (intentionally). Friend function declaration: friend void externalFunction(ClassName obj);, friend class OtherClass;. Characteristics: (1) Declared inside class with 'friend' keyword, (2) Implemented outside class - No scope resolution operator needed, (3) Can access private/protected members, (4) Not inherited - Friends of base not friends of derived. Difference from member functions: (1) Member functions - Have this pointer, part of class, (2) Friend functions - No this pointer, external to class, (3) Operator overloading - Both can be friends. Usage example: class MyClass { private: int value; friend void setMyClass(MyClass &obj, int val); }; void setMyClass(MyClass &obj, int val) { obj.value = val; // Allowed!}. When needed: (1) Operator overloading - <<, >> operators, (2) Binary operators - Need access to both objects, (3) Tight coupling desired - Controlled access, (4) Symmetric operations - Same access needed. Operator example: ostream& operator<<(ostream &out, MyClass obj) { return out << obj.value; }. Limitations: (1) Breaks encapsulation - Use carefully, (2) Not inherited - Must re-declare in subclass, (3) No virtual friends - Can't override, (4) Unidirectional - Class A makes B friend, B doesn't get A access. Modern practice: (1) Minimize friend declarations, (2) Prefer member functions when possible, (3) Friend classes - Tighter coupling alternative, (4) API design - Consider implications. This provides controlled access beyond standard encapsulation.",
+    "chapter": "Chapter 3: Programming Languages",
+    "difficulty": "medium",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  },
+  {
+    "id": 71,
+    "question": "What happens when a derived class overrides a base class method?",
+    "options": [
+      "Base class method is called",
+      "Derived class method replaces base class method",
+      "Both methods run simultaneously",
+      "Program throws an error"
+    ],
+    "correct_answer": "Derived class method replaces base class method",
+    "hint": "Method overriding means derived version takes precedence over base version.",
+    "explanation": "When a derived class overrides a base class method, the derived class method replaces base class method in normal polymorphic behavior. Method overriding mechanism: (1) Derived class defines method with same signature as base, (2) When called on derived object - Derived version executes, (3) Allows customization - Different behavior in derived class, (4) Fundamental to polymorphism. How overriding works: (1) Base class defines virtual method, (2) Derived class redefines with same signature, (3) Polymorphic call through base pointer/reference - Calls derived version, (4) Determined at runtime - Dynamic binding. Example: class Base { virtual void func() { cout << "Base"; } }; class Derived : public Base { void func() { cout << "Derived"; } }; Base *ptr = new Derived(); ptr->func(); // Outputs "Derived". Access mechanisms: (1) Polymorphic (through base ptr/ref) - Calls derived version, (2) Direct - obj.func() calls derived if obj is derived type, (3) Explicit base call - Base::func() from derived class. Virtual requirement: (1) Base method must be virtual - To enable overriding, (2) Non-virtual - Compile-time binding, base version called, (3) override keyword - C++11+ marks intent. Different from overloading: (1) Overloading - Same name, different parameters, (2) Overriding - Same name, same parameters, inheritance. Special methods: (1) Destructors - Should be virtual if inheritance used, (2) Constructors - Cannot be virtual, each class has own, (3) Operators - Can be overridden. Both running - No, one or the other. Errors - No, valid OOP pattern. This is core polymorphism concept.",
+    "chapter": "Chapter 3: Programming Languages",
+    "difficulty": "easy",
+    "marks": 1,
+    "source": "NEC Official Model Questions"
+  }
+]

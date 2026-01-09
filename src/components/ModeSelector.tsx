@@ -16,7 +16,9 @@ export default function ModeSelector({ topics }: ModeSelectorProps) {
 
   const handleModeSelect = (mode: ExamMode) => {
     setSelectedMode(mode);
-    if (mode === "quick-test" || mode === "full-test") {
+    if (mode === "quick-test" || mode === "full-test" || 
+        mode === "official-quick-test" || mode === "official-full-test" || mode === "official-random" ||
+        mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random") {
       router.push(`/quiz/exam/${mode}`);
     }
   };

@@ -253,12 +253,20 @@ export default function HistoryPage() {
         </div>
 
         {/* Exam Sessions */}
-        {sessions.filter(s => s.examMode === 'quick-test' || s.examMode === 'full-test').length > 0 && (
+        {sessions.filter(s => 
+          s.examMode === 'quick-test' || s.examMode === 'full-test' ||
+          s.examMode === 'official-quick-test' || s.examMode === 'official-full-test' ||
+          s.examMode === 'past-quick-test' || s.examMode === 'past-full-test'
+        ).length > 0 && (
           <div className="mb-8">
             <h2 className="text-xl font-semibold text-foreground mb-4">Exam Sessions</h2>
             <div className="space-y-3">
               {sessions
-                .filter(s => s.examMode === 'quick-test' || s.examMode === 'full-test')
+                .filter(s => 
+                  s.examMode === 'quick-test' || s.examMode === 'full-test' ||
+                  s.examMode === 'official-quick-test' || s.examMode === 'official-full-test' ||
+                  s.examMode === 'past-quick-test' || s.examMode === 'past-full-test'
+                )
                 .sort((a, b) => b.startTime - a.startTime)
                 .map(session => {
                   const sessionDate = new Date(session.startTime).toLocaleDateString('en-US', {
@@ -276,6 +284,16 @@ export default function HistoryPage() {
                     ? ((correctAnswers / totalQuestions) * 100).toFixed(1)
                     : '0.0';
                   
+                  const getModeLabel = (mode?: string) => {
+                    if (mode === 'quick-test') return 'Quick Test';
+                    if (mode === 'full-test') return 'Full Test';
+                    if (mode === 'official-quick-test') return 'Official Quick Test';
+                    if (mode === 'official-full-test') return 'Official Full Test';
+                    if (mode === 'past-quick-test') return 'Past Quick Test';
+                    if (mode === 'past-full-test') return 'Past Full Test';
+                    return 'Exam';
+                  };
+                  
                   return (
                     <div
                       key={session.sessionId}
@@ -285,7 +303,7 @@ export default function HistoryPage() {
                         <div className="flex-1">
                           <div className="flex items-center gap-3 mb-2">
                             <span className="text-xs font-semibold text-gray-600 dark:text-gray-400 bg-transparent">
-                              {session.examMode === 'quick-test' ? 'Quick Test' : 'Full Test'}
+                              {getModeLabel(session.examMode)}
                             </span>
                             <span className="text-sm text-gray-500 dark:text-gray-500">
                               {sessionDate}
