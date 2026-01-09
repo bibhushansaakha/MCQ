@@ -15,6 +15,7 @@ import {
   loadQuestions,
   loadOfficialModelQuestions,
   loadPastQuestions,
+  loadPersonalQuestions,
 } from "@/lib/questionUtils";
 import { formatTime, startSession } from "@/lib/analytics";
 import ThemeToggleWrapper from "@/components/ThemeToggleWrapper";
@@ -116,6 +117,17 @@ export default function ReviewPage() {
             // Load past questions
             const config = EXAM_CONFIG[sessionData.examMode];
             const fallbackQuestions = await loadPastQuestions(
+              config.questionCount
+            );
+            loadedQuestions.push(...fallbackQuestions);
+          } else if (
+            sessionData.examMode === "personal-quick-test" ||
+            sessionData.examMode === "personal-full-test" ||
+            sessionData.examMode === "personal-random"
+          ) {
+            // Load personal questions
+            const config = EXAM_CONFIG[sessionData.examMode];
+            const fallbackQuestions = await loadPersonalQuestions(
               config.questionCount
             );
             loadedQuestions.push(...fallbackQuestions);

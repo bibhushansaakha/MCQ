@@ -74,6 +74,19 @@ export async function loadPastQuestions(count: number): Promise<QuestionWithChap
   }
 }
 
+export async function loadPersonalQuestions(count: number): Promise<QuestionWithChapter[]> {
+  try {
+    const response = await fetch(`/api/questions/personal?count=${count}`);
+    if (!response.ok) {
+      throw new Error('Failed to load personal questions');
+    }
+    return response.json();
+  } catch (error) {
+    console.error('Error loading personal questions:', error);
+    throw error;
+  }
+}
+
 export async function loadTopics(): Promise<Topic[]> {
   try {
     const response = await fetch('/api/topics');

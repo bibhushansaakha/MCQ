@@ -8,7 +8,7 @@ import {
   ExamMode,
   EXAM_CONFIG,
 } from "@/lib/types";
-import { loadQuestionsFromAllChapters, loadOfficialModelQuestions, loadPastQuestions } from "@/lib/questionUtils";
+import { loadQuestionsFromAllChapters, loadOfficialModelQuestions, loadPastQuestions, loadPersonalQuestions } from "@/lib/questionUtils";
 import { startSession, recordAttempt, endSession } from "@/lib/analytics";
 import { useExamTimer } from "@/hooks/useExamTimer";
 import QuestionCard from "@/components/QuestionCard";
@@ -38,7 +38,8 @@ export default function ExamQuizPage() {
   const config =
     mode === "quick-test" || mode === "full-test" || 
     mode === "official-quick-test" || mode === "official-full-test" || mode === "official-random" ||
-    mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random"
+    mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random" ||
+    mode === "personal-quick-test" || mode === "personal-full-test" || mode === "personal-random"
       ? EXAM_CONFIG[mode] : null;
   const currentQuestion = questions[currentQuestionIndex] || null;
   const selectedOption = selectedOptions.get(currentQuestionIndex) || null;
@@ -218,6 +219,10 @@ export default function ExamQuizPage() {
             loadedQuestions = await loadPastQuestions(
               examConfig.questionCount
             );
+          } else if (mode === "personal-quick-test" || mode === "personal-full-test" || mode === "personal-random") {
+            loadedQuestions = await loadPersonalQuestions(
+              examConfig.questionCount
+            );
           } else {
           loadedQuestions = await loadQuestionsFromAllChapters(
             examConfig.questionCount
@@ -232,7 +237,8 @@ export default function ExamQuizPage() {
         // Start session only if we don't already have one
         if (!sessionId) {
           const topicName = mode.startsWith("official") ? "official-model-questions" :
-                           mode.startsWith("past") ? "past-questions" : "all-chapters";
+                           mode.startsWith("past") ? "past-questions" :
+                           mode.startsWith("personal") ? "personal-exam-questions" : "all-chapters";
           const newSessionId = sessionToUse || await startSession(topicName, mode, loadedQuestions);
           if (!isMounted) return;
 

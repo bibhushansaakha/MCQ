@@ -18,7 +18,8 @@ export default function ModeSelector({ topics }: ModeSelectorProps) {
     setSelectedMode(mode);
     if (mode === "quick-test" || mode === "full-test" || 
         mode === "official-quick-test" || mode === "official-full-test" || mode === "official-random" ||
-        mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random") {
+        mode === "past-quick-test" || mode === "past-full-test" || mode === "past-random" ||
+        mode === "personal-quick-test" || mode === "personal-full-test" || mode === "personal-random") {
       router.push(`/quiz/exam/${mode}`);
     }
   };

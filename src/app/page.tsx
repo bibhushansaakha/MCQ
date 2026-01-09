@@ -27,6 +27,74 @@ export default async function Home() {
 
       {/* Main Content */}
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        {/* Personal Exam Questions - HIGHEST PRIORITY */}
+        <Link
+          href="/personal"
+          className="group mb-8 p-8 rounded-xl border-2 border-[#ea580c] bg-[#ea580c]/10 dark:bg-[#ea580c]/20 hover:bg-[#ea580c]/15 dark:hover:bg-[#ea580c]/25 transition-all hover:shadow-xl block relative overflow-hidden"
+        >
+          <div className="absolute top-0 right-0 bg-[#ea580c] text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+            HIGHEST PRIORITY
+          </div>
+          <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="w-12 h-12 rounded-lg bg-[#ea580c] flex items-center justify-center group-hover:scale-110 transition-transform shadow-lg">
+                <svg
+                  className="w-6 h-6 text-white"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                  />
+                </svg>
+              </div>
+              <div>
+                <h2 className="text-2xl font-bold text-foreground group-hover:text-[#ea580c] transition-colors">
+                  Personal Exam Questions
+                </h2>
+                <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+                  55 questions remembered from the actual NEC exam I just took
+                </p>
+              </div>
+            </div>
+            <svg
+              className="w-5 h-5 text-gray-400 group-hover:text-[#ea580c] transition-colors"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M9 5l7 7-7 7"
+              />
+            </svg>
+          </div>
+          <p className="text-gray-600 dark:text-gray-400 leading-relaxed mb-4">
+            These are the most important questions - directly from the actual NEC exam I just took. 
+            Practice these questions in all modes: quick test, full test, random practice, and learn mode.
+          </p>
+          <ul className="space-y-2 text-sm text-gray-500 dark:text-gray-500">
+            <li className="flex items-center gap-2">
+              <span className="text-[#ea580c]">•</span>
+              <span className="font-medium">55 questions</span> from the actual exam experience
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-[#ea580c]">•</span>
+              Quick test (25 questions), Full test (55 questions), and Random practice modes
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-[#ea580c]">•</span>
+              Learn mode with detailed explanations for each question
+            </li>
+          </ul>
+        </Link>
+
         {/* High Priority Section */}
         <Link
           href="/priority"

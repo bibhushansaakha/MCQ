@@ -10,6 +10,7 @@ let questionsCache: Map<string, Question[]> = new Map();
 let learnQuestionsCache: Map<string, Question[]> = new Map();
 let officialQuestionsCache: Question[] | null = null;
 let pastQuestionsCache: Question[] | null = null;
+let personalQuestionsCache: Question[] | null = null;
 
 /**
  * Read topics from topics.json
@@ -869,6 +870,184 @@ export async function loadPastQuestions(): Promise<Question[]> {
     return sortedQuestions;
   } catch (error) {
     console.error('Error loading past questions:', error);
+    return [];
+  }
+}
+
+/**
+ * Load personal exam questions from personal.json
+ * These are questions remembered from the actual NEC exam
+ */
+export async function loadPersonalQuestions(): Promise<Question[]> {
+  // Check cache first
+  if (personalQuestionsCache) {
+    return personalQuestionsCache;
+  }
+
+  try {
+    const personalFilePath = join(process.cwd(), 'public', 'data', 'personal.json');
+    let content = await readFile(personalFilePath, 'utf-8');
+    
+    // Try to parse JSON first - only repair if needed
+    let data;
+    try {
+      // First try parsing directly
+      data = JSON.parse(content);
+    } catch (directParseError: any) {
+      // If direct parse fails, try repairing
+      
+      // Replace curly quotes first (before JSON parsing)
+      let repairedContent = content.replace(/\u201C/g, '"'); // Left double quotation mark
+      repairedContent = repairedContent.replace(/\u201D/g, '"'); // Right double quotation mark
+      repairedContent = repairedContent.replace(/\u2018/g, "'"); // Left single quotation mark
+      repairedContent = repairedContent.replace(/\u2019/g, "'"); // Right single quotation mark
+      repairedContent = repairedContent.replace(/[\u2014\u2013]/g, '-'); // Em/en dash
+      
+      // Fix unescaped quotes inside string values using a proper JSON state machine
+      let result = '';
+      let i = 0;
+      let inString = false;
+      let escapeNext = false;
+      
+      while (i < repairedContent.length) {
+        const char = repairedContent[i];
+        
+        if (escapeNext) {
+          // We're processing an escaped character
+          result += char;
+          escapeNext = false;
+          i++;
+          continue;
+        }
+        
+        if (char === '\\') {
+          // Escape sequence - preserve it and mark next char as escaped
+          result += char;
+          escapeNext = true;
+          i++;
+          continue;
+        }
+        
+        if (char === '"') {
+          if (inString) {
+            // We're inside a string - check if this quote ends the string
+            // Look ahead to see if this is followed by structural characters
+            const lookAhead = repairedContent.substring(i + 1, Math.min(i + 15, repairedContent.length));
+            // End quote if followed by: colon (key), comma, closing brace, or closing bracket
+            const isEndQuote = /^\s*([:,}\]])/.test(lookAhead);
+            
+            if (isEndQuote) {
+              // This quote ends the string
+              result += char;
+              inString = false;
+            } else {
+              // This quote is inside the string value - escape it
+              result += '\\"';
+            }
+          } else {
+            // We're not in a string - this quote starts a string (key or value)
+            // The only exception is if it's immediately followed by closing bracket/brace (empty array/object)
+            const lookAhead = repairedContent.substring(i + 1, Math.min(i + 10, repairedContent.length));
+            
+            // Only structural if immediately followed by closing bracket/brace (empty array/object like [] or {})
+            const isStructural = /^\s*[\]}]/.test(lookAhead);
+            
+            if (isStructural) {
+              // Structural quote (empty array/object) - don't enter string mode
+              result += char;
+            } else {
+              // This starts a string value (key or value)
+              result += char;
+              inString = true;
+            }
+          }
+        } else {
+          // Handle other characters
+          if (inString && (char === '\n' || char === '\r')) {
+            // Escape newlines inside string values
+            if (char === '\n') {
+              result += '\\n';
+            } else if (char === '\r') {
+              result += '\\r';
+            }
+          } else {
+            result += char;
+          }
+        }
+        
+        i++;
+      }
+      
+      // Try parsing the repaired content
+      try {
+        data = JSON.parse(result);
+      } catch (parseError: any) {
+        const errorPos = parseError.message.match(/position (\d+)/)?.[1];
+        const contextStart = Math.max(0, parseInt(errorPos || '0', 10) - 100);
+        const contextEnd = Math.min(result.length, parseInt(errorPos || '0', 10) + 100);
+        const context = result.substring(contextStart, contextEnd);
+        
+        console.error(`Error parsing JSON in personal.json at position ${errorPos}:`, parseError.message);
+        console.error(`Context: ${JSON.stringify(context)}`);
+        throw new Error(`Invalid JSON in personal.json at position ${errorPos}: ${parseError.message}`);
+      }
+    }
+
+    // Handle array of questions format
+    const questions = Array.isArray(data) ? data : [];
+    const allQuestions: Question[] = [];
+
+    for (const q of questions) {
+      // Skip if question is missing required fields
+      if (!q || (!q.question && !q.id && !q.question_number)) {
+        continue;
+      }
+
+      // Handle options - could be array or JSON string
+      let options: string[] = [];
+      if (Array.isArray(q.options)) {
+        options = q.options;
+      } else if (typeof q.options === 'string') {
+        try {
+          options = JSON.parse(q.options);
+        } catch {
+          options = [];
+        }
+      }
+
+      // Validate required fields
+      if (!q.question || options.length === 0 || !q.correct_answer) {
+        console.error(`Skipping question in personal.json due to missing required fields`);
+        continue;
+      }
+
+      const question: Question = {
+        question_number: q.id || q.question_number || q.questionNumber || 0,
+        id: q.id || q.question_number || q.questionNumber || undefined,
+        question: q.question.trim(),
+        options: options.map(opt => typeof opt === 'string' ? opt.trim() : String(opt)),
+        correct_answer: (q.correct_answer || q.correctAnswer || '').trim(),
+        hint: (q.hint || '').trim(),
+        explanation: (q.explanation || '').trim(),
+        chapter: (q.chapter || '').trim(),
+        difficulty: (q.difficulty === 'easy' || q.difficulty === 'difficult' || q.difficulty === 'medium') 
+          ? (q.difficulty === 'medium' ? undefined : q.difficulty) 
+          : undefined,
+        source: (q.source || 'NEC Exam Experience - Personal').trim(),
+      };
+
+      allQuestions.push(question);
+    }
+
+    // Sort by id/question_number to maintain order
+    const sortedQuestions = allQuestions.sort((a, b) => 
+      (a.id || a.question_number || 0) - (b.id || b.question_number || 0)
+    );
+
+    personalQuestionsCache = sortedQuestions;
+    return sortedQuestions;
+  } catch (error) {
+    console.error('Error loading personal questions:', error);
     return [];
   }
 }
