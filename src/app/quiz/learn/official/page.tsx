@@ -165,7 +165,8 @@ export default function OfficialLearnPage() {
         new Map(prev).set(currentQuestionIndex, Date.now())
       );
     }
-  }, [currentQuestionIndex]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentQuestionIndex]); // questionStartTimes intentionally excluded to avoid unnecessary re-runs
 
   const handleOptionSelect = useCallback(
     async (option: string) => {

@@ -32,6 +32,7 @@ export default function LearnQuizPage() {
   const [totalAnswered, setTotalAnswered] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const currentQuestion = questions[currentQuestionIndex] || null;
   const selectedOption = selectedOptions.get(currentQuestionIndex) || null;
@@ -512,11 +513,11 @@ export default function LearnQuizPage() {
             <div className="flex flex-col min-w-0 flex-1">
               <span className="text-xs md:text-sm font-semibold text-foreground truncate">
                 Learn - Ch{chapter}
-              </span>
+                </span>
               <span className="text-xs text-gray-500 dark:text-gray-500 sm:hidden">
                 {answeredCount}/{questions.length}
                 </span>
-            </div>
+              </div>
           </div>
           {/* Right: Progress + Next Button */}
           <div className="flex items-center gap-2 flex-shrink-0">
