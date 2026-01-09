@@ -33,6 +33,7 @@ export default function ExamQuizPage() {
   >(new Map());
   const [isExamComplete, setIsExamComplete] = useState(false);
   const [hasUnsavedChanges, setHasUnsavedChanges] = useState(false);
+  const [showMobileMenu, setShowMobileMenu] = useState(false);
 
   const config =
     mode === "quick-test" || mode === "full-test" || 
@@ -218,9 +219,9 @@ export default function ExamQuizPage() {
               examConfig.questionCount
             );
           } else {
-            loadedQuestions = await loadQuestionsFromAllChapters(
-              examConfig.questionCount
-            );
+          loadedQuestions = await loadQuestionsFromAllChapters(
+            examConfig.questionCount
+          );
           }
         }
 
@@ -275,6 +276,9 @@ export default function ExamQuizPage() {
 
   const handleOptionSelect = useCallback(async (option: string) => {
     if (isExamComplete) return;
+
+    // Auto-hide mobile menu when selecting an option
+    setShowMobileMenu(false);
 
     setSelectedOptions((prev) =>
       new Map(prev).set(currentQuestionIndex, option)
@@ -427,28 +431,55 @@ export default function ExamQuizPage() {
   const progress = (answeredCount / questions.length) * 100;
 
   return (
-    <main className="min-h-screen bg-background py-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
-        {/* Timer and Progress - Top Bar */}
-        <div className="mb-6 p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50/30 dark:bg-gray-100/5">
-          <div className="flex justify-between items-center mb-2">
-            <div className="flex items-center gap-4">
-              <span className="text-sm font-semibold text-foreground">
+    <main className="h-screen bg-background flex flex-col overflow-hidden">
+      {/* Timer and Progress - Top Bar - Compact on Mobile */}
+      <div className="flex-shrink-0 p-2 md:p-3 border-b border-gray-200 dark:border-gray-800 bg-gray-50/30 dark:bg-gray-100/5">
+        <div className="flex justify-between items-center mb-1 md:mb-2 gap-2">
+          {/* Left: Menu Button + Title */}
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            {/* Mobile Menu Button - Prominent on Left */}
+            <button
+              onClick={() => setShowMobileMenu(!showMobileMenu)}
+              className="lg:hidden p-2 -ml-1 text-foreground hover:bg-gray-50/15 dark:hover:bg-gray-800/10 active:bg-gray-50/25 dark:active:bg-gray-800/20 rounded-lg transition-colors touch-manipulation"
+              aria-label="Toggle navigation menu"
+            >
+              <svg
+                className="w-6 h-6"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d={showMobileMenu ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"}
+                />
+              </svg>
+            </button>
+            <div className="flex flex-col min-w-0 flex-1">
+              <span className="text-xs md:text-sm font-semibold text-foreground truncate">
                 {mode === "quick-test" ? "Quick Test" : 
                  mode === "full-test" ? "Full Test" :
-                 mode === "official-quick-test" ? "Official Quick Test" :
-                 mode === "official-full-test" ? "Official Full Test" :
-                 mode === "official-random" ? "Official Random Practice" :
-                 mode === "past-quick-test" ? "Past Quick Test" :
-                 mode === "past-full-test" ? "Past Full Test" :
-                 mode === "past-random" ? "Past Random Practice" : "Exam"}
+                 mode === "official-quick-test" ? "Official Quick" :
+                 mode === "official-full-test" ? "Official Full" :
+                 mode === "official-random" ? "Official Random" :
+                 mode === "past-quick-test" ? "Past Quick" :
+                 mode === "past-full-test" ? "Past Full" :
+                 mode === "past-random" ? "Past Random" : "Exam"}
               </span>
-              <span className="text-sm text-gray-500 dark:text-gray-500">
-                {answeredCount} / {questions.length} answered
+              <span className="text-xs text-gray-500 dark:text-gray-500 sm:hidden">
+                {answeredCount}/{questions.length}
               </span>
             </div>
+          </div>
+          {/* Right: Timer + Progress Indicator */}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            <span className="text-xs text-gray-500 dark:text-gray-500 hidden sm:inline">
+              {answeredCount}/{questions.length}
+            </span>
             <div
-              className={`text-lg font-mono font-semibold ${
+              className={`text-sm md:text-base lg:text-lg font-mono font-semibold whitespace-nowrap ${
                 remainingTime < 5 * 60 * 1000
                   ? "text-red-600 dark:text-red-500"
                   : "text-foreground"
@@ -457,18 +488,22 @@ export default function ExamQuizPage() {
               {formattedTime}
             </div>
           </div>
-          <div className="w-full bg-gray-100/30 dark:bg-gray-100/10 rounded-full h-2">
+        </div>
+        <div className="w-full bg-gray-100/30 dark:bg-gray-100/10 rounded-full h-1 md:h-2">
             <div
-              className="bg-foreground h-2 rounded-full transition-[width]"
+            className="bg-foreground h-1 md:h-2 rounded-full transition-[width]"
               style={{ width: `${progress}%` }}
             />
           </div>
+        <div className="text-xs text-gray-500 dark:text-gray-500 mt-1 sm:hidden">
+          {answeredCount}/{questions.length} answered
         </div>
+      </div>
 
-        {/* Main Layout: Question on Left, Navigation on Right */}
-        <div className="flex flex-col lg:flex-row gap-6">
-          {/* Left Side: Question and Options */}
-          <div className="flex-1 lg:max-w-3xl">
+      <div className="flex-1 flex overflow-hidden">
+        <div className="flex-1 overflow-y-auto">
+          <div className="max-w-3xl mx-auto px-3 md:px-6 py-4 md:py-8">
+
             <QuestionCard
               question={currentQuestion}
               questionNumber={currentQuestionIndex + 1}
@@ -485,45 +520,87 @@ export default function ExamQuizPage() {
               onNext={handleNextQuestion}
             />
 
-            {/* Navigation Buttons */}
-            <div className="mt-8 flex justify-between items-center">
+            {/* Navigation Buttons - Mobile Optimized */}
+            <div className="mt-4 md:mt-8 flex justify-between items-center gap-2">
               <button
-                onClick={handlePreviousQuestion}
+                onClick={() => {
+                  handlePreviousQuestion();
+                  setShowMobileMenu(false);
+                }}
                 disabled={currentQuestionIndex === 0}
-                className="px-4 py-2 text-sm text-foreground bg-transparent border border-gray-200/40 dark:border-gray-700/30 rounded hover:bg-gray-50/15 dark:hover:bg-gray-800/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-3 md:px-4 py-2.5 text-xs md:text-sm text-foreground bg-transparent border border-gray-200/40 dark:border-gray-700/30 rounded-lg hover:bg-gray-50/15 dark:hover:bg-gray-800/10 active:bg-gray-50/25 dark:active:bg-gray-800/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-1 touch-manipulation"
                 aria-label="Previous question"
               >
-                Previous
+                ← Prev
               </button>
 
               <button
                 onClick={handleFinishExam}
-                className="px-6 py-2 text-sm font-medium text-background bg-[#ea580c] rounded hover:bg-[#c2410c] transition-colors"
+                className="px-3 md:px-6 py-2.5 text-xs md:text-sm font-medium text-background bg-[#ea580c] rounded-lg hover:bg-[#c2410c] active:bg-[#9a3412] transition-colors flex-1 md:flex-none touch-manipulation shadow-sm"
               >
+                <span className="hidden md:inline">
                 {answeredCount === questions.length
                   ? "Finish Exam"
-                  : `Finish Exam (${answeredCount}/${questions.length} answered)`}
+                    : `Finish (${answeredCount}/${questions.length})`}
+                </span>
+                <span className="md:hidden">Finish</span>
               </button>
 
               <button
-                onClick={handleNextQuestion}
+                onClick={() => {
+                  handleNextQuestion();
+                  setShowMobileMenu(false);
+                }}
                 disabled={currentQuestionIndex === questions.length - 1}
-                className="px-4 py-2 text-sm text-foreground bg-transparent border border-gray-200/40 dark:border-gray-700/30 rounded hover:bg-gray-50/15 dark:hover:bg-gray-800/10 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="px-3 md:px-4 py-2.5 text-xs md:text-sm text-foreground bg-transparent border border-gray-200/40 dark:border-gray-700/30 rounded-lg hover:bg-gray-50/15 dark:hover:bg-gray-800/10 active:bg-gray-50/25 dark:active:bg-gray-800/20 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex-1 touch-manipulation"
                 aria-label="Next question"
               >
-                Next
+                Next →
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Right Side: Question Navigation Sidebar */}
-          <div className="lg:w-80 lg:sticky lg:top-20 lg:self-start">
-            <div className="p-4 rounded-lg border border-gray-200 dark:border-gray-800 bg-gray-50/30 dark:bg-gray-100/5">
-              <div className="mb-4">
-                <h3 className="text-sm font-semibold text-foreground mb-2">
-                  Question Navigation
+        {/* Mobile Menu Overlay - Auto-hide when interacting with questions */}
+        {showMobileMenu && (
+          <div 
+            className="lg:hidden fixed inset-0 bg-black/50 z-40 transition-opacity"
+            onClick={() => setShowMobileMenu(false)}
+            onTouchStart={() => setShowMobileMenu(false)}
+          />
+        )}
+
+        {/* Right Side: Question Navigation Sidebar - Hidden on mobile, shown as drawer */}
+        <div className={`lg:w-80 lg:sticky lg:top-0 lg:self-start lg:block fixed lg:relative inset-y-0 right-0 z-50 lg:z-auto bg-background border-l border-gray-200 dark:border-gray-800 shadow-xl lg:shadow-none transform transition-transform duration-300 ease-in-out ${
+          showMobileMenu ? 'translate-x-0' : 'translate-x-full lg:translate-x-0'
+        }`}>
+          <div className="h-full overflow-y-auto p-3 md:p-4">
+            <div className="mb-4 flex items-center justify-between lg:hidden">
+              <h3 className="text-sm font-semibold text-foreground">
+                Navigation
                 </h3>
-                <div className="flex items-center justify-center gap-2 mb-4">
+              <button
+                onClick={() => setShowMobileMenu(false)}
+                className="p-2 text-foreground hover:bg-gray-50/15 dark:hover:bg-gray-800/10 rounded-lg transition-colors"
+                aria-label="Close menu"
+              >
+                <svg
+                  className="w-5 h-5"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div className="mb-3 md:mb-4">
+              <div className="flex items-center justify-center gap-2 mb-3 md:mb-4">
                   <button
                     onClick={handlePreviousQuestion}
                     disabled={currentQuestionIndex === 0}
@@ -544,7 +621,7 @@ export default function ExamQuizPage() {
                       />
                     </svg>
                   </button>
-                  <span className="text-sm font-medium text-foreground min-w-[120px] text-center">
+                <span className="text-sm font-medium text-foreground min-w-[80px] md:min-w-[120px] text-center">
                     {currentQuestionIndex + 1} / {questions.length}
                   </span>
                   <button
@@ -569,15 +646,18 @@ export default function ExamQuizPage() {
                   </button>
                 </div>
               </div>
-              <div className="max-h-[60vh] overflow-y-auto p-1">
-                <div className="flex flex-wrap gap-1.5">
+            <div className="max-h-[calc(100vh-200px)] overflow-y-auto p-1">
+              <div className="flex flex-wrap gap-1 md:gap-1.5">
                   {questions.map((_, index) => {
                     const isAttempted = selectedOptions.has(index);
                     return (
                       <button
                         key={index}
-                        onClick={() => handleQuestionSelect(index)}
-                        className={`w-8 h-8 text-xs font-medium rounded-lg transition-all flex items-center justify-center border border-gray-200/40 dark:border-gray-700/30 ${
+                      onClick={() => {
+                        handleQuestionSelect(index);
+                        setShowMobileMenu(false);
+                      }}
+                      className={`w-7 h-7 md:w-8 md:h-8 text-xs font-medium rounded-lg transition-all flex items-center justify-center border border-gray-200/40 dark:border-gray-700/30 touch-manipulation active:scale-95 ${
                           index === currentQuestionIndex
                             ? "text-white bg-[#ea580c] ring-2 ring-offset-1 ring-[#ea580c]/50 scale-105"
                             : isAttempted
@@ -597,7 +677,7 @@ export default function ExamQuizPage() {
                   })}
                 </div>
               </div>
-              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-800">
+            <div className="mt-3 md:mt-4 pt-3 md:pt-4 border-t border-gray-200 dark:border-gray-800 hidden lg:block">
                 <div className="text-xs text-gray-500 dark:text-gray-500 space-y-1">
                   <div>Keyboard shortcuts:</div>
                   <div className="flex items-center gap-1">
@@ -607,7 +687,6 @@ export default function ExamQuizPage() {
                   <div className="flex items-center gap-1">
                     <kbd className="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded text-xs">← →</kbd>
                     <span>Navigate questions</span>
-                  </div>
                 </div>
               </div>
             </div>

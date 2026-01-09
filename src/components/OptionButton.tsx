@@ -17,7 +17,7 @@ export default function OptionButton({
   isAnswered,
   onClick,
 }: OptionButtonProps) {
-  let buttonClass = 'w-full p-3 text-left rounded transition-colors ';
+  let buttonClass = 'w-full p-2 md:p-3 text-sm md:text-base text-left rounded transition-colors ';
   
   if (isAnswered) {
     if (isCorrect) {
@@ -37,7 +37,7 @@ export default function OptionButton({
     <button
       onClick={onClick}
       disabled={isAnswered}
-      className={buttonClass}
+      className={`${buttonClass} touch-manipulation active:scale-[0.98] transition-transform`}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
